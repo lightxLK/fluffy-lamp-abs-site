@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# reference / design assets (not part of the codebase)
+amns-design-language/
+docs/
+vite.config.ts
+*.html
+*.pdf
