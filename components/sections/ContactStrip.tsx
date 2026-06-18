@@ -1,0 +1,36 @@
+import Link from 'next/link';
+import { Container } from '@/components/layout/Container';
+
+export function ContactStrip() {
+  return (
+    <section className="bg-abs-blue py-20">
+      <Container>
+        <div className="text-center">
+          <h2 className="text-white font-bold text-3xl lg:text-4xl leading-tight mb-4">
+            Ready to build with ABS steel?
+          </h2>
+          <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto">
+            Talk to our team today. We&apos;ll help you find the right product, grade, and quantity.
+          </p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Link
+              href="https://wa.me/919007211599"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp Us"
+              className="inline-flex items-center gap-3 bg-white text-abs-blue px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
+            >
+              WhatsApp Us
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 border border-white/40 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:border-white hover:bg-white/10 transition-colors duration-300"
+            >
+              Get in Touch
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
