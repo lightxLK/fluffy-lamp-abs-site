@@ -6,7 +6,6 @@ import Autoplay from 'embla-carousel-autoplay';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
-import { FurnaceScene } from '@/components/svg/scenes/FurnaceScene';
 
 const SLIDES = [
   {
@@ -18,7 +17,7 @@ const SLIDES = [
   {
     eyebrow: 'From Our Mill to Your Build',
     headline: 'Steel That Shapes India',
-    tagline: 'Rolling shutter profiles, pipes, coils and more — direct from Howrah.',
+    tagline: 'Rolling shutter profiles, pipes, coils and more, direct from Howrah.',
     cta: { label: 'Our Products', href: '/products' },
   },
   {
@@ -45,26 +44,36 @@ export function HeroSection() {
     };
   }, [emblaApi]);
 
-  useEffect(() => {
-    return () => autoplay.destroy();
-  }, [autoplay]);
-
   const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
   return (
     <section className="relative h-screen min-h-[600px] bg-bg-dark overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-bg-dark via-bg-mid to-bg-dark" />
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/hero.webm"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
 
-      <div className="absolute top-0 right-0 w-80 h-96 opacity-15 pointer-events-none">
-        <FurnaceScene className="w-full h-full" />
-      </div>
+      <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />
+
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background:
+            'radial-gradient(120% 120% at 0% 100%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0) 75%)',
+        }}
+      />
 
       <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {SLIDES.map((slide, i) => (
             <div key={i} className="relative flex-none w-full h-full flex items-center">
               <Container className="w-full">
-                <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-6">
+                <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-6">
                   {slide.eyebrow}
                 </p>
                 <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
