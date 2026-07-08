@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./out/
-          server-dir: ./domains/tsa.anilbalajisteel.com/public_html/
+          server-dir: ./public_html/
           dangerous-clean-slate: false
           exclude: |
             **/.git*
