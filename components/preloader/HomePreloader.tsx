@@ -23,20 +23,35 @@ const SLOT_SCALE = 0.2;
 const SLOT_GAP = 40;
 
 const GREETINGS = ['hello', 'नमस्ते', 'ନମସ୍କାର', 'নমস্কার'];
-const GREETING_START = 0.08;
+const GREETING_HOLDS = [0.45, 0.3, 0.3, 0.45]; // per-language hold, seconds
 const GREETING_ENTER = 0.15;
-const GREETING_HOLD = 0.75;
 const GREETING_EXIT = 0.15;
-const GREETING_CYCLE = GREETING_ENTER + GREETING_HOLD + GREETING_EXIT;
+const GREETING_START = 0.08;
+
+// Each word's enter-start time, derived from the previous word's full cycle.
+const GREETING_STARTS = GREETING_HOLDS.reduce<number[]>((starts, hold, i) => {
+  const start =
+    i === 0
+      ? GREETING_START
+      : starts[i - 1] + GREETING_ENTER + GREETING_HOLDS[i - 1] + GREETING_EXIT;
+  starts.push(start);
+  return starts;
+}, []);
 
 const TL_DELAY = 0.15;
-const BAR_FILL_DURATION = 3.9;
 const BAR_CLOSE_DURATION = 0.7;
 const CLIP_OPEN_DURATION = 0.6;
 const CLIP_OPEN_OFFSET = 0.45; // clip-path wipe starts this far into the bar-close tween
 const SLOT_CONVERGE_DURATION = 0.9;
 const SLOT_SPREAD_DURATION = 0.9;
 const HERO_SCALE_DURATION = 0.9;
+
+// Cards reveal exactly when the last greeting finishes its hold, so the bar-fill
+// duration is derived from the greeting schedule rather than picked by hand.
+const LAST_INDEX = GREETINGS.length - 1;
+const CARDS_REVEAL_AT =
+  GREETING_STARTS[LAST_INDEX] + GREETING_ENTER + GREETING_HOLDS[LAST_INDEX] + GREETING_EXIT;
+const BAR_FILL_DURATION = CARDS_REVEAL_AT - CLIP_OPEN_OFFSET;
 
 const OVERLAY_COVERED = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
 const OVERLAY_OPEN = 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)';
@@ -147,14 +162,9 @@ export function HomePreloader({ children }: HomePreloaderProps) {
       '<',
     );
 
-    // Cards start converging as soon as the clip-path wipe begins.
-    const cardsRevealAt = BAR_FILL_DURATION + CLIP_OPEN_OFFSET;
-    const lastWord = greetings.length - 1;
-
     greetings.forEach((word, i) => {
-      const start = GREETING_START + i * GREETING_CYCLE;
-      const exitStart =
-        i === lastWord ? cardsRevealAt - GREETING_EXIT : start + GREETING_ENTER + GREETING_HOLD;
+      const start = GREETING_STARTS[i];
+      const exitStart = start + GREETING_ENTER + GREETING_HOLDS[i];
 
       tl.to(word, { opacity: 1, y: 0, duration: GREETING_ENTER, ease: 'power2.out' }, start).to(
         word,
