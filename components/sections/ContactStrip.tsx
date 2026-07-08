@@ -1,10 +1,15 @@
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
+import { ReadyToBuildScene } from '@/components/svg/scenes/ReadyToBuildScene';
 
 export function ContactStrip() {
   return (
-    <section className="bg-abs-blue py-20">
-      <Container>
+    <section className="relative bg-abs-blue py-20 overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.35] pointer-events-none">
+        <ReadyToBuildScene className="w-full h-auto" />
+      </div>
+
+      <Container className="relative">
         <div className="text-center">
           <h2 className="text-white font-bold text-3xl lg:text-4xl leading-tight mb-4">
             Ready to build with ABS steel?
