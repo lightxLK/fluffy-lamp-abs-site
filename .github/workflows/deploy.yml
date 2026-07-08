@@ -30,12 +30,12 @@ jobs:
       - name: Deploy out/ to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: 148.135.140.192
-          username: u591788557.tsa.anilbalajisteel.com
+          server: ftp.tsa.anilbalajisteel.com
+          username: u591788557.tsaxabs
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./out/
-          server-dir: ./
+          server-dir: ./domains/tsa.anilbalajisteel.com/public_html/
           dangerous-clean-slate: false
           exclude: |
             **/.git*
