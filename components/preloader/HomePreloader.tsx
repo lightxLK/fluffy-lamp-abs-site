@@ -22,15 +22,15 @@ const CENTER_SLOT = 2;
 const SLOT_SCALE = 0.2;
 const SLOT_GAP = 40;
 
-const GREETINGS = ['নমস্কার', 'नमस्ते', 'hello', 'ନମସ୍କାର'];
+const GREETINGS = ['hello', 'नमस्ते', 'ନମସ୍କାର', 'নমস্কার'];
 const GREETING_START = 0.08;
-const GREETING_ENTER = 0.06;
-const GREETING_HOLD = 0.09;
-const GREETING_EXIT = 0.06;
+const GREETING_ENTER = 0.15;
+const GREETING_HOLD = 0.75;
+const GREETING_EXIT = 0.15;
 const GREETING_CYCLE = GREETING_ENTER + GREETING_HOLD + GREETING_EXIT;
 
 const TL_DELAY = 0.15;
-const BAR_FILL_DURATION = 0.9;
+const BAR_FILL_DURATION = 3.9;
 const BAR_CLOSE_DURATION = 0.7;
 const CLIP_OPEN_DURATION = 0.6;
 const CLIP_OPEN_OFFSET = 0.45; // clip-path wipe starts this far into the bar-close tween
