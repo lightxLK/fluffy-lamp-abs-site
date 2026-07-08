@@ -15,3 +15,13 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   }),
 });
+
+// jsdom has no dedicated SVGPathElement class — all SVG tags are generic SVGElement,
+// which lacks getTotalLength/getPointAtLength. Stub them so DrawSVG-style GSAP
+// animations (stroke-dash length calc) don't throw.
+if (typeof SVGElement !== 'undefined') {
+  // @ts-expect-error - jsdom's SVGElement doesn't type this method, but code paths call it
+  SVGElement.prototype.getTotalLength = () => 100;
+  // @ts-expect-error - same as above
+  SVGElement.prototype.getPointAtLength = () => ({ x: 0, y: 0 }) as DOMPoint;
+}
