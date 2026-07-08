@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import gsap from 'gsap';
+import { ABSLogoMarkScene } from '@/components/svg/scenes/ABSLogoMarkScene';
+import { NavLinkSwap } from '@/components/layout/NavLinkSwap';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -16,10 +17,30 @@ const NAV_LINKS = [
   { label: 'Contact Us', href: '/contact' },
 ] as const;
 
+const SVG_WIDTH = 1131;
+const SVG_HEIGHT = 861;
+const SVG_CENTER_X = SVG_WIDTH / 2;
+
+const OPEN_HIDDEN = `M${SVG_WIDTH},0 Q${SVG_CENTER_X},0 0,0 L0,0 L${SVG_WIDTH},0 Z`;
+const OPEN_BULGE = `M${SVG_WIDTH},345 Q${SVG_CENTER_X},620 0,345 L0,0 L${SVG_WIDTH},0 Z`;
+const OPEN_FULL = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT} 0,${SVG_HEIGHT} L0,0 L${SVG_WIDTH},0 Z`;
+const CLOSE_START = `M${SVG_WIDTH},0 Q${SVG_CENTER_X},0 0,0 L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
+const CLOSE_BULGE = `M${SVG_WIDTH},350 Q${SVG_CENTER_X},130 0,350 L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
+const CLOSE_HIDDEN = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT} 0,${SVG_HEIGHT} L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [logoDrawing, setLogoDrawing] = useState(false);
+  const [nearFooter, setNearFooter] = useState(false);
   const pathname = usePathname();
+
+  const pathRef = useRef<SVGPathElement>(null);
+  const linksColRef = useRef<HTMLDivElement>(null);
+  const infoColRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -28,88 +49,210 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMobileOpen(false);
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(([entry]) => setNearFooter(entry.isIntersecting), {
+      rootMargin: '0px 0px 0px 0px',
+    });
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, [pathname]);
+
+  useEffect(() => {
+    gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
+    gsap.set(infoColRef.current?.querySelectorAll('p, h3, h6') ?? [], { opacity: 0, y: 100 });
+    gsap.set(logoRef.current, { opacity: 0 });
+  }, []);
+
+  const openMenu = () => {
+    tlRef.current?.kill();
+    setOpen(true);
+    setLogoDrawing(true);
+    document.body.style.overflow = 'hidden';
+
+    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6') ?? [];
+    gsap.set(infoItems, { opacity: 0, y: 100 });
+    gsap.set(logoRef.current, { opacity: 0 });
+
+    const tl = gsap.timeline();
+    tlRef.current = tl;
+
+    tl.to(pathRef.current, { duration: 0.5, attr: { d: OPEN_BULGE }, ease: 'power4.in' }).to(
+      pathRef.current,
+      { duration: 0.5, attr: { d: OPEN_FULL }, ease: 'power4.out' },
+    );
+
+    tl.to(
+      infoItems,
+      { duration: 0.75, opacity: 1, y: 0, ease: 'power3.out', stagger: 0.075 },
+      '-=0.6',
+    );
+
+    tl.to(logoRef.current, { duration: 0.3, opacity: 1, ease: 'power2.out' }, 0.85);
+  };
+
+  const closeMenu = () => {
+    tlRef.current?.kill();
+    setLogoDrawing(false);
+    gsap.set(pathRef.current, { attr: { d: CLOSE_START } });
+
+    const links = linksColRef.current?.querySelectorAll('a') ?? [];
+    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6') ?? [];
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setOpen(false);
+        document.body.style.overflow = '';
+        gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
+        gsap.set(links, { opacity: 1 });
+        gsap.set(infoItems, { opacity: 0, y: 100 });
+        gsap.set(logoRef.current, { opacity: 0 });
+      },
+    });
+    tlRef.current = tl;
+
+    tl.to(links, { duration: 0.3, opacity: 0 })
+      .to(infoItems, { duration: 0.3, opacity: 0 }, '<')
+      .to(logoRef.current, { duration: 0.3, opacity: 0 }, '<');
+
+    tl.to(pathRef.current, { duration: 0.5, attr: { d: CLOSE_BULGE }, ease: 'power3.in' }, '<').to(
+      pathRef.current,
+      { duration: 0.5, attr: { d: CLOSE_HIDDEN }, ease: 'power3.out' },
+    );
+  };
+
+  const toggleMenu = () => (open ? closeMenu() : openMenu());
+
+  useEffect(() => {
+    if (!open) return;
+    const id = requestAnimationFrame(() => closeMenu());
+    return () => cancelAnimationFrame(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMenu();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
+
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
     <header
       className={[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-bg-dark border-b border-border-subtle backdrop-blur-sm' : 'bg-transparent',
+        scrolled || open
+          ? 'bg-bg-dark border-b border-border-subtle backdrop-blur-sm'
+          : 'bg-transparent',
+        nearFooter && !open
+          ? '-translate-y-full opacity-0 pointer-events-none'
+          : 'translate-y-0 opacity-100',
       ].join(' ')}
     >
       <nav
-        className="max-w-[1440px] mx-auto px-6 lg:px-8 h-20 flex items-center justify-between"
+        className="max-w-[1440px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between relative z-20"
         aria-label="Primary navigation"
       >
-        <Link href="/" className="flex items-center gap-2 group" aria-label="Anil Balaji Steel">
-          <span className="text-white font-bold text-xl tracking-wide">ABS</span>
-          <span className="text-abs-blue font-light">|</span>
-          <span className="text-text-muted text-xs font-medium uppercase tracking-widest hidden sm:block">
-            Anil Balaji Steel
-          </span>
+        <Link href="/" className="flex items-center group" aria-label="Anil Balaji Steel">
+          <img src="/ABS.svg" alt="Anil Balaji Steel" className="h-16 w-16" />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-8" role="list">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={[
-                  'text-xs font-medium uppercase tracking-widest transition-colors duration-200',
-                  (link.href === '/' ? pathname === '/' : pathname.startsWith(link.href))
-                    ? 'text-white'
-                    : 'text-text-muted hover:text-white',
-                ].join(' ')}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
         <button
-          className="lg:hidden text-text-muted hover:text-white transition-colors p-2"
-          onClick={() => setMobileOpen((o) => !o)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
+          className="text-text-primary hover:text-abs-blue transition-colors p-2"
+          onClick={toggleMenu}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="fullscreen-menu"
         >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          <svg className={`ham ham2${open ? ' active' : ''}`} viewBox="0 0 100 100" width="32">
+            <path
+              className="line top"
+              d="m 70,33 h -40 c -6.5909,0 -7.763966,-4.501509 -7.763966,-7.511428 0,-4.721448 3.376452,-9.583771 13.876919,-9.583771 14.786182,0 11.409257,14.896182 9.596449,21.970818 -1.812808,7.074636 -15.709402,12.124381 -15.709402,12.124381"
+            />
+            <path className="line middle" d="m 30,50 h 40" />
+            <path
+              className="line bottom"
+              d="m 70,67 h -40 c -6.5909,0 -7.763966,4.501509 -7.763966,7.511428 0,4.721448 3.376452,9.583771 13.876919,9.583771 14.786182,0 11.409257,-14.896182 9.596449,-21.970818 -1.812808,-7.074636 -15.709402,-12.124381 -15.709402,-12.124381"
+            />
+          </svg>
         </button>
       </nav>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-bg-dark border-t border-border-subtle overflow-hidden"
+      <div
+        id="fullscreen-menu"
+        ref={menuRef}
+        className={[
+          'absolute top-0 left-0 w-full h-[100svh]',
+          'z-10',
+          open ? 'pointer-events-auto' : 'pointer-events-none',
+        ].join(' ')}
+      >
+        <svg
+          className="absolute top-0 left-0 w-full h-full -z-10"
+          viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+          preserveAspectRatio="none"
+        >
+          <path ref={pathRef} fill="#0d0d0d" d={OPEN_HIDDEN} />
+        </svg>
+
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 h-full pb-10 lg:pb-16 flex flex-col-reverse lg:flex-row gap-8 relative">
+          <div
+            ref={logoRef}
+            className="hidden lg:block absolute top-20 left-8 bottom-48 right-[52%] pointer-events-none opacity-0"
           >
-            <ul className="max-w-[1440px] mx-auto px-6 py-6 space-y-4" role="list">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={[
-                      'block text-sm font-medium uppercase tracking-widest py-2 transition-colors duration-200',
-                      (link.href === '/' ? pathname === '/' : pathname.startsWith(link.href))
-                        ? 'text-white'
-                        : 'text-text-muted hover:text-white',
-                    ].join(' ')}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <ABSLogoMarkScene loop active={logoDrawing} className="w-full h-full" />
+          </div>
+
+          <div ref={infoColRef} className="flex-1 flex flex-col justify-end">
+            <p className="text-abs-blue text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
+              Get in touch
+            </p>
+            <h3 className="text-white text-2xl lg:text-3xl font-semibold mb-1">
+              <a
+                href="mailto:viren@anilbalajisteel.com"
+                className="hover:text-abs-blue transition-colors"
+              >
+                viren@anilbalajisteel.com
+              </a>
+            </h3>
+            <h3 className="text-white text-2xl lg:text-3xl font-semibold">
+              <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
+                +91 90072 11599
+              </a>
+            </h3>
+            <br />
+            <a
+              href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-white transition-colors"
+            >
+              <h6 className="text-sm lg:text-base leading-snug">
+                Jalan Industrial Complex, Gate No. 1, Domjur, NH6
+              </h6>
+              <h6 className="text-sm lg:text-base leading-snug">Howrah, 711411</h6>
+            </a>
+          </div>
+
+          <div ref={linksColRef} className="flex-[1.5] lg:flex-1 flex flex-col justify-end">
+            {NAV_LINKS.map((link) => (
+              <NavLinkSwap
+                key={link.href}
+                label={link.label}
+                href={link.href}
+                active={isActive(link.href)}
+                open={open}
+                className="font-sans font-bold leading-[1.15] text-[clamp(2.25rem,7vw,4.5rem)] w-max overflow-visible transition-colors"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

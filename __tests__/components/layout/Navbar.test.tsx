@@ -4,9 +4,9 @@ import { Navbar } from '@/components/layout/Navbar';
 jest.mock('next/navigation', () => ({ usePathname: () => '/' }));
 
 describe('Navbar', () => {
-  it('renders the ABS logo text', () => {
+  it('renders the ABS logo', () => {
     render(<Navbar />);
-    expect(screen.getByText('ABS')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /anil balaji steel/i })).toBeInTheDocument();
   });
 
   it('renders all primary nav links', () => {
