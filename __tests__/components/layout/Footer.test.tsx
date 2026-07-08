@@ -14,7 +14,7 @@ describe('Footer', () => {
 
   it('renders contact email', () => {
     render(<Footer />);
-    expect(screen.getByText(/connect@anilbalajisteel\.com/)).toBeInTheDocument();
+    expect(screen.getByText(/viren@anilbalajisteel\.com/)).toBeInTheDocument();
   });
 
   it('renders all company nav links', () => {

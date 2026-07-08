@@ -18,7 +18,7 @@ export function SplitTextReveal({ children, className, delay = 0 }: SplitTextRev
       if (!ref.current) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      const split = new SplitText(ref.current, { type: 'chars' });
+      const split = new SplitText(ref.current, { type: 'words, chars' });
       gsap.from(split.chars, {
         opacity: 0,
         y: 40,

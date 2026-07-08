@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/svg/icons/WhatsAppIcon';
 
 export function WhatsAppButton() {
   const [visible, setVisible] = useState(false);
@@ -27,7 +27,7 @@ export function WhatsAppButton() {
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
       ].join(' ')}
     >
-      <MessageCircle className="w-6 h-6 text-white" aria-hidden="true" />
+      <WhatsAppIcon className="w-6 h-6 fill-white" />
     </a>
   );
 }

@@ -45,9 +45,13 @@ export function NetworkSection() {
 
   return (
     <section className="bg-bg-dark py-24" id="network">
+      <DrawSVGSection selector=".abs-path" className="block w-full">
+        <EastIndiaMapScene className="w-full h-auto opacity-70 max-h-[80vh]" />
+      </DrawSVGSection>
+
       <Container>
-        <div className="mb-14">
-          <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-4">
+        <div className="text-center mb-14 mt-16">
+          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
             Eastern India &amp; Beyond
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -55,22 +59,16 @@ export function NetworkSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div ref={statsRef} className="grid grid-cols-2 gap-8">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="border-t border-border-subtle pt-6">
-                <p className="text-text-primary font-bold text-5xl leading-none mb-2">
-                  <span data-counter={stat.end}>0</span>
-                  <span>{stat.suffix}</span>
-                </p>
-                <p className="text-text-muted text-xs uppercase tracking-widest">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <DrawSVGSection selector=".abs-path">
-            <EastIndiaMapScene className="w-full h-auto opacity-70 max-h-96" />
-          </DrawSVGSection>
+        <div ref={statsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          {STATS.map((stat) => (
+            <div key={stat.label} className="border-t border-border-subtle pt-6 text-center">
+              <p className="text-text-primary font-bold text-5xl leading-none mb-2">
+                <span data-counter={stat.end}>0</span>
+                <span>{stat.suffix}</span>
+              </p>
+              <p className="text-text-muted text-xs uppercase tracking-widest">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </Container>
     </section>

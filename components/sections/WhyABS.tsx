@@ -1,16 +1,17 @@
 import { Container } from '@/components/layout/Container';
 import { FactoryFloorScene } from '@/components/svg/scenes/FactoryFloorScene';
+import { CardGlow } from '@/components/ui/CardGlow';
 
 const REASONS = [
   {
     number: '01',
     title: '50-Year Track Record',
-    body: 'Half a century of delivering steel on spec, on time, and on trust — ask any builder in Bengal.',
+    body: 'Half a century of delivering steel on spec, on time, and on trust; ask any builder in Bengal.',
   },
   {
     number: '02',
     title: 'Direct Mill Sourcing',
-    body: 'We source prime material from SAIL, Tata, JSW, and Jindal — no middleman, no grade uncertainty.',
+    body: 'We source prime material from SAIL, Tata, JSW, and Jindal; no middleman, no grade uncertainty.',
   },
   {
     number: '03',
@@ -20,12 +21,12 @@ const REASONS = [
   {
     number: '04',
     title: 'In-House Fabrication',
-    body: 'Fabrica brings custom design and fabrication under one roof — fewer handoffs, tighter tolerances.',
+    body: 'Fabrica brings custom design and fabrication under one roof, fewer handoffs, tighter tolerances.',
   },
   {
     number: '05',
     title: 'Full Product Range',
-    body: 'Profiles, pipes, sheets, coils, sheds — one supplier for your entire project bill of materials.',
+    body: 'Profiles, pipes, sheets, coils, sheds; one supplier for your entire project bill of materials.',
   },
   {
     number: '06',
@@ -43,7 +44,7 @@ export function WhyABS() {
 
       <Container className="relative">
         <div className="mb-14 text-center">
-          <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
             The ABS Advantage
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -53,15 +54,14 @@ export function WhyABS() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {REASONS.map((reason) => (
-            <article
-              key={reason.number}
-              className="bg-bg-card border border-border-subtle p-8 hover:border-abs-blue/40 transition-colors duration-300"
-            >
-              <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
-                {reason.number}
-              </p>
-              <h3 className="text-text-primary font-semibold text-lg mb-3">{reason.title}</h3>
-              <p className="text-text-muted text-sm leading-relaxed">{reason.body}</p>
+            <article key={reason.number} className="h-full">
+              <CardGlow className="h-full p-8">
+                <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
+                  {reason.number}
+                </p>
+                <h3 className="text-text-primary font-semibold text-lg mb-3">{reason.title}</h3>
+                <p className="text-text-muted text-sm leading-relaxed">{reason.body}</p>
+              </CardGlow>
             </article>
           ))}
         </div>

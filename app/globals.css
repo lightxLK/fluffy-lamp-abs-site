@@ -113,11 +113,51 @@
   html {
     @apply font-sans;
     -webkit-font-smoothing: antialiased;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   body {
     @apply bg-bg-dark text-text-primary;
   }
+}
+
+/* ─── Nav hamburger-to-arrow toggle (ham2) ──────────────────────── */
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.ham .line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  transition:
+    stroke-dasharray 400ms,
+    stroke-dashoffset 400ms;
+}
+
+.ham2 .top,
+.ham2 .bottom {
+  stroke-dasharray: 40 121;
+}
+
+.ham2.active .top,
+.ham2.active .bottom {
+  stroke-dashoffset: -102px;
+}
+
+#fullscreen-menu .char,
+#fullscreen-menu h3,
+#fullscreen-menu h6,
+#fullscreen-menu p {
+  will-change: transform, opacity;
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────── */

@@ -19,8 +19,8 @@ export function Footer() {
     <footer className="bg-bg-dark border-t border-border-subtle">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <p className="text-white font-bold text-2xl tracking-wide">ABS</p>
-          <p className="text-text-muted text-sm mt-1">Anil Balaji Steel Pvt. Ltd.</p>
+          <img src="/ABS.svg" alt="Anil Balaji Steel" className="h-24 w-24" />
+          <p className="text-text-muted text-sm mt-3">Anil Balaji Steel Pvt. Ltd.</p>
           <p className="text-text-muted text-sm mt-4 leading-relaxed max-w-xs">
             Eastern India&apos;s most trusted steel manufacturer. Howrah, West Bengal. Est. 1972.
           </p>
@@ -45,7 +45,16 @@ export function Footer() {
         <div>
           <p className="text-white font-semibold text-xs uppercase tracking-widest mb-6">Contact</p>
           <address className="not-italic space-y-3 text-text-muted text-sm">
-            <p>Jalan Industrial Complex, Howrah, West Bengal — 711302</p>
+            <p>
+              <a
+                href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                Jalan Industrial Complex, Gate No. 1, Domjur, NH6, Howrah, 711411
+              </a>
+            </p>
             <p>
               <a
                 href="tel:+919007211599"
@@ -56,10 +65,10 @@ export function Footer() {
             </p>
             <p>
               <a
-                href="mailto:connect@anilbalajisteel.com"
+                href="mailto:viren@anilbalajisteel.com"
                 className="hover:text-white transition-colors duration-200"
               >
-                connect@anilbalajisteel.com
+                viren@anilbalajisteel.com
               </a>
             </p>
           </address>
