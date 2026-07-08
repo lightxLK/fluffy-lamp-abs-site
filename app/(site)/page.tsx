@@ -5,6 +5,7 @@ import { generateOrganizationSchema } from '@/lib/seo/generateOrganizationSchema
 
 import { HeroSection } from '@/components/sections/HeroSection';
 import { TrustBar } from '@/components/sections/TrustBar';
+import { HomePreloader } from '@/components/preloader/HomePreloader';
 
 const AboutSnapshot = dynamic(() =>
   import('@/components/sections/AboutSnapshot').then((m) => m.AboutSnapshot),
@@ -47,7 +48,9 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
 
-      <HeroSection />
+      <HomePreloader>
+        <HeroSection />
+      </HomePreloader>
       <TrustBar />
 
       <div className="relative">
