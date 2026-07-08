@@ -46,3 +46,6 @@ docs/
 vite.config.ts
 *.html
 *.pdf
+
+# unused/original assets kept locally only, not shipped or committed
+/misc/

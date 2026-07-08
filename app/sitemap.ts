@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 
+export const dynamic = 'force-static';
+
 const BASE_URL = 'https://www.anilbalajisteel.com';
 
 const STATIC_ROUTES = [
@@ -16,7 +18,8 @@ const STATIC_ROUTES = [
   '/products/shutter-accessories',
   '/products/pipes',
   '/products/sheet',
-  '/products/shed',
+  '/products/chequered-plate',
+  '/products/plain-sheets',
   '/contact',
   '/terms',
   '/careers',

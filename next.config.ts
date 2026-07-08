@@ -1,9 +1,11 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['192.168.29.110'],
+  output: 'export',
+  trailingSlash: true,
+  allowedDevOrigins: ['192.168.29.110', '127.0.0.1', 'localhost'],
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
     remotePatterns: [],
   },
 };
