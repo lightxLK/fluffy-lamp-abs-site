@@ -2,11 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { ProductsSection } from '@/components/sections/ProductsSection';
 
 describe('ProductsSection', () => {
-  it('renders all 7 products', () => {
+  it('renders all 6 products', () => {
     render(<ProductsSection />);
     expect(screen.getByText('Rolling Shutter Profiles')).toBeInTheDocument();
-    expect(screen.getByText('Steel Coils')).toBeInTheDocument();
-    expect(screen.getByText('Flat Bars & Angles')).toBeInTheDocument();
+    expect(screen.getByText('Shutter Accessories')).toBeInTheDocument();
+    expect(screen.getByText('Steel Pipes & Tubes')).toBeInTheDocument();
+    expect(screen.getByText('Roofing Sheets')).toBeInTheDocument();
+    expect(screen.getByText('Chequered Plate')).toBeInTheDocument();
+    expect(screen.getByText('Plain Sheets')).toBeInTheDocument();
   });
 
   it('each card links to its product page', () => {

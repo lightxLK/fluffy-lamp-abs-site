@@ -10,39 +10,30 @@ import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { PRODUCTS } from '@/data/products';
 
-const product = PRODUCTS.find((p) => p.slug === 'shutter-accessories')!;
+const product = PRODUCTS.find((p) => p.slug === 'plain-sheets')!;
 
 export const metadata: Metadata = genMeta({
   title: `${product.name} | Anil Balaji Steel`,
   description: product.description,
-  path: '/products/shutter-accessories',
+  path: '/products/plain-sheets',
 });
 
-const COMPONENTS = [
-  {
-    name: 'Bottom Plate',
-    specs: ['Thickness: 2.5mm, 3mm', 'Guide width options: 2.5", 3"'],
-  },
-  {
-    name: 'Spring',
-    specs: ['Thickness: 6mm, 7mm, 8mm', 'Weight rated by pair, size 12"–24"'],
-  },
-  {
-    name: 'Lock Plate',
-    specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
-  },
-  {
-    name: 'Hood Cover',
-    specs: ['Thickness: 0.3mm–0.35mm', 'Width: 336mm · 50–60 kg/roll · Material: GI'],
-  },
-  {
-    name: 'Bracket Plate',
-    specs: ['Thickness: 2mm–5mm', 'Size: 14"×14", 16"×16" · Material: GP, HR, CR'],
-  },
+const APPLICATIONS = [
+  'Fabrication & custom cutting',
+  'Sheet metal work & enclosures',
+  'General engineering & manufacturing',
+  'Stack-ready supply for OEMs',
 ];
 
-export default function ShutterAccessoriesPage() {
-  const breadcrumbSchema = generateBreadcrumbSchema('/products/shutter-accessories');
+const BENEFITS = [
+  { title: 'Precision Cut', body: 'Flat, accurate, and consistent across the run.' },
+  { title: 'Multiple Grades', body: 'GI, CR, HR, and PPGL materials available.' },
+  { title: 'Stack Ready', body: 'Cut to length and ready for immediate use.' },
+  { title: 'Bulk Supply', body: 'High-volume capacity for large orders.' },
+];
+
+export default function PlainSheetsPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema('/products/plain-sheets');
   const productSchema = generateProductSchema({
     name: product.name,
     description: product.description,
@@ -74,34 +65,44 @@ export default function ShutterAccessoriesPage() {
 
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
-          <div className="mb-14 max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
-              Complete Component Range
-            </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              Everything for a full installation
-            </h2>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+            <div>
+              <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+                Applications
+              </p>
+              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
+                Flat, finished, ready to use
+              </h2>
+              <ul className="space-y-4">
+                {APPLICATIONS.map((app) => (
+                  <li
+                    key={app}
+                    className="text-text-body text-sm leading-relaxed border-t border-border-subtle pt-4"
+                  >
+                    {app}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COMPONENTS.map((component) => (
-              <CardGlow key={component.name} className="p-8">
-                <h3 className="text-text-primary font-semibold text-lg mb-4">{component.name}</h3>
-                <ul className="space-y-2">
-                  {component.specs.map((s) => (
-                    <li key={s} className="text-text-muted text-sm leading-relaxed">
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </CardGlow>
-            ))}
+            <div className="grid grid-cols-2 gap-6">
+              {BENEFITS.map((benefit) => (
+                <CardGlow key={benefit.title} className="p-6">
+                  <h3 className="text-text-primary font-semibold text-sm mb-2">{benefit.title}</h3>
+                  <p className="text-text-muted text-xs leading-relaxed">{benefit.body}</p>
+                </CardGlow>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
       <section className="bg-bg-dark py-24">
         <Container className="text-center">
+          <p className="text-text-muted text-base leading-relaxed max-w-xl mx-auto mb-10">
+            Plain sheets cut to precision in GI, CR, HR, and PPGL materials, flat, finished, and
+            stack-ready.
+          </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
