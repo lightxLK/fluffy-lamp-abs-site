@@ -64,18 +64,35 @@ const BAR_FILL_DURATION = CARDS_REVEAL_AT - CLIP_OPEN_OFFSET;
 const OVERLAY_COVERED = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
 const OVERLAY_OPEN = 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)';
 
-function scrollToReturnSection() {
-  const sectionId = consumeHomeReturnSection();
-  if (!sectionId) return;
-  const el = document.getElementById(sectionId);
-  if (!el) return;
-
+function scrollElementIntoView(el: HTMLElement) {
   const lenis = getLenis();
   if (lenis) {
     lenis.scrollTo(el, { immediate: true });
   } else {
     el.scrollIntoView({ behavior: 'auto', block: 'start' });
   }
+  ScrollTrigger.refresh();
+}
+
+/**
+ * The target section may belong to a dynamically-imported component whose
+ * chunk hasn't finished mounting yet, so retry for a bit instead of giving
+ * up on the first miss.
+ */
+function scrollToSectionWhenReady(sectionId: string, attemptsLeft = 30) {
+  const el = document.getElementById(sectionId);
+  if (el) {
+    scrollElementIntoView(el);
+    return;
+  }
+  if (attemptsLeft <= 0) return;
+  window.setTimeout(() => scrollToSectionWhenReady(sectionId, attemptsLeft - 1), 100);
+}
+
+function scrollToReturnSection() {
+  const sectionId = consumeHomeReturnSection();
+  if (!sectionId) return;
+  scrollToSectionWhenReady(sectionId);
 }
 
 export function HomePreloader({ children }: HomePreloaderProps) {
