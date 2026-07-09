@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 
@@ -37,7 +37,7 @@ export function NavLinkSwap({ label, href, active, open, className }: NavLinkSwa
     gsap.set(secondaryRefs.current, { y: '100%' });
   }, [label]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const charEls = charRefs.current;
     if (!charEls.length) return;
 
