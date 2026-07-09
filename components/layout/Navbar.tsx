@@ -229,7 +229,7 @@ export function Navbar() {
               Get in touch
             </p>
             <div
-              className="h-px bg-border-subtle mb-4"
+              className="h-px bg-white mb-4"
               style={{ width: separatorWidth || undefined }}
               aria-hidden="true"
             />
@@ -241,12 +241,11 @@ export function Navbar() {
                 viren@anilbalajisteel.com
               </a>
             </h3>
-            <h3 className="text-text-muted text-base lg:text-lg font-semibold">
+            <h3 className="text-text-muted text-base lg:text-lg font-semibold mb-1">
               <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
                 +91 90072 11599
               </a>
             </h3>
-            <br />
             <a
               href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
               target="_blank"
