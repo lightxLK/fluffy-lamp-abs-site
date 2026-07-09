@@ -35,6 +35,7 @@ export function RollingMillScene({ className }: RollingMillSceneProps) {
           start: 'top 80%',
           toggleActions: 'play none none none',
           once: true,
+          invalidateOnRefresh: true,
         },
       });
     },

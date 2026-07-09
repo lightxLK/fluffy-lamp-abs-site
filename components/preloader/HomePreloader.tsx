@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import Image from 'next/image';
-import { gsap, CustomEase } from '@/lib/gsap';
+import { gsap, CustomEase, ScrollTrigger } from '@/lib/gsap';
 
 let easesRegistered = false;
 function ensureEases() {
@@ -76,6 +76,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
       gsap.set(overlayRef.current, { clipPath: OVERLAY_OPEN });
       gsap.set(slots, { clearProps: 'all' });
       gsap.set(greetings, { opacity: 0 });
+      ScrollTrigger.refresh();
       return;
     }
 
@@ -113,6 +114,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
         gsap.set(overlayRef.current, { display: 'none' });
         gsap.set([slots[0], slots[1], slots[3], slots[4]], { display: 'none' });
         gsap.set(slots[CENTER_SLOT], { clearProps: 'all' });
+        ScrollTrigger.refresh();
       },
     });
 

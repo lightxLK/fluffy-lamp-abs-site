@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
@@ -32,6 +32,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [nearFooter, setNearFooter] = useState(false);
+  const [separatorWidth, setSeparatorWidth] = useState(0);
   const pathname = usePathname();
 
   const pathRef = useRef<SVGPathElement>(null);
@@ -39,6 +40,19 @@ export function Navbar() {
   const infoColRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const addressLine2Ref = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    const el = addressLine2Ref.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+
+    const update = () => setSeparatorWidth(el.offsetWidth);
+    update();
+
+    const resizeObserver = new ResizeObserver(update);
+    resizeObserver.observe(el);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -211,9 +225,14 @@ export function Navbar() {
             ref={infoColRef}
             className="absolute bottom-8 right-6 lg:right-8 flex flex-col items-end text-right"
           >
-            <p className="text-white underline underline-offset-4 text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
+            <p className="text-white text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
               Get in touch
             </p>
+            <div
+              className="h-px bg-border-subtle mb-4"
+              style={{ width: separatorWidth || undefined }}
+              aria-hidden="true"
+            />
             <h3 className="text-text-muted text-base lg:text-lg font-semibold mb-1">
               <a
                 href="mailto:viren@anilbalajisteel.com"
@@ -222,7 +241,7 @@ export function Navbar() {
                 viren@anilbalajisteel.com
               </a>
             </h3>
-            <h3 className="text-white text-base lg:text-lg font-semibold">
+            <h3 className="text-text-muted text-base lg:text-lg font-semibold">
               <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
                 +91 90072 11599
               </a>
@@ -235,7 +254,7 @@ export function Navbar() {
               className="block w-fit text-text-muted hover:text-white transition-colors"
             >
               <h6 className="text-base lg:text-lg leading-snug">Jalan Industrial Complex,</h6>
-              <h6 className="text-base lg:text-lg leading-snug">
+              <h6 ref={addressLine2Ref} className="text-base lg:text-lg leading-snug">
                 Gate No. 1, Domjur, NH6, Howrah, 711411
               </h6>
             </a>
