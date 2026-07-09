@@ -3,12 +3,10 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import Image from 'next/image';
 import { gsap, CustomEase, ScrollTrigger } from '@/lib/gsap';
-import { getLenis } from '@/lib/lenis';
 import {
-  consumeHomeReturnSection,
-  consumeWasBackNavigation,
   markPreloaderShown,
   peekHomeReturnSection,
+  peekWasBackNavigation,
   wasPreloaderShownRecently,
 } from '@/lib/homeReturn';
 
@@ -64,37 +62,6 @@ const BAR_FILL_DURATION = CARDS_REVEAL_AT - CLIP_OPEN_OFFSET;
 const OVERLAY_COVERED = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
 const OVERLAY_OPEN = 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)';
 
-function scrollElementIntoView(el: HTMLElement) {
-  const lenis = getLenis();
-  if (lenis) {
-    lenis.scrollTo(el, { immediate: true });
-  } else {
-    el.scrollIntoView({ behavior: 'auto', block: 'start' });
-  }
-  ScrollTrigger.refresh();
-}
-
-/**
- * The target section may belong to a dynamically-imported component whose
- * chunk hasn't finished mounting yet, so retry for a bit instead of giving
- * up on the first miss.
- */
-function scrollToSectionWhenReady(sectionId: string, attemptsLeft = 30) {
-  const el = document.getElementById(sectionId);
-  if (el) {
-    scrollElementIntoView(el);
-    return;
-  }
-  if (attemptsLeft <= 0) return;
-  window.setTimeout(() => scrollToSectionWhenReady(sectionId, attemptsLeft - 1), 100);
-}
-
-function scrollToReturnSection() {
-  const sectionId = consumeHomeReturnSection();
-  if (!sectionId) return;
-  scrollToSectionWhenReady(sectionId);
-}
-
 export function HomePreloader({ children }: HomePreloaderProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -106,15 +73,13 @@ export function HomePreloader({ children }: HomePreloaderProps) {
       window.history.scrollRestoration = 'manual';
     }
 
+    // Non-destructive: HomeReturnScroll (mounted at the layout level) owns
+    // consuming these and doing the actual scroll restoration, since it
+    // reliably re-runs on every route change even when Next's router cache
+    // reuses this page instance without remounting it.
     const pendingSection = peekHomeReturnSection();
-    const cameViaBack = consumeWasBackNavigation();
+    const cameViaBack = peekWasBackNavigation();
     const shouldRestoreSection = Boolean(pendingSection) && cameViaBack;
-
-    if (pendingSection && !shouldRestoreSection) {
-      // Reached "/" via a link click, not a back gesture - a stale section
-      // from an earlier CTA click doesn't apply here, so drop it.
-      consumeHomeReturnSection();
-    }
 
     const skipAnimation = !shouldRestoreSection && wasPreloaderShownRecently();
 
@@ -144,7 +109,6 @@ export function HomePreloader({ children }: HomePreloaderProps) {
       gsap.set(slots, { clearProps: 'all' });
       gsap.set(greetings, { opacity: 0 });
       ScrollTrigger.refresh();
-      scrollToReturnSection();
       return;
     }
 
@@ -183,7 +147,6 @@ export function HomePreloader({ children }: HomePreloaderProps) {
         gsap.set([slots[0], slots[1], slots[3], slots[4]], { display: 'none' });
         gsap.set(slots[CENTER_SLOT], { clearProps: 'all' });
         ScrollTrigger.refresh();
-        scrollToReturnSection();
       },
     });
 

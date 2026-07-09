@@ -60,3 +60,9 @@ export function consumeWasBackNavigation(): boolean {
   window.sessionStorage.removeItem(BACK_NAVIGATION_KEY);
   return value === '1';
 }
+
+/** Non-destructive read, for a component that only wants to peek at the flag. */
+export function peekWasBackNavigation(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.sessionStorage.getItem(BACK_NAVIGATION_KEY) === '1';
+}
