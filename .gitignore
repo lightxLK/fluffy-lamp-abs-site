@@ -49,3 +49,7 @@ vite.config.ts
 
 # unused/original assets kept locally only, not shipped or committed
 /misc/
+
+# Claude Code project instructions (local-only, not part of shipped repo)
+/CLAUDE.md
+/AGENTS.md
