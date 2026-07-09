@@ -6,6 +6,7 @@ import { gsap, CustomEase, ScrollTrigger } from '@/lib/gsap';
 import { getLenis } from '@/lib/lenis';
 import {
   consumeHomeReturnSection,
+  consumeWasBackNavigation,
   markPreloaderShown,
   peekHomeReturnSection,
   wasPreloaderShownRecently,
@@ -89,13 +90,22 @@ export function HomePreloader({ children }: HomePreloaderProps) {
     }
 
     const pendingSection = peekHomeReturnSection();
-    const skipAnimation = !pendingSection && wasPreloaderShownRecently();
+    const cameViaBack = consumeWasBackNavigation();
+    const shouldRestoreSection = Boolean(pendingSection) && cameViaBack;
+
+    if (pendingSection && !shouldRestoreSection) {
+      // Reached "/" via a link click, not a back gesture - a stale section
+      // from an earlier CTA click doesn't apply here, so drop it.
+      consumeHomeReturnSection();
+    }
+
+    const skipAnimation = !shouldRestoreSection && wasPreloaderShownRecently();
 
     if (!skipAnimation) {
       markPreloaderShown();
     }
 
-    if (!pendingSection) {
+    if (!shouldRestoreSection) {
       window.scrollTo(0, 0);
     }
 
