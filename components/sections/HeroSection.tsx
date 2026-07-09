@@ -6,6 +6,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
+import GlassSurface from '@/components/ui/GlassSurface';
 
 const SLIDES = [
   {
@@ -73,7 +74,7 @@ export function HeroSection() {
           {SLIDES.map((slide, i) => (
             <div key={i} className="relative flex-none w-full h-full flex items-center">
               <Container className="w-full">
-                <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-6">
+                <p className="text-[#989898] text-sm font-medium uppercase tracking-widest mb-6">
                   {slide.eyebrow}
                 </p>
                 <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
@@ -89,12 +90,27 @@ export function HeroSection() {
                   >
                     {slide.cta.label}
                   </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 border border-border-subtle text-text-muted px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:text-white hover:border-white transition-colors duration-300"
+                  <GlassSurface
+                    width="fit-content"
+                    height="fit-content"
+                    borderRadius={2}
+                    borderWidth={0.1}
+                    brightness={70}
+                    opacity={0.6}
+                    blur={6}
+                    displace={2}
+                    backgroundOpacity={0.08}
+                    saturation={1.4}
+                    distortionScale={-60}
+                    className="group"
                   >
-                    Contact Us
-                  </Link>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 border border-border-subtle text-text-muted px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white group-hover:border-white transition-colors duration-300"
+                    >
+                      Contact Us
+                    </Link>
+                  </GlassSurface>
                 </div>
               </Container>
             </div>
