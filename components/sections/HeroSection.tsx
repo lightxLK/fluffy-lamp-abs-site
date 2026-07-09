@@ -93,20 +93,14 @@ export function HeroSection() {
                   <GlassSurface
                     width="fit-content"
                     height="fit-content"
-                    borderRadius={2}
-                    borderWidth={0.1}
-                    brightness={70}
-                    opacity={0.6}
-                    blur={6}
-                    displace={2}
-                    backgroundOpacity={0.08}
-                    saturation={1.4}
-                    distortionScale={-60}
+                    borderRadius={3}
+                    backgroundOpacity={0.1}
+                    saturation={1.2}
                     className="group"
                   >
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 border border-border-subtle text-text-muted px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white group-hover:border-white transition-colors duration-300"
+                      className="inline-flex items-center gap-2 text-text-muted px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white transition-colors duration-300"
                     >
                       Contact Us
                     </Link>
