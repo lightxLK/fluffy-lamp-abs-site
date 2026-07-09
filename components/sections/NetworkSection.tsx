@@ -9,7 +9,7 @@ import { EastIndiaMapScene } from '@/components/svg/scenes/EastIndiaMapScene';
 const STATS = [
   { end: 250, suffix: '+', label: 'Dealers' },
   { end: 6, suffix: '', label: 'States' },
-  { end: 100000, suffix: ' MT', label: 'Annual Capacity' },
+  { end: 100000, suffix: '', label: 'MT Annual Capacity' },
   { end: 50, suffix: '+', label: 'Years' },
 ];
 
