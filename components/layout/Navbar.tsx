@@ -152,7 +152,7 @@ export function Navbar() {
   return (
     <header
       className={[
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300',
         scrolled || open
           ? 'bg-bg-dark border-b border-border-subtle backdrop-blur-sm'
           : 'bg-transparent',
@@ -208,7 +208,10 @@ export function Navbar() {
         </svg>
 
         <div className="w-full h-full pb-10 lg:pb-16 flex flex-col items-center justify-center relative">
-          <div ref={linksColRef} className="flex flex-col items-start text-left">
+          <div
+            ref={linksColRef}
+            className="flex flex-col items-start text-left -translate-x-8 sm:-translate-x-12 lg:-translate-x-20"
+          >
             {NAV_LINKS.map((link) => (
               <NavLinkSwap
                 key={link.href}
