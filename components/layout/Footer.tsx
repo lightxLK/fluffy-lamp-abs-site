@@ -19,7 +19,7 @@ export function Footer() {
     <footer className="bg-bg-dark border-t border-border-subtle">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <img src="/abs-nav-footer.webp" alt="Anil Balaji Steel" className="h-20 w-auto" />
+          <img src="/abs-nav-footer1.webp" alt="Anil Balaji Steel" className="h-20 w-auto" />
           <p className="text-text-muted text-sm mt-3">Anil Balaji Steel Pvt. Ltd.</p>
           <p className="text-text-muted text-sm mt-4 leading-relaxed max-w-xs">
             Eastern India&apos;s most trusted steel manufacturer. Howrah, West Bengal. Est. 1972.
