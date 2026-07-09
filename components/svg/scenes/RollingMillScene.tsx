@@ -18,7 +18,8 @@ export function RollingMillScene({ className }: RollingMillSceneProps) {
       if (!path) return;
 
       const length = path.getTotalLength();
-      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+      const preDrawnOffset = length * 0.7;
+      gsap.set(path, { strokeDasharray: length, strokeDashoffset: preDrawnOffset });
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         gsap.set(path, { strokeDashoffset: 0 });
@@ -27,7 +28,7 @@ export function RollingMillScene({ className }: RollingMillSceneProps) {
 
       gsap.to(path, {
         strokeDashoffset: 0,
-        duration: 30,
+        duration: 4,
         ease: 'power2.inOut',
         scrollTrigger: {
           trigger: svgRef.current,
