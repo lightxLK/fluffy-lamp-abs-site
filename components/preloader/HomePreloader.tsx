@@ -3,6 +3,13 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import Image from 'next/image';
 import { gsap, CustomEase, ScrollTrigger } from '@/lib/gsap';
+import { getLenis } from '@/lib/lenis';
+import {
+  consumeHomeReturnSection,
+  markPreloaderShown,
+  peekHomeReturnSection,
+  wasPreloaderShownRecently,
+} from '@/lib/homeReturn';
 
 let easesRegistered = false;
 function ensureEases() {
@@ -56,6 +63,20 @@ const BAR_FILL_DURATION = CARDS_REVEAL_AT - CLIP_OPEN_OFFSET;
 const OVERLAY_COVERED = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
 const OVERLAY_OPEN = 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)';
 
+function scrollToReturnSection() {
+  const sectionId = consumeHomeReturnSection();
+  if (!sectionId) return;
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+
+  const lenis = getLenis();
+  if (lenis) {
+    lenis.scrollTo(el, { immediate: true });
+  } else {
+    el.scrollIntoView({ behavior: 'auto', block: 'start' });
+  }
+}
+
 export function HomePreloader({ children }: HomePreloaderProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -66,17 +87,37 @@ export function HomePreloader({ children }: HomePreloaderProps) {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
+
+    const pendingSection = peekHomeReturnSection();
+    const skipAnimation = !pendingSection && wasPreloaderShownRecently();
+
+    if (!skipAnimation) {
+      markPreloaderShown();
+    }
+
+    if (!pendingSection) {
+      window.scrollTo(0, 0);
+    }
 
     const slots = slotRefs.current;
     const greetings = greetingRefs.current;
     if (slots.some((slot) => !slot) || !overlayRef.current || !barRef.current) return;
+
+    if (skipAnimation) {
+      gsap.set(overlayRef.current, { clipPath: OVERLAY_OPEN, display: 'none' });
+      gsap.set([slots[0], slots[1], slots[3], slots[4]], { display: 'none' });
+      gsap.set(slots[CENTER_SLOT], { clearProps: 'all' });
+      gsap.set(greetings, { opacity: 0 });
+      ScrollTrigger.refresh();
+      return;
+    }
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(overlayRef.current, { clipPath: OVERLAY_OPEN });
       gsap.set(slots, { clearProps: 'all' });
       gsap.set(greetings, { opacity: 0 });
       ScrollTrigger.refresh();
+      scrollToReturnSection();
       return;
     }
 
@@ -115,6 +156,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
         gsap.set([slots[0], slots[1], slots[3], slots[4]], { display: 'none' });
         gsap.set(slots[CENTER_SLOT], { clearProps: 'all' });
         ScrollTrigger.refresh();
+        scrollToReturnSection();
       },
     });
 

@@ -1,11 +1,11 @@
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
+import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function FabricaTeaser() {
   return (
-    <section className="relative bg-bg-mid py-24 overflow-hidden">
+    <section className="relative bg-bg-mid py-24 overflow-hidden" id="fabrica">
       <DrawSVGSection selector=".abs-path" className="block w-full" duration={30}>
         <GatePergolaScene className="w-full h-auto opacity-60 max-h-[70vh]" />
       </DrawSVGSection>
@@ -27,12 +27,13 @@ export function FabricaTeaser() {
             Led by Ms. Komal Agarwal, our fabrication division has completed 500+ bespoke
             installations across West Bengal and Odisha.
           </p>
-          <Link
+          <HomeExitLink
             href="/services/fabrica"
+            sectionId="fabrica"
             className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Discover Fabrica
-          </Link>
+          </HomeExitLink>
         </div>
       </Container>
     </section>

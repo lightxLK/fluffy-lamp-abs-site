@@ -1,0 +1,43 @@
+const PRELOADER_SHOWN_KEY = 'abs:home-preloader-shown-at';
+const RETURN_SECTION_KEY = 'abs:home-return-section';
+const PRELOADER_SESSION_MS = 30 * 60 * 1000;
+
+/** Whether the home preloader already played within the last 30 minutes. */
+export function wasPreloaderShownRecently(): boolean {
+  if (typeof window === 'undefined') return false;
+  const raw = window.sessionStorage.getItem(PRELOADER_SHOWN_KEY);
+  if (!raw) return false;
+  const shownAt = Number(raw);
+  if (!Number.isFinite(shownAt)) return false;
+  return Date.now() - shownAt < PRELOADER_SESSION_MS;
+}
+
+export function markPreloaderShown(): void {
+  if (typeof window === 'undefined') return;
+  window.sessionStorage.setItem(PRELOADER_SHOWN_KEY, String(Date.now()));
+}
+
+/**
+ * Called from a CTA on the home page right before navigating away, so that
+ * coming back (via back button or a link back to "/") can restore the
+ * section the user left from instead of dumping them at the top.
+ */
+export function markHomeSectionExit(sectionId: string): void {
+  if (typeof window === 'undefined') return;
+  if (window.location.pathname !== '/') return;
+  window.sessionStorage.setItem(RETURN_SECTION_KEY, sectionId);
+}
+
+/** Non-destructive read, for deciding whether to force-replay the preloader. */
+export function peekHomeReturnSection(): string | null {
+  if (typeof window === 'undefined') return null;
+  return window.sessionStorage.getItem(RETURN_SECTION_KEY);
+}
+
+/** Reads and clears the pending return section in one step. */
+export function consumeHomeReturnSection(): string | null {
+  if (typeof window === 'undefined') return null;
+  const sectionId = window.sessionStorage.getItem(RETURN_SECTION_KEY);
+  window.sessionStorage.removeItem(RETURN_SECTION_KEY);
+  return sectionId;
+}

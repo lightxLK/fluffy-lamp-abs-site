@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { RollingMillScene } from '@/components/svg/scenes/RollingMillScene';
+import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function AboutSnapshot() {
   return (
-    <section className="relative bg-bg-dark py-24 overflow-hidden">
+    <section className="relative bg-bg-dark py-24 overflow-hidden" id="about-snapshot">
       <div className="relative w-full">
         <RollingMillScene className="w-full h-auto opacity-60" />
         <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 gap-4 p-4 sm:p-8 translate-y-8 sm:translate-y-12">
@@ -40,12 +40,13 @@ export function AboutSnapshot() {
             Today, with 70+ professionals, 250+ dealer partners, and relationships with SAIL, Tata,
             JSW, and Jindal, we carry that legacy forward with precision.
           </p>
-          <Link
+          <HomeExitLink
             href="/about"
+            sectionId="about-snapshot"
             className="inline-flex items-center gap-3 text-abs-blue text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors duration-300"
           >
             Our Story
-          </Link>
+          </HomeExitLink>
         </div>
       </Container>
 

@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { PRODUCTS } from '@/data/products';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function ProductsSection() {
   return (
@@ -21,9 +21,10 @@ export function ProductsSection() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           {PRODUCTS.map((product) => {
             return (
-              <Link
+              <HomeExitLink
                 key={product.slug}
                 href={`/products/${product.slug}`}
+                sectionId="products"
                 aria-label={product.name}
                 className="group relative block aspect-[4/3]"
               >
@@ -48,18 +49,19 @@ export function ProductsSection() {
                     </p>
                   </div>
                 </CardGlow>
-              </Link>
+              </HomeExitLink>
             );
           })}
         </div>
 
         <div className="mt-8 text-center">
-          <Link
+          <HomeExitLink
             href="/products"
+            sectionId="products"
             className="inline-flex items-center gap-3 border border-border-subtle text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-white hover:border-white transition-colors duration-300"
           >
             View All Products
-          </Link>
+          </HomeExitLink>
         </div>
       </Container>
     </section>

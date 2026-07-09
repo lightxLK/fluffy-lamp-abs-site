@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
+import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function CSRTeaser() {
   return (
-    <section className="relative bg-bg-mid py-24 overflow-hidden">
+    <section className="relative bg-bg-mid py-24 overflow-hidden" id="csr">
       <Image
         src="/csr.webp"
         alt=""
@@ -36,12 +36,13 @@ export function CSRTeaser() {
             neighbourhoods where our workers live, the schools their children attend, and the
             environment we all share.
           </p>
-          <Link
+          <HomeExitLink
             href="/news"
+            sectionId="csr"
             className="inline-flex items-center gap-3 border border-border-subtle text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-white hover:border-white transition-colors duration-300"
           >
             Read Our Stories
-          </Link>
+          </HomeExitLink>
         </div>
       </Container>
     </section>

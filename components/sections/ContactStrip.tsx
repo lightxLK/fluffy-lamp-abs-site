@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { ReadyToBuildScene } from '@/components/svg/scenes/ReadyToBuildScene';
+import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function ContactStrip() {
   return (
-    <section className="relative bg-abs-blue py-20 overflow-hidden">
+    <section className="relative bg-abs-blue py-20 overflow-hidden" id="contact-strip">
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.35] pointer-events-none">
         <ReadyToBuildScene className="w-full h-auto" />
       </div>
@@ -27,12 +28,13 @@ export function ContactStrip() {
             >
               WhatsApp Us
             </Link>
-            <Link
+            <HomeExitLink
               href="/contact"
+              sectionId="contact-strip"
               className="inline-flex items-center gap-3 border border-white/40 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:border-white hover:bg-white/10 transition-colors duration-300"
             >
               Get in Touch
-            </Link>
+            </HomeExitLink>
           </div>
         </div>
       </Container>
