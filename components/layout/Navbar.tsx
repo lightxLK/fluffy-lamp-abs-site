@@ -73,7 +73,7 @@ export function Navbar() {
 
   useEffect(() => {
     gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
-    gsap.set(infoColRef.current?.querySelectorAll('p, h3, h6') ?? [], { opacity: 0, y: 100 });
+    gsap.set(infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [], { opacity: 0, y: 100 });
   }, []);
 
   const openMenu = () => {
@@ -83,7 +83,7 @@ export function Navbar() {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
-    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6') ?? [];
+    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [];
     gsap.set(infoItems, { opacity: 0, y: 100 });
 
     const tl = gsap.timeline();
@@ -106,7 +106,7 @@ export function Navbar() {
     gsap.set(pathRef.current, { attr: { d: CLOSE_START } });
 
     const links = linksColRef.current?.querySelectorAll('a') ?? [];
-    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6') ?? [];
+    const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [];
 
     const tl = gsap.timeline({
       onComplete: () => {

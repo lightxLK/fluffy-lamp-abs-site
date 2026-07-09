@@ -16,8 +16,8 @@ export function AboutSnapshot() {
             ] as const
           ).map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-text-primary font-bold text-2xl sm:text-3xl">{stat.value}</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest">{stat.label}</p>
+              <p className="text-text-primary font-bold text-4xl sm:text-5xl">{stat.value}</p>
+              <p className="text-text-muted text-sm uppercase tracking-widest">{stat.label}</p>
             </div>
           ))}
         </div>

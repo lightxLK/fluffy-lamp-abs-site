@@ -18,7 +18,7 @@ export function RollingMillScene({ className }: RollingMillSceneProps) {
       if (!path) return;
 
       const length = path.getTotalLength();
-      const preDrawnOffset = length * 0.9;
+      const preDrawnOffset = length * 0.99;
       gsap.set(path, { strokeDasharray: length, strokeDashoffset: preDrawnOffset });
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
