@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Navbar } from '@/components/layout/Navbar';
 
 jest.mock('next/navigation', () => ({ usePathname: () => '/' }));
+jest.mock('@/lib/lenis', () => ({ getLenis: jest.fn(() => null) }));
 
 describe('Navbar', () => {
   it('renders the ABS logo', () => {

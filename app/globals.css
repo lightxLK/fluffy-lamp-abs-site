@@ -43,9 +43,9 @@
 /* ─── ABS design tokens ───────────────────────────────────────────── */
 @theme {
   /* Brand colors */
-  --color-abs-blue: #0624cb;
-  --color-abs-blue-dark: #0419a0;
-  --color-abs-blue-light: #3b55e6;
+  --color-abs-blue: #0b3ecf;
+  --color-abs-blue-dark: #0931a4;
+  --color-abs-blue-light: #3667f4;
 
   /* Surface colors */
   --color-bg-dark: #0d0d0d;
@@ -81,7 +81,7 @@
   --card-foreground: #ffffff;
   --popover: #1d1d1d;
   --popover-foreground: #ffffff;
-  --primary: #0624cb;
+  --primary: #0b3ecf;
   --primary-foreground: #ffffff;
   --secondary: #28282b;
   --secondary-foreground: #ffffff;
@@ -92,16 +92,16 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: rgba(255, 255, 255, 0.1);
   --input: rgba(255, 255, 255, 0.1);
-  --ring: #0624cb;
+  --ring: #0b3ecf;
   --radius: 0.5rem;
   --sidebar: #1d1d1d;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #0624cb;
+  --sidebar-primary: #0b3ecf;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #28282b;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #0624cb;
+  --sidebar-ring: #0b3ecf;
 }
 
 /* ─── Base layer ─────────────────────────────────────────────────── */

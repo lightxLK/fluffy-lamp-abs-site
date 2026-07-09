@@ -10,12 +10,18 @@ interface ABSLogoMarkSceneProps {
   loop?: boolean;
   /** When `loop` is set, controls whether the looping animation is running. */
   active?: boolean;
+  /** Draw once, triggered by `active` flipping true (instead of scroll), and reset when it flips false. */
+  once?: boolean;
+  /** Stroke color for the path. */
+  stroke?: string;
 }
 
 export function ABSLogoMarkScene({
   className,
   loop = false,
   active = true,
+  once = false,
+  stroke = '#fff',
 }: ABSLogoMarkSceneProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -29,18 +35,17 @@ export function ABSLogoMarkScene({
       tweenRef.current?.kill();
       tweenRef.current = null;
 
-      const length = path.getTotalLength();
-      gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+      gsap.set(path, { drawSVG: '0%' });
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(path, { strokeDashoffset: loop && !active ? length : 0 });
+        gsap.set(path, { drawSVG: loop && !active ? '0%' : '100%' });
         return;
       }
 
       if (loop) {
         if (!active) return;
         tweenRef.current = gsap.to(path, {
-          strokeDashoffset: 0,
+          drawSVG: '100%',
           duration: 1.4,
           ease: 'power2.inOut',
           repeat: -1,
@@ -50,8 +55,18 @@ export function ABSLogoMarkScene({
         return;
       }
 
+      if (once) {
+        if (!active) return;
+        tweenRef.current = gsap.to(path, {
+          drawSVG: '100%',
+          duration: 2.8,
+          ease: 'power2.inOut',
+        });
+        return;
+      }
+
       tweenRef.current = gsap.to(path, {
-        strokeDashoffset: 0,
+        drawSVG: '100%',
         duration: 4,
         ease: 'power2.inOut',
         scrollTrigger: {
@@ -62,7 +77,7 @@ export function ABSLogoMarkScene({
         },
       });
     },
-    { scope: svgRef, dependencies: [loop, active] },
+    { scope: svgRef, dependencies: [loop, active, once] },
   );
 
   return (
@@ -71,7 +86,7 @@ export function ABSLogoMarkScene({
         ref={pathRef}
         d={ABS_LOGO_MARK_PATH}
         fill="none"
-        stroke="#fff"
+        stroke={stroke}
         strokeWidth="6"
         strokeLinecap="round"
         strokeLinejoin="round"

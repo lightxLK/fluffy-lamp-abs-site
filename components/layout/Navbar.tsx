@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
-import { ABSLogoMarkScene } from '@/components/svg/scenes/ABSLogoMarkScene';
+import { getLenis } from '@/lib/lenis';
 import { NavLinkSwap } from '@/components/layout/NavLinkSwap';
 
 const NAV_LINKS = [
@@ -31,14 +31,12 @@ const CLOSE_HIDDEN = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT}
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [logoDrawing, setLogoDrawing] = useState(false);
   const [nearFooter, setNearFooter] = useState(false);
   const pathname = usePathname();
 
   const pathRef = useRef<SVGPathElement>(null);
   const linksColRef = useRef<HTMLDivElement>(null);
   const infoColRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
@@ -62,18 +60,17 @@ export function Navbar() {
   useEffect(() => {
     gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
     gsap.set(infoColRef.current?.querySelectorAll('p, h3, h6') ?? [], { opacity: 0, y: 100 });
-    gsap.set(logoRef.current, { opacity: 0 });
   }, []);
 
   const openMenu = () => {
     tlRef.current?.kill();
     setOpen(true);
-    setLogoDrawing(true);
+    getLenis()?.stop();
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
     const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6') ?? [];
     gsap.set(infoItems, { opacity: 0, y: 100 });
-    gsap.set(logoRef.current, { opacity: 0 });
 
     const tl = gsap.timeline();
     tlRef.current = tl;
@@ -88,13 +85,10 @@ export function Navbar() {
       { duration: 0.75, opacity: 1, y: 0, ease: 'power3.out', stagger: 0.075 },
       '-=0.6',
     );
-
-    tl.to(logoRef.current, { duration: 0.3, opacity: 1, ease: 'power2.out' }, 0.85);
   };
 
   const closeMenu = () => {
     tlRef.current?.kill();
-    setLogoDrawing(false);
     gsap.set(pathRef.current, { attr: { d: CLOSE_START } });
 
     const links = linksColRef.current?.querySelectorAll('a') ?? [];
@@ -103,18 +97,17 @@ export function Navbar() {
     const tl = gsap.timeline({
       onComplete: () => {
         setOpen(false);
+        getLenis()?.start();
+        document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
         gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
         gsap.set(links, { opacity: 1 });
         gsap.set(infoItems, { opacity: 0, y: 100 });
-        gsap.set(logoRef.current, { opacity: 0 });
       },
     });
     tlRef.current = tl;
 
-    tl.to(links, { duration: 0.3, opacity: 0 })
-      .to(infoItems, { duration: 0.3, opacity: 0 }, '<')
-      .to(logoRef.current, { duration: 0.3, opacity: 0 }, '<');
+    tl.to(links, { duration: 0.3, opacity: 0 }).to(infoItems, { duration: 0.3, opacity: 0 }, '<');
 
     tl.to(pathRef.current, { duration: 0.5, attr: { d: CLOSE_BULGE }, ease: 'power3.in' }, '<').to(
       pathRef.current,
@@ -159,7 +152,7 @@ export function Navbar() {
         aria-label="Primary navigation"
       >
         <Link href="/" className="flex items-center group" aria-label="Anil Balaji Steel">
-          <img src="/ABS.svg" alt="Anil Balaji Steel" className="h-16 w-16" />
+          <img src="/abs-nav-footer.webp" alt="Anil Balaji Steel" className="h-14 w-auto" />
         </Link>
 
         <button
@@ -200,46 +193,8 @@ export function Navbar() {
           <path ref={pathRef} fill="#0d0d0d" d={OPEN_HIDDEN} />
         </svg>
 
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-8 h-full pb-10 lg:pb-16 flex flex-col-reverse lg:flex-row gap-8 relative">
-          <div
-            ref={logoRef}
-            className="hidden lg:block absolute top-20 left-8 bottom-48 right-[52%] pointer-events-none opacity-0"
-          >
-            <ABSLogoMarkScene loop active={logoDrawing} className="w-full h-full" />
-          </div>
-
-          <div ref={infoColRef} className="flex-1 flex flex-col justify-end">
-            <p className="text-abs-blue text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
-              Get in touch
-            </p>
-            <h3 className="text-white text-2xl lg:text-3xl font-semibold mb-1">
-              <a
-                href="mailto:viren@anilbalajisteel.com"
-                className="hover:text-abs-blue transition-colors"
-              >
-                viren@anilbalajisteel.com
-              </a>
-            </h3>
-            <h3 className="text-white text-2xl lg:text-3xl font-semibold">
-              <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
-                +91 90072 11599
-              </a>
-            </h3>
-            <br />
-            <a
-              href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-white transition-colors"
-            >
-              <h6 className="text-sm lg:text-base leading-snug">
-                Jalan Industrial Complex, Gate No. 1, Domjur, NH6
-              </h6>
-              <h6 className="text-sm lg:text-base leading-snug">Howrah, 711411</h6>
-            </a>
-          </div>
-
-          <div ref={linksColRef} className="flex-[1.5] lg:flex-1 flex flex-col justify-end">
+        <div className="w-full h-full pb-10 lg:pb-16 flex flex-col items-center justify-center relative">
+          <div ref={linksColRef} className="flex flex-col items-start text-left">
             {NAV_LINKS.map((link) => (
               <NavLinkSwap
                 key={link.href}
@@ -250,6 +205,40 @@ export function Navbar() {
                 className="font-sans font-bold leading-[1.15] text-[clamp(2.25rem,7vw,4.5rem)] w-max overflow-visible transition-colors"
               />
             ))}
+          </div>
+
+          <div
+            ref={infoColRef}
+            className="absolute bottom-8 right-6 lg:right-8 flex flex-col items-end text-right"
+          >
+            <p className="text-white underline underline-offset-4 text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
+              Get in touch
+            </p>
+            <h3 className="text-text-muted text-base lg:text-lg font-semibold mb-1">
+              <a
+                href="mailto:viren@anilbalajisteel.com"
+                className="hover:text-abs-blue transition-colors"
+              >
+                viren@anilbalajisteel.com
+              </a>
+            </h3>
+            <h3 className="text-white text-base lg:text-lg font-semibold">
+              <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
+                +91 90072 11599
+              </a>
+            </h3>
+            <br />
+            <a
+              href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-fit text-text-muted hover:text-white transition-colors"
+            >
+              <h6 className="text-base lg:text-lg leading-snug">Jalan Industrial Complex,</h6>
+              <h6 className="text-base lg:text-lg leading-snug">
+                Gate No. 1, Domjur, NH6, Howrah, 711411
+              </h6>
+            </a>
           </div>
         </div>
       </div>

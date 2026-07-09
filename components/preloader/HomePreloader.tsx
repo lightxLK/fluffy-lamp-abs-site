@@ -22,8 +22,8 @@ const CENTER_SLOT = 2;
 const SLOT_SCALE = 0.2;
 const SLOT_GAP = 40;
 
-const GREETINGS = ['hello', 'नमस्ते', 'ନମସ୍କାର', 'নমস্কার'];
-const GREETING_HOLDS = [0.45, 0.3, 0.3, 0.45]; // per-language hold, seconds
+const GREETINGS = ['নমস্কার', 'hello', 'नमस्ते', 'ନମସ୍କାର', 'নমস্কাৰ'];
+const GREETING_HOLDS = [0.45, 0.3, 0.3, 0.3, 0.45]; // per-language hold, seconds
 const GREETING_ENTER = 0.15;
 const GREETING_EXIT = 0.15;
 const GREETING_START = 0.08;
