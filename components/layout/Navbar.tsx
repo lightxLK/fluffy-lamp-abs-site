@@ -85,6 +85,7 @@ export function Navbar() {
 
     const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [];
     gsap.set(infoItems, { opacity: 0, y: 100 });
+    gsap.set(linksColRef.current?.querySelectorAll('a') ?? [], { opacity: 1 });
 
     const tl = gsap.timeline();
     tlRef.current = tl;
@@ -115,7 +116,6 @@ export function Navbar() {
         document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
         gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
-        gsap.set(links, { opacity: 1 });
         gsap.set(infoItems, { opacity: 0, y: 100 });
       },
     });
