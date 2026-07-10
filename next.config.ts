@@ -18,4 +18,5 @@ const nextConfig: NextConfig = {
   },
 };
 
+// no-op: verifying pinned buildId keeps FTP deploys incremental
 export default nextConfig;
