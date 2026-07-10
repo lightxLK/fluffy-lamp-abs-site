@@ -26,9 +26,9 @@ export function ProductsSection() {
                 href={`/products/${product.slug}`}
                 sectionId="products"
                 aria-label={product.name}
-                className="group relative block aspect-[4/3]"
+                className="group relative block aspect-[4/3] rounded overflow-hidden"
               >
-                <CardGlow className="h-full w-full overflow-hidden">
+                <CardGlow className="h-full w-full overflow-hidden rounded" borderRadius={10}>
                   <DrawSVGSection
                     selector=".abs-path"
                     duration={20}

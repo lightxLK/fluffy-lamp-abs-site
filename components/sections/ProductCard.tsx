@@ -42,11 +42,11 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group relative block aspect-[4/5]"
+      className="group relative block aspect-[4/5] rounded overflow-hidden"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
-      <CardGlow className="h-full w-full overflow-hidden">
+      <CardGlow className="h-full w-full overflow-hidden rounded">
         <div
           ref={iconRef}
           className="absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-white group-hover:opacity-100 transition-[color,opacity] duration-500 p-10"
