@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Albert_Sans } from 'next/font/google';
+import { EasterEgg } from '@/components/layout/EasterEgg';
 import './globals.css';
 
 const albertSans = Albert_Sans({
@@ -25,7 +26,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={albertSans.variable}>
-      <body className="bg-bg-dark text-text-primary font-sans antialiased">{children}</body>
+      <body className="bg-bg-dark text-text-primary font-sans antialiased">
+        {children}
+        <EasterEgg />
+      </body>
     </html>
   );
 }

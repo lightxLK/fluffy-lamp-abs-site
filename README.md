@@ -70,32 +70,44 @@ Visual assets for the site (hero imagery, product photography, the India distrib
 
 **Framework and rendering**
 
-- [Next.js 16](https://nextjs.org) (App Router, static export mode)
-- [React 19](https://react.dev)
-- [TypeScript 5](https://www.typescriptlang.org)
+[![Next.js](https://img.shields.io/badge/Next.js%2016-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React%2019-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript%205-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
+Next.js 16 with the App Router, running in static export mode (`output: 'export'`).
 
 **Styling and UI**
 
-- [Tailwind CSS 4](https://tailwindcss.com)
-- [shadcn](https://ui.shadcn.com) component conventions (`components.json`, base nova style, neutral base color)
-- [class variance authority](https://cva.style) and `tailwind merge` for variant driven styling
-- [Lucide](https://lucide.dev) icon set
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS%204-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com)
+[![Lucide](https://img.shields.io/badge/Lucide-F56565?style=for-the-badge&logo=lucide&logoColor=white)](https://lucide.dev)
+[![class variance authority](https://img.shields.io/badge/class%20variance%20authority-8B5CF6?style=for-the-badge)](https://cva.style)
+[![tailwind merge](https://img.shields.io/badge/tailwind%20merge-38BDF8?style=for-the-badge)](https://github.com/dcastil/tailwind-merge)
+
+Component conventions follow shadcn (`components.json`, base nova style, neutral base color), with class variance authority and tailwind merge driving variant based styling.
 
 **Animation and interaction**
 
-- [GSAP](https://gsap.com) with `@gsap/react` for scroll and entrance animations
-- [animejs](https://animejs.com)
-- [Framer Motion](https://www.framer.com/motion)
-- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
-- [Embla Carousel](https://www.embla-carousel.com) with the autoplay plugin
-- [Split Type](https://github.com/lukePeavey/SplitType) for text splitting effects
+[![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black)](https://gsap.com)
+[![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)
+[![anime.js](https://img.shields.io/badge/anime.js-FF6B6B?style=for-the-badge)](https://animejs.com)
+[![Lenis](https://img.shields.io/badge/Lenis-1A1A1A?style=for-the-badge)](https://lenis.darkroom.engineering)
+[![Embla Carousel](https://img.shields.io/badge/Embla%20Carousel-2F2F2F?style=for-the-badge)](https://www.embla-carousel.com)
+[![Split Type](https://img.shields.io/badge/Split%20Type-4A4A4A?style=for-the-badge)](https://github.com/lukePeavey/SplitType)
+
+GSAP with `@gsap/react` drives scroll and entrance animation, Lenis provides smooth scrolling, and Split Type powers text splitting effects. Framer Motion, anime.js, and Embla Carousel (with its autoplay plugin) cover interaction and carousel needs.
 
 **Tooling**
 
-- [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
-- [Husky](https://typicode.github.io/husky) and `lint-staged` for pre commit checks
-- [Jest](https://jestjs.io) with `@testing-library/react` and `jest-environment-jsdom`
-- [Sharp](https://sharp.pixelplumbing.com) and `ffmpeg-static` for asset optimization scripts
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org)
+[![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io)
+[![Husky](https://img.shields.io/badge/Husky-42B883?style=for-the-badge&logo=husky&logoColor=white)](https://typicode.github.io/husky)
+[![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io)
+[![Testing Library](https://img.shields.io/badge/Testing%20Library-E33332?style=for-the-badge&logo=testinglibrary&logoColor=white)](https://testing-library.com)
+[![Sharp](https://img.shields.io/badge/Sharp-99CC00?style=for-the-badge)](https://sharp.pixelplumbing.com)
+[![ffmpeg](https://img.shields.io/badge/ffmpeg-007808?style=for-the-badge&logo=ffmpeg&logoColor=white)](https://ffmpeg.org)
+
+ESLint and Prettier enforce code quality, Husky and `lint-staged` run them on every commit, Jest with Testing Library covers automated tests, and Sharp with `ffmpeg-static` power the asset optimization scripts.
 
 ## Features
 
@@ -107,6 +119,7 @@ Visual assets for the site (hero imagery, product photography, the India distrib
 - Structured SEO helpers under `lib/seo`, plus `sitemap.ts` and `robots.ts` route handlers.
 - Contact form wired to a configurable external endpoint via environment variable.
 - Image and video optimization scripts (`scripts/optimize-images.mjs`, `scripts/compress-hero-video.mjs`) to keep static assets lean before deploy.
+- A site wide developer easter egg (`components/layout/EasterEgg.tsx`): pressing `Alt + Shift + L + K` on any page opens the developer's site in a new tab.
 
 ## Project Structure
 
