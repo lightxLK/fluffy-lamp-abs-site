@@ -7,7 +7,7 @@ export function AboutSnapshot() {
     <section className="relative bg-bg-dark py-24 overflow-hidden" id="about-snapshot">
       <div className="relative w-full">
         <RollingMillScene className="w-full h-auto opacity-60" />
-        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 gap-4 p-4 sm:p-8 translate-y-8 sm:translate-y-12">
+        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 gap-4 p-4 sm:p-8 translate-y-20 sm:translate-y-28">
           {(
             [
               { value: '1972', label: 'Founded' },
@@ -24,7 +24,7 @@ export function AboutSnapshot() {
       </div>
 
       <Container>
-        <div className="max-w-3xl mx-auto text-center mt-16">
+        <div className="max-w-3xl mx-auto text-center mt-36 sm:mt-40">
           <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
             Our Legacy
           </p>
@@ -43,7 +43,7 @@ export function AboutSnapshot() {
           <HomeExitLink
             href="/about"
             sectionId="about-snapshot"
-            className="inline-flex items-center gap-3 text-abs-blue text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Our Story
           </HomeExitLink>
