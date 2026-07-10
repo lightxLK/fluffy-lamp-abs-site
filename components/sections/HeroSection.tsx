@@ -93,9 +93,15 @@ export function HeroSection() {
                   <GlassSurface
                     width="fit-content"
                     height="fit-content"
-                    borderRadius={3}
-                    backgroundOpacity={0.1}
-                    saturation={1.2}
+                    borderRadius={2}
+                    borderWidth={0.1}
+                    brightness={70}
+                    opacity={0.6}
+                    blur={6}
+                    displace={2}
+                    backgroundOpacity={0.08}
+                    saturation={1.4}
+                    distortionScale={-60}
                     className="group"
                   >
                     <Link

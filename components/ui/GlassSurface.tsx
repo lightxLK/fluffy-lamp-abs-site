@@ -1,30 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState, useId, type ReactNode, type CSSProperties } from 'react';
+import React, { useEffect, useRef, useState, useId } from 'react';
 import './GlassSurface.css';
 
-type BlendMode =
-  | 'normal'
-  | 'multiply'
-  | 'screen'
-  | 'overlay'
-  | 'darken'
-  | 'lighten'
-  | 'color-dodge'
-  | 'color-burn'
-  | 'hard-light'
-  | 'soft-light'
-  | 'difference'
-  | 'exclusion'
-  | 'hue'
-  | 'saturation'
-  | 'color'
-  | 'luminosity'
-  | 'plus-darker'
-  | 'plus-lighter';
-
 export interface GlassSurfaceProps {
-  children?: ReactNode;
+  children?: React.ReactNode;
   width?: number | string;
   height?: number | string;
   borderRadius?: number;
@@ -41,12 +21,30 @@ export interface GlassSurfaceProps {
   blueOffset?: number;
   xChannel?: 'R' | 'G' | 'B';
   yChannel?: 'R' | 'G' | 'B';
-  mixBlendMode?: BlendMode;
+  mixBlendMode?:
+    | 'normal'
+    | 'multiply'
+    | 'screen'
+    | 'overlay'
+    | 'darken'
+    | 'lighten'
+    | 'color-dodge'
+    | 'color-burn'
+    | 'hard-light'
+    | 'soft-light'
+    | 'difference'
+    | 'exclusion'
+    | 'hue'
+    | 'saturation'
+    | 'color'
+    | 'luminosity'
+    | 'plus-darker'
+    | 'plus-lighter';
   className?: string;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
-const GlassSurface = ({
+const GlassSurface: React.FC<GlassSurfaceProps> = ({
   children,
   width = 200,
   height = 80,
@@ -67,37 +65,13 @@ const GlassSurface = ({
   mixBlendMode = 'difference',
   className = '',
   style = {},
-}: GlassSurfaceProps) => {
+}) => {
   const id = useId();
   const filterId = `glass-filter-${id}`;
   const redGradId = `red-grad-${id}`;
   const blueGradId = `blue-grad-${id}`;
 
-  const supportsSVGFilters = () => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return false;
-    }
-
-    const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-    const isFirefox = /Firefox/.test(navigator.userAgent);
-
-    if (isWebkit || isFirefox) {
-      return false;
-    }
-
-    const div = document.createElement('div');
-    div.style.backdropFilter = `url(#${filterId})`;
-
-    return div.style.backdropFilter !== '';
-  };
-
   const [svgSupported, setSvgSupported] = useState<boolean>(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window/CSS APIs unavailable during SSR
-    setSvgSupported(supportsSVGFilters());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const feImageRef = useRef<SVGFEImageElement>(null);
@@ -173,7 +147,7 @@ const GlassSurface = ({
   ]);
 
   useEffect(() => {
-    if (!containerRef.current || typeof ResizeObserver === 'undefined') return;
+    if (!containerRef.current) return;
 
     const resizeObserver = new ResizeObserver(() => {
       setTimeout(updateDisplacementMap, 0);
@@ -192,7 +166,31 @@ const GlassSurface = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);
 
-  const containerStyle = {
+  const supportsSVGFilters = () => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return false;
+    }
+
+    const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+
+    if (isWebkit || isFirefox) {
+      return false;
+    }
+
+    const div = document.createElement('div');
+    div.style.backdropFilter = `url(#${filterId})`;
+
+    return div.style.backdropFilter !== '';
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window/CSS APIs unavailable during SSR
+    setSvgSupported(supportsSVGFilters());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const containerStyle: React.CSSProperties = {
     ...style,
     width: typeof width === 'number' ? `${width}px` : width,
     height: typeof height === 'number' ? `${height}px` : height,
@@ -200,7 +198,7 @@ const GlassSurface = ({
     '--glass-frost': backgroundOpacity,
     '--glass-saturation': saturation,
     '--filter-id': `url(#${filterId})`,
-  } as CSSProperties;
+  } as React.CSSProperties;
 
   return (
     <div
@@ -228,7 +226,13 @@ const GlassSurface = ({
               result="map"
             />
 
-            <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" result="dispRed" />
+            <feDisplacementMap
+              ref={redChannelRef}
+              in="SourceGraphic"
+              in2="map"
+              id="redchannel"
+              result="dispRed"
+            />
             <feColorMatrix
               in="dispRed"
               type="matrix"
@@ -243,6 +247,7 @@ const GlassSurface = ({
               ref={greenChannelRef}
               in="SourceGraphic"
               in2="map"
+              id="greenchannel"
               result="dispGreen"
             />
             <feColorMatrix
@@ -259,6 +264,7 @@ const GlassSurface = ({
               ref={blueChannelRef}
               in="SourceGraphic"
               in2="map"
+              id="bluechannel"
               result="dispBlue"
             />
             <feColorMatrix

@@ -25,3 +25,11 @@ if (typeof SVGElement !== 'undefined') {
   // @ts-expect-error - same as above
   SVGElement.prototype.getPointAtLength = () => ({ x: 0, y: 0 }) as DOMPoint;
 }
+
+// jsdom does not implement ResizeObserver — stub it so components that observe
+// element size (e.g. GlassSurface's displacement map recompute) don't throw
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
