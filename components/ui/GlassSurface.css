@@ -56,10 +56,12 @@
     0px 16px 56px rgba(17, 17, 26, 0.05) inset;
 }
 
+/* Matches the hero-arrow glass treatment from the EO Odisha site. */
 .glass-surface--fallback {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .glass-surface:focus-visible {
