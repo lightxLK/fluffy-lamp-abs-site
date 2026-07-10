@@ -1,36 +1,227 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anil Balaji Steel Corporate Website
+
+A statically exported marketing site for Anil Balaji Steel (ABS), a steel manufacturing and processing company. The site presents the company profile, product catalogue, manufacturing capabilities, corporate social responsibility work, and contact channels for prospective B2B buyers, distributors, and partners.
+
+![Next.js](https://img.shields.io/badge/Next.js-16.2.9-000000?style=flat&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=flat&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
+![License](https://img.shields.io/badge/license-Proprietary-lightgrey?style=flat)
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Motivation](#motivation)
+3. [Build and Deployment Status](#build-and-deployment-status)
+4. [Code Style](#code-style)
+5. [Screenshots](#screenshots)
+6. [Tech Stack](#tech-stack)
+7. [Features](#features)
+8. [Project Structure](#project-structure)
+9. [Getting Started](#getting-started)
+10. [Available Scripts](#available-scripts)
+11. [Environment Variables](#environment-variables)
+12. [Testing](#testing)
+13. [Deployment](#deployment)
+14. [Contributing](#contributing)
+15. [Credits](#credits)
+16. [License](#license)
+
+## Overview
+
+This repository contains the source for the public facing website of Anil Balaji Steel. It is built with the Next.js App Router and exported as a fully static site (`output: 'export'`), which is then pushed to a traditional FTP host rather than a Node runtime.
+
+The site covers the company's corporate story, product range (sheets, pipes, chequered plates, shutters, and shutter accessories), manufacturing facility (Fabrica), network and distribution reach, CSR initiatives, careers, and a contact form for inbound enquiries.
+
+## Motivation
+
+Anil Balaji Steel needed a modern, fast loading, and easily maintainable web presence to replace legacy marketing collateral (PDF brochures and catalogues) with an interactive, structured, and SEO friendly site. Content such as product listings, service offerings, leadership directors, timeline milestones, and news is centralized in typed data modules under `data/`, so updates do not require touching page markup directly.
+
+A static export target was chosen deliberately, since the production host only supports FTP based static file hosting rather than a Node.js server, and the build pipeline is tuned to keep FTP deploys incremental by pinning the Next.js build ID.
+
+## Build and Deployment Status
+
+The project is built and deployed automatically on every push to `main` via GitHub Actions, which runs `npm run build` and pushes the resulting `out/` directory to the production FTP host.
+
+[![Build & Deploy to FTP](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=flat&logo=githubactions&logoColor=white)](.github/workflows/deploy.yml)
+[![Node](https://img.shields.io/badge/node-20.x-339933?style=flat&logo=node.js&logoColor=white)](.github/workflows/deploy.yml)
+
+The workflow definition lives at `.github/workflows/deploy.yml`.
+
+## Code Style
+
+Formatting and linting are enforced through Prettier and ESLint (Next.js flat config), wired into pre commit hooks via Husky and lint staged.
+
+[![code style: prettier](https://img.shields.io/badge/code%20style-prettier-F7B93E?style=flat&logo=prettier&logoColor=black)](https://prettier.io)
+[![linting: eslint](https://img.shields.io/badge/linting-eslint-4B32C3?style=flat&logo=eslint&logoColor=white)](https://eslint.org)
+[![type checked: TypeScript](https://img.shields.io/badge/type%20checked-typescript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
+Configuration:
+
+- Prettier: `.prettierrc` (semicolons on, single quotes, trailing commas, two space indentation, one hundred character print width).
+- ESLint: `eslint.config.mjs`, extending `eslint-config-next` and `eslint-config-prettier`.
+- Pre commit: `.husky/` plus the `lint-staged` block in `package.json`, which runs ESLint and Prettier on staged TypeScript files and Prettier on staged JSON, CSS, and Markdown files.
+
+## Screenshots
+
+Visual assets for the site (hero imagery, product photography, the India distribution map, and brand marks) live under `public/`. Add representative screenshots of the live pages here as the design stabilizes.
+
+## Tech Stack
+
+**Framework and rendering**
+
+- [Next.js 16](https://nextjs.org) (App Router, static export mode)
+- [React 19](https://react.dev)
+- [TypeScript 5](https://www.typescriptlang.org)
+
+**Styling and UI**
+
+- [Tailwind CSS 4](https://tailwindcss.com)
+- [shadcn](https://ui.shadcn.com) component conventions (`components.json`, base nova style, neutral base color)
+- [class variance authority](https://cva.style) and `tailwind merge` for variant driven styling
+- [Lucide](https://lucide.dev) icon set
+
+**Animation and interaction**
+
+- [GSAP](https://gsap.com) with `@gsap/react` for scroll and entrance animations
+- [animejs](https://animejs.com)
+- [Framer Motion](https://www.framer.com/motion)
+- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
+- [Embla Carousel](https://www.embla-carousel.com) with the autoplay plugin
+- [Split Type](https://github.com/lukePeavey/SplitType) for text splitting effects
+
+**Tooling**
+
+- [ESLint](https://eslint.org) and [Prettier](https://prettier.io)
+- [Husky](https://typicode.github.io/husky) and `lint-staged` for pre commit checks
+- [Jest](https://jestjs.io) with `@testing-library/react` and `jest-environment-jsdom`
+- [Sharp](https://sharp.pixelplumbing.com) and `ffmpeg-static` for asset optimization scripts
+
+## Features
+
+- Static export architecture suited to inexpensive FTP hosting, with a pinned build ID so unchanged files are skipped on redeploy.
+- Content driven pages: products, services, directors, timeline, and news are sourced from typed modules in `data/`, keeping page components declarative.
+- Route groups under `app/(site)` for the marketing shell, with dedicated routes for about, careers, contact, products (chequered plate, pipes, plain sheets, sheet, shutter, shutter accessories), services (applications, Fabrica), and terms.
+- Custom scroll and reveal animation system built on GSAP, Lenis, and Split Type, wrapped in reusable providers (`GSAPProvider`, `LenisProvider`) and components (`DrawSVGSection`, `SplitTextReveal`).
+- Reusable glass surface and glow UI primitives (`GlassSurface`, `CardGlow`, `BorderGlow`) layered on top of shadcn style base components.
+- Structured SEO helpers under `lib/seo`, plus `sitemap.ts` and `robots.ts` route handlers.
+- Contact form wired to a configurable external endpoint via environment variable.
+- Image and video optimization scripts (`scripts/optimize-images.mjs`, `scripts/compress-hero-video.mjs`) to keep static assets lean before deploy.
+
+## Project Structure
+
+```
+app/(site)/          Route groups for the public site: about, careers, contact,
+                      products, services, terms
+app/news/             News section routes
+components/animations Scroll and text reveal animation providers and helpers
+components/layout      Header, footer, and shell layout components
+components/preloader   Initial load experience
+components/sections    Page level sections (hero, timeline, CSR, network, etc.)
+components/svg         Inline SVG assets used as components
+components/ui          Base UI primitives (buttons, glass surfaces, glow effects)
+data/                  Typed content modules: directors, news, products, services,
+                      timeline
+lib/                   Shared utilities: GSAP setup, Lenis setup, SEO helpers,
+                      home return logic
+public/                Static assets: images, video, SVGs
+scripts/               Node scripts for image and video asset optimization
+__tests__/             Jest test suites for components and library code
+docs/                  Internal design and content reference notes
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Node.js](https://nodejs.org) 20.x or later
+- npm (the project is committed with `package-lock.json`)
+
+### Installation
+
+Clone the repository and install dependencies.
+
+```bash
+git clone <repository-url>
+cd website+
+npm install
+```
+
+### Development
+
+Start the local development server.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in a browser to view the site. Pages under `app/(site)` and `app/news` hot reload as files change.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script                    | Description                                                               |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `npm run dev`             | Start the Next.js development server.                                     |
+| `npm run build`           | Produce a static export in `out/`.                                        |
+| `npm run start`           | Serve the production build (Next.js server mode, for local verification). |
+| `npm run lint`            | Run ESLint across the project.                                            |
+| `npm run typecheck`       | Run the TypeScript compiler in no emit mode.                              |
+| `npm run format`          | Run Prettier across the project and write changes.                        |
+| `npm run test`            | Run the Jest test suite.                                                  |
+| `npm run images:optimize` | Optimize images in `public/` using Sharp.                                 |
+| `npm run video:compress`  | Compress the hero video using ffmpeg.                                     |
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+| Variable                       | Purpose                                                                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_CONTACT_ENDPOINT` | External endpoint the contact form submits enquiries to. Required at build time; injected as a GitHub Actions secret in CI. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `.env.local` file at the project root for local development:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+NEXT_PUBLIC_CONTACT_ENDPOINT=https://example.com/api/contact
+```
 
-## Deploy on Vercel
+## Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Tests are written with Jest, `@testing-library/react`, and a jsdom environment, configured in `jest.config.ts` and `jest.setup.ts`. Suites live under `__tests__/components` and `__tests__/lib`, alongside a baseline `smoke.test.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run the full suite:
+
+```bash
+npm run test
+```
+
+## Deployment
+
+The site is deployed as static output rather than a hosted Node.js application.
+
+1. `next.config.ts` sets `output: 'export'` and `trailingSlash: true`, and pins `generateBuildId` to a constant value so unchanged files hash identically between builds, keeping FTP uploads incremental.
+2. On every push to `main`, `.github/workflows/deploy.yml` installs dependencies, restores the Next.js build cache, runs `npm run build`, and uploads the resulting `out/` directory to the production FTP host using `SamKirkland/FTP-Deploy-Action`.
+3. `hero.webm` is excluded from the FTP sync step to avoid repeatedly re-uploading a large static video asset.
+
+To produce the same static output locally:
+
+```bash
+npm run build
+```
+
+The exportable site will be written to `out/`.
+
+## Contributing
+
+This is an internal, client owned codebase. If you are contributing:
+
+1. Create a feature branch from `main`.
+2. Keep content changes in `data/` where possible rather than hardcoding copy into components.
+3. Run `npm run lint`, `npm run typecheck`, and `npm run test` before opening a pull request; the pre commit hook (Husky plus lint staged) will also run ESLint and Prettier automatically on staged files.
+4. Keep commits scoped and descriptive, following the existing history's conventional style (for example `feat:`, `fix:`, `chore:`, `perf:`, `style:`).
+
+## Credits
+
+Built and maintained by TSA Media Pvt. Ltd. for Anil Balaji Steel. The project was originally scaffolded with `create-next-app` and has since been substantially customized for the company's brand, content, and static hosting requirements.
+
+## License
+
+This project is proprietary and confidential to Anil Balaji Steel and TSA Media Pvt. Ltd. All rights reserved. No license is granted for reuse, redistribution, or modification without written permission from the copyright holders.
