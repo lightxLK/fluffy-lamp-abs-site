@@ -48,7 +48,7 @@ export function HeroSection() {
   const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
   return (
-    <section className="relative h-screen min-h-[600px] bg-bg-dark overflow-hidden">
+    <section className="relative h-dvh min-h-[600px] bg-bg-dark overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src="/hero.webm"

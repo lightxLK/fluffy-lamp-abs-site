@@ -17,7 +17,7 @@ const SERVICES = [
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 const inputClasses =
-  'w-full bg-bg-card border border-border-subtle text-text-primary text-sm px-4 py-3 focus:outline-none focus:border-abs-blue transition-colors duration-200 placeholder:text-text-muted';
+  'w-full bg-bg-card border border-border-subtle text-text-primary text-base px-4 py-3 focus:outline-none focus:border-abs-blue transition-colors duration-200 placeholder:text-text-muted';
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');

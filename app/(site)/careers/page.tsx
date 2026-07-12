@@ -67,7 +67,7 @@ export default function CareersPage() {
 
       <section className="bg-bg-card border-y border-border-subtle py-16">
         <Container>
-          <div className="grid grid-cols-3 gap-8 max-w-2xl">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl">
             {STATS.map((stat) => (
               <div key={stat.label} className="border-t border-border-subtle pt-6 text-center">
                 <p className="text-text-primary font-bold text-4xl leading-none mb-2">

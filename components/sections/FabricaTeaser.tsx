@@ -5,11 +5,17 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 export function FabricaTeaser() {
   return (
     <section
-      className="relative bg-bg-mid min-h-[110vh] flex items-center justify-center overflow-hidden"
+      className="relative bg-bg-mid min-h-[110dvh] flex items-center justify-center overflow-hidden"
       id="fabrica"
     >
       {/* Background Image */}
-      <Image src="/dssdfc.png" alt="Fabrica" fill className="object-cover object-top z-0" />
+      <Image
+        src="/dssdfc.png"
+        alt="Fabrica"
+        fill
+        sizes="100vw"
+        className="object-cover object-top z-0"
+      />
 
       {/* Color Overlay */}
       <div className="absolute inset-0 bg-[#0D0D0D]/65 z-[5] pointer-events-none" />

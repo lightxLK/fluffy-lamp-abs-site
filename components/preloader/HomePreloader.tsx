@@ -241,7 +241,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
         </div>
       </div>
 
-      <div className="relative w-full h-screen overflow-hidden">
+      <div className="relative w-full h-dvh overflow-hidden">
         {SLOT_ROTATIONS.map((_, i) =>
           i === CENTER_SLOT ? (
             <div
