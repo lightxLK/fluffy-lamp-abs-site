@@ -41,7 +41,7 @@ export function AboutTimeline() {
     <section ref={sectionRef} className="relative bg-bg-dark py-24 overflow-hidden" id="timeline">
       <Container>
         <div className="mb-14">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             The Journey
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">

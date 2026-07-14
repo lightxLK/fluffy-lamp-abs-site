@@ -32,7 +32,7 @@ export function ProductPageHero({
       </DrawSVGSection>
 
       <Container className="relative">
-        <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+        <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
           {category} · {brandLine}
         </p>
         <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-2xl">

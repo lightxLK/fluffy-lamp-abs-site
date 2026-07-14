@@ -67,7 +67,7 @@ export default function PlainSheetsPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             <div>
-              <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
                 Applications
               </p>
               <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">

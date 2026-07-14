@@ -25,7 +25,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={albertSans.variable}>
+    <html lang="en" className={albertSans.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(localStorage.getItem('abs-theme')==='light')document.documentElement.classList.add('light');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="bg-bg-dark text-text-primary font-sans antialiased">
         {children}
         <EasterEgg />

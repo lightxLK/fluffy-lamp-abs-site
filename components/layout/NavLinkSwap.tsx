@@ -89,7 +89,7 @@ export function NavLinkSwap({ label, href, active, open, className }: NavLinkSwa
   return (
     <Link
       href={href}
-      className={[className, active ? 'text-abs-blue' : 'text-white'].join(' ')}
+      className={[className, active ? 'text-abs-blue' : 'text-text-primary'].join(' ')}
       onMouseEnter={() => handleHover(false)}
       onMouseLeave={() => handleHover(true)}
     >

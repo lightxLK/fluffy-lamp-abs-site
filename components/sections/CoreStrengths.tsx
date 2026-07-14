@@ -30,7 +30,7 @@ export function CoreStrengths() {
     <section className="relative bg-bg-mid py-24">
       <Container>
         <div className="mb-14 text-center">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             What Sets Us Apart
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -55,7 +55,7 @@ export function CoreStrengths() {
         <div className="mt-14 text-center">
           <Link
             href="/about/board-of-directors"
-            className="inline-flex items-center gap-3 text-abs-blue text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-3 text-abs-blue text-sm font-semibold uppercase tracking-widest hover:text-text-primary transition-colors duration-300"
           >
             Meet the Board
           </Link>

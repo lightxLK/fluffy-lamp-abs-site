@@ -10,7 +10,7 @@ export function ProductsSection() {
     <section className="bg-bg-dark min-h-screen flex flex-col justify-center py-16" id="products">
       <Container className="w-full">
         <div className="mb-8">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Our Range
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight max-w-xl">
@@ -32,7 +32,7 @@ export function ProductsSection() {
                   <DrawSVGSection
                     selector=".abs-path"
                     duration={20}
-                    className="absolute inset-0 flex items-center justify-center text-white opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6"
+                    className="absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6"
                   >
                     <ProductIcon slug={product.slug} variant="stroke" className="w-full h-full" />
                   </DrawSVGSection>
@@ -58,7 +58,7 @@ export function ProductsSection() {
           <HomeExitLink
             href="/products"
             sectionId="products"
-            className="inline-flex items-center gap-3 border border-border-subtle text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-white hover:border-white transition-colors duration-300"
+            className="inline-flex items-center gap-3 border border-border-subtle text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-text-primary hover:border-text-primary transition-colors duration-300"
           >
             View All Products
           </HomeExitLink>

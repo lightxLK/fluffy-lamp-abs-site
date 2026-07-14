@@ -74,7 +74,7 @@ export default function FabricaPage() {
         </DrawSVGSection>
 
         <Container className="relative">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Introducing ABS Fabrica
           </p>
           <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-2xl">
@@ -105,7 +105,7 @@ export default function FabricaPage() {
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
           <div className="mb-14 max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               How Fabrica Works
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -130,7 +130,7 @@ export default function FabricaPage() {
       <section className="bg-bg-dark py-24">
         <Container>
           <div className="mb-14 max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Gate Systems
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -176,7 +176,7 @@ export default function FabricaPage() {
       <section className="bg-bg-mid py-24">
         <Container>
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Led By
             </p>
             <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">

@@ -232,7 +232,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
               ref={(el) => {
                 greetingRefs.current[i] = el;
               }}
-              className="absolute text-white text-3xl md:text-5xl font-medium tracking-tight text-center"
+              className="absolute text-text-primary text-3xl md:text-5xl font-medium tracking-tight text-center"
               style={{ opacity: 0 }}
             >
               {word}

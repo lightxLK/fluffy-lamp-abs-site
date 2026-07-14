@@ -3,6 +3,7 @@
 @import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));
 
 /* ─── shadcn token bridge ─────────────────────────────────────────── */
 @theme inline {
@@ -42,23 +43,10 @@
 
 /* ─── ABS design tokens ───────────────────────────────────────────── */
 @theme {
-  /* Brand colors */
+  /* Brand colors (theme-invariant) */
   --color-abs-blue: #0b3ecf;
   --color-abs-blue-dark: #0931a4;
   --color-abs-blue-light: #3667f4;
-
-  /* Surface colors */
-  --color-bg-dark: #0d0d0d;
-  --color-bg-card: #1d1d1d;
-  --color-bg-mid: #28282b;
-
-  /* Text */
-  --color-text-primary: #ffffff;
-  --color-text-muted: #999999;
-  --color-text-body: rgba(255, 255, 255, 0.8);
-
-  /* Border */
-  --color-border-subtle: rgba(255, 255, 255, 0.1);
 
   /* Layout */
   --width-site: 1440px;
@@ -70,10 +58,39 @@
   --duration-slow: 1.2s;
 }
 
-/* ─── shadcn base vars (dark-first — ABS is dark-only) ───────────── */
+/* Themeable tokens — resolve at runtime so .light can flip them */
+@theme inline {
+  /* Surface colors */
+  --color-bg-dark: var(--abs-bg-dark);
+  --color-bg-card: var(--abs-bg-card);
+  --color-bg-mid: var(--abs-bg-mid);
+
+  /* Text */
+  --color-text-primary: var(--abs-text-primary);
+  --color-text-muted: var(--abs-text-muted);
+  --color-text-body: var(--abs-text-body);
+
+  /* Border */
+  --color-border-subtle: var(--abs-border-subtle);
+
+  /* SVG line art */
+  --color-line-art: var(--abs-line-art);
+}
+
+/* ─── Theme vars — dark (default) ────────────────────────────────── */
 :root {
   color-scheme: dark;
   scroll-behavior: auto;
+
+  /* ABS surfaces / text / borders */
+  --abs-bg-dark: #0d0d0d;
+  --abs-bg-card: #1d1d1d;
+  --abs-bg-mid: #28282b;
+  --abs-text-primary: #ffffff;
+  --abs-text-muted: #999999;
+  --abs-text-body: rgba(255, 255, 255, 0.8);
+  --abs-border-subtle: rgba(255, 255, 255, 0.1);
+  --abs-line-art: #ffffff;
 
   --background: #0d0d0d;
   --foreground: #ffffff;
@@ -104,6 +121,42 @@
   --sidebar-ring: #0b3ecf;
 }
 
+/* ─── Theme vars — light ─────────────────────────────────────────── */
+:root.light {
+  color-scheme: light;
+
+  --abs-bg-dark: #cdd8de;
+  --abs-bg-card: #dde6eb;
+  --abs-bg-mid: #b9c8d1;
+  --abs-text-primary: #0e1418;
+  --abs-text-muted: #4d5a64;
+  --abs-text-body: rgba(14, 20, 24, 0.8);
+  --abs-border-subtle: rgba(14, 20, 24, 0.14);
+  --abs-line-art: #0e1418;
+
+  --background: #cdd8de;
+  --foreground: #0e1418;
+  --card: #dde6eb;
+  --card-foreground: #0e1418;
+  --popover: #dde6eb;
+  --popover-foreground: #0e1418;
+  --primary-foreground: #ffffff;
+  --secondary: #b9c8d1;
+  --secondary-foreground: #0e1418;
+  --muted: #b9c8d1;
+  --muted-foreground: #4d5a64;
+  --accent: #b9c8d1;
+  --accent-foreground: #0e1418;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(14, 20, 24, 0.14);
+  --input: rgba(14, 20, 24, 0.14);
+  --sidebar: #dde6eb;
+  --sidebar-foreground: #0e1418;
+  --sidebar-accent: #b9c8d1;
+  --sidebar-accent-foreground: #0e1418;
+  --sidebar-border: rgba(14, 20, 24, 0.14);
+}
+
 /* ─── Base layer ─────────────────────────────────────────────────── */
 @layer base {
   * {
@@ -124,6 +177,28 @@
   body {
     @apply bg-bg-dark text-text-primary;
   }
+}
+
+/* ─── Steel texture overlay (site-wide, both themes) ─────────────── */
+/* Fixed soft-light layer above all content; pointer-events off so it
+   never blocks interaction. Opacity tuned per theme. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  /* Low but explicit: paints above ordinary (unpositioned) section
+     content everywhere, but the hero opts out via its own z-index. */
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('/steel-texture.webp');
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+}
+
+:root.light body::after {
+  opacity: 0.28;
 }
 
 /* ─── Nav hamburger-to-arrow toggle (ham2) ──────────────────────── */
@@ -158,6 +233,37 @@
 #fullscreen-menu h6,
 #fullscreen-menu p {
   will-change: transform, opacity;
+}
+
+/* ─── Seamless marquee (canopy) ──────────────────────────────────── */
+/* Each repeated group is exactly one content-width + one gap wide, so
+   translating by calc(-100% - gap) lands pixel-perfect on the next copy. */
+@keyframes canopy-x {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@layer utilities {
+  .animate-canopy-x {
+    animation: canopy-x var(--duration, 30s) linear infinite;
+  }
+
+  .direction-reverse {
+    animation-direction: reverse;
+  }
+
+  .group:hover .group-hover\:paused {
+    animation-play-state: paused;
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────── */

@@ -27,7 +27,7 @@ export default function ProductsPage() {
 
       <section className="relative bg-bg-dark pt-40 pb-16">
         <Container>
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Comprehensive Product Portfolio
           </p>
           <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">

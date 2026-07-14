@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <CardGlow className="h-full w-full overflow-hidden rounded">
         <div
           ref={iconRef}
-          className="absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-white group-hover:opacity-100 transition-[color,opacity] duration-500 p-10"
+          className="absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10"
         >
           <ProductIcon slug={product.slug} variant="stroke" className="w-full h-full" />
         </div>

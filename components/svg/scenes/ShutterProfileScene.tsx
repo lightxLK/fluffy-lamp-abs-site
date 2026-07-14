@@ -7,7 +7,7 @@ export function ShutterProfileScene({ className }: ShutterProfileSceneProps) {
     <svg
       viewBox="0 0 500 100"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

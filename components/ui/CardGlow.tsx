@@ -11,7 +11,7 @@ export function CardGlow({ children, className = '', borderRadius = 10 }: CardGl
   return (
     <BorderGlow
       className={className}
-      backgroundColor="#1d1d1d"
+      backgroundColor="var(--abs-bg-card)"
       borderRadius={borderRadius}
       glowColor="230 90 45"
       colors={['#0B3ECF', '#3667F4', '#0931A4']}

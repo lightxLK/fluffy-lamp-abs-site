@@ -7,7 +7,7 @@ export function ABSLogoOutlineScene({ className }: ABSLogoOutlineSceneProps) {
     <svg
       viewBox="0 0 300 120"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

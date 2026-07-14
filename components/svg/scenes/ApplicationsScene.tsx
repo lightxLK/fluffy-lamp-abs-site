@@ -46,7 +46,7 @@ export function ApplicationsScene({ className }: ApplicationsSceneProps) {
         ref={pathRef}
         d={APPLICATIONS_PATH}
         fill="none"
-        stroke="#fff"
+        stroke="var(--abs-line-art)"
         strokeWidth="2"
         strokeLinecap="round"
       />

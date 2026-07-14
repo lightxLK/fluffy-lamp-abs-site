@@ -25,7 +25,7 @@ export function AboutSnapshot() {
 
       <Container>
         <div className="max-w-3xl mx-auto text-center mt-36 sm:mt-40">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Our Legacy
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight mb-6">

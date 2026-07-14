@@ -1,32 +1,8 @@
-'use client';
-
-import { useRef } from 'react';
-import { gsap, useGSAP } from '@/lib/gsap';
-
 const BRANDS = ['SAIL', 'JSW Steel', 'Tata Steel', 'Jindal Steel', 'Bhushan Steel', 'Mittal Steel'];
 
+const REPEAT = 4;
+
 export function BrandTrustBar() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (!trackRef.current) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const width = trackRef.current.scrollWidth / 2;
-      const tween = gsap.to(trackRef.current, {
-        x: -width,
-        duration: 22,
-        ease: 'none',
-        repeat: -1,
-      });
-      return () => tween.kill();
-    },
-    { scope: trackRef },
-  );
-
-  const items = [...BRANDS, ...BRANDS];
-
   return (
     <section
       className="py-14 bg-bg-dark border-y border-border-subtle overflow-hidden"
@@ -35,11 +11,22 @@ export function BrandTrustBar() {
       <p className="text-center text-text-muted text-xs uppercase tracking-widest mb-8">
         Sourced from India&apos;s finest steel mills
       </p>
-      <div ref={trackRef} className="flex gap-20 whitespace-nowrap w-max">
-        {items.map((brand, i) => (
-          <span key={i} className="text-text-muted text-sm font-semibold uppercase tracking-widest">
-            {brand}
-          </span>
+      <div className="flex w-full overflow-hidden [--gap:5rem] [--duration:22s] gap-(--gap) marquee-mask">
+        {Array.from({ length: REPEAT }).map((_, g) => (
+          <div
+            key={g}
+            aria-hidden={g > 0}
+            className="flex shrink-0 gap-(--gap) whitespace-nowrap animate-canopy-x"
+          >
+            {BRANDS.map((brand) => (
+              <span
+                key={brand}
+                className="text-text-muted text-sm font-semibold uppercase tracking-widest"
+              >
+                {brand}
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </section>

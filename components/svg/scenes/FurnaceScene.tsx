@@ -7,7 +7,7 @@ export function FurnaceScene({ className }: FurnaceSceneProps) {
     <svg
       viewBox="0 0 320 400"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

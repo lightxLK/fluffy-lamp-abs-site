@@ -17,8 +17,15 @@ const NODES = [
 export function EastIndiaMapScene({ className }: EastIndiaMapSceneProps) {
   return (
     <svg viewBox="0 0 2500 2843" fill="none" aria-hidden="true" className={className}>
-      {/* Actual India map — WB bright blue, 5 states mid-blue, rest faded */}
-      <image href="/india-map.svg" width="2500" height="2843" />
+      {/* Actual India map — WB bright blue, 5 states mid-blue, rest faded.
+          Baked-in line colors can't inherit CSS vars, so swap per theme. */}
+      <image href="/india-map.svg" width="2500" height="2843" className="light:hidden" />
+      <image
+        href="/india-map-light.svg"
+        width="2500"
+        height="2843"
+        className="hidden light:inline"
+      />
 
       {/* Dashed connection lines from HQ */}
       {NODES.map((n) => (
@@ -29,7 +36,8 @@ export function EastIndiaMapScene({ className }: EastIndiaMapSceneProps) {
           y1={HQ.cy}
           x2={n.cx}
           y2={n.cy}
-          stroke="rgba(255,255,255,0.35)"
+          stroke="var(--abs-line-art)"
+          strokeOpacity="0.35"
           strokeWidth="7"
           strokeDasharray="24 16"
         />
@@ -37,12 +45,26 @@ export function EastIndiaMapScene({ className }: EastIndiaMapSceneProps) {
 
       {/* Dealer nodes */}
       {NODES.map((n) => (
-        <circle key={n.label} className="abs-path" cx={n.cx} cy={n.cy} r="22" fill="white" />
+        <circle
+          key={n.label}
+          className="abs-path"
+          cx={n.cx}
+          cy={n.cy}
+          r="22"
+          fill="var(--abs-line-art)"
+        />
       ))}
 
       {/* HQ node — Howrah (outer ring + filled centre) */}
-      <circle className="abs-path" cx={HQ.cx} cy={HQ.cy} r="36" stroke="white" strokeWidth="7" />
-      <circle cx={HQ.cx} cy={HQ.cy} r="18" fill="white" />
+      <circle
+        className="abs-path"
+        cx={HQ.cx}
+        cy={HQ.cy}
+        r="36"
+        stroke="var(--abs-line-art)"
+        strokeWidth="7"
+      />
+      <circle cx={HQ.cx} cy={HQ.cy} r="18" fill="var(--abs-line-art)" />
     </svg>
   );
 }

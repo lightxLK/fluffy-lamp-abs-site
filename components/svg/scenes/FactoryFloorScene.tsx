@@ -7,7 +7,7 @@ export function FactoryFloorScene({ className }: FactoryFloorSceneProps) {
     <svg
       viewBox="0 0 600 300"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

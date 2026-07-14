@@ -75,7 +75,7 @@ export default function SheetPage() {
       <section className="bg-bg-dark py-24">
         <Container>
           <div className="mb-14 max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Grades &amp; Specifications
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -128,7 +128,7 @@ export default function SheetPage() {
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
           <div className="max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               ABS BlueShield™ Roofing
             </p>
             <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">

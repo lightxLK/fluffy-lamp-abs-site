@@ -64,12 +64,12 @@ export default async function NewsSlugPage({ params }: Props) {
         <Container>
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 text-text-muted text-xs font-semibold uppercase tracking-widest hover:text-white transition-colors duration-200 mb-8"
+            className="inline-flex items-center gap-2 text-text-muted text-xs font-semibold uppercase tracking-widest hover:text-text-primary transition-colors duration-200 mb-8"
           >
             <span aria-hidden="true">←</span>
             Back to News
           </Link>
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             {formatDate(article.date)}
           </p>
           <h1 className="text-text-primary font-bold text-4xl lg:text-6xl leading-tight max-w-3xl">

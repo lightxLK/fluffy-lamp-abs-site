@@ -7,7 +7,7 @@ export function PipeSectionScene({ className }: PipeSectionSceneProps) {
     <svg
       viewBox="0 0 500 200"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

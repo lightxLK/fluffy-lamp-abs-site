@@ -44,7 +44,7 @@ export function WhyABS() {
 
       <Container className="relative">
         <div className="mb-14 text-center">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             The ABS Advantage
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">

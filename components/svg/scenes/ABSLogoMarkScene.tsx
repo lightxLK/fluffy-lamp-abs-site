@@ -21,7 +21,7 @@ export function ABSLogoMarkScene({
   loop = false,
   active = true,
   once = false,
-  stroke = '#fff',
+  stroke = 'var(--abs-line-art)',
 }: ABSLogoMarkSceneProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);

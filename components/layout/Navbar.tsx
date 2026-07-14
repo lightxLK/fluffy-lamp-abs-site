@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { getLenis } from '@/lib/lenis';
 import { NavLinkSwap } from '@/components/layout/NavLinkSwap';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -166,28 +167,56 @@ export function Navbar() {
         aria-label="Primary navigation"
       >
         <Link href="/" className="flex items-center group" aria-label="Anil Balaji Steel">
-          <img src="/abs-nav-footer1.webp" alt="Anil Balaji Steel" className="h-14 w-auto" />
+          {(() => {
+            // Keep the white logo over the home hero video regardless of theme
+            const overHeroVideo = !scrolled && !open && pathname === '/';
+            return (
+              <>
+                <img
+                  src="/abs-nav-footer1.webp"
+                  alt="Anil Balaji Steel"
+                  className={overHeroVideo ? 'h-14 w-auto' : 'h-14 w-auto light:hidden'}
+                />
+                {!overHeroVideo && (
+                  <img
+                    src="/abs-nav-footer-light.webp"
+                    alt="Anil Balaji Steel"
+                    className="hidden light:block h-14 w-auto"
+                  />
+                )}
+              </>
+            );
+          })()}
         </Link>
 
-        <button
-          className="text-text-primary hover:text-abs-blue transition-colors p-2"
-          onClick={toggleMenu}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="fullscreen-menu"
+        <div
+          className={[
+            'flex items-center gap-1',
+            // Over the home hero video (transparent nav) icons must stay white
+            !scrolled && !open && pathname === '/' ? 'text-white' : 'text-text-primary',
+          ].join(' ')}
         >
-          <svg className={`ham ham2${open ? ' active' : ''}`} viewBox="0 0 100 100" width="32">
-            <path
-              className="line top"
-              d="m 70,33 h -40 c -6.5909,0 -7.763966,-4.501509 -7.763966,-7.511428 0,-4.721448 3.376452,-9.583771 13.876919,-9.583771 14.786182,0 11.409257,14.896182 9.596449,21.970818 -1.812808,7.074636 -15.709402,12.124381 -15.709402,12.124381"
-            />
-            <path className="line middle" d="m 30,50 h 40" />
-            <path
-              className="line bottom"
-              d="m 70,67 h -40 c -6.5909,0 -7.763966,4.501509 -7.763966,7.511428 0,4.721448 3.376452,9.583771 13.876919,9.583771 14.786182,0 11.409257,-14.896182 9.596449,-21.970818 -1.812808,-7.074636 -15.709402,-12.124381 -15.709402,-12.124381"
-            />
-          </svg>
-        </button>
+          <ThemeToggle />
+          <button
+            className="hover:text-abs-blue transition-colors p-2"
+            onClick={toggleMenu}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="fullscreen-menu"
+          >
+            <svg className={`ham ham2${open ? ' active' : ''}`} viewBox="0 0 100 100" width="32">
+              <path
+                className="line top"
+                d="m 70,33 h -40 c -6.5909,0 -7.763966,-4.501509 -7.763966,-7.511428 0,-4.721448 3.376452,-9.583771 13.876919,-9.583771 14.786182,0 11.409257,14.896182 9.596449,21.970818 -1.812808,7.074636 -15.709402,12.124381 -15.709402,12.124381"
+              />
+              <path className="line middle" d="m 30,50 h 40" />
+              <path
+                className="line bottom"
+                d="m 70,67 h -40 c -6.5909,0 -7.763966,4.501509 -7.763966,7.511428 0,4.721448 3.376452,9.583771 13.876919,9.583771 14.786182,0 11.409257,-14.896182 9.596449,-21.970818 -1.812808,-7.074636 -15.709402,-12.124381 -15.709402,-12.124381"
+              />
+            </svg>
+          </button>
+        </div>
       </nav>
 
       <div
@@ -204,7 +233,7 @@ export function Navbar() {
           viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
           preserveAspectRatio="none"
         >
-          <path ref={pathRef} fill="#0d0d0d" d={OPEN_HIDDEN} />
+          <path ref={pathRef} fill="var(--abs-bg-dark)" d={OPEN_HIDDEN} />
         </svg>
 
         <div className="w-full h-full pb-10 lg:pb-16 flex flex-col items-center justify-center relative">
@@ -228,11 +257,11 @@ export function Navbar() {
             ref={infoColRef}
             className="absolute bottom-8 right-6 lg:right-8 flex flex-col items-end text-right"
           >
-            <p className="text-white text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
+            <p className="text-text-primary text-xs font-semibold uppercase tracking-[0.25rem] mb-4">
               Get in touch
             </p>
             <div
-              className="h-px bg-white mb-4"
+              className="h-px bg-text-primary mb-4"
               style={{ width: separatorWidth || undefined }}
               aria-hidden="true"
             />
@@ -253,7 +282,7 @@ export function Navbar() {
               href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-fit text-text-muted hover:text-white transition-colors"
+              className="block w-fit text-text-muted hover:text-text-primary transition-colors"
             >
               <h6 className="text-base lg:text-lg leading-snug">Jalan Industrial Complex,</h6>
               <h6 ref={addressLine2Ref} className="text-base lg:text-lg leading-snug">

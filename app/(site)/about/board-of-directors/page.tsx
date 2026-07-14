@@ -28,7 +28,7 @@ export default function BoardOfDirectorsPage() {
 
       <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
         <Container className="relative">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Leadership
           </p>
           <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
@@ -47,7 +47,7 @@ export default function BoardOfDirectorsPage() {
         </div>
         <Container className="relative">
           <div className="max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               In Memory Of
             </p>
             <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-2">
@@ -64,7 +64,7 @@ export default function BoardOfDirectorsPage() {
       <section className="bg-bg-dark py-24">
         <Container>
           <div className="mb-14 text-center">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Executive Board
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -77,7 +77,7 @@ export default function BoardOfDirectorsPage() {
               <article key={director.name} className="h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-xl mb-1">{director.name}</h3>
-                  <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+                  <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
                     {director.role}
                   </p>
                   <p className="text-text-muted text-sm leading-relaxed mb-4">{director.bio}</p>

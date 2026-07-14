@@ -9,7 +9,7 @@ export function GatePergolaScene({ className }: GatePergolaSceneProps) {
     <svg
       viewBox="0 0 1024 663"
       fill="none"
-      stroke="white"
+      stroke="var(--abs-line-art)"
       strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"

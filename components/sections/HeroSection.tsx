@@ -47,8 +47,10 @@ export function HeroSection() {
 
   const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
+  // z-[2] on the section: paints above the site-wide steel-texture overlay (z-1)
+  // so the hero video stays clean of it, while remaining below the navbar (z-60).
   return (
-    <section className="relative h-dvh min-h-[600px] bg-bg-dark overflow-hidden">
+    <section className="relative z-[2] h-dvh min-h-[600px] bg-bg-dark overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src="/hero.webm"
@@ -77,10 +79,10 @@ export function HeroSection() {
                 <p className="text-[#989898] text-sm font-medium uppercase tracking-widest mb-6">
                   {slide.eyebrow}
                 </p>
-                <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
+                <h1 className="text-white font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
                   {i === 0 ? <SplitTextReveal>{slide.headline}</SplitTextReveal> : slide.headline}
                 </h1>
-                <p className="text-text-muted text-lg mb-10 max-w-xl leading-relaxed">
+                <p className="text-[#999999] text-lg mb-10 max-w-xl leading-relaxed">
                   {slide.tagline}
                 </p>
                 <div className="flex gap-4 flex-wrap">
@@ -106,7 +108,7 @@ export function HeroSection() {
                   >
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 text-text-muted px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white transition-colors duration-300"
+                      className="inline-flex items-center gap-2 text-[#999999] px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white transition-colors duration-300"
                     >
                       Contact Us
                     </Link>
@@ -126,14 +128,14 @@ export function HeroSection() {
             aria-label={`Go to slide ${i + 1}`}
             className={[
               'w-2 h-2 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-abs-blue',
-              i === selectedIndex ? 'bg-abs-blue' : 'bg-border-subtle hover:bg-text-muted',
+              i === selectedIndex ? 'bg-abs-blue' : 'bg-white/15 hover:bg-white/40',
             ].join(' ')}
           />
         ))}
       </div>
 
       <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 opacity-30">
-        <div className="w-px h-12 bg-text-muted" />
+        <div className="w-px h-12 bg-white" />
       </div>
     </section>
   );

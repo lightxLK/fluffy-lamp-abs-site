@@ -1,8 +1,3 @@
-'use client';
-
-import { useRef } from 'react';
-import { gsap, useGSAP } from '@/lib/gsap';
-
 const STATS = [
   '50 Years',
   '250+ Dealers',
@@ -11,42 +6,34 @@ const STATS = [
   '70+ Professionals',
 ];
 
+const REPEAT = 4;
+
 export function TrustBar() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (!trackRef.current) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const width = trackRef.current.scrollWidth / 2;
-      const tween = gsap.to(trackRef.current, {
-        x: -width,
-        duration: 28,
-        ease: 'none',
-        repeat: -1,
-      });
-      return () => tween.kill();
-    },
-    { scope: trackRef },
-  );
-
-  const items = [...STATS, ...STATS];
-
   return (
     <section
       className="bg-bg-card border-y border-border-subtle overflow-hidden py-5"
       aria-label="Trust statistics"
     >
-      <div ref={trackRef} className="flex gap-16 whitespace-nowrap w-max">
-        {items.map((stat, i) => (
-          <span
-            key={i}
-            className="text-text-muted text-xs font-medium uppercase tracking-widest flex items-center gap-4"
+      <div className="flex w-full overflow-hidden [--gap:4rem] [--duration:28s] gap-(--gap) marquee-mask">
+        {Array.from({ length: REPEAT }).map((_, g) => (
+          <div
+            key={g}
+            aria-hidden={g > 0}
+            className="flex shrink-0 gap-(--gap) whitespace-nowrap animate-canopy-x"
           >
-            {stat}
-            <span className="w-1 h-1 rounded-full bg-abs-blue inline-block" aria-hidden="true" />
-          </span>
+            {STATS.map((stat) => (
+              <span
+                key={stat}
+                className="text-text-muted text-xs font-medium uppercase tracking-widest flex items-center gap-4"
+              >
+                {stat}
+                <span
+                  className="w-1 h-1 rounded-full bg-abs-blue inline-block"
+                  aria-hidden="true"
+                />
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </section>

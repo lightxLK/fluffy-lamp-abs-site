@@ -54,7 +54,9 @@ export default function TermsPage() {
 
       <section className="bg-bg-dark pt-40 pb-16">
         <Container>
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">Legal</p>
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+            Legal
+          </p>
           <h1 className="text-text-primary font-bold text-5xl lg:text-6xl leading-none mb-6 max-w-2xl">
             <SplitTextReveal>Terms &amp; Conditions</SplitTextReveal>
           </h1>

@@ -49,7 +49,7 @@ export function RollingMillScene({ className }: RollingMillSceneProps) {
         className="abs-path"
         d={ROLLING_MILL_PATH}
         fill="none"
-        stroke="#fff"
+        stroke="var(--abs-line-art)"
         strokeWidth="2"
         strokeLinecap="round"
       />

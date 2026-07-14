@@ -61,7 +61,7 @@ export default function ShutterPage() {
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
           <div className="mb-14 max-w-2xl">
-            <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Profile Types
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">

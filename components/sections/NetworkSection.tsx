@@ -51,7 +51,7 @@ export function NetworkSection() {
 
       <Container>
         <div className="text-center mb-14 mt-16">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Eastern India &amp; Beyond
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">

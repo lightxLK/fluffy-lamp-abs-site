@@ -40,7 +40,7 @@ export default function ServicesPage() {
 
       <section className="relative bg-bg-dark pt-40 pb-16 overflow-hidden">
         <Container className="relative">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             What We Do
           </p>
           <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-3xl">
@@ -56,7 +56,7 @@ export default function ServicesPage() {
               <a
                 key={service.slug}
                 href={`#${service.slug}`}
-                className="text-xs font-semibold uppercase tracking-widest px-5 py-3 border border-border-subtle text-text-muted hover:text-white hover:border-white transition-colors duration-300"
+                className="text-xs font-semibold uppercase tracking-widest px-5 py-3 border border-border-subtle text-text-muted hover:text-text-primary hover:border-text-primary transition-colors duration-300"
               >
                 {service.name}
               </a>
@@ -85,7 +85,7 @@ export default function ServicesPage() {
             )}
 
             <Container className="relative">
-              <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
                 {service.tagline}
               </p>
               <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6 max-w-2xl">
@@ -126,7 +126,7 @@ export default function ServicesPage() {
 
       <section className="bg-bg-dark py-24">
         <Container className="text-center">
-          <p className="text-[#989898] text-xs font-medium uppercase tracking-widest mb-4">
+          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Bespoke Fabrication
           </p>
           <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">

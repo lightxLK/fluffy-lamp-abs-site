@@ -21,7 +21,7 @@ export function FabricaTeaser() {
       <div className="absolute inset-0 bg-[#0D0D0D]/65 z-[5] pointer-events-none" />
 
       {/* Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-linear-to-t from-[#0D0D0D] to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-linear-to-t from-bg-dark to-transparent z-10 pointer-events-none" />
 
       {/* Content */}
       <Container className="relative z-20 w-full">
@@ -29,10 +29,10 @@ export function FabricaTeaser() {
           <p className="text-white text-xs font-medium uppercase tracking-widest mb-4">
             Custom Fabrication
           </p>
-          <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight mb-6 text-white drop-shadow-md">
+          <h2 className="font-bold text-4xl lg:text-5xl leading-tight mb-6 text-white drop-shadow-md">
             Fabrica
           </h2>
-          <p className="text-text-body text-lg leading-relaxed mb-6 text-white drop-shadow">
+          <p className="text-lg leading-relaxed mb-6 text-white drop-shadow">
             Gates, pergolas, grilles, and custom steel structures, designed and fabricated in-house
             by our specialist team. Fabrica is where industrial precision meets architectural
             vision.
