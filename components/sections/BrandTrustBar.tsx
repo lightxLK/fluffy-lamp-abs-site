@@ -29,7 +29,7 @@ export function BrandTrustBar() {
             {BRANDS.map((brand) => (
               <span
                 key={brand.name}
-                className="flex h-24 w-48 items-center justify-center shrink-0"
+                className="flex h-20 w-48 items-center justify-center shrink-0"
               >
                 <Image
                   src={encodeURI(brand.src)}
