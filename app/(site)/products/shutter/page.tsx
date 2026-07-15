@@ -77,7 +77,7 @@ export default function ShutterPage() {
                   <h3 className="text-text-primary font-semibold text-lg mb-3">{profile.name}</h3>
                   <p className="text-text-muted text-sm leading-relaxed">{profile.note}</p>
                 </CardGlow>
-                <CardNuts />
+                <CardNuts size="sm" />
               </div>
             ))}
           </div>

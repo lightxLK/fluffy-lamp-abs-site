@@ -95,7 +95,7 @@ export default function PlainSheetsPage() {
                     </h3>
                     <p className="text-text-muted text-xs leading-relaxed">{benefit.body}</p>
                   </CardGlow>
-                  <CardNuts />
+                  <CardNuts size="sm" />
                 </div>
               ))}
             </div>
