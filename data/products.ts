@@ -69,4 +69,24 @@ export const PRODUCTS: Product[] = [
       'Advanced cutting line ensuring precision, flatness, and finish in GI, CR, HR, and PPGL materials, cut to length, stack-ready.',
     capacity: '24,000 MT / year',
   },
+  {
+    name: 'Abrasives',
+    brandLine: 'ABS SharpEdge™ Range',
+    slug: 'abrasives',
+    tagline: 'Cutting and grinding wheels for every job',
+    category: 'Consumables',
+    description:
+      'A full range of cutting and grinding wheels engineered for clean cuts and consistent stock removal across steel fabrication and finishing work.',
+    capacity: 'Stocked, ready to dispatch',
+  },
+  {
+    name: 'Packaging & Hallmarking',
+    brandLine: 'ABS TrueMark™ Assurance',
+    slug: 'packaging-hallmarking',
+    tagline: 'Every coil and bundle, verifiably genuine',
+    category: 'Assurance',
+    description:
+      'Tamper-evident packaging and hallmarked profiles carrying length and thickness markings, so every product reaching site is verifiably genuine ABS steel.',
+    capacity: 'Applied across the full range',
+  },
 ];

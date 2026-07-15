@@ -20,6 +20,8 @@ const STATIC_ROUTES = [
   '/products/sheet',
   '/products/chequered-plate',
   '/products/plain-sheets',
+  '/products/abrasives',
+  '/products/packaging-hallmarking',
   '/contact',
   '/terms',
   '/careers',
