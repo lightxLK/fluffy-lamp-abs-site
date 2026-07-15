@@ -252,7 +252,7 @@ export default function BorderGlow({
     >
       {/* mesh gradient border */}
       <div
-        className="absolute inset-0 rounded-[inherit] -z-[1]"
+        className="absolute inset-0 rounded-[inherit] -z-[1] light:!opacity-0"
         style={{
           border: '1px solid transparent',
           background: [
@@ -269,7 +269,7 @@ export default function BorderGlow({
 
       {/* mesh gradient fill near edges */}
       <div
-        className="absolute inset-0 rounded-[inherit] -z-[1]"
+        className="absolute inset-0 rounded-[inherit] -z-[1] light:!opacity-0"
         style={{
           border: '1px solid transparent',
           background: fillBg.join(', '),
@@ -302,7 +302,7 @@ export default function BorderGlow({
 
       {/* outer glow */}
       <span
-        className="absolute pointer-events-none z-[1] rounded-[inherit]"
+        className="absolute pointer-events-none z-[1] rounded-[inherit] light:!opacity-0"
         style={{
           inset: `${-glowRadius}px`,
           maskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
