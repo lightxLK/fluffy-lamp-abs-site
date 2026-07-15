@@ -1,6 +1,7 @@
 import { Container } from '@/components/layout/Container';
 import { FactoryFloorScene } from '@/components/svg/scenes/FactoryFloorScene';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 
 const REASONS = [
   {
@@ -54,7 +55,7 @@ export function WhyABS() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {REASONS.map((reason) => (
-            <article key={reason.number} className="h-full">
+            <article key={reason.number} className="relative h-full">
               <CardGlow className="h-full p-8">
                 <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
                   {reason.number}
@@ -62,6 +63,7 @@ export function WhyABS() {
                 <h3 className="text-text-primary font-semibold text-lg mb-3">{reason.title}</h3>
                 <p className="text-text-muted text-sm leading-relaxed">{reason.body}</p>
               </CardGlow>
+              <CardNuts />
             </article>
           ))}
         </div>

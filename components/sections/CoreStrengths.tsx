@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 
 const STRENGTHS = [
   {
@@ -40,7 +41,7 @@ export function CoreStrengths() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {STRENGTHS.map((s) => (
-            <article key={s.number} className="h-full">
+            <article key={s.number} className="relative h-full">
               <CardGlow className="h-full p-8">
                 <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
                   {s.number}
@@ -48,6 +49,7 @@ export function CoreStrengths() {
                 <h3 className="text-text-primary font-semibold text-lg mb-3">{s.title}</h3>
                 <p className="text-text-muted text-sm leading-relaxed">{s.body}</p>
               </CardGlow>
+              <CardNuts />
             </article>
           ))}
         </div>

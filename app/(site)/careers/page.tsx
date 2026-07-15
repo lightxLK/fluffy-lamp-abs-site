@@ -6,6 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 
 export const metadata: Metadata = genMeta({
   title: 'Careers | Anil Balaji Steel',
@@ -93,11 +94,12 @@ export default function CareersPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((value) => (
-              <article key={value.title} className="h-full">
+              <article key={value.title} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-lg mb-3">{value.title}</h3>
                   <p className="text-text-muted text-sm leading-relaxed">{value.body}</p>
                 </CardGlow>
+                <CardNuts />
               </article>
             ))}
           </div>

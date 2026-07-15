@@ -7,6 +7,7 @@ import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ABSLogoOutlineScene } from '@/components/svg/scenes/ABSLogoOutlineScene';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { TRIBUTE_DIRECTOR, DIRECTORS } from '@/data/directors';
 
 export const metadata: Metadata = genMeta({
@@ -74,7 +75,7 @@ export default function BoardOfDirectorsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {DIRECTORS.map((director) => (
-              <article key={director.name} className="h-full">
+              <article key={director.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-xl mb-1">{director.name}</h3>
                   <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -90,6 +91,7 @@ export default function BoardOfDirectorsPage() {
                     </blockquote>
                   )}
                 </CardGlow>
+                <CardNuts />
               </article>
             ))}
           </div>

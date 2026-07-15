@@ -8,6 +8,7 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'sheet')!;
@@ -85,7 +86,7 @@ export default function SheetPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
             {SHEET_GRADES.map((grade) => (
-              <article key={grade.name} className="h-full">
+              <article key={grade.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-xl mb-4">{grade.name}</h3>
                   <dl className="space-y-3 text-sm">
@@ -103,6 +104,7 @@ export default function SheetPage() {
                     </div>
                   </dl>
                 </CardGlow>
+                <CardNuts />
               </article>
             ))}
           </div>

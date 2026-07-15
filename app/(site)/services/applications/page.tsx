@@ -6,6 +6,7 @@ import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ApplicationsScene } from '@/components/svg/scenes/ApplicationsScene';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 
 export const metadata: Metadata = genMeta({
   title: 'Applications | Anil Balaji Steel',
@@ -72,11 +73,12 @@ export default function ApplicationsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {USE_CASES.map((useCase) => (
-              <article key={useCase.title} className="h-full">
+              <article key={useCase.title} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-lg mb-3">{useCase.title}</h3>
                   <p className="text-text-muted text-sm leading-relaxed">{useCase.body}</p>
                 </CardGlow>
+                <CardNuts />
               </article>
             ))}
           </div>

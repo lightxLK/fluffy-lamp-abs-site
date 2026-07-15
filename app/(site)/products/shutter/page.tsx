@@ -8,6 +8,7 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'shutter')!;
@@ -71,10 +72,13 @@ export default function ShutterPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROFILE_TYPES.map((profile) => (
-              <CardGlow key={profile.name} className="p-8">
-                <h3 className="text-text-primary font-semibold text-lg mb-3">{profile.name}</h3>
-                <p className="text-text-muted text-sm leading-relaxed">{profile.note}</p>
-              </CardGlow>
+              <div key={profile.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-3">{profile.name}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{profile.note}</p>
+                </CardGlow>
+                <CardNuts />
+              </div>
             ))}
           </div>
         </Container>

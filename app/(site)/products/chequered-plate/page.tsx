@@ -8,6 +8,7 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'chequered-plate')!;
@@ -87,10 +88,15 @@ export default function ChequeredPlatePage() {
 
             <div className="grid grid-cols-2 gap-6">
               {BENEFITS.map((benefit) => (
-                <CardGlow key={benefit.title} className="p-6">
-                  <h3 className="text-text-primary font-semibold text-sm mb-2">{benefit.title}</h3>
-                  <p className="text-text-muted text-xs leading-relaxed">{benefit.body}</p>
-                </CardGlow>
+                <div key={benefit.title} className="relative h-full">
+                  <CardGlow className="h-full p-6">
+                    <h3 className="text-text-primary font-semibold text-sm mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-text-muted text-xs leading-relaxed">{benefit.body}</p>
+                  </CardGlow>
+                  <CardNuts />
+                </div>
               ))}
             </div>
           </div>

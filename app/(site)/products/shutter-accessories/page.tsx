@@ -8,6 +8,7 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'shutter-accessories')!;
@@ -85,16 +86,19 @@ export default function ShutterAccessoriesPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {COMPONENTS.map((component) => (
-              <CardGlow key={component.name} className="p-8">
-                <h3 className="text-text-primary font-semibold text-lg mb-4">{component.name}</h3>
-                <ul className="space-y-2">
-                  {component.specs.map((s) => (
-                    <li key={s} className="text-text-muted text-sm leading-relaxed">
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </CardGlow>
+              <div key={component.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{component.name}</h3>
+                  <ul className="space-y-2">
+                    {component.specs.map((s) => (
+                      <li key={s} className="text-text-muted text-sm leading-relaxed">
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </CardGlow>
+                <CardNuts />
+              </div>
             ))}
           </div>
         </Container>

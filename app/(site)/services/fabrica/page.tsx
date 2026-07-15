@@ -8,6 +8,7 @@ import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
@@ -140,7 +141,7 @@ export default function FabricaPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
             {GATE_SYSTEMS.map((gate) => (
-              <article key={gate.name} className="h-full">
+              <article key={gate.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
                   <ul className="space-y-3">
@@ -151,6 +152,7 @@ export default function FabricaPage() {
                     ))}
                   </ul>
                 </CardGlow>
+                <CardNuts />
               </article>
             ))}
           </div>

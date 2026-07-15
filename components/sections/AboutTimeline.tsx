@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { Container } from '@/components/layout/Container';
 import { CardGlow } from '@/components/ui/CardGlow';
+import { CardNuts } from '@/components/ui/CardNuts';
 import { TIMELINE } from '@/data/timeline';
 
 export function AboutTimeline() {
@@ -53,12 +54,13 @@ export function AboutTimeline() {
       <div className="overflow-hidden">
         <div ref={trackRef} className="flex gap-6 px-6 lg:px-8 w-max">
           {TIMELINE.map((entry) => (
-            <article key={entry.year} className="w-[280px] sm:w-[340px] shrink-0">
+            <article key={entry.year} className="relative w-[280px] sm:w-[340px] shrink-0">
               <CardGlow className="p-8">
                 <p className="text-abs-blue font-bold text-3xl mb-4">{entry.year}</p>
                 <h3 className="text-text-primary font-semibold text-lg mb-3">{entry.title}</h3>
                 <p className="text-text-muted text-sm leading-relaxed">{entry.body}</p>
               </CardGlow>
+              <CardNuts />
             </article>
           ))}
         </div>
