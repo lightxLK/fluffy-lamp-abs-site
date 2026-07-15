@@ -36,7 +36,7 @@ export function BrandTrustBar() {
                   alt={brand.name}
                   width={192}
                   height={80}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain brightness-0 invert light:filter-none"
                 />
               </span>
             ))}
