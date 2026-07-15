@@ -11,9 +11,9 @@ describe('TrustBar', () => {
 });
 
 describe('BrandTrustBar', () => {
-  it('renders supplier names', () => {
+  it('renders supplier logos', () => {
     render(<BrandTrustBar />);
-    expect(screen.getAllByText(/SAIL/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Tata Steel/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByAltText(/SAIL/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByAltText(/Jindal Steel/i).length).toBeGreaterThan(0);
   });
 });
