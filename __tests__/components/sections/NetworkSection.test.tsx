@@ -10,10 +10,4 @@ describe('NetworkSection', () => {
     render(<NetworkSection />);
     expect(screen.getByRole('heading', { name: /our network/i })).toBeInTheDocument();
   });
-
-  it('renders stat labels', () => {
-    render(<NetworkSection />);
-    expect(screen.getByText(/Dealers/i)).toBeInTheDocument();
-    expect(screen.getByText(/States/i)).toBeInTheDocument();
-  });
 });

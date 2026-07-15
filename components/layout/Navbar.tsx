@@ -166,7 +166,7 @@ export function Navbar() {
         className="max-w-[1440px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between relative z-20"
         aria-label="Primary navigation"
       >
-        <Link href="/" className="flex items-center group" aria-label="Anil Balaji Steel">
+        <Link href="/" className="flex items-center group pt-2" aria-label="Anil Balaji Steel">
           {(() => {
             // Keep the white logo over the home hero video regardless of theme
             const overHeroVideo = !scrolled && !open && pathname === '/';
@@ -239,7 +239,7 @@ export function Navbar() {
         <div className="w-full h-full pb-10 lg:pb-16 flex flex-col items-center justify-center relative">
           <div
             ref={linksColRef}
-            className="flex flex-col items-start text-left -translate-x-8 sm:-translate-x-12 lg:-translate-x-20"
+            className="flex flex-col items-start text-left gap-2 -translate-x-8 sm:-translate-x-12 lg:-translate-x-20"
           >
             {NAV_LINKS.map((link) => (
               <NavLinkSwap
@@ -248,7 +248,7 @@ export function Navbar() {
                 href={link.href}
                 active={isActive(link.href)}
                 open={open}
-                className="font-sans font-bold leading-[1.15] text-[clamp(2.25rem,7vw,4.5rem)] w-max overflow-visible transition-colors"
+                className="font-sans font-bold leading-[1.15] text-[clamp(1.75rem,5.5vw,3.5rem)] w-max overflow-visible transition-colors"
               />
             ))}
           </div>
