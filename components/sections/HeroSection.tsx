@@ -11,7 +11,7 @@ import GlassSurface from '@/components/ui/GlassSurface';
 const SLIDES = [
   {
     eyebrow: '50 Years of Excellence',
-    headline: "India's Most Trusted Steel",
+    headline: "Eastern India's Most Trusted Steel Manufacturer",
     tagline: 'Trusted by builders across Eastern India since 1972.',
     cta: { label: 'Explore Products', href: '/products' },
   },

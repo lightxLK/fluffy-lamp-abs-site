@@ -32,13 +32,14 @@ export function AboutSnapshot() {
             50 years of rolling steel for India
           </h2>
           <p className="text-text-body text-lg leading-relaxed mb-6">
-            Founded in 1972 in Howrah, Anil Balaji Steel began as a modest rolling operation and
-            grew into Eastern India&apos;s most recognised steel brand, a name on every shutter,
-            roof, and frame across six states.
+            Founded in 1972 in Howrah by Late Shri Ved Prakash Agarwal, Anil Balaji Steel began as a
+            modest rolling operation and grew into Eastern India&apos;s most recognised steel brand,
+            a name on every shutter, roof, and frame across six states.
           </p>
           <p className="text-text-muted text-base leading-relaxed mb-10">
-            Today, with 70+ professionals, 250+ dealer partners, and relationships with SAIL, Tata,
-            JSW, and Jindal, we carry that legacy forward with precision.
+            Today, with 70+ professionals, 250+ dealer partners, and sourcing relationships with
+            SAIL, Tata, JSW, and Jindal, we carry that legacy forward with the same precision it was
+            built on.
           </p>
           <HomeExitLink
             href="/about"

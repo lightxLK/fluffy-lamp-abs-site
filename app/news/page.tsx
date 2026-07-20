@@ -9,9 +9,9 @@ import { ContactStrip } from '@/components/sections/ContactStrip';
 import { NEWS } from '@/data/news';
 
 export const metadata: Metadata = genMeta({
-  title: 'News & Community | Anil Balaji Steel',
+  title: 'News & Milestones | Anil Balaji Steel',
   description:
-    'Milestones, CSR initiatives, and updates from Anil Balaji Steel, from ABS Fabrica to Steel That Cares.',
+    'Updates from Anil Balaji Steel, capacity expansion, automation upgrades, CSR initiatives, and the road to 2030.',
   path: '/news',
 });
 

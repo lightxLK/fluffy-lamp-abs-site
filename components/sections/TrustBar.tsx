@@ -4,6 +4,7 @@ const STATS = [
   '1,00,000 MT Capacity',
   '85% West Bengal',
   '70+ Professionals',
+  '95% Employee Retention',
 ];
 
 const REPEAT = 4;

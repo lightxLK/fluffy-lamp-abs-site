@@ -13,9 +13,9 @@ import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
-  title: 'Services | Anil Balaji Steel',
+  title: 'Steel Services | Loading, Cutting, Slitting & Fabrication | ABS Steel',
   description:
-    'Single Point Loading, Cutting, Slitting, and Fabrication, the four service verticals behind every ABS order.',
+    'Single Point Loading, precision cutting, coil slitting, and custom fabrication. Four service verticals, one facility, from mill to site.',
   path: '/services',
 });
 

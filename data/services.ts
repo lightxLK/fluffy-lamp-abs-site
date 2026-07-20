@@ -89,13 +89,25 @@ export const SERVICES: Service[] = [
       'Shutter gates, kabon structures, motorized gates, and custom components, designed and fabricated in-house, from concept to installation.',
     process: [
       {
-        label: 'Concept Discussion',
-        body: 'Requirements and site measurements captured with the client.',
+        label: 'Strategic Consultation',
+        body: 'We begin by understanding intent, constraints, and context, aligning ideas with feasibility, logic, and execution clarity before a single line is drawn.',
       },
-      { label: 'Design', body: 'CAD drawings prepared and shared for sign-off.' },
-      { label: 'Fabrication', body: 'In-house welding and finishing to the approved drawing.' },
-      { label: 'Installation', body: 'Transported and installed by our fabrication crew.' },
-      { label: 'Handover', body: 'Final inspection and handover with maintenance guidance.' },
+      {
+        label: 'Design Development',
+        body: 'Our in-house team translates concepts into detailed, build-ready drawings, balancing aesthetics, structural integrity, and fabrication practicality.',
+      },
+      {
+        label: 'Precision Fabrication',
+        body: 'Every component is crafted with controlled processes and skilled workmanship, ensuring consistency, accuracy, and durability across bespoke steel elements of any complexity.',
+      },
+      {
+        label: 'Seamless Installation',
+        body: 'Installation is treated as its own design phase, executed by experienced teams for alignment, finish quality, and on-site precision without disrupting surrounding architecture.',
+      },
+      {
+        label: 'Lifecycle Support',
+        body: 'We stay involved after delivery, offering guidance and technical assistance to ensure long-term performance and continued value.',
+      },
     ],
   },
 ];

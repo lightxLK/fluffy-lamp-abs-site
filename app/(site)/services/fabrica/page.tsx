@@ -13,9 +13,9 @@ import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
-  title: 'Fabrica | Anil Balaji Steel',
+  title: 'ABS Fabrica | Custom Steel Gates, Facades & Landscaping, West Bengal',
   description:
-    'ABS Fabrica, turnkey automated gates, pergolas, and architectural steelwork, led by Ms. Komal Agarwal.',
+    'Turnkey automated gates, facades, window grills, and interior landscaping. ABS Fabrica, the design and build arm of Anil Balaji Steel. 500+ projects delivered.',
   path: '/services/fabrica',
 });
 
@@ -40,6 +40,42 @@ const GATE_SYSTEMS = [
       'Full coverage security, locks down completely as a wall-like barrier.',
       'Multipurpose utility for homes and commercial spaces alike.',
     ],
+  },
+];
+
+const NEW_SECTIONS = [
+  {
+    name: 'Facades',
+    description:
+      'Facades from ABS Fabrica are engineered as functional skins, balancing form, structure, and performance. From precision-cut panels to custom metal screens, every facade solution is fabricated with exacting tolerances and architectural intent, designed to respond to light, ventilation, and durability.',
+    features: [
+      'Classical and solid masonry',
+      'Parametric and designer',
+      'Colonial and Indo-European',
+      'Brise-soleil, climate-responsive',
+      'Industrial and exposed',
+      'Modern minimal',
+      'Screen and jaali',
+      'Curtain wall and glass',
+    ],
+  },
+  {
+    name: 'Window Grills & Railings',
+    description:
+      'Conceived as architectural elements, not just functional safeguards. Drawing from refined European styles, Victorian ornamentation, Art Deco geometry, and contemporary laser-cut patterns, each design is crafted with precision and restraint, enhancing facades, balconies, and interiors.',
+    features: [],
+  },
+  {
+    name: 'Cabana & Gazebo',
+    description:
+      'Cabanas that turn open spaces into intimate, well-designed sanctuaries for relaxed outdoor living. Gazebos that frame open-air moments with structure, shade, and enduring design.',
+    features: [],
+  },
+  {
+    name: 'Interior Landscaping',
+    description:
+      'ABS Fabrica approaches interior environments through architectural planning and integrated fabrication. From structural steel elements and custom planters to railings, curated greenery, and lighting, every component is precisely fabricated and purposefully placed for spaces that balance aesthetics and everyday living.',
+    features: [],
   },
 ];
 
@@ -82,13 +118,21 @@ export default function FabricaPage() {
             <SplitTextReveal>Steel, designed your way</SplitTextReveal>
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
-            Our newest consumer-facing venture blends creativity with steel craftsmanship, turnkey
-            automated gates, terrace gardens, landscape installations, and architectural facade
-            designs.
+            ABS Fabrica is the design and fabrication arm of Anil Balaji Steel, translating our
+            material strength into architectural expression. It&apos;s where engineering discipline
+            meets design sensitivity, rooted in craftsmanship and guided by modern fabrication
+            techniques, bringing structure, proportion, and precision to every steel element we
+            create.
+          </p>
+          <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
+            From custom gates, grills, stairs, and facades to complex architectural steel solutions,
+            ABS Fabrica specialises in design-led fabrication. Every project gets the same attention
+            to detail, aesthetic balance, and structural integrity, so the final result belongs
+            within the architecture it serves.
           </p>
           <div className="flex gap-10 flex-wrap">
             <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">200+</p>
+              <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>
               <p className="text-text-muted text-xs uppercase tracking-widest">
                 Projected Projects · 5 Years
               </p>
@@ -139,6 +183,12 @@ export default function FabricaPage() {
             </h2>
           </div>
 
+          <p className="text-text-body text-base leading-relaxed max-w-2xl mb-14">
+            Beyond automation, ABS Fabrica also builds manual gate solutions in premium materials
+            for effortless, durable movement, and fully custom sliding, swing, or foldable designs
+            with bespoke patterns, lighting, and smart locking.
+          </p>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
             {GATE_SYSTEMS.map((gate) => (
               <article key={gate.name} className="relative h-full">
@@ -171,6 +221,34 @@ export default function FabricaPage() {
                 </span>
               ))}
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-bg-card border-y border-border-subtle py-24">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {NEW_SECTIONS.map((item) => (
+              <article key={item.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-xl mb-4">{item.name}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed mb-4">{item.description}</p>
+                  {item.features.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {item.features.map((f) => (
+                        <span
+                          key={f}
+                          className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
+                        >
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
           </div>
         </Container>
       </section>

@@ -6,6 +6,7 @@ import { generateProductSchema } from '@/lib/seo/generateProductSchema';
 import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -14,8 +15,9 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'shutter-accessories')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
+  title: 'Shutter Accessories & Components | Springs, Locks, Motors | ABS Steel',
+  description:
+    'Complete rolling shutter accessory range: bottom plates, springs, lock plates, hood covers, bracket plates, motors, pulleys and more. Everything for one installation, ABS TotalShutter System.',
   path: '/products/shutter-accessories',
 });
 
@@ -39,6 +41,65 @@ const COMPONENTS = [
   {
     name: 'Bracket Plate',
     specs: ['Thickness: 2mm–5mm', 'Size: 14"×14", 16"×16" · Material: GP, HR, CR'],
+  },
+  {
+    name: 'Aluminium Socket',
+    specs: ['Quantity per bag: 5,000 pcs / 17 kg'],
+  },
+  {
+    name: 'Shutter Lock',
+    specs: [
+      'Iron, master key, 12 pcs per bag',
+      'Also available in brass: light, medium, and heavy duty',
+    ],
+  },
+  {
+    name: 'Hash Bolt',
+    specs: ['Thickness: 5mm to 6mm', 'Weight: 50 kg per bag'],
+  },
+  {
+    name: 'Zip',
+    specs: ['Weight: 64/80 gm', 'Quantity: 500 pcs per bag'],
+  },
+  {
+    name: 'Pulley',
+    specs: [
+      'Light: 850 gm, 50 pcs per bag',
+      'Heavy: 1.15 kg, 40 pcs per bag',
+      'Bush: 1.05 kg, 40 pcs per bag',
+    ],
+  },
+  {
+    name: 'U Clamp',
+    specs: ['Weight: 350 gm or 500 gm', 'Quantity: 100 pcs or 75 pcs per bag'],
+  },
+  {
+    name: 'Kakda',
+    specs: ['Thickness: 4mm to 5mm', 'Quantity: 500 pcs per bag'],
+  },
+  {
+    name: 'Collapsible Gate Wheel',
+    specs: ['Weight: 40 kg / 400 pcs', 'Machining polished wheel finish'],
+  },
+  {
+    name: 'Chain Pulley Set',
+    specs: ['Light: 25mm rod', 'Heavy: 32mm rod'],
+  },
+  {
+    name: 'Gear Box',
+    specs: ['Available in light and heavy duty'],
+  },
+  {
+    name: 'Shutter Motors',
+    specs: ['Weight capacity: 500 kg to 2,000 kg'],
+  },
+];
+
+const ACCESSORY_FAQS = [
+  {
+    question: 'Does ABS supply automated shutter components?',
+    answer:
+      'Yes. Our range includes shutter motors rated from 500 kg to 2,000 kg capacity, alongside the full manual hardware range.',
   },
 ];
 
@@ -84,6 +145,12 @@ export default function ShutterAccessoriesPage() {
             </h2>
           </div>
 
+          <p className="text-text-body text-base leading-relaxed max-w-2xl mb-14">
+            From the smallest fastener to the motor that drives it, ABS TotalShutter covers every
+            component in a complete rolling shutter installation, sourced, stocked, and dispatched
+            from one facility.
+          </p>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {COMPONENTS.map((component) => (
               <div key={component.name} className="relative h-full">
@@ -114,6 +181,11 @@ export default function ShutterAccessoriesPage() {
           </Link>
         </Container>
       </section>
+
+      <FAQSection
+        items={ACCESSORY_FAQS}
+        className="bg-bg-card border-y border-border-subtle py-24"
+      />
 
       <ContactStrip />
     </main>

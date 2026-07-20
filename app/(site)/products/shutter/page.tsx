@@ -6,6 +6,7 @@ import { generateProductSchema } from '@/lib/seo/generateProductSchema';
 import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -14,10 +15,29 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'shutter')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
+  title: 'Rolling Shutter Profiles | ABS ShaktiShutter | GI, CR & PPGL',
+  description:
+    'Precision rolling shutter profiles in flat, round, diamond, gear and perforated patterns. GI, CR, PPGL materials with protective guardfilm. 15,000 MT annual capacity, Howrah.',
   path: '/products/shutter',
 });
+
+const FAQS = [
+  {
+    question: 'What materials are ABS shutter profiles available in?',
+    answer:
+      'GI, CR, and PPGL, all with special protective guardfilm to prevent transit and installation damage.',
+  },
+  {
+    question: 'How do I know a profile is genuine ABS?',
+    answer:
+      'Every genuine ABS profile and guide is embossed with our name and logo, and marked with length and thickness directly on the product.',
+  },
+  {
+    question: "What's the difference between diamond and single-diamond profiles?",
+    answer:
+      'Both are available. Diamond gives a fuller raised pattern across the lath, single-diamond gives a lighter, more restrained finish. Talk to our team about which suits your installation.',
+  },
+];
 
 const PROFILE_TYPES = [
   { name: 'Flat Profile', note: 'The standard lath, available in super flat variants.' },
@@ -115,6 +135,8 @@ export default function ShutterPage() {
           </div>
         </Container>
       </section>
+
+      <FAQSection items={FAQS} className="bg-bg-card border-y border-border-subtle py-24" />
 
       <ContactStrip />
     </main>

@@ -29,6 +29,7 @@ export const NEWS: NewsArticle[] = [
       'At Anil Balaji Steel, we believe that true strength lies not only in what we build, but also in how we give back. "Steel That Cares" was born from this philosophy, using our core expertise in steel fabrication for social good.',
       'Our first project under this initiative is a stray dog shelter, modular, weather-protected shelters using PPGL roofing and fabricated structures, blending compassion with engineering to offer dignity and protection to those who cannot ask for it.',
       'Alongside this, ABS sponsors education support for children of our employees, with mentorship and career counselling to help them choose the right path.',
+      'From 2026 onward, "Steel That Cares" will expand into a structured CSR programme covering animal welfare, skill-building workshops, and local community upliftment around our Junglepur facility, delivered in partnership with NGOs and schools.',
     ],
   },
   {
@@ -53,6 +54,8 @@ export const NEWS: NewsArticle[] = [
       'The future of Anil Balaji Steel is anchored in purpose, to scale responsibly, innovate consistently, and serve the nation with strength and sincerity. Our ultimate milestone: listing on the SME IPO platform by 2030.',
       'The roadmap includes enhancing production by 50%+ across all lines by 2027, integrating Industry 4.0 technologies by 2028, and expanding the dealer network to 500+ partners by 2029.',
       'ABS Fabrica is targeted to scale to 1,000+ projects in five years, while "Steel That Cares" formalizes into a full CSR vertical with integrated ESG reporting.',
+      'ABS is also investing in its people, establishing in-house training programmes for workers and young engineers to build a skilled, future-ready workforce grounded in technical and ethical excellence.',
+      'The brand ambition is equally clear: to be positioned among the top 3 steel solutions brands in Eastern India, and recognised nationally, through sustained marketing and digital transformation.',
     ],
   },
 ];

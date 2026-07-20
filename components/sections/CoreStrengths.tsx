@@ -7,22 +7,22 @@ const STRENGTHS = [
   {
     number: '01',
     title: 'Precision',
-    body: 'Every profile, sheet, and pipe rolled to tolerance, gauge, camber, and finish checked at every stage.',
+    body: 'Every profile, sheet, and pipe rolled to tolerance, gauge, camber, and finish checked at every inspection stage under ISO-certified processes.',
   },
   {
     number: '02',
     title: 'Innovation',
-    body: 'Continuous R&D in shutter design, advanced coatings, and roll-forming automation.',
+    body: 'Continuous R&D in shutter design, advanced coatings, and roll-forming automation, backed by IoT-ready monitoring across our production lines.',
   },
   {
     number: '03',
     title: 'Engineering',
-    body: 'A 60,000 sq. ft. Junglepur facility with integrated automation and IoT-ready monitoring.',
+    body: "A 60,000 sq. ft. Junglepur facility with integrated automation, positioned near Kolkata's industrial corridor for fast port, highway, and rail access.",
   },
   {
     number: '04',
     title: 'Finish',
-    body: 'Protective film technology and hallmarked profiles, genuine ABS, verifiable on every product.',
+    body: 'Protective film technology and hallmarked profiles. Every genuine ABS product carries an embossed name and logo, verifiable on sight.',
   },
 ];
 

@@ -14,10 +14,32 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'plain-sheets')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
+  title: 'Plain Sheets & Slit Coils | GI, CR, HR, PPGL | ABS EdgeCut & CoreLine',
+  description:
+    'Precision cut plain sheets and slit coils in GI, CR, HR and PPGL. Cut-to-length, stack-ready supply from ABS EdgeCut and CoreLine, 24,000 MT and 30,000 MT capacity.',
   path: '/products/plain-sheets',
 });
+
+const COIL_PRODUCTS = [
+  {
+    name: 'Slit Coil',
+    specs: [
+      'Thickness: 0.25mm to 2.5mm',
+      'Material: GP, HR, CR, PPGL',
+      'Width: from 35mm',
+      'Weight per coil: 300 kg to 1.5 MT',
+    ],
+  },
+  {
+    name: 'Pencil Coil',
+    specs: [
+      'Thickness: 0.25mm to 0.60mm',
+      'Material: GP, CR, PPGL',
+      'Width: 300mm',
+      'Weight per coil: 50 kg to 70 kg',
+    ],
+  },
+];
 
 const APPLICATIONS = [
   'Fabrication & custom cutting',
@@ -115,6 +137,41 @@ export default function PlainSheetsPage() {
           >
             Request a Quote
           </Link>
+        </Container>
+      </section>
+
+      <section className="bg-bg-card border-y border-border-subtle py-24">
+        <Container>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              ABS CoreLine
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight mb-6">
+              Slit Coils &amp; Pencil Coils
+            </h2>
+            <p className="text-text-body text-base leading-relaxed">
+              ABS CoreLine is our slitting division, converting master coils into precision-slit
+              strips for roll-forming, cladding, and roofing input. Annual capacity: 30,000 MT.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {COIL_PRODUCTS.map((coil) => (
+              <div key={coil.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{coil.name}</h3>
+                  <ul className="space-y-2">
+                    {coil.specs.map((s) => (
+                      <li key={s} className="text-text-muted text-sm leading-relaxed">
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </CardGlow>
+                <CardNuts />
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 

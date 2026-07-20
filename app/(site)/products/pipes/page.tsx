@@ -6,16 +6,30 @@ import { generateProductSchema } from '@/lib/seo/generateProductSchema';
 import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'pipes')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
+  title: 'Steel Pipes & Tubes | Round, Square & RHS Sections | ABS FlowPipe',
+  description:
+    'MS, GP and stainless steel pipes in round, square, and RHS sections. Full dimension range from ABS FlowPipe, 6,000 MT annual capacity, Howrah.',
   path: '/products/pipes',
 });
+
+const PIPE_FAQS = [
+  {
+    question: 'What materials are ABS pipes available in?',
+    answer:
+      'Mild steel (MS), galvanised pipe (GP), and stainless steel, across round, square, and RHS sections.',
+  },
+  {
+    question: 'Can I order custom lengths?',
+    answer: 'Yes. Custom lengths and dimensions are available on request across all pipe sections.',
+  },
+];
 
 const PIPE_TABLES = [
   {
@@ -155,6 +169,8 @@ export default function PipesPage() {
           </Link>
         </Container>
       </section>
+
+      <FAQSection items={PIPE_FAQS} />
 
       <ContactStrip />
     </main>

@@ -6,6 +6,7 @@ import { generateProductSchema } from '@/lib/seo/generateProductSchema';
 import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -14,10 +15,23 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'sheet')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
+  title: 'PPGL Roofing Sheets | GP, CR & HR | ABS BlueShield',
+  description:
+    'PPGL roofing sheets built for Indian weather. GP, CR and HR grades from SAIL, Tata and JSW. Custom widths and lengths, ABS BlueShield System.',
   path: '/products/sheet',
 });
+
+const ROOFING_FAQS = [
+  {
+    question: 'Which brands does ABS source roofing material from?',
+    answer:
+      'SAIL, JSW, and Tata, depending on grade. GP and CR sheets come from SAIL and JSW. HR sheets add Tata to that list.',
+  },
+  {
+    question: 'Can roofing sheets be cut to custom lengths?',
+    answer: 'Yes, all widths listed are customisable to any length you need.',
+  },
+];
 
 const SHEET_GRADES = [
   {
@@ -149,6 +163,8 @@ export default function SheetPage() {
           </div>
         </Container>
       </section>
+
+      <FAQSection items={ROOFING_FAQS} />
 
       <ContactStrip />
     </main>
