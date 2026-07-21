@@ -15,7 +15,7 @@ export function NetworkIndiaMap({ selected, onSelect, className }: NetworkIndiaM
       fill="none"
       role="img"
       aria-label="Map of India"
-      className={className}
+      className={cn('relative z-[2]', className)}
     >
       <image href="/india-map.svg" width="2500" height="2843" className="light:hidden" />
       <image
