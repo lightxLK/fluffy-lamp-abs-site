@@ -1,17 +1,11 @@
 import { Container } from '@/components/layout/Container';
-import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
-import { EastIndiaMapScene } from '@/components/svg/scenes/EastIndiaMapScene';
 import { NetworkExplorer } from '@/components/network/NetworkExplorer';
 
 export function NetworkSection() {
   return (
     <section className="bg-bg-dark py-24" id="network">
-      <DrawSVGSection selector=".abs-path" className="block w-full">
-        <EastIndiaMapScene className="w-full h-auto opacity-70 max-h-[80vh]" />
-      </DrawSVGSection>
-
       <Container>
-        <div className="text-center mt-16">
+        <div className="text-center">
           <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
             Eastern India &amp; Beyond
           </p>

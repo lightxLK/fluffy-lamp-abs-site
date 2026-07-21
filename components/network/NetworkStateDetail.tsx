@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { dotCountFor, NETWORK_STATES } from '@/data/network';
 import {
   parsePathToPolygon,
@@ -66,6 +67,39 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
   }, [state.slug, state.svgSrc, state.dealers]);
 
   const parsed = cache.get(state.slug);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  useGSAP(
+    () => {
+      if (!parsed || !svgRef.current) return;
+
+      const paths = svgRef.current.querySelectorAll<SVGGeometryElement>('.abs-path');
+      const dots = svgRef.current.querySelectorAll<SVGCircleElement>('.abs-dot');
+      if (!paths.length) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(paths, { drawSVG: '100%' });
+        gsap.set(dots, { scale: 1, opacity: 1 });
+        return;
+      }
+
+      const tl = gsap.timeline();
+      tl.fromTo(
+        paths,
+        { drawSVG: '0%' },
+        { drawSVG: '100%', duration: 1.4, ease: 'power2.inOut', stagger: 0.08 },
+      );
+      if (dots.length) {
+        tl.fromTo(
+          dots,
+          { scale: 0, opacity: 0, transformOrigin: 'center' },
+          { scale: 1, opacity: 1, duration: 0.4, stagger: 0.02, ease: 'back.out(1.7)' },
+          '-=0.3',
+        );
+      }
+    },
+    { scope: svgRef, dependencies: [selected, parsed] },
+  );
 
   return (
     <div className={className}>
@@ -74,6 +108,7 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
         {parsed === null && <StatePlaceholder dealers={state.dealers} />}
         {parsed && (
           <svg
+            ref={svgRef}
             viewBox={parsed.viewBox}
             className="h-full w-full"
             role="img"
@@ -83,14 +118,17 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
               <path
                 key={i}
                 d={d}
+                className="abs-path"
                 fill="none"
                 stroke="var(--color-line-art)"
                 strokeWidth={Math.max(2, Number(parsed.viewBox.split(' ')[2]) / 300)}
+                strokeLinejoin="round"
               />
             ))}
             {parsed.dots.map((pt, i) => (
               <circle
                 key={i}
+                className="abs-dot"
                 cx={pt.x}
                 cy={pt.y}
                 r={Math.max(3, Number(parsed.viewBox.split(' ')[2]) / 150)}
