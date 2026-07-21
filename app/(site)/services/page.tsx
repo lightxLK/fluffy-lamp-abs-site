@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
+import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
@@ -47,8 +48,8 @@ export default function ServicesPage() {
             <SplitTextReveal>Services</SplitTextReveal>
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-2xl mb-10">
-            Four service verticals carry every order from mill to site, loading, cutting, slitting,
-            and fabrication, all under one roof.
+            Seven service verticals carry every order from mill to site, loading, cutting, slitting,
+            fabrication, packaging, hallmarking, and laser cutting, all under one roof.
           </p>
 
           <nav aria-label="Service sections" className="flex flex-wrap gap-3">
@@ -95,20 +96,39 @@ export default function ServicesPage() {
                 {service.description}
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-                {service.process.map((step, idx) => (
-                  <div key={step.label} className="border-t border-border-subtle pt-4">
-                    <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-2">
-                      {String(idx + 1).padStart(2, '0')}
-                    </p>
-                    <h3 className="text-text-primary font-semibold text-sm mb-2">{step.label}</h3>
-                    <p className="text-text-muted text-xs leading-relaxed">{step.body}</p>
-                  </div>
-                ))}
-              </div>
+              {service.process && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+                  {service.process.map((step, idx) => (
+                    <div key={step.label} className="border-t border-border-subtle pt-4">
+                      <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-2">
+                        {String(idx + 1).padStart(2, '0')}
+                      </p>
+                      <h3 className="text-text-primary font-semibold text-sm mb-2">{step.label}</h3>
+                      <p className="text-text-muted text-xs leading-relaxed">{step.body}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {service.lists && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-10">
+                  {service.lists.map((list) => (
+                    <div key={list.title} className="border-t border-border-subtle pt-4">
+                      <h3 className="text-text-primary font-semibold text-sm mb-4">{list.title}</h3>
+                      <ul className="space-y-2">
+                        {list.items.map((item) => (
+                          <li key={item} className="text-text-muted text-xs leading-relaxed">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {service.specs && (
-                <div className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border-subtle pt-6">
+                <div className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border-subtle pt-6 mb-10">
                   {service.specs.map((spec) => (
                     <div key={spec.label}>
                       <p className="text-text-muted text-xs uppercase tracking-widest mb-1">
@@ -117,6 +137,35 @@ export default function ServicesPage() {
                       <p className="text-text-primary text-sm font-semibold">{spec.value}</p>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {service.patternGallery && (
+                <div className="border-t border-border-subtle pt-8">
+                  <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
+                    GLC Design Series, {service.patternGallery.count} Patterns
+                  </p>
+                  <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3">
+                    {Array.from({ length: service.patternGallery.count }, (_, idx) => {
+                      const code = `${service.patternGallery!.prefix}-${String(idx + 1).padStart(3, '0')}`;
+                      return (
+                        <div key={code} className="relative">
+                          <div className="relative aspect-[1/3] bg-bg-dark border border-border-subtle overflow-hidden">
+                            <Image
+                              src={`/products/gi-laser-cutting/${code.toLowerCase()}.jpg`}
+                              alt={code}
+                              fill
+                              sizes="150px"
+                              className="object-cover"
+                            />
+                          </div>
+                          <p className="text-text-muted text-[10px] text-center uppercase tracking-widest mt-2">
+                            {code}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </Container>

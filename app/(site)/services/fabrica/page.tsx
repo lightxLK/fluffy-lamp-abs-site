@@ -89,7 +89,7 @@ const COMMON_FEATURES = [
 ];
 
 const komal = DIRECTORS.find((d) => d.name.includes('Komal'))!;
-const fabricationProcess = SERVICES.find((s) => s.slug === 'fabrication')!.process;
+const fabricationProcess = SERVICES.find((s) => s.slug === 'fabrication')!.process!;
 
 export default function FabricaPage() {
   const breadcrumbSchema = generateBreadcrumbSchema('/services/fabrica');

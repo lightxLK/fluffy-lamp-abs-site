@@ -3,13 +3,20 @@ export interface ServiceStep {
   body: string;
 }
 
+export interface ServiceList {
+  title: string;
+  items: string[];
+}
+
 export interface Service {
   slug: string;
   name: string;
   tagline: string;
   description: string;
-  process: ServiceStep[];
+  process?: ServiceStep[];
   specs?: { label: string; value: string }[];
+  lists?: ServiceList[];
+  patternGallery?: { prefix: string; count: number };
 }
 
 export const SERVICES: Service[] = [
@@ -109,5 +116,38 @@ export const SERVICES: Service[] = [
         body: 'We stay involved after delivery, offering guidance and technical assistance to ensure long-term performance and continued value.',
       },
     ],
+  },
+  {
+    slug: 'packaging-hallmarking',
+    name: 'Packaging & Hallmarking',
+    tagline: 'Assurance, built in',
+    description:
+      'Every genuine ABS product carries its own markers of authenticity, verifiable the moment it reaches site.',
+    lists: [
+      {
+        title: 'Markers of Genuine ABS Products',
+        items: [
+          'Profile and guide, name and logo embossed',
+          'Special protective film on every profile',
+        ],
+      },
+      {
+        title: 'Packaging',
+        items: ['Weatherproof CDP packaging', 'Stretch film packaging for springs'],
+      },
+    ],
+  },
+  {
+    slug: 'gi-laser-cutting-sheet',
+    name: 'GI Laser Cutting Sheet',
+    tagline: 'Precision, cut to pattern',
+    description:
+      'Precision-cut GI sheets in a wide range of decorative laser-cut patterns, suited to gates, grills, screens, and facade work. Available in a wide range of standard patterns from our GLC design series.',
+    specs: [
+      { label: 'Thickness', value: '0.6 mm – 3 mm' },
+      { label: 'Width', value: 'Up to 1500 mm' },
+      { label: 'Length', value: 'Can be customised' },
+    ],
+    patternGallery: { prefix: 'GLC', count: 54 },
   },
 ];

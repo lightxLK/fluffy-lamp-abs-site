@@ -7,6 +7,7 @@ import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { FAQSection } from '@/components/sections/FAQSection';
+import Image from 'next/image';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -55,6 +56,14 @@ const SHEET_GRADES = [
 ];
 
 const WIDTHS = ['750 mm', '800 mm', '1000 mm', '1220 mm', '1250 mm', '1500 mm'];
+
+const ROOFING_BRANDS = [
+  { name: 'ABS Branded', src: null },
+  { name: 'Jindal India', src: '/Client Logo/jindal.png' },
+  { name: 'JSW', src: '/Client Logo/jsw.png' },
+  { name: 'Bhushan', src: '/Client Logo/bhushan.png' },
+  { name: 'Tata', src: '/Client Logo/tata.png' },
+];
 
 export default function SheetPage() {
   const breadcrumbSchema = generateBreadcrumbSchema('/products/sheet');
@@ -143,23 +152,62 @@ export default function SheetPage() {
 
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
-          <div className="max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS BlueShield™ Roofing
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-16">
+            <div>
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                ABS BlueShield™ Roofing
+              </p>
+              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
+                PPGL roofing, built for Indian weather
+              </h2>
+              <p className="text-text-body text-base leading-relaxed mb-10">
+                Exceptional strength and weather resistance at significantly reduced cost, ideal for
+                industrial sheds, warehouses, and residential roofing.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+              >
+                Request a Quote
+              </Link>
+            </div>
+            <div className="relative aspect-[4/3] bg-bg-dark border border-border-subtle overflow-hidden">
+              <Image
+                src="/products/sheet/roofing-sheet.jpg"
+                alt="ABS PPGL roofing sheet"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="border-t border-border-subtle pt-8">
+            <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
+              ABS BlueShield, Brands Available
             </p>
-            <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
-              PPGL roofing, built for Indian weather
-            </h2>
-            <p className="text-text-body text-base leading-relaxed mb-10">
-              Exceptional strength and weather resistance at significantly reduced cost, ideal for
-              industrial sheds, warehouses, and residential roofing.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
-            >
-              Request a Quote
-            </Link>
+            <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
+              {ROOFING_BRANDS.map((brand) =>
+                brand.src ? (
+                  <span key={brand.name} className="flex h-14 w-32 items-center justify-center">
+                    <Image
+                      src={brand.src}
+                      alt={brand.name}
+                      width={128}
+                      height={56}
+                      className="h-full w-full object-contain brightness-0 invert light:filter-none"
+                    />
+                  </span>
+                ) : (
+                  <span
+                    key={brand.name}
+                    className="text-text-primary text-sm font-semibold uppercase tracking-widest"
+                  >
+                    {brand.name}
+                  </span>
+                ),
+              )}
+            </div>
           </div>
         </Container>
       </section>

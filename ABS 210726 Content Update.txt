@@ -1,0 +1,328 @@
+please go through this entire document for content updates across the website,  and tell me when you need the SVG line icons of the products or SVG line art to be shown in any particular section, that is not added yet:
+
+A. PRODUCTS, MAIN PAGE [ these are 7 Product cards to be shown in the /product page, replacing the current one which're not present here like Chequered Plate tile or its page...]
+Eyebrow: COMPREHENSIVE PRODUCT PORTFOLIO 
+H1: Products
+ Intro paragraph:
+Every product is a manifestation of precision, integrity, and purpose. From rolling shutter gates to roofing solutions, we deliver complete steel solutions that empower fabricators, OEMs, and project owners with reliability and value.
+Seven tiles, three copy tiers each:
+Tile 1 
+Eyebrow: PROFILES · ABS SHAKTISHUTTER™ 
+Title: Rolling Shutter Gates 
+Tagline: One of the widest profile ranges in the market
+Tile 2 
+Eyebrow: PIPES · ABS FLOWPIPE™ SERIES 
+Title: Pipes 
+Tagline: Round, square and RHS, in MS, GP and stainless steel
+Tile 3 
+Eyebrow: SHEETS · ABS BLUESHIELD™ SYSTEM 
+Title: Roofing Sheets 
+Tagline: PPGL roofing, built for Indian weather
+Tile 4 
+Eyebrow: ACCESSORIES · ABS TOTALSHUTTER™ SYSTEM 
+Title: Shutter Accessories 
+Tagline: Every component for a complete installation
+Tile 5 
+Eyebrow: PROCESSED STEEL · ABS EDGECUT™ SERIES 
+Title: Plain Sheets 
+Tagline: GI, CR, HR and PPGL, cut to length
+Tile 6 
+Eyebrow: COILS · ABS CORELINE™ SERIES 
+Title: Slit & Pencil Coils 
+Tagline: Precision slitting, held to tight tolerance
+Tile 7 
+Eyebrow: ABRASIVES 
+Title: Cutting & Grinding Wheels
+ Tagline: Wheels for every cutting and finishing job
+
+B. PRODUCTS, SUBPAGES [these are the main product categories whose pages are marked with B: and only these product categories are to be shows in the main product page, replacing the current ones. i.e. 7 Products in total; each of their sub products and page content is listed below them in C: ]
+B1. Rolling Shutter Gates
+Eyebrow: PROFILES · ABS SHAKTISHUTTER™ 
+H1: Rolling Shutter Gates 
+Tagline: One of the widest profile ranges in the market
+ Intro: High-quality, precision-engineered profiles in GI, CR, and PPGL with special protective guard film. Annual Capacity: 15,000 MT / Year
+ABS ShaktiShutter, Profile Range
+C1.1. Flat Profile
+Standard lath, approximately 84mm width
+Also available in Super Flat variant
+C1.2. 4 Inch Super Flat
+100mm width lath, built for wide-span openings
+C1.3. Diamond Profile
+Diamond pattern rolled into the lath
+C1.4. Single Diamond Profile
+Single-diamond pattern, a lighter variant of the diamond profile
+C1.5. Gear Profile
+Toothed edge for enhanced structural rigidity
+C1.6. Perforated Profile
+Ventilated lath, allows airflow without compromising security
+Material: GI, CR, PPGL 
+Protection: Special protective guard film on every profile 
+Authenticity: Length and thickness marked on each profile and guide
+
+C2. Bottom Plate
+Thickness: 2.5mm, 3mm
+Guide width options: 2.5", 3"
+C3. Spring
+Thickness: 6mm, 7mm, 8mm
+6mm: 12" at 6 kg/pair, 15" at 8 kg/pair, 18" at 10 kg/pair, 20" at 10.5 kg/pair, 22" at 11.5 kg/pair
+7mm: 12" at 7 kg/pair, 15" at 9 kg/pair, 18" at 11 kg/pair, 20" at 12.5 kg/pair, 22" at 15 kg/pair, 24" at 16.5 kg/pair
+8mm: 18" at 14.3 kg/pair, 20" at 15.7 kg/pair, 22" at 17.2 kg/pair, 24" at 19 kg/pair
+C4. Lock Plate
+Thickness: 2mm, 2.5mm
+Material: GP, HR
+C5. Hood Cover
+Thickness: 0.3mm to 0.35mm
+Width: 336mm
+Weight: 50 to 60 kg/roll
+Material: GI
+C6. Bracket Plate
+Thickness: 2mm to 5mm
+Size: 14"x14", 16"x16"
+Material: GP, HR, CR
+
+B2. Pipes
+Eyebrow: PIPES · ABS FLOWPIPE™ SERIES 
+H1: Pipes
+Tagline: Round, square and RHS, any section 
+Intro: High-quality HR and GP pipes in mild steel, galvanised pipe, and stainless steel. 
+Annual Capacity: 6,000 MT / Year Material: MS, GP, and Stainless Steel
+ABS FlowPipe, Dimension Range
+C1. Round Pipe
+1/2" outer dia, 14 to 18 SWG, 4 kg per piece
+3/4" outer dia, 14 to 18 SWG, 5.5 kg per piece
+1" outer dia, 14 to 20 SWG, 6.5 to 8.5 kg per piece
+1.25" outer dia, 16 to 20 SWG, 9.5 to 12 kg per piece
+1.5" outer dia, 12 to 18 SWG, 8 to 19 kg per piece
+2" outer dia, 12 to 25 SWG, 9 to 21 kg per piece
+C2. Square Pipe
+19x19 mm, 1.4 to 1.8 mm thickness, 5.5 to 7 kg per piece
+25x25 mm, 1.1 to 2.0 mm thickness, 5 to 10 kg per piece
+32x32 mm, 1.4 to 2.5 mm thickness, 8 to 14 kg per piece
+38x38 mm, 1.2 to 2.0 mm thickness, 8 to 15 kg per piece
+48x48 mm, 1.6 to 2.0 mm thickness, 14 to 20 kg per piece
+60x60 mm, 2.0 to 2.5 mm thickness, 24 to 28 kg per piece
+72x72 mm, 2.0 to 2.5 mm thickness, 29 to 32 kg per piece
+C3. RHS Pipe
+40x25 mm, 1.4 to 2.0 mm thickness, 8 to 12 kg per piece
+50x25 mm, 1.4 to 2.5 mm thickness, 10 to 15 kg per piece
+60x40 mm, 1.6 to 2.0 mm thickness, 15 to 19 kg per piece
+75x25 mm, 1.6 mm thickness, 15 kg per piece
+80x40 mm, 2.5 mm thickness, 28 kg per piece
+
+
+B3. Roofing Sheets
+Eyebrow: SHEETS · ABS BLUESHIELD™ SYSTEM 
+H1: Roofing Sheets Tagline: PPGL roofing, built for Indian weather
+ Intro: Exceptional strength and weather resistance at significantly reduced prices, ideal for industrial and residential projects. 
+Annual Capacity: 6,000 MT / Year Material: PPGL, with special protective guard film
+ABS BlueShield, Brands Available
+C1. ABS Branded
+C2. Jindal
+C3. Tata
+
+
+B4. Shutter Accessories
+Eyebrow: ACCESSORIES · ABS TOTALSHUTTER™ SYSTEM 
+H1: Shutter Accessories Tagline: Every component for a complete installation 
+Intro: Complete range of accessories including guide channels, springs, hood covers, lock plates, bracket plates, and ready-made bottom plates. 
+Annual Capacity: 20,000 MT / Year
+ABS TotalShutter, Component Range
+
+C6. Clip
+Weight: 64/80 gm
+Quantity: 500 pcs per bag
+C7. Pulley
+Light: 850 gm, 50 pcs per bag
+Heavy: 1.15 kg, 40 pcs per bag
+Bush: 1.05 kg, 40 pcs per bag
+C8. U Clamp
+Weight: 350 gm or 500 gm
+Quantity: 100 pcs or 75 pcs per bag
+C9. Kakda
+Thickness: 4mm to 5mm
+Quantity: 500 pcs per bag
+C10. Collapsible Gate Wheel
+Weight: 40 kg, 400 pcs per bag
+Finish: Machining polished wheel
+C11. Chain Pulley Set
+Light: 25mm rod
+Heavy: 32mm rod
+C12. Gear Box
+Available in light and heavy duty
+C13. Shutter Motors
+Weight capacity: 500 kg to 2,000 kg
+C14. Aluminium Socket
+Quantity: 5,000 pcs per bag, 17 kg
+C15. Shutter Lock
+Iron: master key, 12 pcs per bag
+Brass: light, medium, and heavy duty
+C16. Hash Bolt
+Thickness: 5mm to 6mm
+Weight: 50 kg per bag
+C17. LAICHIS 
+> THICKNESS: 8 MM 
+> QTY IN ONE BAG: 500 PCS
+C18. Pipe Socket
+Qty. 5000 Pcs
+C19. Tala Patti
+Thickness: 6mm
+Qty in bag: 50KG
+Type: GI, Black
+C20. G Block
+Thickness: 8mm
+Qty in bag: 500 PCs
+C21. Rivit
+Qty in one bag: 50KG
+Type: VSP /Normal
+
+B5. Plain Sheets
+Eyebrow: PROCESSED STEEL · ABS EDGECUT™ SERIES
+H1: Plain Sheets Tagline: GI, CR, HR and PPGL, cut to length 
+Intro: Advanced cutting line ensuring precision, flatness, and finish in GI, CR, HR, and PPGL materials, cut to length, stack-ready. 
+Annual Capacity: 24,000 MT / Year
+ABS EdgeCut, Grade Range
+C1. GI Sheet
+Brands: SAIL, JSW
+Thickness: 0.8mm to 3mm
+Customisability: any length
+Weight range: 10 to 70 kg/sheet
+Widths: 750mm, 800mm, 1000mm, 1220mm, 1250mm, 1500mm
+C2. CR Sheet
+Brands: SAIL, JSW
+Thickness: 0.8mm to 1.6mm
+Customisability: any length
+Weight range: 18 to 37 kg/sheet
+Widths: 750mm, 800mm, 1000mm, 1220mm, 1250mm, 1500mm
+C3. HR Sheet
+Brands: SAIL, TATA, JSW
+Thickness: 1.6mm to 4mm
+Customisability: any length
+Weight range: 38 to 95 kg/sheet
+Widths: 750mm, 800mm, 1000mm, 1220mm, 1250mm, 1500mm
+
+B6. Coils
+Eyebrow: COILS · ABS CORELINE™ SERIES 
+H1: Slit & Pencil Coils Tagline: Precision slitting, held to tight tolerance
+Intro: State-of-the-art slitting with rigorous quality checks for dimensional accuracy and consistency. 
+Annual Capacity: 30,000 MT / Year
+ABS CoreLine, Coil Range
+C1. Slit Coil
+Thickness: 0.25mm to 2.5mm
+Material: GP, HR, CR, PPGL
+Width: from 35mm onwards
+Weight per coil: 300 kg to 1.5 MT
+C2. Pencil Coil
+Thickness: 0.25mm to 0.60mm
+Material: GP, CR, PPGL
+Width: 900mm
+Weight per coil: 50 kg to 70 kg
+
+B7. Abrasives
+Eyebrow: ABRASIVES
+ H1: Cutting & Grinding Wheels 
+Tagline: Wheels for every cutting and finishing job
+Range
+C1. Cutting Wheel
+Size: 14" & 4"
+C2. Grinding Wheel
+Size: 4"
+
+C. SERVICES, MAIN PAGE 
+Eyebrow: WHAT WE DO 
+H1: Services 
+Intro: Seven service verticals carry every order from mill to site, loading, cutting, slitting, fabrication, packaging, hallmarking, and laser cutting, all under one roof.
+Tabs: SINGLE POINT LOADING (SPL) · CUTTING · SLITTING · FABRICATION · PACKAGING & HALLMARKING · GI LASER CUTTING SHEET · FABRICA
+
+Tab 1: Single Point Loading (SPL)
+Eyebrow: ONE DOCK, FULL ORDER, NO DELAY Title: Single Point Loading (SPL) Body:
+Single Point Loading is a centralised system where all materials are prepared and loaded from one fixed point within our facility. It cuts dispatch time, reduces handling errors, and keeps vehicle movement smooth for a faster, more reliable delivery process.
+Process:
+ 01 Order Received, order specification logged against live stock and mill schedule
+ 02 Scheduling, production and dispatch slotted into the loading calendar
+ 03 Material Prep, coil, profile, or sheet staged and inspected ahead of loading 
+04 Loading, single-point loading onto the outbound vehicle, sequenced by drop 
+05 Dispatch, vehicle cleared with documentation and tracked to site
+
+Tab 2: Cutting
+Eyebrow: SHEETS THAT FIT THE FIRST TIME
+ Title: Cut-to-Length
+ Body:
+Our cut-to-length service delivers steel sheets in the exact dimensions your project or customer demands. Whether you're working with roofing sheets or shutter panels, get stack-ready sheets without extra work on site.
+Applications:
+Roofing panels
+Shutter and cladding sheets
+Cut stock for sheet metal work
+Specifications: LENGTHS: 2 ft to 20 ft WIDTH: up to 1250 mm THICKNESS: 0.3 mm to 2.5 mm MATERIALS: GP, HR, CR, PPGL
+Benefits:
+Ready-to-use sheets with clean edges
+Saves cutting time and labour
+Ideal for fast-moving dealer operations
+Tab 3: Slitting
+Eyebrow: COILS, CUT TO PERFORM Title: Slitting Body:
+ABS provides precision slitting services in custom widths. Our high-speed slitting line ensures tight tolerances, clean edges, and uniform quality across the coil.
+Applications:
+Roll-forming input coils
+Slats for shutters and cladding
+Roofing sheet stock prep
+Specifications: WIDTHS: 50 mm to 1250 mm THICKNESS: 0.3 mm to 2.5 mm MATERIALS: HR, CR, GP, Colour-Coated
+Benefits:
+Consistent slit quality, burr-free
+Minimises scrap and offcut loss
+Fast processing for bulk and small orders alike
+
+Tab 4: Fabrication
+Eyebrow: STEEL, DESIGNED YOUR WAY Title: Fabrication Body:
+At ABS Fabrica, our team designs and builds in steel, blending durability with design across shaded rooftop terraces, modern entrance gates, and bold facade accents.
+Applications:
+Rooftop sheds and drive-in canopies
+Designer gates and entrances
+Building facades
+Garden and terrace structures
+Ready-to-install custom steel pieces
+Process: 
+01 Strategic Consultation - understanding intent, constraints, and context before a single line is drawn
+ 02 Design Development - in-house team translates concepts into detailed, build-ready drawings 
+03 Precision Fabrication - controlled processes and skilled workmanship across bespoke steel elements 
+04 - Seamless Installation, executed by experienced teams for alignment and finish quality on site 
+05 - Lifecycle Support, guidance and technical assistance for long-term performance
+Benefits:
+Design and strength, built to last and built to impress
+Custom tailored to your ideas
+Minimal hassle with ready-to-install solutions
+Future-ready, smart tech integration available
+
+Tab 4.1: Fabrica
+Eyebrow: BESPOKE FABRICATION Title: Looking for custom fabrication? Body:
+Fabrica is our dedicated design-and-build vertical for gates, facades, and architectural steelwork.
+CTA: EXPLORE FABRICA (links to /services/fabrica/)
+
+Tab 5: Packaging & Hallmarking
+Eyebrow: ASSURANCE, BUILT IN Title: Packaging & Hallmarking Body:
+Every genuine ABS product carries its own markers of authenticity, verifiable the moment it reaches site.
+Markers of Genuine ABS Products:
+Profile and guide, name and logo embossed
+Special protective film on every profile
+Packaging:
+Weatherproof CDP packaging
+Stretch film packaging for springs
+
+Tab 6: GI Laser Cutting Sheet
+Eyebrow: PRECISION, CUT TO PATTERN Title: GI Laser Cutting Sheet Body:
+Precision-cut GI sheets in a wide range of decorative laser-cut patterns, suited to gates, grills, screens, and facade work.
+Specifications: THICKNESS: 0.6 mm to 3 mm WIDTH: up to 1500 mm LENGTH: can be customised
+Available in a wide range of standard patterns from our GLC design series.
+
+D. NEWS, FABRICA LAUNCH ARTICLE REWRITE
+
+Date: 1 March 2024 Headline: ABS Fabrica Launches, Led by Ms. Komal Agarwal
+
+Body:
+
+Steel built Anil Balaji Steel's first fifty years. Our next chapter is inviting steel into people's homes, translating ABS's material strength into custom gates, grills, facades, and landscape installations.
+
+The launch marks ABS's first move from business-to-business steel supply into direct business-to-consumer design and installation. The vertical is targeting 200 projects over its first five years, at an average project value of 20 lakh rupees, with a focus on turnkey automated gates, terrace gardens, and architectural facade design.
+
+E. ABOUT PAGE, NEW VALUES TILE to be added [besides Our Mission and Our Vision]
+
+OUR VALUES
+Integrity guides every decision, from the mill floor to the boardroom. We build with innovation, keep quality accessible to all, and put people and partnerships first, always mindful of our responsibility to the nation and the environment we share.

@@ -8,16 +8,15 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
-import { CardGlow } from '@/components/ui/CardGlow';
-import { CardNuts } from '@/components/ui/CardNuts';
+import { SpecImageCard } from '@/components/ui/SpecImageCard';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'shutter')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Rolling Shutter Profiles | ABS ShaktiShutter | GI, CR & PPGL',
+  title: 'Rolling Shutter Gates | ABS ShaktiShutter | GI, CR & PPGL',
   description:
-    'Precision rolling shutter profiles in flat, round, diamond, gear and perforated patterns. GI, CR, PPGL materials with protective guardfilm. 15,000 MT annual capacity, Howrah.',
+    'Precision rolling shutter profiles in flat, diamond, gear and perforated patterns, plus bottom plates, springs, lock plates, hood covers and bracket plates. GI, CR, PPGL materials with protective guardfilm. 15,000 MT annual capacity, Howrah.',
   path: '/products/shutter',
 });
 
@@ -40,12 +39,74 @@ const FAQS = [
 ];
 
 const PROFILE_TYPES = [
-  { name: 'Flat Profile', note: 'The standard lath, available in super flat variants.' },
-  { name: 'Round Profile', note: 'Rolled edge for smooth interlocking action.' },
-  { name: 'Diamond Profile', note: 'Available in diamond and single-diamond patterns.' },
-  { name: 'Gear Profile', note: 'Toothed edge for enhanced structural rigidity.' },
-  { name: 'Perforated Profile', note: 'Ventilated lath for airflow without losing security.' },
-  { name: '4 Inch Super Flat', note: '100mm width lath for wide-span openings.' },
+  {
+    name: 'Flat Profile',
+    image: '/products/shutter/flat-profile.jpg',
+    specs: ['Standard lath, approximately 84mm width', 'Also available in Super Flat variant'],
+  },
+  {
+    name: '4 Inch Super Flat',
+    image: '/products/shutter/4-inch-super-flat.jpg',
+    specs: ['100mm width lath, built for wide-span openings'],
+  },
+  {
+    name: 'Diamond Profile',
+    image: '/products/shutter/diamond-profile.jpg',
+    specs: ['Diamond pattern rolled into the lath'],
+  },
+  {
+    name: 'Single Diamond Profile',
+    image: '/products/shutter/single-diamond-profile.jpg',
+    specs: ['Single-diamond pattern, a lighter variant of the diamond profile'],
+  },
+  {
+    name: 'Gear Profile',
+    image: '/products/shutter/gear-profile.jpg',
+    specs: ['Toothed edge for enhanced structural rigidity'],
+  },
+  {
+    name: 'Perforated Profile',
+    image: '/products/shutter/perforated-profile.jpg',
+    specs: ['Ventilated lath, allows airflow without compromising security'],
+  },
+];
+
+const HARDWARE = [
+  {
+    name: 'Bottom Plate',
+    image: '/products/shutter/bottom-plate.jpg',
+    specs: ['Thickness: 2.5mm, 3mm', 'Guide width options: 2.5", 3"'],
+  },
+  {
+    name: 'Spring',
+    image: '/products/shutter/spring.jpg',
+    specs: [
+      'Thickness: 6mm, 7mm, 8mm',
+      '6mm: 12"–22" at 6–11.5 kg/pair',
+      '7mm: 12"–24" at 7–16.5 kg/pair',
+      '8mm: 18"–24" at 14.3–19 kg/pair',
+    ],
+  },
+  {
+    name: 'Lock Plate',
+    image: '/products/shutter/lock-plate.jpg',
+    specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
+  },
+  {
+    name: 'Hood Cover',
+    image: '/products/shutter/hood-cover.jpg',
+    specs: [
+      'Thickness: 0.3mm to 0.35mm',
+      'Width: 336mm',
+      'Weight: 50 to 60 kg/roll',
+      'Material: GI',
+    ],
+  },
+  {
+    name: 'Bracket Plate',
+    image: '/products/shutter/bracket-plate.jpg',
+    specs: ['Thickness: 2mm to 5mm', 'Size: 14"x14", 16"x16"', 'Material: GP, HR, CR'],
+  },
 ];
 
 export default function ShutterPage() {
@@ -83,7 +144,7 @@ export default function ShutterPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Profile Types
+              ABS ShaktiShutter, Profile Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               One of the widest ranges in the market
@@ -92,13 +153,7 @@ export default function ShutterPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROFILE_TYPES.map((profile) => (
-              <div key={profile.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-3">{profile.name}</h3>
-                  <p className="text-text-muted text-sm leading-relaxed">{profile.note}</p>
-                </CardGlow>
-                <CardNuts size="sm" />
-              </div>
+              <SpecImageCard key={profile.name} {...profile} />
             ))}
           </div>
         </Container>
@@ -106,6 +161,21 @@ export default function ShutterPage() {
 
       <section className="bg-bg-dark py-24">
         <Container>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              ABS TotalShutter, Component Range
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+              Every part for a complete gate
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            {HARDWARE.map((item) => (
+              <SpecImageCard key={item.name} {...item} />
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
             <div className="border-t border-border-subtle pt-6">
               <p className="text-text-muted text-xs uppercase tracking-widest mb-2">Material</p>

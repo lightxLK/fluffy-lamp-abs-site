@@ -7,52 +7,52 @@ import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
-import { CardGlow } from '@/components/ui/CardGlow';
-import { CardNuts } from '@/components/ui/CardNuts';
+import { SpecImageCard } from '@/components/ui/SpecImageCard';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'plain-sheets')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Plain Sheets & Slit Coils | GI, CR, HR, PPGL | ABS EdgeCut & CoreLine',
+  title: 'Plain Sheets | GI, CR & HR, Cut to Length | ABS EdgeCut',
   description:
-    'Precision cut plain sheets and slit coils in GI, CR, HR and PPGL. Cut-to-length, stack-ready supply from ABS EdgeCut and CoreLine, 24,000 MT and 30,000 MT capacity.',
+    'Precision cut plain sheets in GI, CR, and HR, cut to length, stack-ready. ABS EdgeCut Series, 24,000 MT annual capacity, Howrah.',
   path: '/products/plain-sheets',
 });
 
-const COIL_PRODUCTS = [
+const GRADES = [
   {
-    name: 'Slit Coil',
+    name: 'GI Sheet',
+    image: '/products/plain-sheets/gi-sheet.jpg',
     specs: [
-      'Thickness: 0.25mm to 2.5mm',
-      'Material: GP, HR, CR, PPGL',
-      'Width: from 35mm',
-      'Weight per coil: 300 kg to 1.5 MT',
+      'Brands: SAIL, JSW',
+      'Thickness: 0.8mm to 3mm',
+      'Customisability: any length',
+      'Weight range: 10 to 70 kg/sheet',
+      'Widths: 750, 800, 1000, 1220, 1250, 1500mm',
     ],
   },
   {
-    name: 'Pencil Coil',
+    name: 'CR Sheet',
+    image: '/products/plain-sheets/cr-sheet.jpg',
     specs: [
-      'Thickness: 0.25mm to 0.60mm',
-      'Material: GP, CR, PPGL',
-      'Width: 300mm',
-      'Weight per coil: 50 kg to 70 kg',
+      'Brands: SAIL, JSW',
+      'Thickness: 0.8mm to 1.6mm',
+      'Customisability: any length',
+      'Weight range: 18 to 37 kg/sheet',
+      'Widths: 750, 800, 1000, 1220, 1250, 1500mm',
     ],
   },
-];
-
-const APPLICATIONS = [
-  'Fabrication & custom cutting',
-  'Sheet metal work & enclosures',
-  'General engineering & manufacturing',
-  'Stack-ready supply for OEMs',
-];
-
-const BENEFITS = [
-  { title: 'Precision Cut', body: 'Flat, accurate, and consistent across the run.' },
-  { title: 'Multiple Grades', body: 'GI, CR, HR, and PPGL materials available.' },
-  { title: 'Stack Ready', body: 'Cut to length and ready for immediate use.' },
-  { title: 'Bulk Supply', body: 'High-volume capacity for large orders.' },
+  {
+    name: 'HR Sheet',
+    image: '/products/plain-sheets/hr-sheet.jpg',
+    specs: [
+      'Brands: SAIL, TATA, JSW',
+      'Thickness: 1.6mm to 4mm',
+      'Customisability: any length',
+      'Weight range: 38 to 95 kg/sheet',
+      'Widths: 750, 800, 1000, 1220, 1250, 1500mm',
+    ],
+  },
 ];
 
 export default function PlainSheetsPage() {
@@ -88,39 +88,19 @@ export default function PlainSheetsPage() {
 
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
-            <div>
-              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-                Applications
-              </p>
-              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
-                Flat, finished, ready to use
-              </h2>
-              <ul className="space-y-4">
-                {APPLICATIONS.map((app) => (
-                  <li
-                    key={app}
-                    className="text-text-body text-sm leading-relaxed border-t border-border-subtle pt-4"
-                  >
-                    {app}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              ABS EdgeCut, Grade Range
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+              GI, CR &amp; HR, cut to length
+            </h2>
+          </div>
 
-            <div className="grid grid-cols-2 gap-6">
-              {BENEFITS.map((benefit) => (
-                <div key={benefit.title} className="relative h-full">
-                  <CardGlow className="h-full p-6">
-                    <h3 className="text-text-primary font-semibold text-sm mb-2">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-text-muted text-xs leading-relaxed">{benefit.body}</p>
-                  </CardGlow>
-                  <CardNuts size="sm" />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {GRADES.map((grade) => (
+              <SpecImageCard key={grade.name} {...grade} />
+            ))}
           </div>
         </Container>
       </section>
@@ -128,7 +108,7 @@ export default function PlainSheetsPage() {
       <section className="bg-bg-dark py-24">
         <Container className="text-center">
           <p className="text-text-muted text-base leading-relaxed max-w-xl mx-auto mb-10">
-            Plain sheets cut to precision in GI, CR, HR, and PPGL materials, flat, finished, and
+            Plain sheets cut to precision in GI, CR, and HR materials, flat, finished, and
             stack-ready.
           </p>
           <Link
@@ -137,41 +117,6 @@ export default function PlainSheetsPage() {
           >
             Request a Quote
           </Link>
-        </Container>
-      </section>
-
-      <section className="bg-bg-card border-y border-border-subtle py-24">
-        <Container>
-          <div className="mb-14 max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS CoreLine
-            </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight mb-6">
-              Slit Coils &amp; Pencil Coils
-            </h2>
-            <p className="text-text-body text-base leading-relaxed">
-              ABS CoreLine is our slitting division, converting master coils into precision-slit
-              strips for roll-forming, cladding, and roofing input. Annual capacity: 30,000 MT.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {COIL_PRODUCTS.map((coil) => (
-              <div key={coil.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{coil.name}</h3>
-                  <ul className="space-y-2">
-                    {coil.specs.map((s) => (
-                      <li key={s} className="text-text-muted text-sm leading-relaxed">
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                </CardGlow>
-                <CardNuts />
-              </div>
-            ))}
-          </div>
         </Container>
       </section>
 

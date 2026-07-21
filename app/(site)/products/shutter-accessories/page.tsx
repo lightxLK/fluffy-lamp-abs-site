@@ -8,61 +8,27 @@ import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
-import { CardGlow } from '@/components/ui/CardGlow';
-import { CardNuts } from '@/components/ui/CardNuts';
+import { SpecImageCard } from '@/components/ui/SpecImageCard';
 import { PRODUCTS } from '@/data/products';
 
 const product = PRODUCTS.find((p) => p.slug === 'shutter-accessories')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Shutter Accessories & Components | Springs, Locks, Motors | ABS Steel',
+  title: 'Shutter Accessories & Components | Pulleys, Motors, Locks | ABS Steel',
   description:
-    'Complete rolling shutter accessory range: bottom plates, springs, lock plates, hood covers, bracket plates, motors, pulleys and more. Everything for one installation, ABS TotalShutter System.',
+    'Complete rolling shutter accessory range: clips, pulleys, U clamps, kakda, collapsible gate wheels, chain pulley sets, gear boxes, motors, locks and more. Everything for one installation, ABS TotalShutter System.',
   path: '/products/shutter-accessories',
 });
 
 const COMPONENTS = [
   {
-    name: 'Bottom Plate',
-    specs: ['Thickness: 2.5mm, 3mm', 'Guide width options: 2.5", 3"'],
-  },
-  {
-    name: 'Spring',
-    specs: ['Thickness: 6mm, 7mm, 8mm', 'Weight rated by pair, size 12"–24"'],
-  },
-  {
-    name: 'Lock Plate',
-    specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
-  },
-  {
-    name: 'Hood Cover',
-    specs: ['Thickness: 0.3mm–0.35mm', 'Width: 336mm · 50–60 kg/roll · Material: GI'],
-  },
-  {
-    name: 'Bracket Plate',
-    specs: ['Thickness: 2mm–5mm', 'Size: 14"×14", 16"×16" · Material: GP, HR, CR'],
-  },
-  {
-    name: 'Aluminium Socket',
-    specs: ['Quantity per bag: 5,000 pcs / 17 kg'],
-  },
-  {
-    name: 'Shutter Lock',
-    specs: [
-      'Iron, master key, 12 pcs per bag',
-      'Also available in brass: light, medium, and heavy duty',
-    ],
-  },
-  {
-    name: 'Hash Bolt',
-    specs: ['Thickness: 5mm to 6mm', 'Weight: 50 kg per bag'],
-  },
-  {
-    name: 'Zip',
+    name: 'Clip',
+    image: '/products/shutter-accessories/clip.jpg',
     specs: ['Weight: 64/80 gm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Pulley',
+    image: '/products/shutter-accessories/pulley.jpg',
     specs: [
       'Light: 850 gm, 50 pcs per bag',
       'Heavy: 1.15 kg, 40 pcs per bag',
@@ -71,27 +37,76 @@ const COMPONENTS = [
   },
   {
     name: 'U Clamp',
+    image: '/products/shutter-accessories/u-clamp.jpg',
     specs: ['Weight: 350 gm or 500 gm', 'Quantity: 100 pcs or 75 pcs per bag'],
   },
   {
     name: 'Kakda',
+    image: '/products/shutter-accessories/kakda.jpg',
     specs: ['Thickness: 4mm to 5mm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Collapsible Gate Wheel',
+    image: '/products/shutter-accessories/collapsible-gate-wheel.jpg',
     specs: ['Weight: 40 kg / 400 pcs', 'Machining polished wheel finish'],
   },
   {
     name: 'Chain Pulley Set',
+    image: '/products/shutter-accessories/chain-pulley-set.jpg',
     specs: ['Light: 25mm rod', 'Heavy: 32mm rod'],
   },
   {
     name: 'Gear Box',
+    image: '/products/shutter-accessories/gear-box.jpg',
     specs: ['Available in light and heavy duty'],
   },
   {
     name: 'Shutter Motors',
+    image: '/products/shutter-accessories/shutter-motors.jpg',
     specs: ['Weight capacity: 500 kg to 2,000 kg'],
+  },
+  {
+    name: 'Aluminium Socket',
+    image: '/products/shutter-accessories/aluminium-socket.jpg',
+    specs: ['Quantity per bag: 5,000 pcs / 17 kg'],
+  },
+  {
+    name: 'Shutter Lock',
+    image: '/products/shutter-accessories/shutter-lock.jpg',
+    specs: [
+      'Iron, master key, 12 pcs per bag',
+      'Also available in brass: light, medium, and heavy duty',
+    ],
+  },
+  {
+    name: 'Hash Bolt',
+    image: '/products/shutter-accessories/hash-bolt.jpg',
+    specs: ['Thickness: 5mm to 6mm', 'Weight: 50 kg per bag'],
+  },
+  {
+    name: 'Laichis',
+    image: '/products/shutter-accessories/laichis.jpg',
+    specs: ['Thickness: 8mm', 'Quantity: 500 pcs per bag'],
+  },
+  {
+    name: 'Pipe Socket',
+    image: '/products/shutter-accessories/pipe-socket.jpg',
+    specs: ['Quantity: 5,000 pcs'],
+  },
+  {
+    name: 'Tala Patti',
+    image: '/products/shutter-accessories/tala-patti.jpg',
+    specs: ['Thickness: 6mm', 'Quantity per bag: 50 kg', 'Type: GI, Black'],
+  },
+  {
+    name: 'G Block',
+    image: '/products/shutter-accessories/g-block.jpg',
+    specs: ['Thickness: 8mm', 'Quantity per bag: 500 pcs'],
+  },
+  {
+    name: 'Rivit',
+    image: '/products/shutter-accessories/rivit.jpg',
+    specs: ['Quantity per bag: 50 kg', 'Type: VSP / Normal'],
   },
 ];
 
@@ -153,19 +168,7 @@ export default function ShutterAccessoriesPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {COMPONENTS.map((component) => (
-              <div key={component.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{component.name}</h3>
-                  <ul className="space-y-2">
-                    {component.specs.map((s) => (
-                      <li key={s} className="text-text-muted text-sm leading-relaxed">
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                </CardGlow>
-                <CardNuts />
-              </div>
+              <SpecImageCard key={component.name} {...component} />
             ))}
           </div>
         </Container>

@@ -10,83 +10,73 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   {
-    name: 'Rolling Shutter Profiles',
+    name: 'Rolling Shutter Gates',
     brandLine: 'ABS ShaktiShutter™',
     slug: 'shutter',
-    tagline: 'The profile Eastern India trusts most',
+    tagline: 'One of the widest profile ranges in the market',
     category: 'Profiles',
     description:
-      'High-quality, precision-engineered profiles in GI, CR, and PPGL with protective film technology. Flat, round, diamond, gear, and perforated, one of the widest design ranges in the market.',
+      'High-quality, precision-engineered profiles in GI, CR, and PPGL with special protective guard film. Flat, super flat, diamond, gear, and perforated profiles, alongside bottom plates, springs, lock plates, hood covers, and bracket plates.',
     capacity: '15,000 MT / year',
   },
   {
-    name: 'Shutter Accessories',
-    brandLine: 'ABS TotalShutter™ System',
-    slug: 'shutter-accessories',
-    tagline: 'Every part for a complete installation',
-    category: 'Accessories',
-    description:
-      'Complete range of accessories including guide channels, springs, hood covers, lock plates, bracket plates, and ready-made bottom plates, everything under one roof.',
-    capacity: '20,000 MT / year',
-  },
-  {
-    name: 'Steel Pipes & Tubes',
+    name: 'Pipes',
     brandLine: 'ABS FlowPipe™ Series',
     slug: 'pipes',
-    tagline: 'Round, square, RHS, any section',
+    tagline: 'Round, square and RHS, in MS, GP and stainless steel',
     category: 'Pipes',
     description:
-      'High-quality HR and GP pipes in MS, GP, and stainless steel. Round, square, and RHS sections across a full dimension range for structural and fluid-carrying use.',
+      'High-quality HR and GP pipes in mild steel, galvanised pipe, and stainless steel. Round, square, and RHS sections across a full dimension range.',
     capacity: '6,000 MT / year',
   },
   {
     name: 'Roofing Sheets',
     brandLine: 'ABS BlueShield™ System',
     slug: 'sheet',
-    tagline: 'Industrial-grade weather protection',
+    tagline: 'PPGL roofing, built for Indian weather',
     category: 'Sheets',
     description:
-      'PPGL roofing sheets with exceptional strength and weather resistance at reduced cost. Ideal for industrial sheds, warehouses, and residential roofing.',
+      'PPGL roofing sheets with exceptional strength and weather resistance at significantly reduced prices, ideal for industrial and residential projects.',
     capacity: '6,000 MT / year',
   },
   {
-    name: 'Chequered Plate',
-    brandLine: 'ABS GripDeck™ Series',
-    slug: 'chequered-plate',
-    tagline: 'Raised-diamond tread, built for grip',
-    category: 'Plates',
+    name: 'Shutter Accessories',
+    brandLine: 'ABS TotalShutter™ System',
+    slug: 'shutter-accessories',
+    tagline: 'Every component for a complete installation',
+    category: 'Accessories',
     description:
-      'Durable chequered plates with a raised diamond tread pattern for anti-slip flooring, walkways, and platforms, engineered for traction and heavy-duty industrial use.',
-    capacity: '5,000 MT / year',
+      'Complete range of accessories including clips, pulleys, U clamps, kakda, collapsible gate wheels, chain pulley sets, gear boxes, shutter motors, and more, everything under one roof.',
+    capacity: '20,000 MT / year',
   },
   {
     name: 'Plain Sheets',
     brandLine: 'ABS EdgeCut™ Series',
     slug: 'plain-sheets',
-    tagline: 'Precision cut, flat, and finished',
+    tagline: 'GI, CR, HR and PPGL, cut to length',
     category: 'Processed Steel',
     description:
       'Advanced cutting line ensuring precision, flatness, and finish in GI, CR, HR, and PPGL materials, cut to length, stack-ready.',
     capacity: '24,000 MT / year',
   },
   {
-    name: 'Abrasives',
-    brandLine: 'ABS SharpEdge™ Range',
+    name: 'Slit & Pencil Coils',
+    brandLine: 'ABS CoreLine™ Series',
+    slug: 'coils',
+    tagline: 'Precision slitting, held to tight tolerance',
+    category: 'Coils',
+    description:
+      'State-of-the-art slitting with rigorous quality checks for dimensional accuracy and consistency, delivering slit coil and pencil coil to tight tolerance.',
+    capacity: '30,000 MT / year',
+  },
+  {
+    name: 'Cutting & Grinding Wheels',
+    brandLine: 'Abrasives',
     slug: 'abrasives',
-    tagline: 'Cutting and grinding wheels for every job',
-    category: 'Consumables',
+    tagline: 'Wheels for every cutting and finishing job',
+    category: 'Abrasives',
     description:
       'A full range of cutting and grinding wheels engineered for clean cuts and consistent stock removal across steel fabrication and finishing work.',
     capacity: 'Stocked, ready to dispatch',
-  },
-  {
-    name: 'Packaging & Hallmarking',
-    brandLine: 'ABS TrueMark™ Assurance',
-    slug: 'packaging-hallmarking',
-    tagline: 'Every coil and bundle, verifiably genuine',
-    category: 'Assurance',
-    description:
-      'Tamper-evident packaging and hallmarked profiles carrying length and thickness markings, so every product reaching site is verifiably genuine ABS steel.',
-    capacity: 'Applied across the full range',
   },
 ];

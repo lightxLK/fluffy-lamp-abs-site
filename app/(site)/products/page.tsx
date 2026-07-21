@@ -9,9 +9,9 @@ import { ProductCard } from '@/components/sections/ProductCard';
 import { PRODUCTS } from '@/data/products';
 
 export const metadata: Metadata = genMeta({
-  title: 'Steel Products | Rolling Shutter Profiles, Pipes, Sheets & More | ABS Steel',
+  title: 'Steel Products | Rolling Shutter Gates, Pipes, Sheets & More | ABS Steel',
   description:
-    'Complete steel product range from Anil Balaji Steel: rolling shutter profiles, pipes, roofing sheets, chequered plate, plain sheets and slit coils. Direct from mill, Howrah.',
+    'Complete steel product range from Anil Balaji Steel: rolling shutter gates, pipes, roofing sheets, shutter accessories, plain sheets, slit & pencil coils, and abrasives. Direct from mill, Howrah.',
   path: '/products',
 });
 
@@ -35,8 +35,8 @@ export default function ProductsPage() {
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-2xl">
             Every product is a manifestation of precision, integrity, and purpose. From rolling
-            shutter profiles to roofing solutions, we deliver complete steel solutions for
-            fabricators, OEMs, and project owners.
+            shutter gates to roofing solutions, we deliver complete steel solutions that empower
+            fabricators, OEMs, and project owners with reliability and value.
           </p>
         </Container>
       </section>

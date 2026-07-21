@@ -6,38 +6,53 @@ import { generateProductSchema } from '@/lib/seo/generateProductSchema';
 import { Container } from '@/components/layout/Container';
 import { ProductPageHero } from '@/components/sections/ProductPageHero';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { ProductIcon } from '@/components/svg/icons/ProductIcon';
 import { SpecImageCard } from '@/components/ui/SpecImageCard';
 import { PRODUCTS } from '@/data/products';
 
-const product = PRODUCTS.find((p) => p.slug === 'abrasives')!;
+const product = PRODUCTS.find((p) => p.slug === 'coils')!;
 
 export const metadata: Metadata = genMeta({
-  title: `${product.name} | Anil Balaji Steel`,
-  description: product.description,
-  path: '/products/abrasives',
+  title: 'Slit & Pencil Coils | Precision Slitting | ABS CoreLine',
+  description:
+    'Precision slit coil and pencil coil, held to tight tolerance in GP, HR, CR and PPGL. ABS CoreLine Series, 30,000 MT annual capacity, Howrah.',
+  path: '/products/coils',
 });
 
-const WHEELS = [
+const COILS = [
   {
-    name: 'Cutting Wheel — 14"',
-    image: '/products/abrasives/cutting-wheel-14.jpg',
-    specs: ['Size: 14"'],
+    name: 'Slit Coil',
+    image: '/products/coils/slit-coil.jpg',
+    specs: [
+      'Thickness: 0.25mm to 2.5mm',
+      'Material: GP, HR, CR, PPGL',
+      'Width: from 35mm onwards',
+      'Weight per coil: 300 kg to 1.5 MT',
+    ],
   },
   {
-    name: 'Cutting Wheel — 4"',
-    image: '/products/abrasives/cutting-wheel-4.jpg',
-    specs: ['Size: 4"'],
-  },
-  {
-    name: 'Grinding Wheel',
-    image: '/products/abrasives/grinding-wheel-4.jpg',
-    specs: ['Size: 4"'],
+    name: 'Pencil Coil',
+    image: '/products/coils/pencil-coil.jpg',
+    specs: [
+      'Thickness: 0.25mm to 0.60mm',
+      'Material: GP, CR, PPGL',
+      'Width: 900mm',
+      'Weight per coil: 50 kg to 70 kg',
+    ],
   },
 ];
 
-export default function AbrasivesPage() {
-  const breadcrumbSchema = generateBreadcrumbSchema('/products/abrasives');
+const COIL_FAQS = [
+  {
+    question: 'What tolerance does ABS CoreLine hold on slit width?',
+    answer:
+      'Our high-speed slitting line runs rigorous dimensional checks on every pass, holding tight width tolerance across GP, HR, CR, and PPGL material.',
+  },
+];
+
+export default function CoilsPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema('/products/coils');
   const productSchema = generateProductSchema({
     name: product.name,
     description: product.description,
@@ -71,16 +86,16 @@ export default function AbrasivesPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Range
+              ABS CoreLine, Coil Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              The right wheel for every job
+              Precision slitting, held to tight tolerance
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {WHEELS.map((wheel) => (
-              <SpecImageCard key={wheel.name} {...wheel} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {COILS.map((coil) => (
+              <SpecImageCard key={coil.name} {...coil} />
             ))}
           </div>
         </Container>
@@ -88,10 +103,6 @@ export default function AbrasivesPage() {
 
       <section className="bg-bg-dark py-24">
         <Container className="text-center">
-          <p className="text-text-muted text-base leading-relaxed max-w-xl mx-auto mb-10">
-            Cutting and grinding wheels stocked alongside our steel range, so your fabrication work
-            never waits on a separate supplier.
-          </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
@@ -100,6 +111,8 @@ export default function AbrasivesPage() {
           </Link>
         </Container>
       </section>
+
+      <FAQSection items={COIL_FAQS} className="bg-bg-card border-y border-border-subtle py-24" />
 
       <ContactStrip />
     </main>

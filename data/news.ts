@@ -14,9 +14,8 @@ export const NEWS: NewsArticle[] = [
     excerpt:
       'A landmark diversification from B2B to B2C; ABS Fabrica brings turnkey automated gates, terrace gardens, and architectural facade design directly to consumers.',
     body: [
-      'Anil Balaji Steel has launched ABS Fabrica, its newest consumer-facing venture blending creativity with steel craftsmanship. Led by Ms. Komal Agarwal, the vertical delivers turnkey automated gates, terrace gardens, landscape installations, and architectural facade designs.',
-      'The division marks ABS’s first direct move from business-to-business steel supply into business-to-consumer design and installation, targeting 200 projects over its first five years at an average project value of ₹20 lakhs.',
-      '"At ABS, we don\'t just sell steel; we communicate strength, trust, and purpose," said Ms. Agarwal.',
+      "Steel built Anil Balaji Steel's first fifty years. Our next chapter is inviting steel into people's homes, translating ABS's material strength into custom gates, grills, facades, and landscape installations.",
+      'The launch marks ABS’s first move from business-to-business steel supply into direct business-to-consumer design and installation. The vertical is targeting 200 projects over its first five years, at an average project value of 20 lakh rupees, with a focus on turnkey automated gates, terrace gardens, and architectural facade design.',
     ],
   },
   {

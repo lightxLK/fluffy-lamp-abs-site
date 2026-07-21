@@ -4,7 +4,7 @@ export function AboutVisionMission() {
   return (
     <section className="relative bg-bg-dark pb-24">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 max-w-4xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-14 max-w-6xl">
           <div>
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               Our Vision
@@ -24,6 +24,17 @@ export function AboutVisionMission() {
               To democratise access to quality, technology-driven steel solutions across India,
               empowering people, partners, and communities through innovation, integrity, and a deep
               commitment to nation-building.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              Our Values
+            </p>
+            <p className="text-text-body text-base leading-relaxed">
+              Integrity guides every decision, from the mill floor to the boardroom. We build with
+              innovation, keep quality accessible to all, and put people and partnerships first,
+              always mindful of our responsibility to the nation and the environment we share.
             </p>
           </div>
         </div>
