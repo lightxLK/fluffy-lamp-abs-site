@@ -25,9 +25,6 @@ const SVG_CENTER_X = SVG_WIDTH / 2;
 const OPEN_HIDDEN = `M${SVG_WIDTH},0 Q${SVG_CENTER_X},0 0,0 L0,0 L${SVG_WIDTH},0 Z`;
 const OPEN_BULGE = `M${SVG_WIDTH},345 Q${SVG_CENTER_X},620 0,345 L0,0 L${SVG_WIDTH},0 Z`;
 const OPEN_FULL = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT} 0,${SVG_HEIGHT} L0,0 L${SVG_WIDTH},0 Z`;
-const CLOSE_START = `M${SVG_WIDTH},0 Q${SVG_CENTER_X},0 0,0 L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
-const CLOSE_BULGE = `M${SVG_WIDTH},350 Q${SVG_CENTER_X},130 0,350 L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
-const CLOSE_HIDDEN = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT} 0,${SVG_HEIGHT} L0,${SVG_HEIGHT} L${SVG_WIDTH},${SVG_HEIGHT} Z`;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -105,7 +102,7 @@ export function Navbar() {
 
   const closeMenu = () => {
     tlRef.current?.kill();
-    gsap.set(pathRef.current, { attr: { d: CLOSE_START } });
+    gsap.set(pathRef.current, { attr: { d: OPEN_FULL } });
 
     const links = linksColRef.current?.querySelectorAll('a') ?? [];
     const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [];
@@ -124,9 +121,11 @@ export function Navbar() {
 
     tl.to(links, { duration: 0.3, opacity: 0 }).to(infoItems, { duration: 0.3, opacity: 0 }, '<');
 
-    tl.to(pathRef.current, { duration: 0.5, attr: { d: CLOSE_BULGE }, ease: 'power3.in' }, '<').to(
+    // Mirrors openMenu's keyframes in reverse so the panel retracts back up
+    // through the top edge it grew from, instead of collapsing to the bottom.
+    tl.to(pathRef.current, { duration: 0.5, attr: { d: OPEN_BULGE }, ease: 'power3.in' }, '<').to(
       pathRef.current,
-      { duration: 0.5, attr: { d: CLOSE_HIDDEN }, ease: 'power3.out' },
+      { duration: 0.5, attr: { d: OPEN_HIDDEN }, ease: 'power3.out' },
     );
   };
 

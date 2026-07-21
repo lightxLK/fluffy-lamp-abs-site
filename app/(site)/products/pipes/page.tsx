@@ -125,7 +125,7 @@ export default function PipesPage() {
                     alt={table.name}
                     fill
                     sizes="280px"
-                    className="object-cover"
+                    className="object-contain p-4"
                   />
                 </div>
                 <div>

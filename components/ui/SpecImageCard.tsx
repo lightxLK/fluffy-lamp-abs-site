@@ -18,7 +18,7 @@ export function SpecImageCard({ name, image, specs }: SpecImageCardProps) {
             alt={name}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-contain p-4"
           />
         </div>
         <div className="p-8">

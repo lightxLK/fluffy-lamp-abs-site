@@ -143,24 +143,30 @@ export default function ServicesPage() {
               {service.patternGallery && (
                 <div className="border-t border-border-subtle pt-8">
                   <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
-                    GLC Design Series, {service.patternGallery.count} Patterns
+                    GLC Design Series,{' '}
+                    {service.patternGallery.groupCount * service.patternGallery.codesPerGroup}{' '}
+                    Patterns
                   </p>
-                  <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3">
-                    {Array.from({ length: service.patternGallery.count }, (_, idx) => {
-                      const code = `${service.patternGallery!.prefix}-${String(idx + 1).padStart(3, '0')}`;
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {Array.from({ length: service.patternGallery.groupCount }, (_, idx) => {
+                      const { prefix, codesPerGroup } = service.patternGallery!;
+                      const groupNum = idx + 1;
+                      const firstCode = idx * codesPerGroup + 1;
+                      const lastCode = firstCode + codesPerGroup - 1;
+                      const range = `${prefix}-${String(firstCode).padStart(3, '0')} – ${prefix}-${String(lastCode).padStart(3, '0')}`;
                       return (
-                        <div key={code} className="relative">
-                          <div className="relative aspect-[1/3] bg-bg-dark border border-border-subtle overflow-hidden">
+                        <div key={groupNum}>
+                          <div className="relative aspect-[2/1] bg-bg-dark border border-border-subtle overflow-hidden">
                             <Image
-                              src={`/products/gi-laser-cutting/${code.toLowerCase()}.png`}
-                              alt={code}
+                              src={`/products/gi-laser-cutting/glc-group-${groupNum}.png`}
+                              alt={`GLC design series, ${range}`}
                               fill
-                              sizes="150px"
-                              className="object-cover"
+                              sizes="(min-width: 1024px) 50vw, 100vw"
+                              className="object-contain p-3"
                             />
                           </div>
-                          <p className="text-text-muted text-[10px] text-center uppercase tracking-widest mt-2">
-                            {code}
+                          <p className="text-text-muted text-[11px] text-center uppercase tracking-widest mt-2">
+                            Group {groupNum}, {range}
                           </p>
                         </div>
                       );

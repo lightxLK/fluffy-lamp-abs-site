@@ -57,7 +57,7 @@ export function CoreStrengths() {
         <div className="mt-14 text-center">
           <Link
             href="/about/board-of-directors"
-            className="inline-flex items-center gap-3 text-abs-blue text-sm font-semibold uppercase tracking-widest hover:text-text-primary transition-colors duration-300"
+            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Meet the Board
           </Link>

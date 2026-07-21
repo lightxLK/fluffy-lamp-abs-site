@@ -55,7 +55,7 @@ export function AboutTimeline() {
         <div ref={trackRef} className="flex gap-6 px-6 lg:px-8 w-max">
           {TIMELINE.map((entry) => (
             <article key={entry.year} className="relative w-[280px] sm:w-[340px] shrink-0">
-              <CardGlow className="p-8">
+              <CardGlow className="h-full p-8">
                 <p className="text-abs-blue font-bold text-3xl mb-4">{entry.year}</p>
                 <h3 className="text-text-primary font-semibold text-lg mb-3">{entry.title}</h3>
                 <p className="text-text-muted text-sm leading-relaxed">{entry.body}</p>

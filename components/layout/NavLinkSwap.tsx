@@ -61,7 +61,7 @@ export function NavLinkSwap({ label, href, active, open, className }: NavLinkSwa
     }
   }, [open]);
 
-  const handleHover = (leaving: boolean) => {
+  const handleEnter = () => {
     const order = shuffledIndices(chars.length);
     gsap.killTweensOf([...primaryRefs.current, ...secondaryRefs.current]);
 
@@ -71,27 +71,25 @@ export function NavLinkSwap({ label, href, active, open, className }: NavLinkSwa
       const secondary = secondaryRefs.current[i];
       if (!primary || !secondary) return;
 
-      gsap.to(primary, {
-        y: leaving ? '0%' : '-100%',
-        duration: SWAP_DURATION,
-        ease: 'power3.out',
-        delay,
-      });
-      gsap.to(secondary, {
-        y: leaving ? '100%' : '0%',
-        duration: SWAP_DURATION,
-        ease: 'power3.out',
-        delay,
-      });
+      gsap.to(primary, { y: '-100%', duration: SWAP_DURATION, ease: 'power3.out', delay });
+      gsap.to(secondary, { y: '0%', duration: SWAP_DURATION, ease: 'power3.out', delay });
     });
+  };
+
+  // No animated exit — snaps straight back so the entry swap can replay
+  // cleanly on the next hover, instead of mirroring it as its own animation.
+  const handleLeave = () => {
+    gsap.killTweensOf([...primaryRefs.current, ...secondaryRefs.current]);
+    gsap.set(primaryRefs.current, { y: '0%' });
+    gsap.set(secondaryRefs.current, { y: '100%' });
   };
 
   return (
     <Link
       href={href}
       className={[className, active ? 'text-abs-blue' : 'text-text-primary'].join(' ')}
-      onMouseEnter={() => handleHover(false)}
-      onMouseLeave={() => handleHover(true)}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
       <span className="sr-only">{label}</span>
       {chars.map((char, i) => (

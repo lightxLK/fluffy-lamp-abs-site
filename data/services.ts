@@ -16,7 +16,8 @@ export interface Service {
   process?: ServiceStep[];
   specs?: { label: string; value: string }[];
   lists?: ServiceList[];
-  patternGallery?: { prefix: string; count: number };
+  /** Each group is one contact-sheet image covering a contiguous range of pattern codes. */
+  patternGallery?: { prefix: string; groupCount: number; codesPerGroup: number };
 }
 
 export const SERVICES: Service[] = [
@@ -148,6 +149,6 @@ export const SERVICES: Service[] = [
       { label: 'Width', value: 'Up to 1500 mm' },
       { label: 'Length', value: 'Can be customised' },
     ],
-    patternGallery: { prefix: 'GLC', count: 72 },
+    patternGallery: { prefix: 'GLC', groupCount: 8, codesPerGroup: 9 },
   },
 ];
