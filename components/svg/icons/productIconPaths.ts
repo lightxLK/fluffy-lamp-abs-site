@@ -20,7 +20,3 @@ export const PRODUCT_ICON_PATHS: Record<string, string> = {
 export const PRODUCT_ICON_VIEWBOX: Record<string, string> = {
   'packaging-hallmarking': '0 0 600 400',
 };
-
-// TODO: replace with dedicated coils line art once the new SVG set lands; borrows the
-// plain-sheets icon as a placeholder so the /products/coils tile and hero aren't blank.
-PRODUCT_ICON_PATHS.coils = PRODUCT_ICON_PATHS['plain-sheets'];
