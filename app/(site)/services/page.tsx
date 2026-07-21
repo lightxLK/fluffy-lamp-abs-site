@@ -11,6 +11,7 @@ import { FactoryFloorScene } from '@/components/svg/scenes/FactoryFloorScene';
 import { PipeSectionScene } from '@/components/svg/scenes/PipeSectionScene';
 import { CoilUnrollScene } from '@/components/svg/scenes/CoilUnrollScene';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
+import { ShutterProfileScene } from '@/components/svg/scenes/ShutterProfileScene';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
@@ -27,6 +28,7 @@ const SCENE_MAP: Record<string, SceneComponent> = {
   cutting: PipeSectionScene,
   slitting: CoilUnrollScene,
   fabrication: GatePergolaScene,
+  'packaging-hallmarking': ShutterProfileScene,
 };
 
 export default function ServicesPage() {

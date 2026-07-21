@@ -1,5 +1,4 @@
 import { Container } from '@/components/layout/Container';
-import { FactoryFloorScene } from '@/components/svg/scenes/FactoryFloorScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
 
@@ -38,11 +37,7 @@ const REASONS = [
 
 export function WhyABS() {
   return (
-    <section className="relative bg-bg-dark py-24 overflow-hidden" id="why-abs">
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
-        <FactoryFloorScene className="w-full h-full" />
-      </div>
-
+    <section className="relative bg-bg-dark py-24" id="why-abs">
       <Container className="relative">
         <div className="mb-14 text-center">
           <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

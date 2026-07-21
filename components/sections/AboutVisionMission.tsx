@@ -6,7 +6,7 @@ export function AboutVisionMission() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-14 max-w-6xl">
           <div>
-            <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
               Our Vision
             </p>
             <p className="text-text-body text-base leading-relaxed">
@@ -17,7 +17,7 @@ export function AboutVisionMission() {
           </div>
 
           <div>
-            <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
               Our Mission
             </p>
             <p className="text-text-body text-base leading-relaxed">
@@ -28,7 +28,7 @@ export function AboutVisionMission() {
           </div>
 
           <div>
-            <p className="text-abs-blue text-xs font-medium uppercase tracking-widest mb-4">
+            <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-4">
               Our Values
             </p>
             <p className="text-text-body text-base leading-relaxed">
