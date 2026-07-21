@@ -1,6 +1,7 @@
 import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { EastIndiaMapScene } from '@/components/svg/scenes/EastIndiaMapScene';
+import { NetworkExplorer } from '@/components/network/NetworkExplorer';
 
 export function NetworkSection() {
   return (
@@ -17,6 +18,10 @@ export function NetworkSection() {
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
             Our Network
           </h2>
+        </div>
+
+        <div className="mt-16">
+          <NetworkExplorer />
         </div>
       </Container>
     </section>
