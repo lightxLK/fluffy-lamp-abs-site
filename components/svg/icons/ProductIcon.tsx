@@ -1,4 +1,5 @@
 import { PRODUCT_ICON_PATHS, PRODUCT_ICON_VIEWBOX } from './productIconPaths';
+import { CoilsIcon } from './CoilsIcon';
 
 interface ProductIconProps {
   slug: string;
@@ -9,25 +10,16 @@ interface ProductIconProps {
 const VIEWBOX = '0 0 384 384';
 
 // Multi-layer shaded illustration rather than a single-color line path — doesn't
-// fit the currentColor fill/stroke system below, so it's served as a static asset.
-// Inverted in dark theme since it's drawn in black.
-const RASTER_ICONS: Record<string, string> = {
-  coils: '/products/coils/steel-coil.svg',
+// fit the currentColor fill/stroke system below, so it renders via its own
+// component. Its paths still carry the .abs-path class and a stroke so the
+// same DrawSVG hover animation other product icons get still applies.
+const CUSTOM_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  coils: CoilsIcon,
 };
 
 export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconProps) {
-  const rasterSrc = RASTER_ICONS[slug];
-  if (rasterSrc) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element -- static SVG asset, not a next/image candidate
-      <img
-        src={rasterSrc}
-        alt=""
-        aria-hidden="true"
-        className={`${className ?? ''} object-contain invert light:invert-0`}
-      />
-    );
-  }
+  const CustomIcon = CUSTOM_ICONS[slug];
+  if (CustomIcon) return <CustomIcon className={className} />;
 
   const path = PRODUCT_ICON_PATHS[slug];
   if (!path) return null;

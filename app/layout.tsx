@@ -29,7 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(localStorage.getItem('abs-theme')==='light')document.documentElement.classList.add('light');}catch(e){}})();`,
+            // Light is the default theme — only stay dark if the visitor
+            // previously chose it explicitly.
+            __html: `(function(){try{if(localStorage.getItem('abs-theme')!=='dark')document.documentElement.classList.add('light');}catch(e){}})();`,
           }}
         />
       </head>
