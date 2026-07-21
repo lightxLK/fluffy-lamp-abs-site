@@ -3,12 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { dotCountFor, NETWORK_STATES } from '@/data/network';
-import {
-  parseStateSvg,
-  pickOuterPolygon,
-  samplePointsInPolygon,
-  type Point,
-} from '@/lib/svgGeometry';
+import { parseStateSvg, type Point } from '@/lib/svgGeometry';
+import { sampleDotsViaRaster } from '@/lib/svgRaster';
 
 interface NetworkStateDetailProps {
   selected: string;
@@ -46,15 +42,16 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
 
     fetch(state.svgSrc)
       .then((res) => (res.ok ? res.text() : Promise.reject(new Error('not found'))))
-      .then((text) => {
+      .then(async (text) => {
         const result = parseStateSvg(text);
         if (!result) throw new Error('unparseable svg');
 
-        // Line-art traces both edges of the drawn border as separate
-        // subpaths (plus small disconnected islands) — only the outer
-        // silhouette bounds "inside the state" for dot placement.
-        const outer = pickOuterPolygon(result.pathData);
-        const dots = samplePointsInPolygon(outer, dotCountFor(state.dealers), state.slug);
+        const dots = await sampleDotsViaRaster(
+          text,
+          result.viewBox,
+          dotCountFor(state.dealers),
+          state.slug,
+        );
 
         cache.set(state.slug, { viewBox: result.viewBox, pathData: result.pathData, dots });
         if (!cancelled) setVersion((v) => v + 1);
