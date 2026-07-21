@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { dotCountFor, NETWORK_STATES } from '@/data/network';
 import {
-  parsePathToPolygon,
   parseStateSvg,
+  pickOuterPolygon,
   samplePointsInPolygon,
   type Point,
 } from '@/lib/svgGeometry';
@@ -50,8 +50,11 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
         const result = parseStateSvg(text);
         if (!result) throw new Error('unparseable svg');
 
-        const polygon = result.pathData.flatMap(parsePathToPolygon);
-        const dots = samplePointsInPolygon(polygon, dotCountFor(state.dealers), state.slug);
+        // Line-art traces both edges of the drawn border as separate
+        // subpaths (plus small disconnected islands) — only the outer
+        // silhouette bounds "inside the state" for dot placement.
+        const outer = pickOuterPolygon(result.pathData);
+        const dots = samplePointsInPolygon(outer, dotCountFor(state.dealers), state.slug);
 
         cache.set(state.slug, { viewBox: result.viewBox, pathData: result.pathData, dots });
         if (!cancelled) setVersion((v) => v + 1);
@@ -73,28 +76,36 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
     () => {
       if (!parsed || !svgRef.current) return;
 
-      const paths = svgRef.current.querySelectorAll<SVGGeometryElement>('.abs-path');
+      // Two layers share the same outline: `.abs-sketch` (stroked, fill:none)
+      // plays the DrawSVG reveal, then hands off to `.abs-fill` (solid,
+      // no stroke) for the resting frame — the line art itself is a thin
+      // drawn ribbon, so stroking it at rest would trace both of its edges
+      // as a double line. Filling it is the single clean line.
+      const sketch = svgRef.current.querySelectorAll<SVGGeometryElement>('.abs-sketch');
+      const fill = svgRef.current.querySelectorAll<SVGGeometryElement>('.abs-fill');
       const dots = svgRef.current.querySelectorAll<SVGCircleElement>('.abs-dot');
-      if (!paths.length) return;
+      if (!sketch.length) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(paths, { drawSVG: '100%' });
+        gsap.set(sketch, { opacity: 0 });
+        gsap.set(fill, { opacity: 1 });
         gsap.set(dots, { scale: 1, opacity: 1 });
         return;
       }
 
+      gsap.set(sketch, { drawSVG: '0%', opacity: 1 });
+      gsap.set(fill, { opacity: 0 });
+      gsap.set(dots, { scale: 0, opacity: 0 });
+
       const tl = gsap.timeline();
-      tl.fromTo(
-        paths,
-        { drawSVG: '0%' },
-        { drawSVG: '100%', duration: 1.4, ease: 'power2.inOut', stagger: 0.08 },
-      );
+      tl.to(sketch, { drawSVG: '100%', duration: 2.6, ease: 'power2.inOut', stagger: 0.15 });
+      tl.to(fill, { opacity: 1, duration: 0.7, ease: 'power1.out' }, '-=0.5');
+      tl.to(sketch, { opacity: 0, duration: 0.6, ease: 'power1.out' }, '<');
       if (dots.length) {
-        tl.fromTo(
+        tl.to(
           dots,
-          { scale: 0, opacity: 0, transformOrigin: 'center' },
-          { scale: 1, opacity: 1, duration: 0.4, stagger: 0.02, ease: 'back.out(1.7)' },
-          '-=0.3',
+          { scale: 1, opacity: 1, duration: 0.4, stagger: 0.03, ease: 'back.out(1.7)' },
+          '-=0.2',
         );
       }
     },
@@ -116,14 +127,17 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
           >
             {parsed.pathData.map((d, i) => (
               <path
-                key={i}
+                key={`sketch-${i}`}
                 d={d}
-                className="abs-path"
+                className="abs-sketch"
                 fill="none"
                 stroke="var(--color-line-art)"
-                strokeWidth={Math.max(2, Number(parsed.viewBox.split(' ')[2]) / 300)}
+                strokeWidth={Math.max(1.5, Number(parsed.viewBox.split(' ')[2]) / 400)}
                 strokeLinejoin="round"
               />
+            ))}
+            {parsed.pathData.map((d, i) => (
+              <path key={`fill-${i}`} d={d} className="abs-fill" fill="var(--color-line-art)" />
             ))}
             {parsed.dots.map((pt, i) => (
               <circle

@@ -12,10 +12,11 @@ export interface BBox {
 
 /**
  * Flattens an SVG path's `d` attribute (M/L/C, absolute + relative, plus Z)
- * into a polygon of points. Cubic curves are sampled, not exact — good enough
- * for bbox + point-in-polygon use, not for re-rendering the path itself.
+ * into one polygon per M...Z subpath. Cubic curves are sampled (10 segments),
+ * not exact — good enough for bbox + point-in-polygon use, not for
+ * re-rendering the path itself.
  */
-export function parsePathToPolygon(d: string): Point[] {
+export function parsePathToSubpolygons(d: string): Point[][] {
   const tokens = d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e-?\d+)?/g);
   if (!tokens) return [];
 
@@ -23,12 +24,13 @@ export function parsePathToPolygon(d: string): Point[] {
   let cur: Point = { x: 0, y: 0 };
   let start: Point = { x: 0, y: 0 };
   let cmd = '';
-  const pts: Point[] = [];
+  const subpolys: Point[][] = [];
+  let pts: Point[] = [];
 
   const num = () => parseFloat(tokens[i++]);
 
   const cubic = (x1: number, y1: number, x2: number, y2: number, x: number, y: number) => {
-    for (let t = 0.2; t <= 1.0001; t += 0.2) {
+    for (let t = 0.1; t <= 1.0001; t += 0.1) {
       const mt = 1 - t;
       const px = mt * mt * mt * cur.x + 3 * mt * mt * t * x1 + 3 * mt * t * t * x2 + t * t * t * x;
       const py = mt * mt * mt * cur.y + 3 * mt * mt * t * y1 + 3 * mt * t * t * y2 + t * t * t * y;
@@ -41,12 +43,16 @@ export function parsePathToPolygon(d: string): Point[] {
     if (/[a-zA-Z]/.test(tokens[i])) cmd = tokens[i++];
     switch (cmd) {
       case 'M':
+        if (pts.length) subpolys.push(pts);
+        pts = [];
         cur = { x: num(), y: num() };
         start = { ...cur };
         pts.push({ ...cur });
         cmd = 'L';
         break;
       case 'm':
+        if (pts.length) subpolys.push(pts);
+        pts = [];
         cur = { x: cur.x + num(), y: cur.y + num() };
         start = { ...cur };
         pts.push({ ...cur });
@@ -101,7 +107,43 @@ export function parsePathToPolygon(d: string): Point[] {
     }
   }
 
-  return pts;
+  if (pts.length) subpolys.push(pts);
+  return subpolys;
+}
+
+/** Flattens every subpath into one merged point list (bbox/rough-shape use only). */
+export function parsePathToPolygon(d: string): Point[] {
+  return parsePathToSubpolygons(d).flat();
+}
+
+/** Shoelace formula; sign indicates winding direction. */
+export function polygonArea(poly: Point[]): number {
+  let area = 0;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    area += poly[j].x * poly[i].y - poly[i].x * poly[j].y;
+  }
+  return area / 2;
+}
+
+/**
+ * Picks the subpath enclosing the most area — the state's outer silhouette —
+ * out of every subpath across every path in the SVG (ribbon-style line art
+ * traces both edges of the drawn border as separate subpaths, plus any small
+ * disconnected islands; the outer contour is what "inside the state" means).
+ */
+export function pickOuterPolygon(pathDataList: string[]): Point[] {
+  let best: Point[] = [];
+  let bestArea = -Infinity;
+  for (const d of pathDataList) {
+    for (const poly of parsePathToSubpolygons(d)) {
+      const area = Math.abs(polygonArea(poly));
+      if (area > bestArea) {
+        bestArea = area;
+        best = poly;
+      }
+    }
+  }
+  return best;
 }
 
 export function polygonBBox(poly: Point[]): BBox {
@@ -141,23 +183,50 @@ function mulberry32(seed: number) {
   };
 }
 
+const MARGIN_PROBE_OFFSETS = [
+  { x: 1, y: 0 },
+  { x: -1, y: 0 },
+  { x: 0, y: 1 },
+  { x: 0, y: -1 },
+];
+
 /**
- * Rejection-samples `count` points strictly inside the polygon, using a seed
- * derived from a string (e.g. state slug) so the scatter is stable per state.
+ * Rejection-samples `count` points inside the polygon, using a seed derived
+ * from a string (e.g. state slug) so the scatter is stable per state. Also
+ * probes a small ring around each candidate so dots land comfortably inside
+ * the shape rather than hugging its boundary.
  */
 export function samplePointsInPolygon(poly: Point[], count: number, seedStr: string): Point[] {
   if (poly.length < 3) return [];
   const bbox = polygonBBox(poly);
+  const margin = Math.max(bbox.maxX - bbox.minX, bbox.maxY - bbox.minY) * 0.035;
   const rand = mulberry32(hashString(seedStr));
   const result: Point[] = [];
   let attempts = 0;
-  const maxAttempts = count * 400;
+  const maxAttempts = count * 800;
 
   while (result.length < count && attempts < maxAttempts) {
     attempts++;
     const x = bbox.minX + rand() * (bbox.maxX - bbox.minX);
     const y = bbox.minY + rand() * (bbox.maxY - bbox.minY);
-    if (pointInPolygon({ x, y }, poly)) result.push({ x, y });
+    const pt = { x, y };
+    if (!pointInPolygon(pt, poly)) continue;
+    const clearOfEdge = MARGIN_PROBE_OFFSETS.every((o) =>
+      pointInPolygon({ x: x + o.x * margin, y: y + o.y * margin }, poly),
+    );
+    if (clearOfEdge) result.push(pt);
+  }
+
+  // Edge-clearance probe found fewer than requested (small/thin shape) — fall
+  // back to plain inside-polygon points so we still hit the target count.
+  if (result.length < count) {
+    attempts = 0;
+    while (result.length < count && attempts < maxAttempts) {
+      attempts++;
+      const x = bbox.minX + rand() * (bbox.maxX - bbox.minX);
+      const y = bbox.minY + rand() * (bbox.maxY - bbox.minY);
+      if (pointInPolygon({ x, y }, poly)) result.push({ x, y });
+    }
   }
 
   return result;
