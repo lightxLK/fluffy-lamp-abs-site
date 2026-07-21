@@ -45,9 +45,19 @@ const PROFILE_TYPES = [
     specs: ['Standard lath, approximately 84mm width', 'Also available in Super Flat variant'],
   },
   {
+    name: '84mm Super Flat',
+    image: '/products/shutter/84mm-super-flat.jpg',
+    specs: ['Super flat variant, 84mm width'],
+  },
+  {
     name: '4 Inch Super Flat',
     image: '/products/shutter/4-inch-super-flat.jpg',
     specs: ['100mm width lath, built for wide-span openings'],
+  },
+  {
+    name: 'Round Profile',
+    image: '/products/shutter/round-profile.jpg',
+    specs: ['Rounded edge profile'],
   },
   {
     name: 'Diamond Profile',
@@ -68,6 +78,14 @@ const PROFILE_TYPES = [
     name: 'Perforated Profile',
     image: '/products/shutter/perforated-profile.jpg',
     specs: ['Ventilated lath, allows airflow without compromising security'],
+  },
+];
+
+const GUIDES = [
+  {
+    name: 'Guide',
+    image: '/products/shutter/c2-guide.jpg',
+    specs: ['Thickness: 2.0mm, 750 gms/ft', 'Thickness: 2.5mm, 900 gms/ft', 'Material: GP, HR'],
   },
 ];
 
@@ -160,6 +178,25 @@ export default function ShutterPage() {
       </section>
 
       <section className="bg-bg-dark py-24">
+        <Container>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              ABS TotalShutter, Guide Range
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+              Guides
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            {GUIDES.map((item) => (
+              <SpecImageCard key={item.name} {...item} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

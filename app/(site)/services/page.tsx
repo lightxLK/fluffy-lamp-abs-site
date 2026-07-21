@@ -7,11 +7,7 @@ import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
-import { FactoryFloorScene } from '@/components/svg/scenes/FactoryFloorScene';
-import { PipeSectionScene } from '@/components/svg/scenes/PipeSectionScene';
-import { CoilUnrollScene } from '@/components/svg/scenes/CoilUnrollScene';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
-import { ShutterProfileScene } from '@/components/svg/scenes/ShutterProfileScene';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
@@ -23,12 +19,10 @@ export const metadata: Metadata = genMeta({
 
 type SceneComponent = React.ComponentType<{ className?: string }>;
 
+// Only Fabrica (fabrication) keeps its background line art; the rest were
+// removed as pure decoration per feedback.
 const SCENE_MAP: Record<string, SceneComponent> = {
-  spl: FactoryFloorScene,
-  cutting: PipeSectionScene,
-  slitting: CoilUnrollScene,
   fabrication: GatePergolaScene,
-  'packaging-hallmarking': ShutterProfileScene,
 };
 
 export default function ServicesPage() {

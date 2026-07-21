@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Quote } from 'lucide-react';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
-import { ABSLogoOutlineScene } from '@/components/svg/scenes/ABSLogoOutlineScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
 import { TRIBUTE_DIRECTOR, DIRECTORS } from '@/data/directors';
@@ -42,22 +42,30 @@ export default function BoardOfDirectorsPage() {
         </Container>
       </section>
 
-      <section className="relative bg-bg-card border-y border-border-subtle py-20 overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-[0.05] pointer-events-none">
-          <ABSLogoOutlineScene className="w-full h-full" />
-        </div>
+      <section className="relative bg-bg-card border-y border-border-subtle py-20">
         <Container className="relative">
-          <div className="max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              In Memory Of
-            </p>
-            <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-2">
-              {TRIBUTE_DIRECTOR.name}
-            </h2>
-            <p className="text-text-muted text-sm uppercase tracking-widest mb-6">
-              {TRIBUTE_DIRECTOR.role}
-            </p>
-            <p className="text-text-body text-base leading-relaxed">{TRIBUTE_DIRECTOR.bio}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+            <div>
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                In Memory Of
+              </p>
+              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-2">
+                {TRIBUTE_DIRECTOR.name}
+              </h2>
+              <p className="text-text-muted text-sm uppercase tracking-widest mb-6">
+                {TRIBUTE_DIRECTOR.role}
+              </p>
+              <p className="text-text-body text-base leading-relaxed">{TRIBUTE_DIRECTOR.bio}</p>
+            </div>
+            <div className="relative aspect-[4/5] max-w-md mx-auto w-full rounded-2xl overflow-hidden">
+              <Image
+                src={TRIBUTE_DIRECTOR.image}
+                alt={TRIBUTE_DIRECTOR.name}
+                fill
+                sizes="(min-width: 1024px) 33vw, 80vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </Container>
       </section>
@@ -73,17 +81,32 @@ export default function BoardOfDirectorsPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {DIRECTORS.map((director) => (
               <article key={director.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-xl mb-1">{director.name}</h3>
-                  <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-                    {director.role}
-                  </p>
-                  <p className="text-text-muted text-sm leading-relaxed mb-4">{director.bio}</p>
+                  <div className="flex flex-col sm:flex-row gap-6">
+                    <div className="relative aspect-[4/5] w-full sm:w-40 shrink-0 rounded-xl overflow-hidden">
+                      <Image
+                        src={director.image}
+                        alt={director.name}
+                        fill
+                        sizes="160px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-text-primary font-semibold text-xl mb-1">
+                        {director.name}
+                      </h3>
+                      <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                        {director.role}
+                      </p>
+                      <p className="text-text-muted text-sm leading-relaxed">{director.bio}</p>
+                    </div>
+                  </div>
                   {director.quote && (
-                    <blockquote className="flex gap-3 border-t border-border-subtle pt-4">
+                    <blockquote className="flex gap-3 border-t border-border-subtle mt-6 pt-4">
                       <Quote className="w-4 h-4 text-abs-blue shrink-0 mt-1" aria-hidden="true" />
                       <p className="text-text-body text-sm italic leading-relaxed">
                         {director.quote}
