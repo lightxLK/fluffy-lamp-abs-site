@@ -18,7 +18,7 @@ export function NetworkTable({ selected, onSelect }: NetworkTableProps) {
               onClick={() => onSelect(state.slug)}
               aria-pressed={isActive}
               className={cn(
-                'flex w-full items-center justify-between rounded-md px-5 py-4 text-left transition-colors duration-300',
+                'relative z-[2] flex w-full items-center justify-between rounded-md px-5 py-4 text-left transition-colors duration-300',
                 isActive ? 'bg-abs-blue text-white' : 'bg-bg-card text-text-body hover:bg-bg-mid',
               )}
             >

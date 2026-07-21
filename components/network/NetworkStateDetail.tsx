@@ -112,14 +112,19 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
 }
 
 function StateSkeleton() {
-  return <div className="h-2/3 w-2/3 animate-pulse rounded-lg bg-bg-mid" aria-hidden="true" />;
+  return (
+    <div
+      className="relative z-[2] h-2/3 w-2/3 animate-pulse rounded-lg bg-bg-mid"
+      aria-hidden="true"
+    />
+  );
 }
 
 function StatePlaceholder({ dealers }: { dealers: number }) {
   const dotCount = dotCountFor(dealers);
   return (
     <div
-      className="border-border-subtle relative flex h-2/3 w-2/3 flex-wrap content-center items-center justify-center gap-2 rounded-lg border border-dashed p-6"
+      className="border-border-subtle relative z-[2] flex h-2/3 w-2/3 flex-wrap content-center items-center justify-center gap-2 rounded-lg border border-dashed p-6"
       aria-hidden="true"
     >
       {Array.from({ length: dotCount }).map((_, i) => (

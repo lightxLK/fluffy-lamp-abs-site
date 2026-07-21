@@ -60,7 +60,7 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-bg-card border border-border-subtle rounded p-10 flex flex-col items-center text-center gap-4">
+      <div className="relative z-[2] bg-bg-card border border-border-subtle rounded p-10 flex flex-col items-center text-center gap-4">
         <CheckCircle2 className="w-10 h-10 text-abs-blue" aria-hidden="true" />
         <p className="text-text-primary font-semibold text-lg">Message sent</p>
         <p className="text-text-muted text-sm max-w-sm">{message}</p>
