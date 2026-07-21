@@ -31,7 +31,7 @@ export function ContactStrip() {
             <HomeExitLink
               href="/contact"
               sectionId="contact-strip"
-              className="inline-flex items-center gap-3 border border-white/40 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:border-white hover:bg-white/10 transition-colors duration-300"
+              className="inline-flex items-center gap-3 border border-white/30 bg-white/10 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:border-white hover:bg-white/20 transition-colors duration-300"
             >
               Get in Touch
             </HomeExitLink>

@@ -4,7 +4,7 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function CSRTeaser() {
   return (
-    <section className="relative bg-bg-mid py-24 overflow-hidden" id="csr">
+    <section className="relative z-[2] bg-bg-mid py-24 overflow-hidden" id="csr">
       <Image
         src="/csr.webp"
         alt=""
@@ -39,7 +39,7 @@ export function CSRTeaser() {
           <HomeExitLink
             href="/news"
             sectionId="csr"
-            className="inline-flex items-center gap-3 border border-white/25 text-white/70 px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-white hover:border-white transition-colors duration-300"
+            className="inline-flex items-center gap-3 border border-white/20 bg-white/10 text-white/70 px-10 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:text-white hover:border-white hover:bg-white/20 transition-colors duration-300"
           >
             Read Our Stories
           </HomeExitLink>

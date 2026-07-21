@@ -58,7 +58,7 @@ export function ProductsSection() {
           <HomeExitLink
             href="/products"
             sectionId="products"
-            className="inline-flex items-center gap-3 border border-border-subtle text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest hover:text-text-primary hover:border-text-primary transition-colors duration-300"
+            className="inline-flex items-center gap-3 border border-border-subtle bg-bg-card/60 text-text-muted px-10 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:text-text-primary hover:border-text-primary hover:bg-bg-card transition-colors duration-300"
           >
             View All Products
           </HomeExitLink>
