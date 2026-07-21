@@ -246,8 +246,12 @@ export default function BorderGlow({
         background: backgroundColor,
         borderRadius: `${borderRadius}px`,
         transform: 'translate3d(0, 0, 0.01px)',
+        // Capped well below typical grid gaps (16–24px) between cards — the
+        // previous recipe blurred out to 64px/32px offset, which pooled into
+        // a visibly darker smudge at the corners where adjacent cards' glows
+        // overlapped across the gap.
         boxShadow:
-          'rgba(0,0,0,0.1) 0 1px 2px, rgba(0,0,0,0.1) 0 2px 4px, rgba(0,0,0,0.1) 0 4px 8px, rgba(0,0,0,0.1) 0 8px 16px, rgba(0,0,0,0.1) 0 16px 32px, rgba(0,0,0,0.1) 0 32px 64px',
+          'rgba(0,0,0,0.08) 0 1px 2px, rgba(0,0,0,0.08) 0 2px 4px, rgba(0,0,0,0.08) 0 4px 8px, rgba(0,0,0,0.08) 0 6px 12px',
       }}
     >
       {/* mesh gradient border */}
