@@ -152,7 +152,7 @@ export default function ServicesPage() {
                         <div key={code} className="relative">
                           <div className="relative aspect-[1/3] bg-bg-dark border border-border-subtle overflow-hidden">
                             <Image
-                              src={`/products/gi-laser-cutting/${code.toLowerCase()}.jpg`}
+                              src={`/products/gi-laser-cutting/${code.toLowerCase()}.png`}
                               alt={code}
                               fill
                               sizes="150px"

@@ -148,6 +148,6 @@ export const SERVICES: Service[] = [
       { label: 'Width', value: 'Up to 1500 mm' },
       { label: 'Length', value: 'Can be customised' },
     ],
-    patternGallery: { prefix: 'GLC', count: 54 },
+    patternGallery: { prefix: 'GLC', count: 72 },
   },
 ];
