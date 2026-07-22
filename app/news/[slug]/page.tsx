@@ -5,8 +5,20 @@ import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
+import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
+import { CSRShelterScene } from '@/components/svg/scenes/CSRShelterScene';
+import { AutomationLineScene } from '@/components/svg/scenes/AutomationLineScene';
+import { EastIndiaMapScene } from '@/components/svg/scenes/EastIndiaMapScene';
 import { NEWS } from '@/data/news';
+
+const NEWS_SCENES: Record<string, (props: { className?: string }) => React.JSX.Element> = {
+  'abs-fabrica-launched': GatePergolaScene,
+  'steel-that-cares-csr-initiative': CSRShelterScene,
+  'automation-integration-2025': AutomationLineScene,
+  'vision-2030-national-service': EastIndiaMapScene,
+};
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -52,6 +64,7 @@ export default async function NewsSlugPage({ params }: Props) {
   }
 
   const breadcrumbSchema = generateBreadcrumbSchema(`/news/${slug}`);
+  const Scene = NEWS_SCENES[article.slug];
 
   return (
     <main className="min-h-screen bg-bg-dark">
@@ -60,8 +73,16 @@ export default async function NewsSlugPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <section className="pt-40 pb-16">
-        <Container>
+      <section className="relative pt-40 pb-16 overflow-hidden">
+        {Scene && (
+          <DrawSVGSection
+            selector=".abs-path"
+            className="absolute inset-0 hidden lg:flex items-center justify-end opacity-[0.08] pointer-events-none pr-8"
+          >
+            <Scene className="w-full max-w-lg h-auto" />
+          </DrawSVGSection>
+        )}
+        <Container className="relative">
           <Link
             href="/news"
             className="inline-flex items-center gap-2 text-text-muted text-xs font-semibold uppercase tracking-widest hover:text-text-primary transition-colors duration-200 mb-8"

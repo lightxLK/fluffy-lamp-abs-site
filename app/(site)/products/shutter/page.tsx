@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -41,42 +41,42 @@ const FAQS = [
 const PROFILE_TYPES = [
   {
     name: 'Flat Profile',
-    image: '/products/shutter/flat-profile.jpg',
+    image: '/products/shutter/flat-profile.webp',
     specs: ['Standard lath, approximately 84mm width', 'Also available in Super Flat variant'],
   },
   {
     name: '84mm Super Flat',
-    image: '/products/shutter/84mm-super-flat.jpg',
+    image: '/products/shutter/84mm-super-flat.webp',
     specs: ['Super flat variant, 84mm width'],
   },
   {
     name: '4 Inch Super Flat',
-    image: '/products/shutter/4-inch-super-flat.jpg',
+    image: '/products/shutter/4-inch-super-flat.webp',
     specs: ['100mm width lath, built for wide-span openings'],
   },
   {
     name: 'Round Profile',
-    image: '/products/shutter/round-profile.jpg',
+    image: '/products/shutter/round-profile.webp',
     specs: ['Rounded edge profile'],
   },
   {
     name: 'Diamond Profile',
-    image: '/products/shutter/diamond-profile.jpg',
+    image: '/products/shutter/diamond-profile.webp',
     specs: ['Diamond pattern rolled into the lath'],
   },
   {
     name: 'Single Diamond Profile',
-    image: '/products/shutter/single-diamond-profile.jpg',
+    image: '/products/shutter/single-diamond-profile.webp',
     specs: ['Single-diamond pattern, a lighter variant of the diamond profile'],
   },
   {
     name: 'Gear Profile',
-    image: '/products/shutter/gear-profile.jpg',
+    image: '/products/shutter/gear-profile.webp',
     specs: ['Toothed edge for enhanced structural rigidity'],
   },
   {
     name: 'Perforated Profile',
-    image: '/products/shutter/perforated-profile.jpg',
+    image: '/products/shutter/perforated-profile.webp',
     specs: ['Ventilated lath, allows airflow without compromising security'],
   },
 ];
@@ -84,7 +84,7 @@ const PROFILE_TYPES = [
 const GUIDES = [
   {
     name: 'Guide',
-    image: '/products/shutter/c2-guide.jpg',
+    image: '/products/shutter/c2-guide.webp',
     specs: ['Thickness: 2.0mm, 750 gms/ft', 'Thickness: 2.5mm, 900 gms/ft', 'Material: GP, HR'],
   },
 ];
@@ -92,12 +92,12 @@ const GUIDES = [
 const HARDWARE = [
   {
     name: 'Bottom Plate',
-    image: '/products/shutter/bottom-plate.jpg',
+    image: '/products/shutter/bottom-plate.webp',
     specs: ['Thickness: 2.5mm, 3mm', 'Guide width options: 2.5", 3"'],
   },
   {
     name: 'Spring',
-    image: '/products/shutter/spring.jpg',
+    image: '/products/shutter/spring.webp',
     specs: [
       'Thickness: 6mm, 7mm, 8mm',
       '6mm: 12"–22" at 6–11.5 kg/pair',
@@ -107,12 +107,12 @@ const HARDWARE = [
   },
   {
     name: 'Lock Plate',
-    image: '/products/shutter/lock-plate.jpg',
+    image: '/products/shutter/lock-plate.webp',
     specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
   },
   {
     name: 'Hood Cover',
-    image: '/products/shutter/hood-cover.jpg',
+    image: '/products/shutter/hood-cover.webp',
     specs: [
       'Thickness: 0.3mm to 0.35mm',
       'Width: 336mm',
@@ -122,7 +122,7 @@ const HARDWARE = [
   },
   {
     name: 'Bracket Plate',
-    image: '/products/shutter/bracket-plate.jpg',
+    image: '/products/shutter/bracket-plate.webp',
     specs: ['Thickness: 2mm to 5mm', 'Size: 14"x14", 16"x16"', 'Material: GP, HR, CR'],
   },
 ];
@@ -181,25 +181,6 @@ export default function ShutterPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS TotalShutter, Guide Range
-            </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              Guides
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-            {GUIDES.map((item) => (
-              <SpecImageCard key={item.name} {...item} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-bg-card border-y border-border-subtle py-24">
-        <Container>
-          <div className="mb-14 max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               ABS TotalShutter, Component Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
@@ -208,7 +189,7 @@ export default function ShutterPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-            {HARDWARE.map((item) => (
+            {[...GUIDES, ...HARDWARE].map((item) => (
               <SpecImageCard key={item.name} {...item} />
             ))}
           </div>
@@ -235,7 +216,7 @@ export default function ShutterPage() {
           <div className="text-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+              className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
             >
               Request a Quote
             </Link>

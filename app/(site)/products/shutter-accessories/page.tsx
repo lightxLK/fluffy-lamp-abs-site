@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -23,12 +23,12 @@ export const metadata: Metadata = genMeta({
 const COMPONENTS = [
   {
     name: 'Clip',
-    image: '/products/shutter-accessories/clip.jpg',
+    image: '/products/shutter-accessories/clip.webp',
     specs: ['Weight: 64/80 gm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Pulley',
-    image: '/products/shutter-accessories/pulley.jpg',
+    image: '/products/shutter-accessories/pulley.webp',
     specs: [
       'Light: 850 gm, 50 pcs per bag',
       'Heavy: 1.15 kg, 40 pcs per bag',
@@ -37,42 +37,42 @@ const COMPONENTS = [
   },
   {
     name: 'U Clamp',
-    image: '/products/shutter-accessories/u-clamp.jpg',
+    image: '/products/shutter-accessories/u-clamp.webp',
     specs: ['Weight: 350 gm or 500 gm', 'Quantity: 100 pcs or 75 pcs per bag'],
   },
   {
     name: 'Kakda',
-    image: '/products/shutter-accessories/kakda.jpg',
+    image: '/products/shutter-accessories/kakda.webp',
     specs: ['Thickness: 4mm to 5mm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Collapsible Gate Wheel',
-    image: '/products/shutter-accessories/collapsible-gate-wheel.jpg',
+    image: '/products/shutter-accessories/collapsible-gate-wheel.webp',
     specs: ['Weight: 40 kg / 400 pcs', 'Machining polished wheel finish'],
   },
   {
     name: 'Chain Pulley Set',
-    image: '/products/shutter-accessories/chain-pulley-set.jpg',
+    image: '/products/shutter-accessories/chain-pulley-set.webp',
     specs: ['Light: 25mm rod', 'Heavy: 32mm rod'],
   },
   {
     name: 'Gear Box',
-    image: '/products/shutter-accessories/gear-box.jpg',
+    image: '/products/shutter-accessories/gear-box.webp',
     specs: ['Available in light and heavy duty'],
   },
   {
     name: 'Shutter Motors',
-    image: '/products/shutter-accessories/shutter-motors.jpg',
+    image: '/products/shutter-accessories/shutter-motors.webp',
     specs: ['Weight capacity: 500 kg to 2,000 kg'],
   },
   {
     name: 'Aluminium Socket',
-    image: '/products/shutter-accessories/aluminium-socket.jpg',
+    image: '/products/shutter-accessories/aluminium-socket.webp',
     specs: ['Quantity per bag: 5,000 pcs / 17 kg'],
   },
   {
     name: 'Shutter Lock',
-    image: '/products/shutter-accessories/shutter-lock.jpg',
+    image: '/products/shutter-accessories/shutter-lock.webp',
     specs: [
       'Iron, master key, 12 pcs per bag',
       'Also available in brass: light, medium, and heavy duty',
@@ -80,32 +80,32 @@ const COMPONENTS = [
   },
   {
     name: 'Hash Bolt',
-    image: '/products/shutter-accessories/hash-bolt.jpg',
+    image: '/products/shutter-accessories/hash-bolt.webp',
     specs: ['Thickness: 5mm to 6mm', 'Weight: 50 kg per bag'],
   },
   {
     name: 'Laichis',
-    image: '/products/shutter-accessories/laichis.jpg',
+    image: '/products/shutter-accessories/laichis.webp',
     specs: ['Thickness: 8mm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Pipe Socket',
-    image: '/products/shutter-accessories/pipe-socket.jpg',
+    image: '/products/shutter-accessories/pipe-socket.webp',
     specs: ['Quantity: 5,000 pcs'],
   },
   {
     name: 'Tala Patti',
-    image: '/products/shutter-accessories/tala-patti.jpg',
+    image: '/products/shutter-accessories/tala-patti.webp',
     specs: ['Thickness: 6mm', 'Quantity per bag: 50 kg', 'Type: GI, Black'],
   },
   {
     name: 'G Block',
-    image: '/products/shutter-accessories/g-block.jpg',
+    image: '/products/shutter-accessories/g-block.webp',
     specs: ['Thickness: 8mm', 'Quantity per bag: 500 pcs'],
   },
   {
     name: 'Rivit',
-    image: '/products/shutter-accessories/rivit.jpg',
+    image: '/products/shutter-accessories/rivit.webp',
     specs: ['Quantity per bag: 50 kg', 'Type: VSP / Normal'],
   },
 ];
@@ -178,7 +178,7 @@ export default function ShutterAccessoriesPage() {
         <Container className="text-center">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Request a Quote
           </Link>

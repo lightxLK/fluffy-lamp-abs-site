@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -154,7 +154,7 @@ export default function ServicesPage() {
                         <div key={groupNum}>
                           <div className="relative aspect-[2/1] bg-bg-dark border border-border-subtle overflow-hidden">
                             <Image
-                              src={`/products/gi-laser-cutting/glc-group-${groupNum}.png`}
+                              src={`/products/gi-laser-cutting/glc-group-${groupNum}.webp`}
                               alt={`GLC design series, ${range}`}
                               fill
                               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -189,7 +189,7 @@ export default function ServicesPage() {
           </p>
           <Link
             href="/services/fabrica"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Explore Fabrica
           </Link>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -88,7 +88,7 @@ export function HeroSection() {
                 <div className="flex gap-4 flex-wrap">
                   <Link
                     href={slide.cta.href}
-                    className="inline-flex items-center gap-2 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+                    className="inline-flex items-center gap-2 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
                   >
                     {slide.cta.label}
                   </Link>

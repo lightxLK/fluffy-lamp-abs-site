@@ -57,7 +57,7 @@ export default function BoardOfDirectorsPage() {
               </p>
               <p className="text-text-body text-base leading-relaxed">{TRIBUTE_DIRECTOR.bio}</p>
             </div>
-            <div className="relative aspect-[4/5] max-w-md mx-auto w-full rounded-2xl overflow-hidden">
+            <div className="relative z-[2] aspect-[4/5] max-w-md mx-auto w-full rounded-2xl overflow-hidden">
               <Image
                 src={TRIBUTE_DIRECTOR.image}
                 alt={TRIBUTE_DIRECTOR.name}
@@ -86,7 +86,7 @@ export default function BoardOfDirectorsPage() {
               <article key={director.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <div className="flex flex-col sm:flex-row gap-6">
-                    <div className="relative aspect-[4/5] w-full sm:w-40 shrink-0 rounded-xl overflow-hidden">
+                    <div className="relative z-[2] aspect-[4/5] w-full sm:w-40 shrink-0 rounded-xl overflow-hidden">
                       <Image
                         src={director.image}
                         alt={director.name}

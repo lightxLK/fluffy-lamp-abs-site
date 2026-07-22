@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 const BRANDS = [
-  { name: 'SAIL', src: '/Client Logo/sail.png' },
-  { name: 'APL Apollo', src: '/Client Logo/apollo.png' },
-  { name: 'Nezone', src: '/Client Logo/nezone-bl.png' },
-  { name: 'JSW Steel', src: '/Client Logo/jsw.png' },
-  { name: 'Jindal Steel', src: '/Client Logo/jindal.png' },
+  { name: 'SAIL', src: '/Client Logo/sail.webp' },
+  { name: 'APL Apollo', src: '/Client Logo/apollo.webp' },
+  { name: 'Nezone', src: '/Client Logo/nezone-bl.webp' },
+  { name: 'JSW Steel', src: '/Client Logo/jsw.webp' },
+  { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
 ];
 
 const REPEAT = 4;

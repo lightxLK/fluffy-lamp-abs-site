@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -59,10 +59,10 @@ const WIDTHS = ['750 mm', '800 mm', '1000 mm', '1220 mm', '1250 mm', '1500 mm'];
 
 const ROOFING_BRANDS = [
   { name: 'ABS Branded', src: null },
-  { name: 'Jindal India', src: '/Client Logo/jindal.png' },
-  { name: 'JSW', src: '/Client Logo/jsw.png' },
-  { name: 'Bhushan', src: '/Client Logo/bhushan.png' },
-  { name: 'Tata', src: '/Client Logo/tata.png' },
+  { name: 'Jindal India', src: '/Client Logo/jindal.webp' },
+  { name: 'JSW', src: '/Client Logo/jsw.webp' },
+  { name: 'Bhushan', src: '/Client Logo/bhushan.webp' },
+  { name: 'Tata Steel', src: '/Client Logo/tata-steel.webp' },
 ];
 
 export default function SheetPage() {
@@ -166,14 +166,14 @@ export default function SheetPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+                className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
               >
                 Request a Quote
               </Link>
             </div>
             <div className="relative aspect-[4/3] bg-bg-dark border border-border-subtle overflow-hidden">
               <Image
-                src="/products/sheet/roofing-sheet.jpg"
+                src="/products/sheet/roofing-sheet.webp"
                 alt="ABS PPGL roofing sheet"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

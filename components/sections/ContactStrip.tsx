@@ -24,14 +24,14 @@ export function ContactStrip() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp Us"
-              className="inline-flex items-center gap-3 bg-white text-abs-blue px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
+              className="relative z-[2] inline-flex items-center gap-3 bg-white text-abs-blue px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
             >
               WhatsApp Us
             </Link>
             <HomeExitLink
               href="/contact"
               sectionId="contact-strip"
-              className="inline-flex items-center gap-3 border border-white/30 bg-white/10 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:border-white hover:bg-white/20 transition-colors duration-300"
+              className="relative z-[2] inline-flex items-center gap-3 border border-white/30 bg-white/10 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:border-white hover:bg-white/20 transition-colors duration-300"
             >
               Get in Touch
             </HomeExitLink>

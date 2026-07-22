@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -23,7 +23,7 @@ export const metadata: Metadata = genMeta({
 const COILS = [
   {
     name: 'Slit Coil',
-    image: '/products/coils/slit-coil.jpg',
+    image: '/products/coils/slit-coil.webp',
     specs: [
       'Thickness: 0.25mm to 2.5mm',
       'Material: GP, HR, CR, PPGL',
@@ -33,7 +33,7 @@ const COILS = [
   },
   {
     name: 'Pencil Coil',
-    image: '/products/coils/pencil-coil.jpg',
+    image: '/products/coils/pencil-coil.webp',
     specs: [
       'Thickness: 0.25mm to 0.60mm',
       'Material: GP, CR, PPGL',
@@ -105,7 +105,7 @@ export default function CoilsPage() {
         <Container className="text-center">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Request a Quote
           </Link>

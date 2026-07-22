@@ -1,4 +1,4 @@
-import { Container } from '@/components/layout/Container';
+﻿import { Container } from '@/components/layout/Container';
 import { RollingMillScene } from '@/components/svg/scenes/RollingMillScene';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
@@ -44,7 +44,7 @@ export function AboutSnapshot() {
           <HomeExitLink
             href="/about"
             sectionId="about-snapshot"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Our Story
           </HomeExitLink>

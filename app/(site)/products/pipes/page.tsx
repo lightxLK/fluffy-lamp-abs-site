@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -35,7 +35,7 @@ const PIPE_FAQS = [
 const PIPE_TABLES = [
   {
     name: 'Round Pipe',
-    image: '/products/pipes/round-pipe.jpg',
+    image: '/products/pipes/round-pipe.webp',
     columns: ['Outer Dia', 'Thickness', 'Weight/Piece'],
     rows: [
       ['1/2"', '14 – 18 SWG', '4 Kgs'],
@@ -48,7 +48,7 @@ const PIPE_TABLES = [
   },
   {
     name: 'Square Pipe',
-    image: '/products/pipes/square-pipe.jpg',
+    image: '/products/pipes/square-pipe.webp',
     columns: ['Size (mm)', 'Thickness (mm)', 'Weight/Piece'],
     rows: [
       ['19×19', '1.4 – 1.8', '5.5 – 7 Kgs'],
@@ -62,7 +62,7 @@ const PIPE_TABLES = [
   },
   {
     name: 'RHS Pipe',
-    image: '/products/pipes/rhs-pipe.jpg',
+    image: '/products/pipes/rhs-pipe.webp',
     columns: ['Size (mm)', 'Thickness (mm)', 'Weight/Piece'],
     rows: [
       ['40×25', '1.4 – 2.0', '8 – 12 Kgs'],
@@ -178,7 +178,7 @@ export default function PipesPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Request a Quote
           </Link>

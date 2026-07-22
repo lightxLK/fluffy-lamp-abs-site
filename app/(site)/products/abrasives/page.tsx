@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -21,17 +21,17 @@ export const metadata: Metadata = genMeta({
 const WHEELS = [
   {
     name: 'Cutting Wheel — 14"',
-    image: '/products/abrasives/cutting-wheel-14.jpg',
+    image: '/products/abrasives/cutting-wheel-14.webp',
     specs: ['Size: 14"'],
   },
   {
     name: 'Cutting Wheel — 4"',
-    image: '/products/abrasives/cutting-wheel-4.jpg',
+    image: '/products/abrasives/cutting-wheel-4.webp',
     specs: ['Size: 4"'],
   },
   {
     name: 'Grinding Wheel',
-    image: '/products/abrasives/grinding-wheel-4.jpg',
+    image: '/products/abrasives/grinding-wheel-4.webp',
     specs: ['Size: 4"'],
   },
 ];
@@ -94,7 +94,7 @@ export default function AbrasivesPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Request a Quote
           </Link>

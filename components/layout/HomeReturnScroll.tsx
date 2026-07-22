@@ -33,24 +33,37 @@ function scrollToSectionWhenReady(sectionId: string, attemptsLeft = 30) {
 
 /**
  * Restores scroll position when landing back on "/" via a real back/forward
- * gesture from a home page CTA. Lives at the layout level (not inside
- * HomePreloader) because Next's client router cache can reuse a previously
- * rendered "/" page instance on back navigation without remounting it -
- * a mount-scoped effect inside the page would simply never re-run in that
- * case. usePathname() here reliably reflects every route change regardless
- * of whether the underlying page component remounted.
+ * gesture from a home page CTA. Also resets scroll to top on every other
+ * route change: Lenis owns scroll independently of the browser and the
+ * LenisProvider mounts once at the layout level, so without this it keeps
+ * whatever offset the previous page was at, and short destination pages
+ * (e.g. the Abrasives product page) clamp that offset to their own bottom.
+ * Lives at the layout level (not inside HomePreloader) because Next's client
+ * router cache can reuse a previously rendered "/" page instance on back
+ * navigation without remounting it - a mount-scoped effect inside the page
+ * would simply never re-run in that case. usePathname() here reliably
+ * reflects every route change regardless of whether the underlying page
+ * component remounted.
  */
 export function HomeReturnScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname !== '/') return;
-
     const cameViaBack = consumeWasBackNavigation();
-    const sectionId = consumeHomeReturnSection();
-    if (!cameViaBack || !sectionId) return;
+    const sectionId = pathname === '/' ? consumeHomeReturnSection() : null;
 
-    scrollToSectionWhenReady(sectionId);
+    if (pathname === '/' && cameViaBack && sectionId) {
+      scrollToSectionWhenReady(sectionId);
+      return;
+    }
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+    ScrollTrigger.refresh();
   }, [pathname]);
 
   return null;

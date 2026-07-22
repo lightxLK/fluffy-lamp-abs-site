@@ -8,8 +8,8 @@ const CORNER_POSITIONS = [
 ];
 
 const SIZES = {
-  lg: { src: '/nut.png', px: 20 },
-  sm: { src: '/small-bolt.png', px: 14 },
+  lg: { src: '/nut.webp', px: 20 },
+  sm: { src: '/small-bolt.webp', px: 14 },
 } as const;
 
 interface CardNutsProps {

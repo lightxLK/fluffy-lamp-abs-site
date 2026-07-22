@@ -1,4 +1,4 @@
-import { Container } from '@/components/layout/Container';
+﻿import { Container } from '@/components/layout/Container';
 import Image from 'next/image';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
@@ -10,7 +10,7 @@ export function FabricaTeaser() {
     >
       {/* Background Image */}
       <Image
-        src="/dssdfc.png"
+        src="/dssdfc.webp"
         alt="Fabrica"
         fill
         sizes="100vw"
@@ -41,7 +41,7 @@ export function FabricaTeaser() {
           <HomeExitLink
             href="/services/fabrica"
             sectionId="fabrica"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 shadow-lg"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 shadow-lg"
           >
             Discover Fabrica
           </HomeExitLink>

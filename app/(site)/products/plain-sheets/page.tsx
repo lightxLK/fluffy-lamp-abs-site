@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -22,7 +22,7 @@ export const metadata: Metadata = genMeta({
 const GRADES = [
   {
     name: 'GI Sheet',
-    image: '/products/plain-sheets/gi-sheet.jpg',
+    image: '/products/plain-sheets/gi-sheet.webp',
     specs: [
       'Brands: SAIL, JSW',
       'Thickness: 0.8mm to 3mm',
@@ -33,7 +33,7 @@ const GRADES = [
   },
   {
     name: 'CR Sheet',
-    image: '/products/plain-sheets/cr-sheet.jpg',
+    image: '/products/plain-sheets/cr-sheet.webp',
     specs: [
       'Brands: SAIL, JSW',
       'Thickness: 0.8mm to 1.6mm',
@@ -44,7 +44,7 @@ const GRADES = [
   },
   {
     name: 'HR Sheet',
-    image: '/products/plain-sheets/hr-sheet.jpg',
+    image: '/products/plain-sheets/hr-sheet.webp',
     specs: [
       'Brands: SAIL, TATA, JSW',
       'Thickness: 1.6mm to 4mm',
@@ -113,7 +113,7 @@ export default function PlainSheetsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
           >
             Request a Quote
           </Link>

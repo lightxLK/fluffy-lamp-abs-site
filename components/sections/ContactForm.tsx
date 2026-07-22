@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, type FormEvent } from 'react';
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -168,7 +168,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex items-center gap-3 bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === 'submitting' && <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />}
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
