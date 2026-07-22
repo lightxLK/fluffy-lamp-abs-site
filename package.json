@@ -14,6 +14,12 @@
     "images:optimize": "node scripts/optimize-images.mjs",
     "video:compress": "node scripts/compress-hero-video.mjs"
   },
+  "browserslist": [
+    "chrome >= 91",
+    "edge >= 91",
+    "firefox >= 90",
+    "safari >= 15"
+  ],
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",

@@ -1,6 +1,16 @@
 # Static export served directly by Apache (no Next.js server) — headers that
 # would normally come from next.config `headers()` have to live here instead.
 
+# --- MIME types ---
+# Hostinger's server has no default mapping for .webm, so it fell back to
+# text/plain — Chrome refuses to play video served with that content-type
+# (surfaces as a network error, not a decode error).
+<IfModule mod_mime.c>
+  AddType video/webm .webm
+  AddType video/mp4 .mp4
+  AddType font/woff2 .woff2
+</IfModule>
+
 # --- Compression ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
@@ -45,4 +55,13 @@
     ExpiresDefault "access plus 0 seconds"
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
+</IfModule>
+
+# --- Security headers ---
+# CSP/Trusted-Types are skipped deliberately: this site relies on inline
+# scripts (theme toggle, JSON-LD) that would need nonce/hash plumbing we
+# can't verify against a live server from here.
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>

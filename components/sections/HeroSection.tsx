@@ -59,6 +59,10 @@ export function HeroSection() {
         loop
         playsInline
         preload="none"
+        // This is the page's LCP element (via its poster) — bump its fetch
+        // priority so the poster doesn't queue behind lower-priority assets.
+        // React's video attribute types don't include fetchPriority yet.
+        {...{ fetchPriority: 'high' }}
       >
         <source src="/hero.webm" type="video/webm" />
         <source src="/hero.mp4" type="video/mp4" />
