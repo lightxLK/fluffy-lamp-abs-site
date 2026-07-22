@@ -166,7 +166,15 @@ export function Navbar() {
         aria-label="Primary navigation"
       >
         <Link href="/" className="flex items-center group pt-2" aria-label="Anil Balaji Steel">
-          <img src="/abs-nav-footer-light.webp" alt="Anil Balaji Steel" className="h-14 w-auto" />
+          <img
+            src={
+              !scrolled && !open && pathname === '/'
+                ? '/abs-nav-footer1.webp'
+                : '/abs-nav-footer-light.webp'
+            }
+            alt="Anil Balaji Steel"
+            className="h-14 w-auto"
+          />
         </Link>
 
         <div
