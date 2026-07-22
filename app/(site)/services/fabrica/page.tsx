@@ -111,10 +111,10 @@ export default function FabricaPage() {
       <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
         <DrawSVGSection
           selector=".abs-path"
-          className="absolute inset-0 hidden lg:flex items-center justify-end opacity-25 pointer-events-none pr-8 translate-y-16"
+          className="absolute inset-0 hidden lg:flex items-center justify-end opacity-25 pointer-events-none pr-8"
           duration={30}
         >
-          <GatePergolaScene className="w-full max-w-xl h-auto" />
+          <GatePergolaScene className="w-full max-w-2xl h-auto" />
         </DrawSVGSection>
 
         <Container className="relative">

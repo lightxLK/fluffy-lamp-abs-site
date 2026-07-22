@@ -62,7 +62,9 @@ const ROOFING_BRANDS = [
   { name: 'Jindal India', src: '/Client Logo/jindal.webp' },
   { name: 'JSW', src: '/Client Logo/jsw.webp' },
   { name: 'Bhushan', src: '/Client Logo/bhushan.webp' },
-  { name: 'Tata Steel', src: '/Client Logo/tata-steel.webp' },
+  // Square source art, unlike the wide wordmarks above it, so it needs a
+  // taller box to read at a comparable size once object-contain shrinks it.
+  { name: 'Tata Steel', src: '/Client Logo/tata-steel.webp', boxClassName: 'h-24 w-24' },
 ];
 
 export default function SheetPage() {
@@ -189,7 +191,10 @@ export default function SheetPage() {
             <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
               {ROOFING_BRANDS.map((brand) =>
                 brand.src ? (
-                  <span key={brand.name} className="flex h-14 w-32 items-center justify-center">
+                  <span
+                    key={brand.name}
+                    className={`flex items-center justify-center ${brand.boxClassName ?? 'h-14 w-32'}`}
+                  >
                     <Image
                       src={brand.src}
                       alt={brand.name}

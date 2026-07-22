@@ -18,7 +18,7 @@ export function ProductCard({ product }: ProductCardProps) {
     () => {
       const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
       if (!paths?.length) return;
-      gsap.set(paths, { drawSVG: '100%' });
+      gsap.set(paths, { drawSVG: '100%', fillOpacity: 1 });
     },
     { scope: iconRef },
   );
@@ -26,17 +26,33 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleEnter = () => {
     const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
     if (!paths?.length) return;
-    gsap.fromTo(
-      paths,
-      { drawSVG: '0%' },
-      { drawSVG: '100%', duration: 2.5, ease: 'power1.inOut', stagger: 0.04, overwrite: true },
-    );
+    // Line draws first, then the fill fades in behind it. On icons rendered
+    // with fill="none" (the common case) the fillOpacity tween is a no-op.
+    gsap
+      .timeline({ overwrite: true })
+      .fromTo(
+        paths,
+        { drawSVG: '0%' },
+        { drawSVG: '100%', duration: 2.5, ease: 'power1.inOut', stagger: 0.04 },
+      )
+      .fromTo(
+        paths,
+        { fillOpacity: 0 },
+        { fillOpacity: 1, duration: 0.6, ease: 'power1.out' },
+        '-=0.3',
+      );
   };
 
   const handleLeave = () => {
     const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
     if (!paths?.length) return;
-    gsap.to(paths, { drawSVG: '100%', duration: 0.4, ease: 'power2.out', overwrite: true });
+    gsap.to(paths, {
+      drawSVG: '100%',
+      fillOpacity: 1,
+      duration: 0.4,
+      ease: 'power2.out',
+      overwrite: true,
+    });
   };
 
   return (

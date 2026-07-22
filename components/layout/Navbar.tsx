@@ -166,26 +166,7 @@ export function Navbar() {
         aria-label="Primary navigation"
       >
         <Link href="/" className="flex items-center group pt-2" aria-label="Anil Balaji Steel">
-          {(() => {
-            // Keep the white logo over the home hero video regardless of theme
-            const overHeroVideo = !scrolled && !open && pathname === '/';
-            return (
-              <>
-                <img
-                  src="/abs-nav-footer1.webp"
-                  alt="Anil Balaji Steel"
-                  className={overHeroVideo ? 'h-14 w-auto' : 'h-14 w-auto light:hidden'}
-                />
-                {!overHeroVideo && (
-                  <img
-                    src="/abs-nav-footer-light.webp"
-                    alt="Anil Balaji Steel"
-                    className="hidden light:block h-14 w-auto"
-                  />
-                )}
-              </>
-            );
-          })()}
+          <img src="/abs-nav-footer-light.webp" alt="Anil Balaji Steel" className="h-14 w-auto" />
         </Link>
 
         <div
