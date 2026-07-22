@@ -176,6 +176,11 @@
 
   body {
     @apply bg-bg-dark text-text-primary;
+    /* Safety net: several sections (marquees, pinned/translated tracks,
+       vw-based preloader transforms) can end up a few px wider than the
+       viewport on mobile. Clipping on body (not html) keeps position:sticky
+       working against the viewport for vertical stickiness. */
+    overflow-x: hidden;
   }
 }
 
