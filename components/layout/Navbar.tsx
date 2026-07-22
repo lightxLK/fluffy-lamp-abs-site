@@ -173,6 +173,8 @@ export function Navbar() {
                 : '/abs-nav-footer-light.webp'
             }
             alt="Anil Balaji Steel"
+            width={320}
+            height={226}
             className="h-14 w-auto"
           />
         </Link>
@@ -253,29 +255,29 @@ export function Navbar() {
               style={{ width: separatorWidth || undefined }}
               aria-hidden="true"
             />
-            <h3 className="text-text-muted text-base lg:text-lg font-semibold mb-1">
+            <p className="text-text-muted text-base lg:text-lg font-semibold mb-1">
               <a
                 href="mailto:viren@anilbalajisteel.com"
                 className="hover:text-abs-blue transition-colors"
               >
                 viren@anilbalajisteel.com
               </a>
-            </h3>
-            <h3 className="text-text-muted text-base lg:text-lg font-semibold mb-1">
+            </p>
+            <p className="text-text-muted text-base lg:text-lg font-semibold mb-1">
               <a href="tel:+919007211599" className="hover:text-abs-blue transition-colors">
                 +91 90072 11599
               </a>
-            </h3>
+            </p>
             <a
               href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-fit text-text-muted hover:text-text-primary transition-colors"
             >
-              <h6 className="text-base lg:text-lg leading-snug">Jalan Industrial Complex,</h6>
-              <h6 ref={addressLine2Ref} className="text-base lg:text-lg leading-snug">
+              <p className="text-base lg:text-lg leading-snug">Jalan Industrial Complex,</p>
+              <p ref={addressLine2Ref} className="text-base lg:text-lg leading-snug">
                 Gate No. 1, Domjur, NH6, Howrah, 711411
-              </h6>
+              </p>
             </a>
           </div>
         </div>

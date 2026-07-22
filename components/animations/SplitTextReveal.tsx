@@ -39,7 +39,10 @@ export function SplitTextReveal({ children, className, delay = 0 }: SplitTextRev
   );
 
   return (
-    <span ref={ref} className={className}>
+    // role="text" lets SplitText's auto aria-label (set on this span once it
+    // splits into chars/words) pass ARIA validation — a bare <span> has an
+    // implicit generic role, which doesn't permit aria-label on its own.
+    <span ref={ref} role="text" className={className}>
       {children}
     </span>
   );

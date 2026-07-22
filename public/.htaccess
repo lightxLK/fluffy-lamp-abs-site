@@ -1,0 +1,48 @@
+# Static export served directly by Apache (no Next.js server) — headers that
+# would normally come from next.config `headers()` have to live here instead.
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/ttf font/otf application/vnd.ms-fontobject
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/x-javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json application/xml application/rss+xml
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml font/ttf font/otf application/vnd.ms-fontobject
+</IfModule>
+
+# --- Caching ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # _next/static/* is content-hashed by Next.js — safe to cache for a year, immutably.
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(webp|png|jpe?g|svg|ico|avif)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(woff2?|ttf|otf|eot)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(webm|mp4)$">
+    ExpiresDefault "access plus 1 month"
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>

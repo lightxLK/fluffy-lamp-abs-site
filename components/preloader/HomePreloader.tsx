@@ -29,10 +29,12 @@ const SLOT_SCALE = 0.2;
 const SLOT_GAP = 40;
 
 const GREETINGS = ['নমস্কার', 'hello', 'नमस्ते', 'ନମସ୍କାର', 'নমস্কাৰ'];
-const GREETING_HOLDS = [0.45, 0.3, 0.3, 0.3, 0.45]; // per-language hold, seconds
-const GREETING_ENTER = 0.15;
-const GREETING_EXIT = 0.15;
-const GREETING_START = 0.08;
+// Kept short deliberately: this overlay is the page's LCP element, so every
+// second here is a second added directly to Largest Contentful Paint.
+const GREETING_HOLDS = [0.25, 0.18, 0.18, 0.18, 0.25]; // per-language hold, seconds
+const GREETING_ENTER = 0.1;
+const GREETING_EXIT = 0.1;
+const GREETING_START = 0.05;
 
 // Each word's enter-start time, derived from the previous word's full cycle.
 const GREETING_STARTS = GREETING_HOLDS.reduce<number[]>((starts, hold, i) => {
@@ -44,13 +46,13 @@ const GREETING_STARTS = GREETING_HOLDS.reduce<number[]>((starts, hold, i) => {
   return starts;
 }, []);
 
-const TL_DELAY = 0.15;
-const BAR_CLOSE_DURATION = 0.7;
-const CLIP_OPEN_DURATION = 0.6;
-const CLIP_OPEN_OFFSET = 0.45; // clip-path wipe starts this far into the bar-close tween
-const SLOT_CONVERGE_DURATION = 0.9;
-const SLOT_SPREAD_DURATION = 0.9;
-const HERO_SCALE_DURATION = 0.9;
+const TL_DELAY = 0.05;
+const BAR_CLOSE_DURATION = 0.45;
+const CLIP_OPEN_DURATION = 0.4;
+const CLIP_OPEN_OFFSET = 0.3; // clip-path wipe starts this far into the bar-close tween
+const SLOT_CONVERGE_DURATION = 0.6;
+const SLOT_SPREAD_DURATION = 0.6;
+const HERO_SCALE_DURATION = 0.6;
 
 // Cards reveal exactly when the last greeting finishes its hold, so the bar-fill
 // duration is derived from the greeting schedule rather than picked by hand.

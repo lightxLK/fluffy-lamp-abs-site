@@ -22,11 +22,15 @@ export function Footer() {
           <img
             src="/abs-nav-footer1.webp"
             alt="Anil Balaji Steel"
+            width={320}
+            height={226}
             className="h-20 w-auto light:hidden"
           />
           <img
             src="/abs-nav-footer-light.webp"
             alt="Anil Balaji Steel"
+            width={320}
+            height={226}
             className="hidden light:block h-20 w-auto"
           />
           <p className="text-text-muted text-sm mt-3">Anil Balaji Steel Pvt. Ltd.</p>

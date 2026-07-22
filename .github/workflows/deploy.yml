@@ -53,4 +53,3 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            hero.webm

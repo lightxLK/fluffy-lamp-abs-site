@@ -53,12 +53,16 @@ export function HeroSection() {
     <section className="relative z-[2] h-dvh min-h-[600px] bg-bg-dark overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src="/hero.webm"
+        poster="/hero-poster.webp"
         autoPlay
         muted
         loop
         playsInline
-      />
+        preload="none"
+      >
+        <source src="/hero.webm" type="video/webm" />
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
 
       <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />
 
@@ -120,17 +124,21 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1 z-10">
         {SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => scrollTo(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={[
-              'w-2 h-2 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-abs-blue',
-              i === selectedIndex ? 'bg-abs-blue' : 'bg-white/15 hover:bg-white/40',
-            ].join(' ')}
-          />
+            className="p-2.5 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-abs-blue rounded-full"
+          >
+            <span
+              className={[
+                'block w-2 h-2 rounded-full transition-colors duration-300',
+                i === selectedIndex ? 'bg-abs-blue' : 'bg-white/15 hover:bg-white/40',
+              ].join(' ')}
+            />
+          </button>
         ))}
       </div>
 

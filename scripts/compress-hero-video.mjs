@@ -1,5 +1,6 @@
 // Re-encodes public/hero-source.<ext> into public/hero.mp4 + public/hero.webm using ffmpeg-static.
-// Keeps source resolution (no downscale), strips audio, applies perceptual (CRF) compression.
+// Downscales to 1080p/24fps (the hero video is a darkened, overlaid background —
+// full 4K source resolution is wasted bytes) and strips audio.
 // Usage: node scripts/compress-hero-video.mjs <path-to-source-video>
 
 import { spawnSync } from 'node:child_process';
@@ -23,10 +24,12 @@ function run(args) {
   }
 }
 
-console.log('Encoding H.264 MP4 (CRF 24, no audio)...');
-run(['-y', '-i', source, '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '24', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', mp4Out]);
+const SCALE = 'scale=1920:-2,fps=24';
 
-console.log('Encoding VP9 WebM (CRF 32, no audio)...');
-run(['-y', '-i', source, '-an', '-c:v', 'libvpx-vp9', '-crf', '32', '-b:v', '0', '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', webmOut]);
+console.log('Encoding H.264 MP4 (1080p, CRF 30, no audio)...');
+run(['-y', '-i', source, '-an', '-vf', SCALE, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', mp4Out]);
+
+console.log('Encoding VP9 WebM (1080p, CRF 40, no audio)...');
+run(['-y', '-i', source, '-an', '-vf', SCALE, '-c:v', 'libvpx-vp9', '-crf', '40', '-b:v', '0', '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', webmOut]);
 
 console.log(`\nDone: ${mp4Out}\n      ${webmOut}`);
