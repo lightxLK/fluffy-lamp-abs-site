@@ -1,6 +1,7 @@
 import { GSAPProvider } from '@/components/animations/GSAPProvider';
 import { LenisProvider } from '@/components/animations/LenisProvider';
 import { Navbar } from '@/components/layout/Navbar';
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
 import { BackButton } from '@/components/layout/BackButton';
@@ -16,6 +17,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <ScrollMemoryTracker />
         <HomeReturnScroll />
         <Navbar />
+        <Breadcrumbs />
         <main>{children}</main>
         <Footer />
         <WhatsAppButton />
