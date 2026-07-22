@@ -36,7 +36,7 @@ export function Breadcrumbs() {
   const crumbs = buildCrumbs(pathname);
 
   return (
-    <nav aria-label="Breadcrumb" className="fixed top-24 inset-x-0 z-40 pointer-events-none">
+    <nav aria-label="Breadcrumb" className="absolute top-24 inset-x-0 z-40 pointer-events-none">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
         <ol className="flex flex-wrap items-center gap-2 py-3 pointer-events-auto">
           {crumbs.map((crumb, i) => (
