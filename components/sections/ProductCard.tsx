@@ -26,7 +26,9 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleEnter = () => {
     const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
     if (!paths?.length) return;
-    // Line draws first, then the fill snaps in the instant the draw finishes.
+    // Same crossfade handoff as the ABS logo scene: the fill starts fading
+    // in well before the line finishes drawing, reading as one continuous
+    // motion instead of a draw-then-fill sequence.
     gsap
       .timeline({ overwrite: true })
       .fromTo(
@@ -34,7 +36,7 @@ export function ProductCard({ product }: ProductCardProps) {
         { drawSVG: '0%', fillOpacity: 0 },
         { drawSVG: '100%', duration: 2.5, ease: 'power1.inOut', stagger: 0.04 },
       )
-      .set(paths, { fillOpacity: 1 });
+      .to(paths, { fillOpacity: 1, duration: 0.7, ease: 'power1.out' }, '-=1.5');
   };
 
   const handleLeave = () => {

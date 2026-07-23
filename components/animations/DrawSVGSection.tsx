@@ -31,8 +31,9 @@ export function DrawSVGSection({
         return;
       }
 
-      // Line draws first, then the fill snaps in the instant the draw
-      // finishes.
+      // Same crossfade handoff as the ABS logo scene: the fill starts
+      // fading in well before the line finishes drawing, so the two read
+      // as one continuous motion instead of a draw-then-fill sequence.
       gsap
         .timeline({
           scrollTrigger: {
@@ -46,7 +47,11 @@ export function DrawSVGSection({
           { drawSVG: '0%', fillOpacity: 0 },
           { drawSVG: '100%', duration, stagger: 0.08, ease: 'power2.inOut' },
         )
-        .set(paths, { fillOpacity: 1 });
+        .to(
+          paths,
+          { fillOpacity: 1, duration: duration * 0.25, ease: 'power1.out' },
+          `-=${duration * 0.54}`,
+        );
     },
     { scope: ref },
   );
