@@ -64,8 +64,10 @@ export function HeroSection() {
         // React's video attribute types don't include fetchPriority yet.
         {...{ fetchPriority: 'high' }}
       >
-        <source src="/hero.webm" type="video/webm" />
-        <source src="/hero.mp4" type="video/mp4" />
+        <source src="/hero-mobile.webm" type="video/webm" media="(max-width: 767px)" />
+        <source src="/hero-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
+        <source src="/hero-desktop.webm" type="video/webm" />
+        <source src="/hero-desktop.mp4" type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />
