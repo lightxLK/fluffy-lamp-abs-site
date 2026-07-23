@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { getLenis } from '@/lib/lenis';
+import { lockScroll, unlockScroll } from '@/lib/scrollLock';
 import { NavLinkSwap } from '@/components/layout/NavLinkSwap';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
@@ -89,8 +90,7 @@ export function Navbar() {
     tlRef.current?.kill();
     setOpen(true);
     getLenis()?.stop();
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+    lockScroll();
 
     const infoItems = infoColRef.current?.querySelectorAll('p, h3, h6, div') ?? [];
     gsap.set(infoItems, { opacity: 0, y: 100 });
@@ -122,8 +122,7 @@ export function Navbar() {
       onComplete: () => {
         setOpen(false);
         getLenis()?.start();
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
+        unlockScroll();
         gsap.set(pathRef.current, { attr: { d: OPEN_HIDDEN } });
         gsap.set(infoItems, { opacity: 0, y: 100 });
       },

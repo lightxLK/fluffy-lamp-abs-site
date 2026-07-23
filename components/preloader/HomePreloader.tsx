@@ -9,6 +9,7 @@ import {
   peekWasBackNavigation,
   wasPreloaderShownRecently,
 } from '@/lib/homeReturn';
+import { lockScroll, unlockScroll } from '@/lib/scrollLock';
 
 let easesRegistered = false;
 function ensureEases() {
@@ -115,7 +116,8 @@ export function HomePreloader({ children }: HomePreloaderProps) {
     }
 
     ensureEases();
-    document.body.style.overflow = 'hidden';
+    lockScroll();
+    let locked = true;
 
     const vw = window.innerWidth;
     const slotWidth = vw * SLOT_SCALE;
@@ -144,7 +146,8 @@ export function HomePreloader({ children }: HomePreloaderProps) {
     const tl = gsap.timeline({
       delay: TL_DELAY,
       onComplete: () => {
-        document.body.style.overflow = '';
+        locked = false;
+        unlockScroll();
         gsap.set(overlayRef.current, { display: 'none' });
         gsap.set([slots[0], slots[1], slots[3], slots[4]], { display: 'none' });
         gsap.set(slots[CENTER_SLOT], { clearProps: 'all' });
@@ -211,7 +214,10 @@ export function HomePreloader({ children }: HomePreloaderProps) {
 
     return () => {
       tl.kill();
-      document.body.style.overflow = '';
+      if (locked) {
+        locked = false;
+        unlockScroll();
+      }
     };
   }, []);
 

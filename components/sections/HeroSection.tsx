@@ -58,9 +58,10 @@ export function HeroSection() {
         muted
         loop
         playsInline
-        preload="none"
-        // This is the page's LCP element (via its poster) — bump its fetch
-        // priority so the poster doesn't queue behind lower-priority assets.
+        preload="auto"
+        // The poster (this page's LCP element) loads via the `poster` attribute
+        // regardless of `preload`, so eager preload here only helps autoplay
+        // start reliably — it doesn't compete with the poster fetch.
         // React's video attribute types don't include fetchPriority yet.
         {...{ fetchPriority: 'high' }}
       >
