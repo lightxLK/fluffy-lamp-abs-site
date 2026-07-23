@@ -63,7 +63,7 @@ export default function ApplicationsPage() {
         <ApplicationsScene className="w-full h-auto opacity-70" />
       </section>
 
-      <section className="bg-bg-mid py-24">
+      <section className="bg-bg-mid py-24 overflow-hidden">
         <Container>
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">

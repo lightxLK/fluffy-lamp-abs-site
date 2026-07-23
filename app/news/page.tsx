@@ -49,7 +49,7 @@ export default function NewsPage() {
         </Container>
       </section>
 
-      <section className="pb-24">
+      <section className="pb-24 overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {sorted.map((article) => (

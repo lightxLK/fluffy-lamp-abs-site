@@ -179,7 +179,7 @@ export default function FabricaPage() {
         </Container>
       </section>
 
-      <section className="bg-bg-dark py-24">
+      <section className="bg-bg-dark py-24 overflow-hidden">
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -232,7 +232,7 @@ export default function FabricaPage() {
         </Container>
       </section>
 
-      <section className="bg-bg-card border-y border-border-subtle py-24">
+      <section className="bg-bg-card border-y border-border-subtle py-24 overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {NEW_SECTIONS.map((item) => (

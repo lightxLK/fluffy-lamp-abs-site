@@ -28,7 +28,7 @@ const STRENGTHS = [
 
 export function CoreStrengths() {
   return (
-    <section className="relative bg-bg-mid py-24">
+    <section className="relative bg-bg-mid py-24 overflow-hidden">
       <Container>
         <div className="mb-14 text-center">
           <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

@@ -70,7 +70,7 @@ export default function BoardOfDirectorsPage() {
         </Container>
       </section>
 
-      <section className="bg-bg-dark py-24">
+      <section className="bg-bg-dark py-24 overflow-hidden">
         <Container>
           <div className="mb-14 text-center">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

@@ -98,7 +98,7 @@ export default function SheetPage() {
         }
       />
 
-      <section className="bg-bg-dark py-24">
+      <section className="bg-bg-dark py-24 overflow-hidden">
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
