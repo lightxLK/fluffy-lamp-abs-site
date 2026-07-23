@@ -37,7 +37,7 @@ const REASONS = [
 
 export function WhyABS() {
   return (
-    <section className="relative bg-bg-dark py-24" id="why-abs">
+    <section className="relative bg-bg-dark py-24 overflow-hidden" id="why-abs">
       <Container className="relative">
         <div className="mb-14 text-center">
           <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
