@@ -26,21 +26,17 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleEnter = () => {
     const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
     if (!paths?.length) return;
-    // Line draws first, then the fill fades in behind it. On icons rendered
-    // with fill="none" (the common case) the fillOpacity tween is a no-op.
+    // Line draws first, then the fill snaps in the instant the draw finishes.
+    // On icons rendered with fill="none" (the common case) the fillOpacity
+    // set is a no-op.
     gsap
       .timeline({ overwrite: true })
       .fromTo(
         paths,
-        { drawSVG: '0%' },
+        { drawSVG: '0%', fillOpacity: 0 },
         { drawSVG: '100%', duration: 2.5, ease: 'power1.inOut', stagger: 0.04 },
       )
-      .fromTo(
-        paths,
-        { fillOpacity: 0 },
-        { fillOpacity: 1, duration: 0.6, ease: 'power1.out' },
-        '-=0.3',
-      );
+      .set(paths, { fillOpacity: 1 });
   };
 
   const handleLeave = () => {

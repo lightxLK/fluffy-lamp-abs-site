@@ -2,73 +2,44 @@
 
 import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
-import { ABS_LOGO_MARK_PATH } from './absLogoMarkPath';
+import { ABS_LOGO_STROKE_PATH } from './absLogoStrokePath';
 
 interface ABSLogoMarkSceneProps {
   className?: string;
-  /** Loop the draw/undraw animation continuously instead of a one-shot scroll-triggered draw. */
-  loop?: boolean;
-  /** When `loop` is set, controls whether the looping animation is running. */
-  active?: boolean;
-  /** Draw once, triggered by `active` flipping true (instead of scroll), and reset when it flips false. */
-  once?: boolean;
-  /** Stroke color for the path. */
+  /** Stroke/fill color for the path. */
   stroke?: string;
 }
 
+const VIEWBOX = '-1 -1 1513 1070';
+
 export function ABSLogoMarkScene({
   className,
-  loop = false,
-  active = true,
-  once = false,
   stroke = 'var(--abs-line-art)',
 }: ABSLogoMarkSceneProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useGSAP(
     () => {
-      const path = pathRef.current;
-      if (!path) return;
+      if (!svgRef.current) return;
 
-      tweenRef.current?.kill();
-      tweenRef.current = null;
-
-      gsap.set(path, { drawSVG: '0%' });
+      // Same two-layer handoff as the network state maps: `.abs-sketch`
+      // (stroked, fill:none) plays the DrawSVG reveal, then `.abs-fill`
+      // (solid, no stroke) fades in for the resting frame — the line art is
+      // a thin drawn ribbon, so stroking it at rest would trace both edges.
+      const sketch = svgRef.current.querySelector<SVGGeometryElement>('.abs-sketch');
+      const fill = svgRef.current.querySelector<SVGGeometryElement>('.abs-fill');
+      if (!sketch || !fill) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(path, { drawSVG: loop && !active ? '0%' : '100%' });
+        gsap.set(sketch, { opacity: 0 });
+        gsap.set(fill, { opacity: 1 });
         return;
       }
 
-      if (loop) {
-        if (!active) return;
-        tweenRef.current = gsap.to(path, {
-          drawSVG: '100%',
-          duration: 1.4,
-          ease: 'power2.inOut',
-          repeat: -1,
-          yoyo: true,
-          repeatDelay: 0.15,
-        });
-        return;
-      }
+      gsap.set(sketch, { drawSVG: '0%', opacity: 1 });
+      gsap.set(fill, { opacity: 0 });
 
-      if (once) {
-        if (!active) return;
-        tweenRef.current = gsap.to(path, {
-          drawSVG: '100%',
-          duration: 2.8,
-          ease: 'power2.inOut',
-        });
-        return;
-      }
-
-      tweenRef.current = gsap.to(path, {
-        drawSVG: '100%',
-        duration: 4,
-        ease: 'power2.inOut',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: svgRef.current,
           start: 'top 80%',
@@ -76,21 +47,25 @@ export function ABSLogoMarkScene({
           once: true,
         },
       });
+      tl.to(sketch, { drawSVG: '100%', duration: 2.8, ease: 'power2.inOut' });
+      tl.set(fill, { opacity: 1 });
+      tl.set(sketch, { opacity: 0 });
     },
-    { scope: svgRef, dependencies: [loop, active, once] },
+    { scope: svgRef },
   );
 
   return (
-    <svg ref={svgRef} viewBox="0 0 2000 2000" aria-hidden="true" className={className}>
+    <svg ref={svgRef} viewBox={VIEWBOX} aria-hidden="true" className={className}>
       <path
-        ref={pathRef}
-        d={ABS_LOGO_MARK_PATH}
+        className="abs-sketch"
+        d={ABS_LOGO_STROKE_PATH}
         fill="none"
         stroke={stroke}
-        strokeWidth="6"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+      <path className="abs-fill" d={ABS_LOGO_STROKE_PATH} fill={stroke} />
     </svg>
   );
 }
