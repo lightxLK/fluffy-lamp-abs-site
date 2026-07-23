@@ -32,11 +32,13 @@ export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconPr
 
   if (variant === 'stroke') {
     return (
-      <svg viewBox={viewBox} fill="none" aria-hidden="true" className={className}>
+      <svg viewBox={viewBox} aria-hidden="true" className={className}>
         <path
           className="abs-path"
           d={path}
           transform={transform}
+          fill="currentColor"
+          fillOpacity="0"
           stroke="currentColor"
           strokeWidth="3"
           fillRule="evenodd"

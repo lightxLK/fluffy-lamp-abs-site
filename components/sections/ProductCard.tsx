@@ -27,8 +27,6 @@ export function ProductCard({ product }: ProductCardProps) {
     const paths = iconRef.current?.querySelectorAll<SVGGeometryElement>('.abs-path');
     if (!paths?.length) return;
     // Line draws first, then the fill snaps in the instant the draw finishes.
-    // On icons rendered with fill="none" (the common case) the fillOpacity
-    // set is a no-op.
     gsap
       .timeline({ overwrite: true })
       .fromTo(

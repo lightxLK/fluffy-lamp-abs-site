@@ -22,14 +22,17 @@ export function DrawSVGSection({
   useGSAP(
     () => {
       if (!ref.current) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       const paths = ref.current.querySelectorAll<SVGGeometryElement>(selector);
       if (!paths.length) return;
 
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(paths, { fillOpacity: 1 });
+        return;
+      }
+
       // Line draws first, then the fill snaps in the instant the draw
-      // finishes. Paths rendered with fill="none" (the common case) simply
-      // ignore the fillOpacity set.
+      // finishes.
       gsap
         .timeline({
           scrollTrigger: {
