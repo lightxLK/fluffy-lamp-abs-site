@@ -48,8 +48,8 @@ export function ABSLogoMarkScene({
         },
       });
       tl.to(sketch, { drawSVG: '100%', duration: 2.8, ease: 'power2.inOut' });
-      tl.set(fill, { opacity: 1 });
-      tl.set(sketch, { opacity: 0 });
+      tl.to(fill, { opacity: 1, duration: 0.7, ease: 'power1.out' }, '-=0.5');
+      tl.to(sketch, { opacity: 0, duration: 0.6, ease: 'power1.out' }, '<');
     },
     { scope: svgRef },
   );
