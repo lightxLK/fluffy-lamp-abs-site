@@ -1,4 +1,8 @@
-import { PRODUCT_ICON_PATHS, PRODUCT_ICON_VIEWBOX } from './productIconPaths';
+import {
+  PRODUCT_ICON_PATHS,
+  PRODUCT_ICON_VIEWBOX,
+  PRODUCT_ICON_TRANSFORM,
+} from './productIconPaths';
 import { CoilsIcon } from './CoilsIcon';
 
 interface ProductIconProps {
@@ -24,6 +28,7 @@ export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconPr
   const path = PRODUCT_ICON_PATHS[slug];
   if (!path) return null;
   const viewBox = PRODUCT_ICON_VIEWBOX[slug] ?? VIEWBOX;
+  const transform = PRODUCT_ICON_TRANSFORM[slug];
 
   if (variant === 'stroke') {
     return (
@@ -31,6 +36,7 @@ export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconPr
         <path
           className="abs-path"
           d={path}
+          transform={transform}
           stroke="currentColor"
           strokeWidth="3"
           fillRule="evenodd"
@@ -41,7 +47,7 @@ export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconPr
 
   return (
     <svg viewBox={viewBox} fill="currentColor" aria-hidden="true" className={className}>
-      <path d={path} fillRule="evenodd" />
+      <path d={path} transform={transform} fillRule="evenodd" />
     </svg>
   );
 }
