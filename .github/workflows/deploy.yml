@@ -46,6 +46,7 @@ jobs:
           username: u591788557.tsaxabs
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
+          timeout: 180000
           local-dir: ./out/
           server-dir: ./
           dangerous-clean-slate: false

@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   // can skip it; actual asset changes still bust cache via their own content
   // hash in the filename (e.g. chunks/*.js).
   generateBuildId: async () => 'abs-static-build',
-  allowedDevOrigins: ['192.168.29.110', '127.0.0.1', 'localhost'],
+  allowedDevOrigins: ['192.168.29.110', '192.168.1.18', '127.0.0.1', 'localhost'],
   images: {
     unoptimized: true,
     remotePatterns: [],
