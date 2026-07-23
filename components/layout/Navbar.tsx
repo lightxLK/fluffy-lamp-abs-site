@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
@@ -26,7 +26,18 @@ const OPEN_HIDDEN = `M${SVG_WIDTH},0 Q${SVG_CENTER_X},0 0,0 L0,0 L${SVG_WIDTH},0
 const OPEN_BULGE = `M${SVG_WIDTH},345 Q${SVG_CENTER_X},620 0,345 L0,0 L${SVG_WIDTH},0 Z`;
 const OPEN_FULL = `M${SVG_WIDTH},${SVG_HEIGHT} Q${SVG_CENTER_X},${SVG_HEIGHT} 0,${SVG_HEIGHT} L0,0 L${SVG_WIDTH},0 Z`;
 
+function subscribeToTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  return () => observer.disconnect();
+}
+
 export function Navbar() {
+  const lightTheme = useSyncExternalStore(
+    subscribeToTheme,
+    () => document.documentElement.classList.contains('light'),
+    () => false,
+  );
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [nearFooter, setNearFooter] = useState(false);
@@ -170,7 +181,9 @@ export function Navbar() {
             src={
               !scrolled && !open && pathname === '/'
                 ? '/abs-nav-footer1.webp'
-                : '/abs-nav-footer-light.webp'
+                : lightTheme
+                  ? '/abs-nav-footer-light.webp'
+                  : '/abs-nav-footer1.webp'
             }
             alt="Anil Balaji Steel"
             width={320}
