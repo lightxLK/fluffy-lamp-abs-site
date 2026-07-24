@@ -125,7 +125,7 @@ export default function PipesPage() {
                     alt={table.name}
                     fill
                     sizes="280px"
-                    className="object-contain p-4"
+                    className="object-contain p-4 drop-shadow-[0_16px_18px_rgba(0,0,0,0.45)]"
                   />
                 </div>
                 <div>

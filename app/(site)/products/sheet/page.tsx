@@ -179,7 +179,7 @@ export default function SheetPage() {
                 alt="ABS PPGL roofing sheet"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain p-6"
+                className="object-contain p-6 drop-shadow-[0_20px_24px_rgba(0,0,0,0.45)]"
               />
             </div>
           </div>
