@@ -6,8 +6,8 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 export function ContactStrip() {
   return (
     <section className="relative bg-abs-blue py-20 overflow-hidden" id="contact-strip">
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.35] pointer-events-none">
-        <ReadyToBuildScene className="w-full h-auto" />
+      <div className="absolute inset-x-0 bottom-0 md:inset-0 flex items-end md:items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden">
+        <ReadyToBuildScene className="w-[220%] max-w-none shrink-0 md:w-full md:max-w-full h-auto" />
       </div>
 
       <Container className="relative">
