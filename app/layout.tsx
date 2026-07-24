@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Albert_Sans } from 'next/font/google';
 import { EasterEgg } from '@/components/layout/EasterEgg';
+import { IS_PRODUCTION_SITE } from '@/lib/env';
 import './globals.css';
 
 const albertSans = Albert_Sans({
@@ -43,17 +44,25 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
-  },
+  // robots.txt (app/robots.ts) blocks crawling on non-production deploys, but
+  // a URL can still get indexed via an inbound link without being crawled —
+  // this meta tag is the layer that actually prevents that.
+  robots: IS_PRODUCTION_SITE
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+          'max-video-preview': -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+      },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
