@@ -7,12 +7,9 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 export function ContactStrip() {
   return (
     <section
-      className="relative bg-abs-blue overflow-hidden flex flex-col justify-start pt-16 pb-72 md:block md:py-20"
+      className="relative bg-abs-blue overflow-hidden flex flex-col justify-start pt-16 md:block md:py-20"
       id="contact-strip"
     >
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center opacity-[0.35] pointer-events-none overflow-hidden md:hidden">
-        <MobileContactStripScene className="w-full max-w-none h-auto" />
-      </div>
       <div className="absolute inset-0 hidden items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden md:flex">
         <ReadyToBuildScene className="w-full max-w-full h-auto" />
       </div>
@@ -45,6 +42,10 @@ export function ContactStrip() {
           </div>
         </div>
       </Container>
+
+      <div className="relative flex justify-center opacity-[0.35] pointer-events-none overflow-hidden md:hidden">
+        <MobileContactStripScene className="w-full max-w-none h-auto" />
+      </div>
     </section>
   );
 }
