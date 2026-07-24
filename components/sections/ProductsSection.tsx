@@ -20,6 +20,7 @@ export function ProductsSection() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {PRODUCTS.map((product) => {
+            const isShutter = product.slug === 'shutter';
             return (
               <HomeExitLink
                 key={product.slug}
@@ -32,13 +33,17 @@ export function ProductsSection() {
                   <DrawSVGSection
                     selector=".abs-path"
                     duration={20}
-                    className="absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6"
+                    className={
+                      isShutter
+                        ? 'absolute inset-0 flex items-start justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-2 pt-0'
+                        : 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6'
+                    }
                   >
                     <ProductIcon
                       slug={product.slug}
                       variant="stroke"
                       strokeWidth={7}
-                      className="w-full h-full"
+                      className={isShutter ? 'w-full h-[135%]' : 'w-full h-full'}
                     />
                   </DrawSVGSection>
 
