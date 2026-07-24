@@ -228,7 +228,7 @@ export function HomePreloader({ children }: HomePreloaderProps) {
       </noscript>
       <div
         ref={overlayRef}
-        className="home-preloader-overlay fixed inset-0 z-50 bg-bg-dark"
+        className="home-preloader-overlay fixed inset-0 z-[70] bg-bg-dark"
         style={{ clipPath: OVERLAY_COVERED }}
       >
         <div ref={barRef} className="absolute top-0 left-0 w-full h-1.5 bg-abs-blue" />

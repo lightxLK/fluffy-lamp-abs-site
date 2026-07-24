@@ -70,7 +70,7 @@ export function HeroSection() {
         <source src="/hero-desktop.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/35 pointer-events-none" aria-hidden="true" />
 
       <div
         className="absolute inset-0 pointer-events-none"

@@ -18,6 +18,43 @@ interface ParsedState {
 }
 
 const cache = new Map<string, ParsedState | null>();
+// Dedupes concurrent loads of the same slug across the prefetch-all pass and
+// the selected-state effect, so they never race to fetch/parse twice.
+const pending = new Map<string, Promise<void>>();
+
+function loadState(state: (typeof NETWORK_STATES)[number]): Promise<void> {
+  const cached = pending.get(state.slug);
+  if (cached) return cached;
+
+  const promise = (async () => {
+    if (typeof fetch === 'undefined') {
+      cache.set(state.slug, null);
+      return;
+    }
+    try {
+      const res = await fetch(state.svgSrc);
+      if (!res.ok) throw new Error('not found');
+      const text = await res.text();
+
+      const result = parseStateSvg(text);
+      if (!result) throw new Error('unparseable svg');
+
+      const dots = await sampleDotsViaRaster(
+        text,
+        result.viewBox,
+        dotCountFor(state.dealers),
+        state.slug,
+      );
+
+      cache.set(state.slug, { viewBox: result.viewBox, pathData: result.pathData, dots });
+    } catch {
+      cache.set(state.slug, null);
+    }
+  })().finally(() => pending.delete(state.slug));
+
+  pending.set(state.slug, promise);
+  return promise;
+}
 
 export function NetworkStateDetail({ selected, className }: NetworkStateDetailProps) {
   const state = NETWORK_STATES.find((s) => s.slug === selected) ?? NETWORK_STATES[0];
@@ -27,44 +64,30 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
 
   useEffect(() => {
     if (cache.has(state.slug)) return;
-
     let cancelled = false;
-
-    if (typeof fetch === 'undefined') {
-      Promise.resolve().then(() => {
-        cache.set(state.slug, null);
-        if (!cancelled) setVersion((v) => v + 1);
-      });
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    fetch(state.svgSrc)
-      .then((res) => (res.ok ? res.text() : Promise.reject(new Error('not found'))))
-      .then(async (text) => {
-        const result = parseStateSvg(text);
-        if (!result) throw new Error('unparseable svg');
-
-        const dots = await sampleDotsViaRaster(
-          text,
-          result.viewBox,
-          dotCountFor(state.dealers),
-          state.slug,
-        );
-
-        cache.set(state.slug, { viewBox: result.viewBox, pathData: result.pathData, dots });
-        if (!cancelled) setVersion((v) => v + 1);
-      })
-      .catch(() => {
-        cache.set(state.slug, null);
-        if (!cancelled) setVersion((v) => v + 1);
-      });
-
+    loadState(state).then(() => {
+      if (!cancelled) setVersion((v) => v + 1);
+    });
     return () => {
       cancelled = true;
     };
   }, [state.slug, state.svgSrc, state.dealers]);
+
+  // Warms every other state's SVG/dots in the background on first mount, so
+  // switching to a state not viewed yet doesn't blank to the loading skeleton.
+  useEffect(() => {
+    let cancelled = false;
+    NETWORK_STATES.forEach((s) => {
+      if (cache.has(s.slug)) return;
+      loadState(s).then(() => {
+        if (!cancelled && s.slug === selected) setVersion((v) => v + 1);
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const parsed = cache.get(state.slug);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -124,7 +147,7 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
           >
             {parsed.pathData.map((d, i) => (
               <path
-                key={`sketch-${i}`}
+                key={`${state.slug}-sketch-${i}`}
                 d={d}
                 className="abs-sketch"
                 fill="none"
@@ -134,11 +157,16 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
               />
             ))}
             {parsed.pathData.map((d, i) => (
-              <path key={`fill-${i}`} d={d} className="abs-fill" fill="var(--color-line-art)" />
+              <path
+                key={`${state.slug}-fill-${i}`}
+                d={d}
+                className="abs-fill"
+                fill="var(--color-line-art)"
+              />
             ))}
             {parsed.dots.map((pt, i) => (
               <circle
-                key={i}
+                key={`${state.slug}-dot-${i}`}
                 className="abs-dot"
                 cx={pt.x}
                 cy={pt.y}

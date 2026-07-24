@@ -8,11 +8,17 @@ interface ProductIconProps {
   slug: string;
   className?: string;
   variant?: 'fill' | 'stroke';
+  strokeWidth?: number;
 }
 
 const VIEWBOX = '0 0 384 384';
 
-export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconProps) {
+export function ProductIcon({
+  slug,
+  className,
+  variant = 'fill',
+  strokeWidth = 3,
+}: ProductIconProps) {
   const path = PRODUCT_ICON_PATHS[slug];
   if (!path) return null;
   const viewBox = PRODUCT_ICON_VIEWBOX[slug] ?? VIEWBOX;
@@ -28,7 +34,7 @@ export function ProductIcon({ slug, className, variant = 'fill' }: ProductIconPr
           fill="currentColor"
           fillOpacity="0"
           stroke="currentColor"
-          strokeWidth="3"
+          strokeWidth={strokeWidth}
           fillRule="evenodd"
         />
       </svg>

@@ -34,7 +34,12 @@ export function ProductsSection() {
                     duration={20}
                     className="absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6"
                   >
-                    <ProductIcon slug={product.slug} variant="stroke" className="w-full h-full" />
+                    <ProductIcon
+                      slug={product.slug}
+                      variant="stroke"
+                      strokeWidth={7}
+                      className="w-full h-full"
+                    />
                   </DrawSVGSection>
 
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/60 to-transparent p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
