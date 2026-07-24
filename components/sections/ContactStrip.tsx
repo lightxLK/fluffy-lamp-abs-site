@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { ReadyToBuildScene } from '@/components/svg/scenes/ReadyToBuildScene';
+import { MobileContactStripScene } from '@/components/svg/scenes/MobileContactStripScene';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function ContactStrip() {
@@ -11,13 +11,7 @@ export function ContactStrip() {
       id="contact-strip"
     >
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-center opacity-[0.35] pointer-events-none overflow-hidden md:hidden">
-        <Image
-          src="/mobile-contact-strip-art.svg"
-          alt=""
-          width={720}
-          height={290}
-          className="w-full max-w-none h-auto"
-        />
+        <MobileContactStripScene className="w-full max-w-none h-auto" />
       </div>
       <div className="absolute inset-0 hidden items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden md:flex">
         <ReadyToBuildScene className="w-full max-w-full h-auto" />
