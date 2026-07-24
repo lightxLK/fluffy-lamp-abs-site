@@ -65,14 +65,14 @@ export function ProductCard({ product }: ProductCardProps) {
           ref={iconRef}
           className={
             isShutter
-              ? 'absolute inset-0 flex items-start justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-4 pt-0'
+              ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-20'
               : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
           }
         >
           <ProductIcon
             slug={product.slug}
             variant="stroke"
-            className={isShutter ? 'w-full h-[135%]' : 'w-full h-full'}
+            className={isShutter ? 'w-[60%] h-[60%]' : 'w-full h-full'}
           />
         </div>
 
