@@ -12,13 +12,13 @@ export function SpecImageCard({ name, image, specs }: SpecImageCardProps) {
   return (
     <div className="relative h-full">
       <CardGlow className="h-full overflow-hidden">
-        <div className="relative z-[2] aspect-[4/3] bg-bg-dark">
+        <div className="relative z-[2] aspect-[4/3] bg-[#A5B8C2]">
           <Image
             src={image}
             alt={name}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-contain p-4 drop-shadow-[0_16px_18px_rgba(0,0,0,0.45)]"
+            className="object-contain p-4"
           />
         </div>
         <div className="p-8">

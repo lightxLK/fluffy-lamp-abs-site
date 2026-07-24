@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { ReadyToBuildScene } from '@/components/svg/scenes/ReadyToBuildScene';
@@ -9,8 +10,17 @@ export function ContactStrip() {
       className="relative bg-abs-blue overflow-hidden flex flex-col justify-start pt-16 pb-72 md:block md:py-20"
       id="contact-strip"
     >
-      <div className="absolute inset-x-0 bottom-0 md:inset-0 flex items-end md:items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden">
-        <ReadyToBuildScene className="w-[220%] max-w-none shrink-0 md:w-full md:max-w-full h-auto" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center opacity-[0.35] pointer-events-none overflow-hidden md:hidden">
+        <Image
+          src="/mobile-contact-strip-art.svg"
+          alt=""
+          width={720}
+          height={290}
+          className="w-full max-w-none h-auto"
+        />
+      </div>
+      <div className="absolute inset-0 hidden items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden md:flex">
+        <ReadyToBuildScene className="w-full max-w-full h-auto" />
       </div>
 
       <Container className="relative">

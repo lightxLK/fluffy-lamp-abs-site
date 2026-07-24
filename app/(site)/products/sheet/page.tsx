@@ -173,13 +173,13 @@ export default function SheetPage() {
                 Request a Quote
               </Link>
             </div>
-            <div className="relative z-[2] aspect-[4/3] bg-bg-dark border border-border-subtle overflow-hidden">
+            <div className="relative z-[2] aspect-[4/3] bg-[#A5B8C2] border border-border-subtle overflow-hidden">
               <Image
                 src="/products/sheet/roofing-sheet.webp"
                 alt="ABS PPGL roofing sheet"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain p-6 drop-shadow-[0_20px_24px_rgba(0,0,0,0.45)]"
+                className="object-contain p-6"
               />
             </div>
           </div>

@@ -119,13 +119,13 @@ export default function PipesPage() {
           <div className="space-y-14">
             {PIPE_TABLES.map((table) => (
               <div key={table.name} className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-                <div className="relative z-[2] aspect-[4/3] bg-bg-card border border-border-subtle overflow-hidden">
+                <div className="relative z-[2] aspect-[4/3] bg-[#A5B8C2] border border-border-subtle overflow-hidden">
                   <Image
                     src={table.image}
                     alt={table.name}
                     fill
                     sizes="280px"
-                    className="object-contain p-4 drop-shadow-[0_16px_18px_rgba(0,0,0,0.45)]"
+                    className="object-contain p-4"
                   />
                 </div>
                 <div>
