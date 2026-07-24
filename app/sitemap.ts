@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { readdirSync } from 'fs';
-import { join } from 'path';
+import { NEWS } from '@/data/news';
 
 export const dynamic = 'force-static';
 
@@ -27,25 +26,20 @@ const STATIC_ROUTES = [
   '/news',
 ];
 
-function getNewsSlugs(): string[] {
-  try {
-    const newsDir = join(process.cwd(), 'content', 'news');
-    return readdirSync(newsDir)
-      .filter((f) => f.endsWith('.mdx'))
-      .map((f) => `/news/${f.replace('.mdx', '')}`);
-  } catch {
-    return [];
-  }
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const newsRoutes = getNewsSlugs();
-  const allRoutes = [...STATIC_ROUTES, ...newsRoutes];
-
-  return allRoutes.map((route) => ({
+  const staticEntries = STATIC_ROUTES.map((route) => ({
     url: `${BASE_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: route === '/' ? 1 : 0.8,
   }));
+
+  const newsEntries = NEWS.map((article) => ({
+    url: `${BASE_URL}/news/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...newsEntries];
 }
