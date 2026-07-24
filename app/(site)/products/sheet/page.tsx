@@ -173,7 +173,7 @@ export default function SheetPage() {
                 Request a Quote
               </Link>
             </div>
-            <div className="relative z-[2] aspect-[4/3] bg-[#A5B8C2] border border-border-subtle overflow-hidden">
+            <div className="relative aspect-[4/3]">
               <Image
                 src="/products/sheet/roofing-sheet.webp"
                 alt="ABS PPGL roofing sheet"
