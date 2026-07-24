@@ -6,7 +6,6 @@ import Autoplay from 'embla-carousel-autoplay';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
-import GlassSurface from '@/components/ui/GlassSurface';
 
 const SLIDES = [
   {
@@ -103,27 +102,12 @@ export function HeroSection() {
                   >
                     {slide.cta.label}
                   </Link>
-                  <GlassSurface
-                    width="fit-content"
-                    height="fit-content"
-                    borderRadius={2}
-                    borderWidth={0.1}
-                    brightness={70}
-                    opacity={0.6}
-                    blur={6}
-                    displace={2}
-                    backgroundOpacity={0.08}
-                    saturation={1.4}
-                    distortionScale={-60}
-                    className="group"
+                  <Link
+                    href="/contact"
+                    className="relative z-[2] inline-flex items-center gap-2 border border-white/30 bg-white/10 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:border-white hover:bg-white/20 transition-colors duration-300"
                   >
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 text-[#999999] px-8 py-4 text-sm font-semibold uppercase tracking-widest group-hover:text-white transition-colors duration-300"
-                    >
-                      Contact Us
-                    </Link>
-                  </GlassSurface>
+                    Contact Us
+                  </Link>
                 </div>
               </Container>
             </div>
