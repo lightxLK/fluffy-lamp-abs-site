@@ -11,6 +11,18 @@
   AddType font/woff2 .woff2
 </IfModule>
 
+# next/og's static export writes the opengraph-image/twitter-image route
+# output with no file extension — Next's own content-type manifest for
+# them only ships to Vercel, not this out/ folder, so without ForceType
+# Apache falls back to its DefaultType (text/plain or none) and social
+# crawlers (Facebook/X/LinkedIn/WhatsApp) fail to render the share image.
+<Files "opengraph-image">
+  ForceType image/png
+</Files>
+<Files "twitter-image">
+  ForceType image/png
+</Files>
+
 # --- Compression ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
@@ -54,6 +66,14 @@
   <FilesMatch "\.html$">
     ExpiresDefault "access plus 0 seconds"
     Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # Extensionless OG/Twitter image routes (see ForceType block above) —
+  # cached briefly rather than immutably since a redesign won't change
+  # the URL the way a content-hashed asset would.
+  <FilesMatch "^(opengraph-image|twitter-image)$">
+    ExpiresDefault "access plus 1 day"
+    Header set Cache-Control "public, max-age=86400"
   </FilesMatch>
 </IfModule>
 
