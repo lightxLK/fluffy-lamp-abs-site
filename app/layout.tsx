@@ -11,15 +11,48 @@ const albertSans = Albert_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.anilbalajisteel.com'),
   title: {
     default: "Anil Balaji Steel | Eastern India's Most Trusted Steel",
     template: '%s | Anil Balaji Steel',
   },
   description:
     'Rolling shutter profiles, pipes, roofing sheets, coils and fabrication. 50 years of excellence. Howrah, West Bengal.',
+  keywords: [
+    'Anil Balaji Steel',
+    'rolling shutter profiles',
+    'steel pipes',
+    'roofing sheets',
+    'steel coils',
+    'steel fabrication',
+    'steel manufacturer Howrah',
+    'steel manufacturer West Bengal',
+    'Eastern India steel',
+  ],
+  authors: [{ name: 'Anil Balaji Steel Pvt. Ltd.' }],
+  creator: 'Anil Balaji Steel Pvt. Ltd.',
+  publisher: 'Anil Balaji Steel Pvt. Ltd.',
+  formatDetection: { email: false, address: false, telephone: false },
+  applicationName: 'Anil Balaji Steel',
+  category: 'Manufacturing',
   openGraph: {
     siteName: 'Anil Balaji Steel',
     type: 'website',
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 
