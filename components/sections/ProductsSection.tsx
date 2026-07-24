@@ -35,7 +35,7 @@ export function ProductsSection() {
                     duration={20}
                     className={
                       isShutter
-                        ? 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6 pb-14'
+                        ? 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6 pb-12'
                         : 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6'
                     }
                   >
@@ -43,7 +43,7 @@ export function ProductsSection() {
                       slug={product.slug}
                       variant="stroke"
                       strokeWidth={7}
-                      className={isShutter ? 'w-[65%] h-[65%]' : 'w-full h-full'}
+                      className={isShutter ? 'w-[80%] h-[80%]' : 'w-full h-full'}
                     />
                   </DrawSVGSection>
 
