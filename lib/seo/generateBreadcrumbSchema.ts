@@ -1,7 +1,6 @@
 import { getBreadcrumbLabel } from '@/lib/breadcrumbs';
 import { NEWS } from '@/data/news';
-
-const BASE_URL = 'https://www.anilbalajisteel.com';
+import { SITE_URL as BASE_URL } from '@/lib/env';
 
 export function generateBreadcrumbSchema(path: string) {
   const segments = path.split('/').filter(Boolean);

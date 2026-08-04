@@ -6,30 +6,30 @@ Key facts: founded 1972, headquartered at Jalan Industrial Complex, Domjur, NH6,
 
 ## Company
 
-- [About](https://www.anilbalajisteel.com/about): Company history, 50+ years of manufacturing, facilities and capacity.
-- [Board of Directors](https://www.anilbalajisteel.com/about/board-of-directors): Leadership team.
-- [Contact](https://www.anilbalajisteel.com/contact): Address, phone, email, and enquiry form.
-- [Careers](https://www.anilbalajisteel.com/careers): Open roles and company values.
-- [News](https://www.anilbalajisteel.com/news): Company milestones and announcements.
+- [About](https://anilbalajisteel.com/about): Company history, 50+ years of manufacturing, facilities and capacity.
+- [Board of Directors](https://anilbalajisteel.com/about/board-of-directors): Leadership team.
+- [Contact](https://anilbalajisteel.com/contact): Address, phone, email, and enquiry form.
+- [Careers](https://anilbalajisteel.com/careers): Open roles and company values.
+- [News](https://anilbalajisteel.com/news): Company milestones and announcements.
 
 ## Products
 
-- [Products overview](https://www.anilbalajisteel.com/products): Full catalog across all product lines.
-- [Rolling Shutter Gates — ABS ShaktiShutter™](https://www.anilbalajisteel.com/products/shutter): Flat, super flat, diamond, gear, and perforated profiles in GI, CR, and PPGL. 15,000 MT/year.
-- [Shutter Accessories — ABS TotalShutter™](https://www.anilbalajisteel.com/products/shutter-accessories): Clips, pulleys, gear boxes, shutter motors and full installation hardware. 20,000 MT/year.
-- [Pipes — ABS FlowPipe™](https://www.anilbalajisteel.com/products/pipes): Round, square, and RHS pipes in MS, GP, and stainless steel. 6,000 MT/year.
-- [Roofing Sheets — ABS BlueShield™](https://www.anilbalajisteel.com/products/sheet): PPGL roofing sheets for industrial and residential use. 6,000 MT/year.
-- [Plain Sheets — ABS EdgeCut™](https://www.anilbalajisteel.com/products/plain-sheets): GI, CR, HR, and PPGL sheets cut to length. 24,000 MT/year.
-- [Slit & Pencil Coils — ABS CoreLine™](https://www.anilbalajisteel.com/products/coils): Precision slit coil and pencil coil to tight tolerance. 30,000 MT/year.
-- [Cutting & Grinding Wheels](https://www.anilbalajisteel.com/products/abrasives): Abrasive wheels for cutting and finishing work.
+- [Products overview](https://anilbalajisteel.com/products): Full catalog across all product lines.
+- [Rolling Shutter Gates — ABS ShaktiShutter™](https://anilbalajisteel.com/products/shutter): Flat, super flat, diamond, gear, and perforated profiles in GI, CR, and PPGL. 15,000 MT/year.
+- [Shutter Accessories — ABS TotalShutter™](https://anilbalajisteel.com/products/shutter-accessories): Clips, pulleys, gear boxes, shutter motors and full installation hardware. 20,000 MT/year.
+- [Pipes — ABS FlowPipe™](https://anilbalajisteel.com/products/pipes): Round, square, and RHS pipes in MS, GP, and stainless steel. 6,000 MT/year.
+- [Roofing Sheets — ABS BlueShield™](https://anilbalajisteel.com/products/sheet): PPGL roofing sheets for industrial and residential use. 6,000 MT/year.
+- [Plain Sheets — ABS EdgeCut™](https://anilbalajisteel.com/products/plain-sheets): GI, CR, HR, and PPGL sheets cut to length. 24,000 MT/year.
+- [Slit & Pencil Coils — ABS CoreLine™](https://anilbalajisteel.com/products/coils): Precision slit coil and pencil coil to tight tolerance. 30,000 MT/year.
+- [Cutting & Grinding Wheels](https://anilbalajisteel.com/products/abrasives): Abrasive wheels for cutting and finishing work.
 
 ## Services
 
-- [Services overview](https://www.anilbalajisteel.com/services): Loading, cutting, slitting, and fabrication services.
-- [Applications](https://www.anilbalajisteel.com/services/applications): Industry use cases for ABS products.
-- [ABS Fabrica](https://www.anilbalajisteel.com/services/fabrica): Custom B2C fabrication — automated gates, terrace gardens, architectural facades.
+- [Services overview](https://anilbalajisteel.com/services): Loading, cutting, slitting, and fabrication services.
+- [Applications](https://anilbalajisteel.com/services/applications): Industry use cases for ABS products.
+- [ABS Fabrica](https://anilbalajisteel.com/services/fabrica): Custom B2C fabrication — automated gates, terrace gardens, architectural facades.
 
 ## Optional
 
-- [Terms](https://www.anilbalajisteel.com/terms): Terms of service.
-- [Sitemap](https://www.anilbalajisteel.com/sitemap.xml): Full machine-readable list of indexable pages.
+- [Terms](https://anilbalajisteel.com/terms): Terms of service.
+- [Sitemap](https://anilbalajisteel.com/sitemap.xml): Full machine-readable list of indexable pages.

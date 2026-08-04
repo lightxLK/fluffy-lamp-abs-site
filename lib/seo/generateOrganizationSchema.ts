@@ -1,9 +1,11 @@
+import { SITE_URL } from '@/lib/env';
+
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Anil Balaji Steel Pvt. Ltd.',
-    url: 'https://www.anilbalajisteel.com',
+    url: SITE_URL,
     telephone: '+919007211599',
     email: 'viren@anilbalajisteel.com',
     foundingDate: '1972',

@@ -1,9 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { NEWS } from '@/data/news';
+import { SITE_URL as BASE_URL } from '@/lib/env';
 
 export const dynamic = 'force-static';
-
-const BASE_URL = 'https://www.anilbalajisteel.com';
 
 const STATIC_ROUTES = [
   '/',

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-
-const BASE_URL = 'https://www.anilbalajisteel.com';
+import { SITE_URL as BASE_URL } from '@/lib/env';
 
 interface GenerateMetadataParams {
   title: string;

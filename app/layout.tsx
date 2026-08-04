@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Albert_Sans } from 'next/font/google';
 import { EasterEgg } from '@/components/layout/EasterEgg';
-import { IS_PRODUCTION_SITE } from '@/lib/env';
+import { IS_PRODUCTION_SITE, SITE_URL } from '@/lib/env';
 import './globals.css';
 
 const albertSans = Albert_Sans({
@@ -12,7 +12,7 @@ const albertSans = Albert_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.anilbalajisteel.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Anil Balaji Steel | Eastern India's Most Trusted Steel",
     template: '%s | Anil Balaji Steel',
