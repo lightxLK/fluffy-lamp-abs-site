@@ -28,7 +28,7 @@ export const NEWS: NewsArticle[] = [
       'At Anil Balaji Steel, we believe that true strength lies not only in what we build, but also in how we give back. "Steel That Cares" was born from this philosophy, using our core expertise in steel fabrication for social good.',
       'Our first project under this initiative is a stray dog shelter, modular, weather-protected shelters using PPGL roofing and fabricated structures, blending compassion with engineering to offer dignity and protection to those who cannot ask for it.',
       'Alongside this, ABS sponsors education support for children of our employees, with mentorship and career counselling to help them choose the right path.',
-      'From 2026 onward, "Steel That Cares" will expand into a structured CSR programme covering animal welfare, skill-building workshops, and local community upliftment around our Junglepur facility, delivered in partnership with NGOs and schools.',
+      'From 2026 onward, "Steel That Cares" will expand into a structured CSR programme covering animal welfare, skill-building workshops, and local community upliftment around our Jangalpur facility, delivered in partnership with NGOs and schools.',
     ],
   },
   {
@@ -36,9 +36,9 @@ export const NEWS: NewsArticle[] = [
     title: 'PET Strapping Automation Integrated With Roll-Forming Lines',
     date: '2025-02-10',
     excerpt:
-      'Streamlining operations and reducing manual dependency across our Junglepur manufacturing facility.',
+      'Streamlining operations and reducing manual dependency across our Jangalpur manufacturing facility.',
     body: [
-      'ABS has successfully integrated PET strapping automation with its roll-forming lines at the 60,000 sq. ft. Junglepur facility, streamlining operations and reducing manual dependency across the production floor.',
+      'ABS has successfully integrated PET strapping automation with its roll-forming lines at the 60,000 sq. ft. Jangalpur facility, streamlining operations and reducing manual dependency across the production floor.',
       'This builds on the modernization programme begun in 2018, which brought advanced roll-forming and slitting lines to the facility, and follows the 2020 rollout of digital dashboards and ERP integration across the dealer network.',
       'Combined with IoT-ready monitoring for coil handling, the upgrade supports ABS’s Industry 4.0 roadmap targeted for 2028.',
     ],

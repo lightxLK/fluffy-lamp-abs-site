@@ -28,7 +28,7 @@ export const TIMELINE: TimelineEntry[] = [
   {
     year: '2018',
     title: 'Modernization & Expansion',
-    body: 'Advanced roll-forming and slitting lines arrive at the Junglepur facility, lifting production capacity and setting ABS on its automation path.',
+    body: 'Advanced roll-forming and slitting lines arrive at the Jangalpur facility, lifting production capacity and setting ABS on its automation path.',
   },
   {
     year: '2020',

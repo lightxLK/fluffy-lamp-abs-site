@@ -17,7 +17,7 @@ const STRENGTHS = [
   {
     number: '03',
     title: 'Engineering',
-    body: "A 60,000 sq. ft. Junglepur facility with integrated automation, positioned near Kolkata's industrial corridor for fast port, highway, and rail access.",
+    body: "A 60,000 sq. ft. Jangalpur facility with integrated automation, positioned near Kolkata's industrial corridor for fast port, highway, and rail access.",
   },
   {
     number: '04',
