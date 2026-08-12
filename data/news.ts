@@ -12,7 +12,7 @@ export const NEWS: NewsArticle[] = [
     title: 'ABS Fabrica Launches, Led by Ms. Komal Agarwal',
     date: '2024-03-01',
     excerpt:
-      'A landmark diversification from B2B to B2C; ABS Fabrica brings turnkey automated gates, terrace gardens, and architectural facade design directly to consumers.',
+      'A landmark diversification from B2B to B2C, ABS Fabrica brings turnkey automated gates, terrace gardens, and architectural facade design directly to consumers.',
     body: [
       "Steel built Anil Balaji Steel's first fifty years. Our next chapter is inviting steel into people's homes, translating ABS's material strength into custom gates, grills, facades, and landscape installations.",
       'The launch marks ABS’s first move from business-to-business steel supply into direct business-to-consumer design and installation. The vertical is targeting 200 projects over its first five years, at an average project value of 20 lakh rupees, with a focus on turnkey automated gates, terrace gardens, and architectural facade design.',
@@ -48,7 +48,7 @@ export const NEWS: NewsArticle[] = [
     title: 'Vision 2030: Scaling Responsibly, Serving the Nation',
     date: '2025-08-01',
     excerpt:
-      'Capacity expansion, smart manufacturing, and a 500+ dealer network; ABS charts its path to an SME IPO listing by 2030.',
+      'Capacity expansion, smart manufacturing, and a 500+ dealer network, ABS charts its path to an SME IPO listing by 2030.',
     body: [
       'The future of Anil Balaji Steel is anchored in purpose, to scale responsibly, innovate consistently, and serve the nation with strength and sincerity. Our ultimate milestone: listing on the SME IPO platform by 2030.',
       'The roadmap includes enhancing production by 50%+ across all lines by 2027, integrating Industry 4.0 technologies by 2028, and expanding the dealer network to 500+ partners by 2029.',

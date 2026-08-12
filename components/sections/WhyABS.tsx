@@ -6,12 +6,12 @@ const REASONS = [
   {
     number: '01',
     title: '50-Year Track Record',
-    body: 'Half a century of delivering steel on spec, on time, and on trust; ask any builder in Bengal.',
+    body: 'Half a century of delivering steel on spec, on time, and on trust, ask any builder in Bengal.',
   },
   {
     number: '02',
     title: 'Direct Mill Sourcing',
-    body: 'We source prime material from SAIL, Tata, JSW, and Jindal; no middleman, no grade uncertainty.',
+    body: 'We source prime material from SAIL, Tata, JSW, and Jindal, no middleman, no grade uncertainty.',
   },
   {
     number: '03',
@@ -26,7 +26,7 @@ const REASONS = [
   {
     number: '05',
     title: 'Full Product Range',
-    body: 'Profiles, pipes, sheets, coils, sheds; one supplier for your entire project bill of materials.',
+    body: 'Profiles, pipes, sheets, coils, sheds, one supplier for your entire project bill of materials.',
   },
   {
     number: '06',

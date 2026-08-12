@@ -9,7 +9,7 @@ export interface Director {
 export const TRIBUTE_DIRECTOR: Director = {
   name: 'Lt. Ved Prakash Agarwal',
   role: '"Vedu Babu Hansiwala", Founder',
-  bio: 'In 1972, a young man left Hansi, Haryana with nothing but determination and a few annas in his pocket. He arrived in Kolkata seeking not wealth, but dignity, walking miles across the city, often working days without food. Through grit he earned trust first as a broker, then a trader, and eventually as the owner of the very re-rolling mill where he once laboured. From walking barefoot to owning mills; his story is the steel in our name and the strength in our hearts.',
+  bio: 'In 1972, a young man left Hansi, Haryana with nothing but determination and a few annas in his pocket. He arrived in Kolkata seeking not wealth, but dignity, walking miles across the city, often working days without food. Through grit he earned trust first as a broker, then a trader, and eventually as the owner of the very re-rolling mill where he once laboured. From walking barefoot to owning mills, his story is the steel in our name and the strength in our hearts.',
   image: '/board-members/Late Ved Prakash Agarwal.webp',
 };
 
@@ -48,7 +48,7 @@ export const DIRECTORS: Director[] = [
     name: 'Ms. Komal Agarwal',
     role: 'Head of Marketing & Data Analysis · Fabrica',
     bio: 'The creative and analytical heartbeat of ABS, leading marketing strategy and heading the Fabrica division, turnkey automated gates and architectural steelwork.',
-    quote: 'At ABS, we don’t just sell steel; we communicate strength, trust, and purpose.',
+    quote: 'At ABS, we don’t just sell steel, we communicate strength, trust, and purpose.',
     image: '/board-members/Komal Agarwal.webp',
   },
 ];
