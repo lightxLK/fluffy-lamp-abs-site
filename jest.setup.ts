@@ -33,3 +33,10 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
   disconnect() {}
 };
+
+// jsdom does not implement window.scrollTo — real GSAP ScrollTrigger
+// instances with `pin: true` (e.g. StairsScrollScene, AboutTimeline) call it
+// during init/refresh. Without this stub jsdom logs a noisy "Not
+// implemented" console.error on every such test even though nothing is
+// actually broken.
+window.scrollTo = (() => {}) as unknown as typeof window.scrollTo;
