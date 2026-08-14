@@ -19,6 +19,42 @@ export const metadata: Metadata = genMeta({
   path: '/services/fabrica',
 });
 
+const WHY_CHOOSE = [
+  {
+    name: 'Design-Led Fabrication',
+    description:
+      'Steel solutions thoughtfully designed to complement architecture, not overpower it.',
+  },
+  {
+    name: 'Precision & Craftsmanship',
+    description:
+      'Every detail is carefully planned, measured, and executed with consistency and control.',
+  },
+  {
+    name: 'Custom-Built Solutions',
+    description:
+      'Tailored fabrication across styles, scales, and applications, residential to industrial.',
+  },
+];
+
+const GATE_OVERVIEW = [
+  {
+    name: 'Motorised Systems',
+    description:
+      'Automated gates with robust motors, safety features, and backup power, delivering smooth operation, security, and long-term reliability.',
+  },
+  {
+    name: 'Manual Solutions',
+    description:
+      'Precision-balanced manual gates crafted in premium materials, offering effortless movement, durability, and timeless architectural elegance.',
+  },
+  {
+    name: 'Custom Designs',
+    description:
+      'Bespoke gate solutions in sliding, swing, or foldable formats, tailored with custom patterns, lighting, and smart locking systems.',
+  },
+];
+
 const GATE_SYSTEMS = [
   {
     name: 'Automatic Sliding Gate',
@@ -64,12 +100,14 @@ const NEW_SECTIONS = [
     description:
       'Conceived as architectural elements, not just functional safeguards. Drawing from refined European styles, Victorian ornamentation, Art Deco geometry, and contemporary laser-cut patterns, each design is crafted with precision and restraint, enhancing facades, balconies, and interiors.',
     features: [
-      'Victorian ornamentation',
-      'Art Deco geometry',
-      'Contemporary laser-cut',
-      'Classic European',
-      'Minimal linear',
-      'Balcony railings',
+      'Classical and pavilion',
+      'Rustic and country',
+      'Victorian and ornamental',
+      'Asian and oriental',
+      'Modernist and minimal',
+      'Islamic and Mughal',
+      'Tropical and resort',
+      'Industrial and contemporary hybrid',
     ],
   },
   {
@@ -77,12 +115,52 @@ const NEW_SECTIONS = [
     description:
       'Cabanas that turn open spaces into intimate, well-designed sanctuaries for relaxed outdoor living. Gazebos that frame open-air moments with structure, shade, and enduring design.',
     features: [],
+    groups: [
+      {
+        label: 'Gazebo',
+        items: [
+          'Classical and pavilion',
+          'Victorian and ornamental',
+          'Asian and oriental',
+          'Islamic and Mughal',
+          'Rustic and country',
+          'Modernist and minimal',
+          'Tropical and resort',
+        ],
+      },
+      {
+        label: 'Cabana',
+        items: [
+          'Classical poolside',
+          'Tropical and beach',
+          'Modern minimal',
+          'Pavilion-style',
+          'Canopy and fabric',
+          'Pergola-style',
+          'Enclosed and private',
+        ],
+      },
+    ],
   },
   {
     name: 'Interior Landscaping',
     description:
       'ABS Fabrica approaches interior environments through architectural planning and integrated fabrication. From structural steel elements and custom planters to railings, curated greenery, and lighting, every component is precisely fabricated and purposefully placed for spaces that balance aesthetics and everyday living.',
     features: [],
+    highlights: [
+      {
+        label: 'Architectural First',
+        desc: 'Design-led planning that integrates greenery seamlessly within structure, circulation, and spatial intent.',
+      },
+      {
+        label: 'Fabrication Precision',
+        desc: 'Custom steel elements crafted to support plants, lighting, and long-term durability.',
+      },
+      {
+        label: 'End-to-End Harmony',
+        desc: 'From concept to installation, every detail aligned for balanced, finished interior environments.',
+      },
+    ],
   },
 ];
 
@@ -139,15 +217,21 @@ export default function FabricaPage() {
           </p>
           <div className="flex gap-10 flex-wrap">
             <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>
+              <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
               <p className="text-text-muted text-xs uppercase tracking-widest">
-                Projected Projects · 5 Years
+                Years in Business · Five Decades of Steel Manufacturing
               </p>
             </div>
             <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">₹20L</p>
+              <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>
               <p className="text-text-muted text-xs uppercase tracking-widest">
-                Average Project Value
+                Projects Delivered · Satisfied Clients
+              </p>
+            </div>
+            <div>
+              <p className="text-text-primary font-bold text-4xl leading-none mb-1">100%</p>
+              <p className="text-text-muted text-xs uppercase tracking-widest">
+                Quality Guarantee · Commitment to Excellence
               </p>
             </div>
           </div>
@@ -156,6 +240,21 @@ export default function FabricaPage() {
 
       <section className="bg-bg-card border-y border-border-subtle py-24">
         <Container>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              Why Choose ABS Fabrica
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
+            {WHY_CHOOSE.map((item) => (
+              <div key={item.name} className="border-t border-border-subtle pt-6">
+                <h3 className="text-text-primary font-semibold text-base mb-2">{item.name}</h3>
+                <p className="text-text-muted text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
               How Fabrica Works
@@ -195,6 +294,18 @@ export default function FabricaPage() {
             for effortless, durable movement, and fully custom sliding, swing, or foldable designs
             with bespoke patterns, lighting, and smart locking.
           </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
+            {GATE_OVERVIEW.map((gate) => (
+              <article key={gate.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{gate.description}</p>
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
             {GATE_SYSTEMS.map((gate) => (
@@ -249,6 +360,37 @@ export default function FabricaPage() {
                         >
                           {f}
                         </span>
+                      ))}
+                    </div>
+                  )}
+                  {'groups' in item && item.groups && (
+                    <div className="space-y-4">
+                      {item.groups.map((group) => (
+                        <div key={group.label}>
+                          <p className="text-text-primary text-xs font-semibold uppercase tracking-widest mb-2">
+                            {group.label}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {group.items.map((f) => (
+                              <span
+                                key={f}
+                                className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
+                              >
+                                {f}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {'highlights' in item && item.highlights && (
+                    <div className="space-y-3">
+                      {item.highlights.map((h) => (
+                        <div key={h.label}>
+                          <p className="text-text-primary text-sm font-semibold mb-1">{h.label}</p>
+                          <p className="text-text-muted text-xs leading-relaxed">{h.desc}</p>
+                        </div>
                       ))}
                     </div>
                   )}
