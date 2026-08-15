@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
-import { ModelSceneController } from '@/components/sections/ModelSceneController';
+import { CinematicModelScene } from '@/components/sections/CinematicModelScene';
 import { ReducedMotionModelFallback } from '@/components/sections/ReducedMotionModelFallback';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
@@ -174,7 +174,7 @@ export default function FabricaExperiencePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <ModelSceneController />
+      <CinematicModelScene />
 
       <div className="relative z-10 pointer-events-none">
         <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
