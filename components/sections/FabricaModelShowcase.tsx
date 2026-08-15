@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { Container } from '@/components/layout/Container';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -17,15 +14,6 @@ const LANDSCAPE_MODELS = [
   { name: 'Street Lamp', asset: MODEL_ASSETS.streetLamp },
 ];
 
-function hasWebGL(): boolean {
-  try {
-    const canvas = document.createElement('canvas');
-    return !!canvas.getContext('webgl2');
-  } catch {
-    return false;
-  }
-}
-
 function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: string } }) {
   return (
     <article className="relative h-full">
@@ -35,7 +23,7 @@ function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: s
           src={asset.src}
           alt={asset.alt}
           className="w-full h-72"
-          autoRotate={false}
+          autoRotate
           cameraControls
         />
       </CardGlow>
@@ -44,17 +32,7 @@ function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: s
   );
 }
 
-export function ReducedMotionModelFallback() {
-  const [showFallback, setShowFallback] = useState(false);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window.matchMedia/canvas, unavailable during SSR
-    setShowFallback(reducedMotion || !hasWebGL());
-  }, []);
-
-  if (!showFallback) return null;
-
+export function FabricaModelShowcase() {
   return (
     <>
       <section className="bg-bg-dark py-14">
