@@ -1,7 +1,6 @@
 'use client';
 
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import type { PointerEvent as ReactPointerEvent } from 'react';
 import type { ModelViewerElement } from '@google/model-viewer';
 import { cn } from '@/lib/utils';
 
@@ -30,29 +29,6 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
 ) {
   const [loaded, setLoaded] = useState(false);
   const elementRef = useRef<ModelViewerElement | null>(null);
-  const glowRef = useRef<HTMLDivElement | null>(null);
-
-  // model-viewer's WebGL scene isn't scriptable from the outside for a real
-  // dynamic light — this fakes the "cursor as a light source" effect with a
-  // pointer-tracked radial highlight, blended over the canvas. Same trick
-  // BorderGlow already uses elsewhere for its cursor-tracked border glow.
-  // Written straight to the DOM via a ref rather than React state, so
-  // tracking the pointer never triggers a re-render.
-  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const glow = glowRef.current;
-    if (!glow) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-    glow.style.setProperty('--glow-x', `${x}%`);
-    glow.style.setProperty('--glow-y', `${y}%`);
-    glow.style.opacity = '1';
-  };
-
-  const handlePointerLeave = () => {
-    const glow = glowRef.current;
-    if (glow) glow.style.opacity = '0';
-  };
 
   // @google/model-viewer throws `HTMLElement is not defined` if its module
   // scope ever runs on the server (confirmed under Node directly) — this
@@ -87,11 +63,7 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
   }, [fadeOnLoad]);
 
   return (
-    <div
-      className={cn('relative overflow-hidden bg-bg-card', className)}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-    >
+    <div className={cn('relative overflow-hidden bg-bg-card', className)}>
       <model-viewer
         ref={(node: ModelViewerElement | null) => {
           elementRef.current = node;
@@ -106,23 +78,13 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
         camera-controls={cameraControls}
         auto-rotate={autoRotate}
         auto-rotate-delay="0"
-        rotation-per-second="90deg"
+        rotation-per-second="45deg"
         style={{
           width: '100%',
           height: '100%',
           backgroundColor: 'transparent',
           opacity: fadeOnLoad && loaded ? 1 : 0,
           transition: 'opacity 0.6s ease',
-        }}
-      />
-      <div
-        ref={glowRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200"
-        style={{
-          background:
-            'radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255,255,255,0.35), transparent 55%)',
-          mixBlendMode: 'screen',
         }}
       />
     </div>
