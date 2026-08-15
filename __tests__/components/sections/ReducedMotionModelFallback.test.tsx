@@ -24,6 +24,15 @@ describe('ReducedMotionModelFallback', () => {
 
   it('renders nothing when reduced motion is not preferred', () => {
     mockNormalMotion();
+    // This test's contract is specifically "normal motion, WebGL present" —
+    // jsdom's canvas.getContext returns null by default (WebGL isn't
+    // implemented), which would otherwise make hasWebGL() false and
+    // incorrectly trip the fallback's no-WebGL branch too.
+    jest
+      .spyOn(HTMLCanvasElement.prototype, 'getContext')
+      .mockImplementation((type: string) =>
+        type === 'webgl2' ? ({} as unknown as WebGL2RenderingContext) : null,
+      );
     const { container } = render(<ReducedMotionModelFallback />);
     expect(container.firstChild).toBeNull();
   });
@@ -50,5 +59,43 @@ describe('ReducedMotionModelFallback', () => {
       expect(viewer).not.toHaveAttribute('auto-rotate');
       expect(viewer).toHaveAttribute('camera-controls');
     }
+  });
+
+  it('renders the fallback when motion is normal but WebGL2 is unavailable', () => {
+    jest.spyOn(window, 'matchMedia').mockReturnValue({
+      matches: false,
+      media: '',
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    } as unknown as MediaQueryList);
+    jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
+
+    const { container } = render(<ReducedMotionModelFallback />);
+    expect(container.querySelectorAll('model-viewer').length).toBe(6);
+  });
+
+  it('renders nothing when motion is normal and WebGL2 is available', () => {
+    jest.spyOn(window, 'matchMedia').mockReturnValue({
+      matches: false,
+      media: '',
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    } as unknown as MediaQueryList);
+    jest
+      .spyOn(HTMLCanvasElement.prototype, 'getContext')
+      .mockImplementation((type: string) =>
+        type === 'webgl2' ? ({} as unknown as WebGL2RenderingContext) : null,
+      );
+
+    const { container } = render(<ReducedMotionModelFallback />);
+    expect(container.firstChild).toBeNull();
   });
 });

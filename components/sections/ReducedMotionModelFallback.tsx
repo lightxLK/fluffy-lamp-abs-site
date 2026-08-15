@@ -17,6 +17,15 @@ const LANDSCAPE_MODELS = [
   { name: 'Street Lamp', asset: MODEL_ASSETS.streetLamp },
 ];
 
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!canvas.getContext('webgl2');
+  } catch {
+    return false;
+  }
+}
+
 function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: string } }) {
   return (
     <article className="relative h-full">
@@ -39,8 +48,9 @@ export function ReducedMotionModelFallback() {
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window.matchMedia, unavailable during SSR
-    setShowFallback(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window.matchMedia/canvas, unavailable during SSR
+    setShowFallback(reducedMotion || !hasWebGL());
   }, []);
 
   if (!showFallback) return null;
