@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import BorderGlow from './BorderGlow';
+import { cn } from '@/lib/utils';
 
 interface CardGlowProps {
   children: ReactNode;
@@ -10,7 +11,7 @@ interface CardGlowProps {
 export function CardGlow({ children, className = '', borderRadius = 10 }: CardGlowProps) {
   return (
     <BorderGlow
-      className={className}
+      className={cn('pointer-events-auto', className)}
       backgroundColor="var(--abs-bg-card)"
       borderRadius={borderRadius}
       glowColor="230 90 45"
