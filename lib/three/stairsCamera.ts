@@ -10,12 +10,11 @@ export interface CameraTargetBaseline {
   zM: number;
 }
 
-export const STAIRS_ROTATION_DEG = 720;
-// Initial visual-tuning value, not a derived constant – adjust after
-// browser verification against the actual round-stairs.glb model's real
-// scale (Task 7's manual verification), without changing the semantics
-// above (theta rotates, target y descends, everything else fixed).
-export const STAIRS_DESCENT_M = 1.5;
+// Camera now choreographs across the entire page's scroll length (not one
+// section), so both values scale up from the original single-section
+// tuning to stay visually meaningful over that much longer scroll range.
+export const STAIRS_ROTATION_DEG = 1440;
+export const STAIRS_DESCENT_M = 4;
 
 export function radToDeg(rad: number): number {
   return (rad * 180) / Math.PI;

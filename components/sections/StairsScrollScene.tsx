@@ -3,7 +3,6 @@
 import { useRef } from 'react';
 import type { ModelViewerElement } from '@google/model-viewer';
 import { useGSAP, ScrollTrigger } from '@/lib/gsap';
-import { Container } from '@/components/layout/Container';
 import { ModelViewer } from '@/components/ui/ModelViewer';
 import {
   computeStairsCameraOrbit,
@@ -13,21 +12,25 @@ import {
   type CameraTargetBaseline,
 } from '@/lib/three/stairsCamera';
 
+/**
+ * Fixed, whole-page scroll companion (not a pinned section): the round
+ * staircase sits in a fixed right-side layer for the entire document
+ * height, and its camera orbit/descent is driven by scroll progress across
+ * the whole page (`document.documentElement`, top to bottom) rather than a
+ * single section's local scroll range.
+ */
 export function StairsScrollScene() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const modelRef = useRef<ModelViewerElement | null>(null);
 
   useGSAP(
     () => {
-      const section = sectionRef.current;
       const el = modelRef.current;
-      if (!section || !el) return;
+      if (!el) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        // Setting this before the custom element upgrades is safe:
-        // model-viewer is built on Lit's `ReactiveElement`, which queues
-        // and correctly applies instance properties set before upgrade —
-        // this isn't a plain-DOM-property assignment that could be lost.
+        // See ModelViewer.tsx / the note on Lit's `ReactiveElement` for why
+        // setting this before the custom element upgrades is safe.
         el.cameraControls = true;
         return;
       }
@@ -46,38 +49,28 @@ export function StairsScrollScene() {
         const orbit = el.getCameraOrbit();
         const target = el.getCameraTarget();
         orbitBaseline = {
-          // Rounded to 6 decimal places: radians->degrees->radians round
-          // trips through model-viewer's own getCameraOrbit() can leave
-          // sub-millidegree float noise (e.g. 75.00000000000001) that has
-          // no visual effect but would otherwise leak into the rendered
-          // cameraOrbit string.
           thetaDeg: Math.round(radToDeg(orbit.theta) * 1e6) / 1e6,
           phiDeg: Math.round(radToDeg(orbit.phi) * 1e6) / 1e6,
           radiusM: orbit.radius,
         };
         targetBaseline = { xM: target.x, yM: target.y, zM: target.z };
-        // If the model finishes loading after the trigger already exists
-        // (e.g. the visitor scrolled past before the GLB arrived and isn't
-        // scrolling anymore), don't leave the camera at its default until
-        // the next scroll event — sync it to the current progress now.
         if (trigger) applyCamera(trigger.progress);
       };
 
-      // Same race as ModelViewer's own loading state: `el.loaded` can
-      // already be true by the time this effect runs, in which case a
-      // `load` listener attached now would never fire. Capture immediately
-      // if it's already loaded; otherwise wait for the event.
       if (el.loaded) {
         captureBaseline();
       } else {
         el.addEventListener('load', captureBaseline);
       }
 
+      // Trigger spans the whole document, not this component's own DOM
+      // node — `document.documentElement` covers exactly the page's total
+      // scrollable height, so progress 0→1 matches the entire page's
+      // scroll length and speed rather than one section's local span.
       trigger = ScrollTrigger.create({
-        trigger: section,
+        trigger: document.documentElement,
         start: 'top top',
-        end: '+=150%',
-        pin: true,
+        end: 'bottom bottom',
         scrub: true,
         onUpdate: (self) => applyCamera(self.progress),
       });
@@ -87,29 +80,22 @@ export function StairsScrollScene() {
         trigger?.kill();
       };
     },
-    { scope: sectionRef },
+    { scope: wrapperRef },
   );
 
   return (
-    <section ref={sectionRef} className="bg-bg-dark py-24 overflow-hidden">
-      <Container>
-        <div className="mb-14 max-w-2xl">
-          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-            Crafted in Detail
-          </p>
-          <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-            Every step, considered
-          </h2>
-        </div>
-        <ModelViewer
-          ref={modelRef}
-          src="/models/round-stairs.glb"
-          alt="Round staircase fabricated by ABS Fabrica"
-          className="w-full h-[70vh]"
-          autoRotate={false}
-          cameraControls={false}
-        />
-      </Container>
-    </section>
+    <div
+      ref={wrapperRef}
+      className="hidden lg:block fixed top-0 right-0 h-screen w-[38vw] z-0 pointer-events-none"
+    >
+      <ModelViewer
+        ref={modelRef}
+        src="/models/round-stairs.glb"
+        alt="Round staircase fabricated by ABS Fabrica"
+        className="w-full h-full"
+        autoRotate={false}
+        cameraControls={false}
+      />
+    </div>
   );
 }

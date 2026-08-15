@@ -193,11 +193,13 @@ export default function FabricaPage() {
   const breadcrumbSchema = generateBreadcrumbSchema('/services/fabrica');
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen lg:pr-[38vw]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+
+      <StairsScrollScene />
 
       <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
         <DrawSVGSection
@@ -460,7 +462,18 @@ export default function FabricaPage() {
         </Container>
       </section>
 
-      <StairsScrollScene />
+      <section className="bg-bg-dark py-24 overflow-hidden">
+        <Container>
+          <div className="max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              Crafted in Detail
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+              Every step, considered
+            </h2>
+          </div>
+        </Container>
+      </section>
 
       <section className="bg-bg-mid py-24">
         <Container>

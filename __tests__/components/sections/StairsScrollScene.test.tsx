@@ -40,7 +40,11 @@ describe('StairsScrollScene', () => {
   it('drives cameraOrbit/cameraTarget from the captured baseline through the real ScrollTrigger.onUpdate callback', () => {
     mockNormalMotion();
 
-    let capturedConfig: { onUpdate?: (self: { progress: number }) => void } | null = null;
+    let capturedConfig: {
+      trigger?: unknown;
+      end?: string;
+      onUpdate?: (self: { progress: number }) => void;
+    } | null = null;
     const createSpy = jest
       .spyOn(ScrollTrigger, 'create')
       // Partial mock of ScrollTrigger's config/instance shapes — the real
@@ -72,6 +76,10 @@ describe('StairsScrollScene', () => {
     fireEvent(el as unknown as Element, new Event('load'));
 
     expect(capturedConfig).not.toBeNull();
+    // The trigger spans the whole document (not a local section), so
+    // progress matches the entire page's scroll length, not one section's.
+    expect(capturedConfig!.trigger).toBe(document.documentElement);
+    expect(capturedConfig!.end).toBe('bottom bottom');
     capturedConfig!.onUpdate!({ progress: 0.5 });
 
     expect(el.cameraOrbit).toBe(`${10 + STAIRS_ROTATION_DEG * 0.5}deg 75deg 2.5m`);
