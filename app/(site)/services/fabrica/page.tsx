@@ -81,6 +81,16 @@ const GATE_SYSTEMS = [
   },
 ];
 
+const GATE_MODELS = [
+  { name: 'Ornamental Gate', model: '/models/gate.glb' },
+  { name: 'Modern Gate', model: '/models/gate-v2.glb' },
+];
+
+const LANDSCAPE_MODELS = [
+  { name: 'Structural Stairs', model: '/models/stairs.glb' },
+  { name: 'Street Lamp', model: '/models/street-lamp.glb' },
+];
+
 const NEW_SECTIONS = [
   {
     name: 'Facades',
@@ -328,6 +338,24 @@ export default function FabricaPage() {
             ))}
           </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
+            {GATE_MODELS.map((gate) => (
+              <article key={gate.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
+                  <ModelViewer
+                    src={gate.model}
+                    alt={`${gate.name} 3D model`}
+                    className="w-full h-72"
+                    autoRotate
+                    cameraControls
+                  />
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
+
           <div className="border-t border-border-subtle pt-8">
             <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
               Common Features Across All Systems
@@ -406,6 +434,24 @@ export default function FabricaPage() {
                       ))}
                     </div>
                   )}
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            {LANDSCAPE_MODELS.map((item) => (
+              <article key={item.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{item.name}</h3>
+                  <ModelViewer
+                    src={item.model}
+                    alt={`${item.name} 3D model`}
+                    className="w-full h-72"
+                    autoRotate
+                    cameraControls
+                  />
                 </CardGlow>
                 <CardNuts />
               </article>
