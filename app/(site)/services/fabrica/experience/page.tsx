@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ...genMeta({
     title: 'ABS Fabrica Experience | Interactive Steel Fabrication Showcase',
     description:
-      'An interactive, scroll-driven walkthrough of ABS Fabrica gates, facades, window grills, and interior landscaping in 3D.',
+      'An interactive 3D showcase of ABS Fabrica gates, facades, window grills, and interior landscaping.',
     path: '/services/fabrica',
   }),
   robots: { index: false, follow: true },
