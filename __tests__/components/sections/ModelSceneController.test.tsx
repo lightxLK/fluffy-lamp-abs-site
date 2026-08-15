@@ -571,4 +571,134 @@ describe('ModelSceneController', () => {
     document.body.removeChild(gateSection);
     document.body.removeChild(gazeboSection);
   });
+
+  it('enables camera-controls on fine-pointer devices and disables it on coarse-pointer devices', () => {
+    const fineSpy = jest.spyOn(window, 'matchMedia').mockImplementation(
+      (query: string) =>
+        ({
+          matches: query.includes('pointer: fine'),
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        }) as unknown as MediaQueryList,
+    );
+
+    const { container } = render(<ModelSceneController />);
+    const section = document.createElement('section');
+    section.id = 'crafted-in-detail';
+    act(() => {
+      fireIntersection(section, true, 400);
+    });
+
+    // Test what the component actually renders (the attribute React puts
+    // on the custom element), not a DOM property jsdom never populates
+    // since the real `@google/model-viewer` custom element is mocked out —
+    // same pattern the existing ModelViewer.test.tsx already uses.
+    expect(container.querySelector('model-viewer')).toHaveAttribute('camera-controls');
+
+    fineSpy.mockRestore();
+  });
+
+  it('disables camera-controls on coarse-pointer devices', () => {
+    const coarseSpy = jest.spyOn(window, 'matchMedia').mockImplementation(
+      (query: string) =>
+        ({
+          matches: query.includes('pointer: coarse'),
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        }) as unknown as MediaQueryList,
+    );
+
+    const { container } = render(<ModelSceneController />);
+    const section = document.createElement('section');
+    section.id = 'crafted-in-detail';
+    act(() => {
+      fireIntersection(section, true, 400);
+    });
+
+    expect(container.querySelector('model-viewer')).not.toHaveAttribute('camera-controls');
+
+    coarseSpy.mockRestore();
+  });
+
+  it('suppresses scroll-choreography writes while the user is mid-drag, and resumes after the idle timer', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+
+    let capturedOnUpdate: ((self: { progress: number }) => void) | null = null;
+    const createSpy = jest
+      .spyOn(ScrollTrigger, 'create')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation((config: any) => {
+        if ((config.trigger as HTMLElement).id === 'gate-systems')
+          capturedOnUpdate = config.onUpdate;
+        return { kill: jest.fn(), progress: 0 } as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+      });
+
+    const { container } = render(<ModelSceneController />);
+    const gateSection = document.createElement('section');
+    gateSection.id = 'gate-systems';
+    document.body.appendChild(gateSection);
+
+    act(() => {
+      fireIntersection(gateSection, true, 400);
+    });
+    const incomingGateEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as {
+      getCameraOrbit: () => { theta: number; phi: number; radius: number };
+      getCameraTarget: () => { x: number; y: number; z: number };
+    };
+    incomingGateEl.getCameraOrbit = () => ({
+      theta: (10 * Math.PI) / 180,
+      phi: (75 * Math.PI) / 180,
+      radius: 2.5,
+    });
+    incomingGateEl.getCameraTarget = () => ({ x: 0, y: 1.2, z: 0 });
+    act(() => {
+      fireEvent(incomingGateEl as unknown as Element, new Event('load'));
+    });
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+
+    const el = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as Element;
+    expect(el).not.toBeNull();
+
+    act(() => {
+      capturedOnUpdate!({ progress: 0.1 });
+    });
+    const orbitBeforeDrag = (el as unknown as { cameraOrbit: string }).cameraOrbit;
+
+    act(() => {
+      fireEvent(el, new CustomEvent('camera-change', { detail: { source: 'user-interaction' } }));
+    });
+    act(() => {
+      capturedOnUpdate!({ progress: 0.2 });
+    });
+    expect((el as unknown as { cameraOrbit: string }).cameraOrbit).toBe(orbitBeforeDrag);
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    act(() => {
+      capturedOnUpdate!({ progress: 0.3 });
+    });
+    expect((el as unknown as { cameraOrbit: string }).cameraOrbit).not.toBe(orbitBeforeDrag);
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+    document.body.removeChild(gateSection);
+  });
 });

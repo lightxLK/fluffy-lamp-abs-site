@@ -114,6 +114,7 @@ function tryCaptureBaseline(el: ModelViewerElement): CameraBaseline | null {
 
 export function ModelSceneController() {
   const [enabled, setEnabled] = useState(false);
+  const [cameraControls, setCameraControls] = useState(false);
   const [currentModel, setCurrentModel] = useState<ModelAsset | null>(null);
   const [incomingModel, setIncomingModel] = useState<ModelAsset | null>(null);
   // Mirrors of currentElRef/incomingElRef held in state, not just refs, so
@@ -131,7 +132,11 @@ export function ModelSceneController() {
   const baselinesRef = useRef<Map<string, CameraBaseline>>(new Map());
   const activeSectionIdRef = useRef<string | null>(null);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
-  const userInteractionActiveRef = useRef(false); // wired up fully in Task 6; declared here so this task's ScrollTrigger effect can already reference it
+  // Set true on a manual-drag camera-change event, cleared 1s after the
+  // last such event fires idle (see handleCameraChange/idleTimerRef below).
+  // Read by the ScrollTrigger onUpdate handler to suppress scroll-driven
+  // camera writes while the user is mid-drag.
+  const userInteractionActiveRef = useRef(false);
   // Keyed by sectionId; guards trigger creation below against re-creating a
   // trigger that already exists (see that effect's comment for why creation
   // can be attempted more than once).
@@ -151,10 +156,27 @@ export function ModelSceneController() {
   // actually returns at the call site: a `number`.
   const fadeTimerRef = useRef<number | null>(null);
   const cameraTweenRef = useRef<gsap.core.Tween | null>(null);
+  // See fadeTimerRef's comment above for why this is `number | null` rather
+  // than `ReturnType<typeof window.setTimeout>`: this project's tsconfig
+  // pulls in both "dom" lib and @types/node, so that type resolves to
+  // `NodeJS.Timeout`, which doesn't match what `window.setTimeout(...)`
+  // (the DOM overload, correct here) actually returns — a `number`.
+  const idleTimerRef = useRef<number | null>(null);
+
+  const handleCameraChange = useCallback((event: Event) => {
+    const detail = (event as CustomEvent<{ source?: string }>).detail;
+    if (detail?.source !== 'user-interaction') return;
+    userInteractionActiveRef.current = true;
+    if (idleTimerRef.current) window.clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = window.setTimeout(() => {
+      userInteractionActiveRef.current = false;
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- feature detection needs window.matchMedia, unavailable during SSR
     setEnabled(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    setCameraControls(window.matchMedia('(pointer: fine)').matches);
   }, []);
 
   // Unmount-only cleanup (empty deps — this must NOT re-run on every
@@ -185,6 +207,25 @@ export function ModelSceneController() {
     incomingElRef.current = el;
     setIncomingEl(el);
   }, []);
+
+  // Attaches/detaches the camera-change listener as the current/incoming
+  // element identity actually changes. An effect keyed on this state (rather
+  // than an inline addEventListener inside the stable ref callbacks above)
+  // gives an explicit, guaranteed cleanup function — the ref callbacks are
+  // deliberately stable so React doesn't re-invoke them on unrelated
+  // renders, which means they'd have no reliable point to remove a listener
+  // added inline.
+  useEffect(() => {
+    if (!currentEl) return;
+    currentEl.addEventListener('camera-change', handleCameraChange);
+    return () => currentEl.removeEventListener('camera-change', handleCameraChange);
+  }, [currentEl, handleCameraChange]);
+
+  useEffect(() => {
+    if (!incomingEl) return;
+    incomingEl.addEventListener('camera-change', handleCameraChange);
+    return () => incomingEl.removeEventListener('camera-change', handleCameraChange);
+  }, [incomingEl, handleCameraChange]);
 
   // Kills whatever fade timer/camera tween is currently in flight, if any.
   // `transitionId` alone only stops a *stale completion* from committing
@@ -495,7 +536,7 @@ export function ModelSceneController() {
           alt={currentModel.alt}
           className="w-full h-full bg-transparent"
           autoRotate={!(activeSectionId !== null && SCROLL_DRIVEN_SECTION_IDS.has(activeSectionId))}
-          cameraControls={false}
+          cameraControls={cameraControls}
         />
       )}
       {incomingModel && (
@@ -506,7 +547,7 @@ export function ModelSceneController() {
           alt={incomingModel.alt}
           className="absolute inset-0 w-full h-full bg-transparent"
           autoRotate={false}
-          cameraControls={false}
+          cameraControls={cameraControls}
         />
       )}
     </div>
