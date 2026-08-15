@@ -216,12 +216,6 @@ export default function FabricaPage() {
             to detail, aesthetic balance, and structural integrity, so the final result belongs
             within the architecture it serves.
           </p>
-          <Link
-            href="/services/fabrica/experience"
-            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 mb-10"
-          >
-            Explore the Interactive Experience
-          </Link>
           <div className="flex gap-10 flex-wrap">
             <div>
               <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
@@ -405,6 +399,15 @@ export default function FabricaPage() {
                 <CardNuts />
               </article>
             ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/services/fabrica/experience"
+              className="inline-flex items-center gap-2 bg-abs-blue text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            >
+              Explore the Interactive Experience
+            </Link>
           </div>
         </Container>
       </section>
