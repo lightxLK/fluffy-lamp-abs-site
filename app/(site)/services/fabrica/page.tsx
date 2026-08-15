@@ -9,6 +9,7 @@ import { ContactStrip } from '@/components/sections/ContactStrip';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
+import { ModelViewer } from '@/components/ui/ModelViewer';
 import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
@@ -114,6 +115,7 @@ const NEW_SECTIONS = [
     name: 'Cabana & Gazebo',
     description:
       'Cabanas that turn open spaces into intimate, well-designed sanctuaries for relaxed outdoor living. Gazebos that frame open-air moments with structure, shade, and enduring design.',
+    model: '/models/gazebo.glb',
     features: [],
     groups: [
       {
@@ -350,6 +352,15 @@ export default function FabricaPage() {
               <article key={item.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-xl mb-4">{item.name}</h3>
+                  {'model' in item && item.model && (
+                    <ModelViewer
+                      src={item.model}
+                      alt={`${item.name} 3D model`}
+                      className="w-full h-72 mb-4"
+                      autoRotate
+                      cameraControls
+                    />
+                  )}
                   <p className="text-text-muted text-sm leading-relaxed mb-4">{item.description}</p>
                   {item.features.length > 0 && (
                     <div className="flex flex-wrap gap-2">
