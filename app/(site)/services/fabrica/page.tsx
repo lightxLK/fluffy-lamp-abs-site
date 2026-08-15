@@ -57,29 +57,7 @@ const GATE_OVERVIEW = [
   },
 ];
 
-const GATE_SYSTEMS = [
-  {
-    name: 'Automatic Sliding Gate',
-    benefits: [
-      'Space-saving operation, slides neatly along the wall, ideal for compact sites.',
-      'Effortless heavy-duty use for large, wide openings.',
-    ],
-  },
-  {
-    name: 'Automatic Swing Gate',
-    benefits: [
-      'Classic elegance, opens with a grand swing for a premium entrance.',
-      'Dual-leaf options, flexible for single or double panel setups.',
-    ],
-  },
-  {
-    name: 'Automatic Shutter Gate',
-    benefits: [
-      'Full coverage security, locks down completely as a wall-like barrier.',
-      'Multipurpose utility for homes and commercial spaces alike.',
-    ],
-  },
-];
+const GATE_SYSTEMS = ['Automatic Sliding Gate', 'Automatic Swing Gate', 'Automatic Shutter Gate'];
 
 const GATE_MODELS = [
   { name: 'Ornamental Gate', model: '/models/gate.glb' },
@@ -323,17 +301,10 @@ export default function FabricaPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
-            {GATE_SYSTEMS.map((gate) => (
-              <article key={gate.name} className="relative h-full">
+            {GATE_SYSTEMS.map((name) => (
+              <article key={name} className="relative h-full">
                 <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
-                  <ul className="space-y-3">
-                    {gate.benefits.map((b) => (
-                      <li key={b} className="text-text-muted text-sm leading-relaxed">
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-text-primary font-semibold text-lg">{name}</h3>
                 </CardGlow>
                 <CardNuts />
               </article>
