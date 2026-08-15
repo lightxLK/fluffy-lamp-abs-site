@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Quote } from 'lucide-react';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -7,17 +6,19 @@ import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { StairsScrollScene } from '@/components/sections/StairsScrollScene';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
+import { ModelViewer } from '@/components/ui/ModelViewer';
 import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
-  title: 'ABS Fabrica | Custom Steel Gates, Facades & Landscaping, West Bengal',
+  title: 'ABS Fabrica Experience | Interactive Steel Fabrication Showcase',
   description:
-    'Turnkey automated gates, facades, window grills, and interior landscaping. ABS Fabrica, the design and build arm of Anil Balaji Steel. 500+ projects delivered.',
-  path: '/services/fabrica',
+    'An interactive, scroll-driven walkthrough of ABS Fabrica gates, facades, window grills, and interior landscaping in 3D.',
+  path: '/services/fabrica/experience',
 });
 
 const WHY_CHOOSE = [
@@ -56,28 +57,16 @@ const GATE_OVERVIEW = [
   },
 ];
 
-const GATE_SYSTEMS = [
-  {
-    name: 'Automatic Sliding Gate',
-    benefits: [
-      'Space-saving operation, slides neatly along the wall, ideal for compact sites.',
-      'Effortless heavy-duty use for large, wide openings.',
-    ],
-  },
-  {
-    name: 'Automatic Swing Gate',
-    benefits: [
-      'Classic elegance, opens with a grand swing for a premium entrance.',
-      'Dual-leaf options, flexible for single or double panel setups.',
-    ],
-  },
-  {
-    name: 'Automatic Shutter Gate',
-    benefits: [
-      'Full coverage security, locks down completely as a wall-like barrier.',
-      'Multipurpose utility for homes and commercial spaces alike.',
-    ],
-  },
+const GATE_SYSTEMS = ['Automatic Sliding Gate', 'Automatic Swing Gate', 'Automatic Shutter Gate'];
+
+const GATE_MODELS = [
+  { name: 'Ornamental Gate', model: '/models/gate.glb' },
+  { name: 'Modern Gate', model: '/models/gate-v2.glb' },
+];
+
+const LANDSCAPE_MODELS = [
+  { name: 'Structural Stairs', model: '/models/stairs.glb' },
+  { name: 'Street Lamp', model: '/models/street-lamp.glb' },
 ];
 
 const NEW_SECTIONS = [
@@ -115,6 +104,7 @@ const NEW_SECTIONS = [
     name: 'Cabana & Gazebo',
     description:
       'Cabanas that turn open spaces into intimate, well-designed sanctuaries for relaxed outdoor living. Gazebos that frame open-air moments with structure, shade, and enduring design.',
+    model: '/models/gazebo.glb',
     features: [],
     groups: [
       {
@@ -177,15 +167,17 @@ const COMMON_FEATURES = [
 const komal = DIRECTORS.find((d) => d.name.includes('Komal'))!;
 const fabricationProcess = SERVICES.find((s) => s.slug === 'fabrication')!.process!;
 
-export default function FabricaPage() {
-  const breadcrumbSchema = generateBreadcrumbSchema('/services/fabrica');
+export default function FabricaExperiencePage() {
+  const breadcrumbSchema = generateBreadcrumbSchema('/services/fabrica/experience');
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen lg:pr-[38vw]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+
+      <StairsScrollScene />
 
       <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
         <DrawSVGSection
@@ -216,12 +208,6 @@ export default function FabricaPage() {
             to detail, aesthetic balance, and structural integrity, so the final result belongs
             within the architecture it serves.
           </p>
-          <Link
-            href="/services/fabrica/experience"
-            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300 mb-10"
-          >
-            Explore the Interactive Experience
-          </Link>
           <div className="flex gap-10 flex-wrap">
             <div>
               <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
@@ -315,17 +301,28 @@ export default function FabricaPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
-            {GATE_SYSTEMS.map((gate) => (
+            {GATE_SYSTEMS.map((name) => (
+              <article key={name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg">{name}</h3>
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
+            {GATE_MODELS.map((gate) => (
               <article key={gate.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
-                  <ul className="space-y-3">
-                    {gate.benefits.map((b) => (
-                      <li key={b} className="text-text-muted text-sm leading-relaxed">
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                  <ModelViewer
+                    src={gate.model}
+                    alt={`${gate.name} 3D model`}
+                    className="w-full h-72"
+                    autoRotate
+                    cameraControls
+                  />
                 </CardGlow>
                 <CardNuts />
               </article>
@@ -357,6 +354,15 @@ export default function FabricaPage() {
               <article key={item.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <h3 className="text-text-primary font-semibold text-xl mb-4">{item.name}</h3>
+                  {'model' in item && item.model && (
+                    <ModelViewer
+                      src={item.model}
+                      alt={`${item.name} 3D model`}
+                      className="w-full h-72 mb-4"
+                      autoRotate
+                      cameraControls
+                    />
+                  )}
                   <p className="text-text-muted text-sm leading-relaxed mb-4">{item.description}</p>
                   {item.features.length > 0 && (
                     <div className="flex flex-wrap gap-2">
@@ -405,6 +411,37 @@ export default function FabricaPage() {
                 <CardNuts />
               </article>
             ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            {LANDSCAPE_MODELS.map((item) => (
+              <article key={item.name} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-4">{item.name}</h3>
+                  <ModelViewer
+                    src={item.model}
+                    alt={`${item.name} 3D model`}
+                    className="w-full h-72"
+                    autoRotate
+                    cameraControls
+                  />
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-bg-dark py-24 overflow-hidden">
+        <Container>
+          <div className="max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              Crafted in Detail
+            </p>
+            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+              Every step, considered
+            </h2>
           </div>
         </Container>
       </section>
