@@ -14,9 +14,15 @@ const FURTHER_LINKS = [
   { label: 'Careers', href: '/careers' },
 ] as const;
 
+// The root's `relative z-10` is load-bearing: the fabrica experience page
+// mounts a `fixed inset-0 z-0` 3D layer inside <main>. A non-positioned
+// footer paints *below* any positioned element regardless of DOM order, so
+// that layer would cover the footer and swallow every link click. Joining
+// the same paint group (and being later in DOM order) puts the footer back
+// on top. No layout change — `relative` with no offsets moves nothing.
 export function Footer() {
   return (
-    <footer className="bg-bg-dark border-t border-border-subtle">
+    <footer className="relative z-10 bg-bg-dark border-t border-border-subtle">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
           <img

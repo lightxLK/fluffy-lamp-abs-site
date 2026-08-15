@@ -4,10 +4,13 @@ import { ReadyToBuildScene } from '@/components/svg/scenes/ReadyToBuildScene';
 import { MobileContactStripScene } from '@/components/svg/scenes/MobileContactStripScene';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
+// The root's `relative z-10` is load-bearing, not incidental: it keeps this
+// strip above the fabrica experience page's `fixed inset-0 z-0` 3D layer so
+// its CTAs stay clickable. See Footer.tsx for the same contract.
 export function ContactStrip() {
   return (
     <section
-      className="relative bg-abs-blue overflow-hidden flex flex-col justify-start pt-16 md:block md:py-20"
+      className="relative z-10 bg-abs-blue overflow-hidden flex flex-col justify-start pt-16 md:block md:py-20"
       id="contact-strip"
     >
       <div className="absolute inset-0 hidden items-center justify-center opacity-[0.35] pointer-events-none overflow-hidden md:flex">
