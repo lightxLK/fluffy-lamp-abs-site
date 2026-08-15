@@ -33,7 +33,7 @@ function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: s
 
 export function FabricaModelShowcase() {
   return (
-    <section className="bg-bg-dark pt-32 pb-24 min-h-screen">
+    <section className="bg-bg-dark pt-44 pb-24 min-h-screen">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {MODELS.map((model) => (
