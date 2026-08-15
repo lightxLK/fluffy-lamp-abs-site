@@ -7,6 +7,7 @@ import { ScrollTrigger } from '@/lib/gsap';
 import { MODEL_PLACEMENTS, SCENE_ANCHORS } from '@/lib/data/fabricaSceneAnchors';
 import {
   buildCameraCurves,
+  computeFitDistance,
   normalizeModelToPlacement,
   sampleCameraPath,
   type CameraCurves,
@@ -294,6 +295,30 @@ export function CinematicModelScene() {
             residentObjects.set(placement.src, object);
             residency.set(placement.src, 'resident');
             renderer.shadowMap.needsUpdate = true;
+
+            // Static first frame (Task 5): the animation loop only starts
+            // once every model is measured and the curves are built, which
+            // can take a while on the uncompressed ~70MB asset set. Paint
+            // one frame now, positioned from anchor 0's own real (or
+            // fallback) radius, so the page never sits on a blank canvas
+            // during that wait.
+            const anchor0 = SCENE_ANCHORS[0];
+            const fitDistance = computeFitDistance(radius, camera.fov, camera.aspect);
+            const direction0 = anchor0.camera.direction.clone().normalize();
+            camera.position.copy(anchor0.camera.lookAt).addScaledVector(direction0, fitDistance);
+            camera.lookAt(anchor0.camera.lookAt);
+            scene.background = new THREE.Color(anchor0.background);
+            renderer.toneMappingExposure = anchor0.exposure;
+            key.position.copy(anchor0.light.key.position);
+            key.color.setHex(anchor0.light.key.color);
+            key.intensity = anchor0.light.key.intensity;
+            rim.position.copy(anchor0.light.rim.position);
+            rim.color.setHex(anchor0.light.rim.color);
+            rim.intensity = anchor0.light.rim.intensity;
+            hemi.color.setHex(anchor0.light.hemi.skyColor);
+            hemi.groundColor.setHex(anchor0.light.hemi.groundColor);
+            hemi.intensity = anchor0.light.hemi.intensity;
+            renderer.render(scene, camera);
           } else {
             // Metadata-only retention: dispose everything except the
             // measured radius for every model not being promoted now.
