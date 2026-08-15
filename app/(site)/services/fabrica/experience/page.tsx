@@ -6,11 +6,11 @@ import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
-import { StairsScrollScene } from '@/components/sections/StairsScrollScene';
+import { ModelSceneController } from '@/components/sections/ModelSceneController';
+import { ReducedMotionModelFallback } from '@/components/sections/ReducedMotionModelFallback';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
-import { ModelViewer } from '@/components/ui/ModelViewer';
 import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
@@ -59,16 +59,6 @@ const GATE_OVERVIEW = [
 
 const GATE_SYSTEMS = ['Automatic Sliding Gate', 'Automatic Swing Gate', 'Automatic Shutter Gate'];
 
-const GATE_MODELS = [
-  { name: 'Ornamental Gate', model: '/models/gate.glb' },
-  { name: 'Modern Gate', model: '/models/gate-v2.glb' },
-];
-
-const LANDSCAPE_MODELS = [
-  { name: 'Structural Stairs', model: '/models/stairs.glb' },
-  { name: 'Street Lamp', model: '/models/street-lamp.glb' },
-];
-
 const NEW_SECTIONS = [
   {
     name: 'Facades',
@@ -104,7 +94,6 @@ const NEW_SECTIONS = [
     name: 'Cabana & Gazebo',
     description:
       'Cabanas that turn open spaces into intimate, well-designed sanctuaries for relaxed outdoor living. Gazebos that frame open-air moments with structure, shade, and enduring design.',
-    model: '/models/gazebo.glb',
     features: [],
     groups: [
       {
@@ -171,298 +160,270 @@ export default function FabricaExperiencePage() {
   const breadcrumbSchema = generateBreadcrumbSchema('/services/fabrica/experience');
 
   return (
-    <main className="min-h-screen lg:pr-[38vw]">
+    <main className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <StairsScrollScene />
+      <ModelSceneController />
+      <ReducedMotionModelFallback />
 
-      <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
-        <DrawSVGSection
-          selector=".abs-path"
-          className="absolute inset-0 hidden lg:flex items-center justify-end opacity-25 pointer-events-none pr-8"
-          duration={30}
-        >
-          <GatePergolaScene className="w-full max-w-2xl h-auto" />
-        </DrawSVGSection>
+      <div className="relative z-10 pointer-events-none">
+        <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
+          <DrawSVGSection
+            selector=".abs-path"
+            className="absolute inset-0 hidden lg:flex items-center justify-end opacity-25 pointer-events-none pr-8"
+            duration={30}
+          >
+            <GatePergolaScene className="w-full max-w-2xl h-auto" />
+          </DrawSVGSection>
 
-        <Container className="relative">
-          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-            Introducing ABS Fabrica
-          </p>
-          <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-2xl">
-            <SplitTextReveal>Steel, designed your way</SplitTextReveal>
-          </h1>
-          <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
-            ABS Fabrica is the design and fabrication arm of Anil Balaji Steel, translating our
-            material strength into architectural expression. It&apos;s where engineering discipline
-            meets design sensitivity, rooted in craftsmanship and guided by modern fabrication
-            techniques, bringing structure, proportion, and precision to every steel element we
-            create.
-          </p>
-          <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
-            From custom gates, grills, stairs, and facades to complex architectural steel solutions,
-            ABS Fabrica specialises in design-led fabrication. Every project gets the same attention
-            to detail, aesthetic balance, and structural integrity, so the final result belongs
-            within the architecture it serves.
-          </p>
-          <div className="flex gap-10 flex-wrap">
-            <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest">
-                Years in Business · Five Decades of Steel Manufacturing
-              </p>
-            </div>
-            <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest">
-                Projects Delivered · Satisfied Clients
-              </p>
-            </div>
-            <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">100%</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest">
-                Quality Guarantee · Commitment to Excellence
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-bg-card border-y border-border-subtle py-24">
-        <Container>
-          <div className="mb-14 max-w-2xl">
+          <Container className="relative">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Why Choose ABS Fabrica
+              Introducing ABS Fabrica
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
-            {WHY_CHOOSE.map((item) => (
-              <div key={item.name} className="border-t border-border-subtle pt-6">
-                <h3 className="text-text-primary font-semibold text-base mb-2">{item.name}</h3>
-                <p className="text-text-muted text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mb-14 max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              How Fabrica Works
+            <h1 className="text-text-primary font-bold text-5xl lg:text-7xl leading-none mb-6 max-w-2xl">
+              <SplitTextReveal>Steel, designed your way</SplitTextReveal>
+            </h1>
+            <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
+              ABS Fabrica is the design and fabrication arm of Anil Balaji Steel, translating our
+              material strength into architectural expression. It&apos;s where engineering
+              discipline meets design sensitivity, rooted in craftsmanship and guided by modern
+              fabrication techniques, bringing structure, proportion, and precision to every steel
+              element we create.
             </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              From concept to handover
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {fabricationProcess.map((step, idx) => (
-              <div key={step.label} className="border-t border-border-subtle pt-6">
-                <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-3">
-                  {String(idx + 1).padStart(2, '0')}
+            <p className="text-text-body text-lg leading-relaxed max-w-xl mb-10">
+              From custom gates, grills, stairs, and facades to complex architectural steel
+              solutions, ABS Fabrica specialises in design-led fabrication. Every project gets the
+              same attention to detail, aesthetic balance, and structural integrity, so the final
+              result belongs within the architecture it serves.
+            </p>
+            <div className="flex gap-10 flex-wrap">
+              <div>
+                <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
+                <p className="text-text-muted text-xs uppercase tracking-widest">
+                  Years in Business · Five Decades of Steel Manufacturing
                 </p>
-                <h3 className="text-text-primary font-semibold text-base mb-2">{step.label}</h3>
-                <p className="text-text-muted text-sm leading-relaxed">{step.body}</p>
               </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+              <div>
+                <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>
+                <p className="text-text-muted text-xs uppercase tracking-widest">
+                  Projects Delivered · Satisfied Clients
+                </p>
+              </div>
+              <div>
+                <p className="text-text-primary font-bold text-4xl leading-none mb-1">100%</p>
+                <p className="text-text-muted text-xs uppercase tracking-widest">
+                  Quality Guarantee · Commitment to Excellence
+                </p>
+              </div>
+            </div>
+          </Container>
+        </section>
 
-      <section className="bg-bg-dark py-24 overflow-hidden">
-        <Container>
-          <div className="mb-14 max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Gate Systems
-            </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              Automated, elegant, secure
-            </h2>
-          </div>
+        <section className="bg-bg-card border-y border-border-subtle py-24">
+          <Container>
+            <div className="mb-14 max-w-2xl">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                Why Choose ABS Fabrica
+              </p>
+            </div>
 
-          <p className="text-text-body text-base leading-relaxed max-w-2xl mb-14">
-            Beyond automation, ABS Fabrica also builds manual gate solutions in premium materials
-            for effortless, durable movement, and fully custom sliding, swing, or foldable designs
-            with bespoke patterns, lighting, and smart locking.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
-            {GATE_OVERVIEW.map((gate) => (
-              <article key={gate.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
-                  <p className="text-text-muted text-sm leading-relaxed">{gate.description}</p>
-                </CardGlow>
-                <CardNuts />
-              </article>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
-            {GATE_SYSTEMS.map((name) => (
-              <article key={name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg">{name}</h3>
-                </CardGlow>
-                <CardNuts />
-              </article>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
-            {GATE_MODELS.map((gate) => (
-              <article key={gate.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
-                  <ModelViewer
-                    src={gate.model}
-                    alt={`${gate.name} 3D model`}
-                    className="w-full h-72"
-                    autoRotate
-                    cameraControls
-                  />
-                </CardGlow>
-                <CardNuts />
-              </article>
-            ))}
-          </div>
-
-          <div className="border-t border-border-subtle pt-8">
-            <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
-              Common Features Across All Systems
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {COMMON_FEATURES.map((f) => (
-                <span
-                  key={f}
-                  className="text-text-body text-xs px-4 py-2 border border-border-subtle"
-                >
-                  {f}
-                </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
+              {WHY_CHOOSE.map((item) => (
+                <div key={item.name} className="border-t border-border-subtle pt-6">
+                  <h3 className="text-text-primary font-semibold text-base mb-2">{item.name}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{item.description}</p>
+                </div>
               ))}
             </div>
-          </div>
-        </Container>
-      </section>
 
-      <section className="bg-bg-card border-y border-border-subtle py-24 overflow-hidden">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {NEW_SECTIONS.map((item) => (
-              <article key={item.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-xl mb-4">{item.name}</h3>
-                  {'model' in item && item.model && (
-                    <ModelViewer
-                      src={item.model}
-                      alt={`${item.name} 3D model`}
-                      className="w-full h-72 mb-4"
-                      autoRotate
-                      cameraControls
-                    />
-                  )}
-                  <p className="text-text-muted text-sm leading-relaxed mb-4">{item.description}</p>
-                  {item.features.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {item.features.map((f) => (
-                        <span
-                          key={f}
-                          className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
-                        >
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {'groups' in item && item.groups && (
-                    <div className="space-y-4">
-                      {item.groups.map((group) => (
-                        <div key={group.label}>
-                          <p className="text-text-primary text-xs font-semibold uppercase tracking-widest mb-2">
-                            {group.label}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {group.items.map((f) => (
-                              <span
-                                key={f}
-                                className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
-                              >
-                                {f}
-                              </span>
-                            ))}
+            <div className="mb-14 max-w-2xl">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                How Fabrica Works
+              </p>
+              <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+                From concept to handover
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {fabricationProcess.map((step, idx) => (
+                <div key={step.label} className="border-t border-border-subtle pt-6">
+                  <p className="text-abs-blue text-xs font-bold uppercase tracking-widest mb-3">
+                    {String(idx + 1).padStart(2, '0')}
+                  </p>
+                  <h3 className="text-text-primary font-semibold text-base mb-2">{step.label}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{step.body}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        <section id="gate-systems" className="bg-bg-dark/90 py-24 overflow-hidden">
+          <Container>
+            <div className="mb-14 max-w-2xl">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                Gate Systems
+              </p>
+              <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+                Automated, elegant, secure
+              </h2>
+            </div>
+
+            <p className="text-text-body text-base leading-relaxed max-w-2xl mb-14">
+              Beyond automation, ABS Fabrica also builds manual gate solutions in premium materials
+              for effortless, durable movement, and fully custom sliding, swing, or foldable designs
+              with bespoke patterns, lighting, and smart locking.
+            </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
+              {GATE_OVERVIEW.map((gate) => (
+                <article key={gate.name} className="relative h-full">
+                  <CardGlow className="h-full p-8">
+                    <h3 className="text-text-primary font-semibold text-lg mb-4">{gate.name}</h3>
+                    <p className="text-text-muted text-sm leading-relaxed">{gate.description}</p>
+                  </CardGlow>
+                  <CardNuts />
+                </article>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-14">
+              {GATE_SYSTEMS.map((name) => (
+                <article key={name} className="relative h-full">
+                  <CardGlow className="h-full p-8">
+                    <h3 className="text-text-primary font-semibold text-lg">{name}</h3>
+                  </CardGlow>
+                  <CardNuts />
+                </article>
+              ))}
+            </div>
+
+            <div className="border-t border-border-subtle pt-8">
+              <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
+                Common Features Across All Systems
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {COMMON_FEATURES.map((f) => (
+                  <span
+                    key={f}
+                    className="text-text-body text-xs px-4 py-2 border border-border-subtle"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        <section className="bg-bg-card/90 border-y border-border-subtle py-24 overflow-hidden">
+          <Container>
+            <div className="grid grid-cols-1 gap-6">
+              {NEW_SECTIONS.map((item) => (
+                <article
+                  key={item.name}
+                  id={
+                    item.name === 'Cabana & Gazebo'
+                      ? 'cabana-gazebo'
+                      : item.name === 'Interior Landscaping'
+                        ? 'interior-landscaping'
+                        : undefined
+                  }
+                  className="relative h-full"
+                >
+                  <CardGlow className="h-full p-8">
+                    <h3 className="text-text-primary font-semibold text-xl mb-4">{item.name}</h3>
+                    <p className="text-text-muted text-sm leading-relaxed mb-4">
+                      {item.description}
+                    </p>
+                    {item.features.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {item.features.map((f) => (
+                          <span
+                            key={f}
+                            className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
+                          >
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {'groups' in item && item.groups && (
+                      <div className="space-y-4">
+                        {item.groups.map((group) => (
+                          <div key={group.label}>
+                            <p className="text-text-primary text-xs font-semibold uppercase tracking-widest mb-2">
+                              {group.label}
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {group.items.map((f) => (
+                                <span
+                                  key={f}
+                                  className="text-text-body text-xs px-3 py-1.5 border border-border-subtle"
+                                >
+                                  {f}
+                                </span>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {'highlights' in item && item.highlights && (
-                    <div className="space-y-3">
-                      {item.highlights.map((h) => (
-                        <div key={h.label}>
-                          <p className="text-text-primary text-sm font-semibold mb-1">{h.label}</p>
-                          <p className="text-text-muted text-xs leading-relaxed">{h.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </CardGlow>
-                <CardNuts />
-              </article>
-            ))}
-          </div>
+                        ))}
+                      </div>
+                    )}
+                    {'highlights' in item && item.highlights && (
+                      <div className="space-y-3">
+                        {item.highlights.map((h) => (
+                          <div key={h.label}>
+                            <p className="text-text-primary text-sm font-semibold mb-1">
+                              {h.label}
+                            </p>
+                            <p className="text-text-muted text-xs leading-relaxed">{h.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardGlow>
+                  <CardNuts />
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-            {LANDSCAPE_MODELS.map((item) => (
-              <article key={item.name} className="relative h-full">
-                <CardGlow className="h-full p-8">
-                  <h3 className="text-text-primary font-semibold text-lg mb-4">{item.name}</h3>
-                  <ModelViewer
-                    src={item.model}
-                    alt={`${item.name} 3D model`}
-                    className="w-full h-72"
-                    autoRotate
-                    cameraControls
-                  />
-                </CardGlow>
-                <CardNuts />
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
+        <section id="crafted-in-detail" className="bg-bg-dark/90 py-24 overflow-hidden">
+          <Container>
+            <div className="max-w-2xl">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                Crafted in Detail
+              </p>
+              <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
+                Every step, considered
+              </h2>
+            </div>
+          </Container>
+        </section>
 
-      <section className="bg-bg-dark py-24 overflow-hidden">
-        <Container>
-          <div className="max-w-2xl">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Crafted in Detail
-            </p>
-            <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-              Every step, considered
-            </h2>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-bg-mid py-24">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Led By
-            </p>
-            <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
-              {komal.name}
-            </h2>
-            <p className="text-text-muted text-sm uppercase tracking-widest mb-8">{komal.role}</p>
-            <blockquote className="flex flex-col items-center gap-4">
-              <Quote className="w-6 h-6 text-abs-blue" aria-hidden="true" />
-              <p className="text-text-body text-xl italic leading-relaxed">{komal.quote}</p>
-            </blockquote>
-          </div>
-        </Container>
-      </section>
+        <section className="bg-bg-mid/90 py-24">
+          <Container>
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                Led By
+              </p>
+              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
+                {komal.name}
+              </h2>
+              <p className="text-text-muted text-sm uppercase tracking-widest mb-8">{komal.role}</p>
+              <blockquote className="flex flex-col items-center gap-4">
+                <Quote className="w-6 h-6 text-abs-blue" aria-hidden="true" />
+                <p className="text-text-body text-xl italic leading-relaxed">{komal.quote}</p>
+              </blockquote>
+            </div>
+          </Container>
+        </section>
+      </div>
 
       <ContactStrip />
     </main>
