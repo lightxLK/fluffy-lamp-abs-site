@@ -53,3 +53,6 @@ vite.config.ts
 # Claude Code project instructions (local-only, not part of shipped repo)
 /CLAUDE.md
 /AGENTS.md
+
+# subagent-driven-development scratch workspace (local-only)
+/.superpowers/

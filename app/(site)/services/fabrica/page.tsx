@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Quote } from 'lucide-react';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
@@ -398,6 +399,15 @@ export default function FabricaPage() {
                 <CardNuts />
               </article>
             ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/services/fabrica/experience"
+              className="inline-flex items-center gap-2 bg-abs-blue text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            >
+              Explore the Interactive Experience
+            </Link>
           </div>
         </Container>
       </section>
