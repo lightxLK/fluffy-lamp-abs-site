@@ -349,9 +349,14 @@ describe('ModelSceneController', () => {
     // getters before firing load, same pattern the existing baseline-
     // capture tests use, then let its crossfade fully complete (advance
     // past the 600ms fade) before treating it as "current" — completing a
-    // crossfade mounts a genuinely new <model-viewer> in the "current"
-    // JSX slot, distinct from the "incoming" one that unmounts, so any
-    // reference captured before this point would point at a detached node.
+    // crossfade does NOT remount the element: the "current" slot renders
+    // with `key={currentModel.src}`, matching the key the element already
+    // carried in the "incoming" slot, so React reuses the same fiber and
+    // the same live DOM node. The re-query below is just re-reading that
+    // same node under its new role, not picking up a replacement. Don't
+    // "fix" the key scheme assuming a remount happens here — the reuse is
+    // deliberate, and it's what keeps the controller's imperative
+    // `style.opacity` writes from being reset mid-transition.
     const incomingGateEl = container.querySelector(
       `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
     ) as unknown as {
@@ -519,6 +524,88 @@ describe('ModelSceneController', () => {
     createSpy.mockRestore();
     jest.useRealTimers();
     document.body.removeChild(gateSection);
+  });
+
+  it('restores the current model to full opacity when a mid-fade same-section transition is cancelled', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+
+    const capturedTriggers: Record<string, { onUpdate?: (self: { progress: number }) => void }> =
+      {};
+    const createSpy = jest
+      .spyOn(ScrollTrigger, 'create')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation((config: any) => {
+        const id = (config.trigger as HTMLElement).id;
+        capturedTriggers[id] = config;
+        return { kill: jest.fn(), progress: 0 } as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+      });
+
+    const { container } = render(<ModelSceneController />);
+    const gateSection = document.createElement('section');
+    gateSection.id = 'gate-systems';
+    document.body.appendChild(gateSection);
+
+    act(() => {
+      fireIntersection(gateSection, true, 400);
+    });
+    const gateEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as HTMLElement;
+    act(() => {
+      fireEvent(gateEl, new Event('load'));
+      jest.advanceTimersByTime(700);
+    });
+    // gate is now the current model and visible — the controller (not
+    // ModelViewer, which is mounted with fadeOnLoad={false} here) owns this.
+    expect(gateEl.style.opacity).toBe('1');
+
+    // Cross the midpoint: gateV2 is requested, mounts, and loads. Its
+    // startFade zeroes gate's opacity and schedules the 600ms handover.
+    act(() => {
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.6 });
+    });
+    const gateV2El = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gateV2.src}"]`,
+    ) as HTMLElement;
+    act(() => {
+      fireEvent(gateV2El, new Event('load'));
+    });
+    expect(gateEl.style.opacity).toBe('0');
+    expect(gateV2El.style.opacity).toBe('1');
+
+    // Scroll reverses back below the midpoint *before* the 600ms fade
+    // timer fires. gateV2's transition is cancelled and it unmounts — but
+    // gate is still the mounted current model, so it must not be left
+    // stuck at opacity 0 (which would blank the whole 3D layer, since
+    // `finish()` never runs to hand visibility over).
+    act(() => {
+      jest.advanceTimersByTime(300);
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.4 });
+    });
+    expect(container.querySelector(`model-viewer[src="${MODEL_ASSETS.gateV2.src}"]`)).toBeNull();
+    expect(gateEl.isConnected).toBe(true);
+    expect(gateEl.style.opacity).toBe('1');
+
+    // And it stays visible past the point the cancelled timer would have
+    // fired, rather than being re-zeroed by a straggling callback.
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+    expect(gateEl.style.opacity).toBe('1');
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+    document.body.removeChild(gateSection);
+  });
+
+  it('marks the fixed 3D layer pointer-events-auto so it receives drags through the page content', () => {
+    mockNormalMotion();
+    const { container } = render(<ModelSceneController />);
+
+    const layer = container.firstElementChild as HTMLElement;
+    expect(layer).not.toBeNull();
+    expect(layer).toHaveClass('fixed', 'inset-0', 'z-0', 'pointer-events-auto');
   });
 
   it('gives auto-rotate ownership back to the current model when the active section changes from scroll-driven to single-model', () => {

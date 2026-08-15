@@ -10,10 +10,21 @@ interface ModelViewerProps {
   className?: string;
   autoRotate?: boolean;
   cameraControls?: boolean;
+  /**
+   * Whether this component fades itself in on its own `load` event
+   * (default). Set `false` when the *caller* owns fade timing — e.g.
+   * ModelSceneController, which crossfades between two viewers and needs
+   * the incoming one to stay hidden until its own choreography says
+   * otherwise. With `false` the element renders at opacity 0 and never
+   * changes it itself; the caller drives `style.opacity` imperatively
+   * (the 0.6s CSS transition below still animates those writes, and React
+   * never overwrites them because the style prop's value stays constant).
+   */
+  fadeOnLoad?: boolean;
 }
 
 export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(function ModelViewer(
-  { src, alt, className, autoRotate = true, cameraControls = true },
+  { src, alt, className, autoRotate = true, cameraControls = true, fadeOnLoad = true },
   forwardedRef,
 ) {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +46,7 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
   // `src` at runtime, this effect needs revisiting to track which source
   // produced a given `load` event, not just re-adding `[src]` here.
   useEffect(() => {
+    if (!fadeOnLoad) return;
     const el = elementRef.current;
     if (!el) return;
     // `loaded` can already be true by the time this effect runs (e.g. a
@@ -48,7 +60,7 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
     const handleLoad = () => setLoaded(true);
     el.addEventListener('load', handleLoad);
     return () => el.removeEventListener('load', handleLoad);
-  }, []);
+  }, [fadeOnLoad]);
 
   return (
     <div className={cn('relative overflow-hidden bg-border-subtle/40', className)}>
@@ -70,7 +82,7 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
           width: '100%',
           height: '100%',
           backgroundColor: 'transparent',
-          opacity: loaded ? 1 : 0,
+          opacity: fadeOnLoad && loaded ? 1 : 0,
           transition: 'opacity 0.6s ease',
         }}
       />

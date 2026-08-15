@@ -188,6 +188,7 @@ export function ModelSceneController() {
     return () => {
       transitionIdRef.current += 1;
       if (fadeTimerRef.current !== null) window.clearTimeout(fadeTimerRef.current);
+      if (idleTimerRef.current !== null) window.clearTimeout(idleTimerRef.current);
       cameraTweenRef.current?.kill();
     };
   }, []);
@@ -243,6 +244,16 @@ export function ModelSceneController() {
       window.clearTimeout(fadeTimerRef.current);
       fadeTimerRef.current = null;
     }
+    // `startFade` zeroes the *current* model's opacity and relies on
+    // `finish()` (600ms later) to promote the incoming model into its
+    // place. Cancelling that timer means `finish()` never runs, so without
+    // this the outgoing model stays mounted at opacity 0 forever and the
+    // whole layer goes blank (React won't reset it — its style prop value
+    // never changed). Restoring visibility here is also correct when a
+    // *third* target supersedes a mid-fade transition: that new
+    // transition's own `startFade` re-zeroes this element when it actually
+    // begins fading, so the current model simply stays visible until then.
+    if (currentElRef.current) currentElRef.current.style.opacity = '1';
   }, []);
 
   const requestModel = useCallback(
@@ -535,7 +546,18 @@ export function ModelSceneController() {
           src={currentModel.src}
           alt={currentModel.alt}
           className="w-full h-full bg-transparent"
-          autoRotate={!(activeSectionId !== null && SCROLL_DRIVEN_SECTION_IDS.has(activeSectionId))}
+          fadeOnLoad={false}
+          // Camera ownership is XOR: exactly one system may write this
+          // element's camera at a time. `activeSectionId` flips on the same
+          // tick as `requestModel`, so keying off it alone would hand
+          // auto-rotate to a still-mounted, mid-crossfade-out model while
+          // the ease-to-baseline tween is about to start writing its
+          // cameraOrbit/cameraTarget. Any in-flight incoming model means a
+          // transition owns this camera, so auto-rotate must stay off.
+          autoRotate={
+            incomingModel === null &&
+            !(activeSectionId !== null && SCROLL_DRIVEN_SECTION_IDS.has(activeSectionId))
+          }
           cameraControls={cameraControls}
         />
       )}
@@ -546,6 +568,7 @@ export function ModelSceneController() {
           src={incomingModel.src}
           alt={incomingModel.alt}
           className="absolute inset-0 w-full h-full bg-transparent"
+          fadeOnLoad={false}
           autoRotate={false}
           cameraControls={cameraControls}
         />
