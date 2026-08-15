@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     remotePatterns: [],
   },
+  // three ships its addons (e.g. GLTFLoader) as ESM-only .js files under
+  // node_modules/three/examples/jsm — both Next's bundler and next/jest's
+  // Jest transform need this listed to compile those imports.
+  transpilePackages: ['three'],
 };
 
 // no-op: verifying pinned buildId keeps FTP deploys incremental
