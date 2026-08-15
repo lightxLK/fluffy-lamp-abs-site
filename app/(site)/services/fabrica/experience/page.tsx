@@ -177,7 +177,7 @@ export default function FabricaExperiencePage() {
       <CinematicModelScene />
 
       <div className="relative z-10 pointer-events-none">
-        <section className="relative bg-bg-dark/55 pt-40 pb-24 overflow-hidden">
+        <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
           <DrawSVGSection
             selector=".abs-path"
             className="absolute inset-0 hidden lg:flex items-center justify-end opacity-25 pointer-events-none pr-8"
@@ -229,7 +229,9 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
 
-        <section className="bg-bg-card/55 border-y border-border-subtle py-24">
+        <div className="h-[70vh]" />
+
+        <section className="bg-bg-card border-y border-border-subtle py-24">
           <Container>
             <div className="mb-14 max-w-2xl">
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -269,7 +271,9 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
 
-        <section id="gate-systems" className="bg-bg-dark/50 py-24 overflow-hidden">
+        <div className="h-[70vh]" />
+
+        <section id="gate-systems" className="bg-bg-dark py-24 overflow-hidden">
           <Container>
             <div className="mb-14 max-w-2xl">
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -327,7 +331,9 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
 
-        <section className="bg-bg-card/50 border-y border-border-subtle py-24 overflow-hidden">
+        <div className="h-[70vh]" />
+
+        <section className="bg-bg-card border-y border-border-subtle py-24 overflow-hidden">
           <Container>
             <div className="grid grid-cols-1 gap-6">
               {NEW_SECTIONS.map((item) => (
@@ -400,7 +406,9 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
 
-        <section id="crafted-in-detail" className="bg-bg-dark/50 py-24 overflow-hidden">
+        <div className="h-[70vh]" />
+
+        <section id="crafted-in-detail" className="bg-bg-dark py-24 overflow-hidden">
           <Container>
             <div className="max-w-2xl">
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -413,7 +421,9 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
 
-        <section className="bg-bg-mid/50 py-24">
+        <div className="h-[70vh]" />
+
+        <section className="bg-bg-mid py-24">
           <Container>
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
@@ -430,6 +440,8 @@ export default function FabricaExperiencePage() {
             </div>
           </Container>
         </section>
+
+        <div className="h-[70vh]" />
       </div>
 
       {/* Reduced-motion visitors get the model cards here, after the real

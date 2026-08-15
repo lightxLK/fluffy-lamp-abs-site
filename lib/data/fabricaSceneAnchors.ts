@@ -53,14 +53,14 @@ function anchor(
       key: {
         position: worldPosition.clone().add(new THREE.Vector3(8, 10, 8)),
         color: BRAND_KEY_BLUE,
-        intensity: 0.8 + t * 0.4,
+        intensity: 1.6 + t * 0.6,
       },
       rim: {
         position: worldPosition.clone().add(new THREE.Vector3(-8, 6, -8)),
         color: BRAND_RIM_ORANGE,
-        intensity: 0.2 + t * 0.7,
+        intensity: 0.5 + t * 1.0,
       },
-      hemi: { skyColor: BRAND_HEMI_SKY, groundColor: BRAND_HEMI_GROUND, intensity: 0.6 },
+      hemi: { skyColor: BRAND_HEMI_SKY, groundColor: BRAND_HEMI_GROUND, intensity: 1.1 },
     },
     fog: { color: opts.background, density: 0.015 },
     background: opts.background,
@@ -69,10 +69,10 @@ function anchor(
 }
 
 export const SCENE_ANCHORS: readonly SceneAnchor[] = [
-  anchor(0, { fallbackRadius: 2.5, background: 0x0d0d0d, exposure: 1.0 }),
-  anchor(1, { fallbackRadius: 2.5, background: 0x141414, exposure: 1.0 }),
-  anchor(2, { fallbackRadius: 3.0, background: 0x1d1d1d, exposure: 1.0 }),
-  anchor(3, { fallbackRadius: 3.5, background: 0x201a16, exposure: 1.0 }),
-  anchor(4, { fallbackRadius: 3.5, background: 0x241c14, exposure: 1.0 }),
-  anchor(5, { fallbackRadius: 3.0, background: 0x28180f, exposure: 1.0 }),
+  anchor(0, { fallbackRadius: 2.5, background: 0x141414, exposure: 1.35 }),
+  anchor(1, { fallbackRadius: 2.5, background: 0x1c1c1c, exposure: 1.35 }),
+  anchor(2, { fallbackRadius: 3.0, background: 0x262626, exposure: 1.35 }),
+  anchor(3, { fallbackRadius: 3.5, background: 0x2c241d, exposure: 1.35 }),
+  anchor(4, { fallbackRadius: 3.5, background: 0x30261a, exposure: 1.35 }),
+  anchor(5, { fallbackRadius: 3.0, background: 0x352011, exposure: 1.35 }),
 ];
