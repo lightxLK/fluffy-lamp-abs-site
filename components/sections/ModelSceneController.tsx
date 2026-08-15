@@ -2,11 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ModelViewerElement } from '@google/model-viewer';
-import { gsap } from '@/lib/gsap';
+import { ScrollTrigger, gsap } from '@/lib/gsap';
 import { ModelViewer } from '@/components/ui/ModelViewer';
 import { MODEL_ASSETS, type ModelAsset } from '@/lib/data/fabricaModels';
 import type { CameraOrbitBaseline, CameraTargetBaseline } from '@/lib/three/stairsCamera';
-import { radToDeg } from '@/lib/three/stairsCamera';
+import {
+  computeStairsCameraOrbit,
+  computeStairsCameraTarget,
+  radToDeg,
+} from '@/lib/three/stairsCamera';
 
 interface ModelScene {
   sectionId: string;
@@ -23,6 +27,28 @@ export const MODEL_SCENES: readonly ModelScene[] = [
 interface CameraBaseline {
   orbit: CameraOrbitBaseline;
   target: CameraTargetBaseline;
+}
+
+// Sections whose camera is owned by scroll progress rather than idle
+// auto-rotate. Exactly the MODEL_SCENES entries with more than one model —
+// a single-model section has nothing to choreograph between, so it stays
+// on idle drift even while active.
+const SCROLL_DRIVEN_SECTION_IDS = new Set(
+  MODEL_SCENES.filter((scene) => scene.models.length > 1).map((scene) => scene.sectionId),
+);
+
+// Applies scroll-progress choreography to whichever element is passed in,
+// using that element's own captured baseline as the starting point.
+function applyChoreography(
+  el: ModelViewerElement,
+  src: string,
+  localProgress: number,
+  baselines: Map<string, CameraBaseline>,
+) {
+  const baseline = baselines.get(src);
+  if (!baseline) return;
+  el.cameraOrbit = computeStairsCameraOrbit(baseline.orbit, localProgress);
+  el.cameraTarget = computeStairsCameraTarget(baseline.target, localProgress);
 }
 
 function lerp(a: number, b: number, t: number): number {
@@ -104,6 +130,12 @@ export function ModelSceneController() {
   const incomingElRef = useRef<ModelViewerElement | null>(null);
   const baselinesRef = useRef<Map<string, CameraBaseline>>(new Map());
   const activeSectionIdRef = useRef<string | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
+  const userInteractionActiveRef = useRef(false); // wired up fully in Task 6; declared here so this task's ScrollTrigger effect can already reference it
+  // Keyed by sectionId; guards trigger creation below against re-creating a
+  // trigger that already exists (see that effect's comment for why creation
+  // can be attempted more than once).
+  const scrollTriggersRef = useRef<Map<string, ReturnType<typeof ScrollTrigger.create>>>(new Map());
   // Exposed for Task 5 (multi-model ScrollTrigger progress) to call directly.
   const requestModelRef = useRef<(next: ModelAsset) => void>(() => {});
   // Handles to the in-flight fade timer / camera-ease tween, if any —
@@ -362,6 +394,7 @@ export function ModelSceneController() {
 
         if (closest && closest.scene.sectionId !== activeSectionIdRef.current) {
           activeSectionIdRef.current = closest.scene.sectionId;
+          setActiveSectionId(closest.scene.sectionId);
           requestModelRef.current(closest.scene.models[0]);
         }
       },
@@ -372,6 +405,83 @@ export function ModelSceneController() {
 
     return () => observer.disconnect();
   }, [enabled]);
+
+  // Scroll choreography for the two multi-model sections. Each section's
+  // trigger is created once and lives for the page's lifetime (not just
+  // while that section is active) — the authority rule inside onUpdate is
+  // what stops an inactive section's trigger from acting on anything.
+  //
+  // Creation is idempotent (guarded by scrollTriggersRef, keyed by
+  // sectionId) and retried whenever activeSectionId changes, not just once
+  // on mount: this component is a fixed overlay that can mount before the
+  // page's own section elements exist in the DOM yet (e.g. content still
+  // hydrating/streaming in), so `document.getElementById` may miss on the
+  // first attempt. Re-running on every active-section change gives it
+  // another chance to pick up a section that's since appeared, without ever
+  // recreating (and re-killing) a trigger that already exists.
+  useEffect(() => {
+    if (!enabled) return;
+
+    for (const scene of MODEL_SCENES) {
+      if (scene.models.length <= 1) continue;
+      if (scrollTriggersRef.current.has(scene.sectionId)) continue;
+      const el = document.getElementById(scene.sectionId);
+      if (!el) continue;
+
+      const trigger = ScrollTrigger.create({
+        trigger: el,
+        start: 'top top',
+        end: '+=100%',
+        scrub: true,
+        onUpdate: (self) => {
+          // Authority rule: only the active section may drive the camera
+          // or request a model swap — both multi-model sections' triggers
+          // live for the page's lifetime and keep firing on scroll even
+          // while a different section is active.
+          if (activeSectionIdRef.current !== scene.sectionId) return;
+          if (userInteractionActiveRef.current) return;
+
+          const progress = self.progress;
+          const inFirstHalf = progress < 0.5;
+          const target = inFirstHalf ? scene.models[0] : scene.models[1];
+          const localProgress = inFirstHalf ? progress * 2 : (progress - 0.5) * 2;
+
+          // Always go through requestModel — never skip it just because
+          // `target` already equals `currentModel`. requestModel's own
+          // guards (below) are what cancel a *different* pending
+          // transition when scroll reverses back to the already-current
+          // model before that pending one finishes loading; if this
+          // handler only called requestModel on a mismatch, that
+          // cancellation path would never run for exactly the reversal
+          // case it exists to handle.
+          requestModelRef.current(target);
+
+          if (currentModelRef.current?.src === target.src) {
+            const targetEl = currentElRef.current;
+            if (targetEl)
+              applyChoreography(targetEl, target.src, localProgress, baselinesRef.current);
+          }
+        },
+      });
+      scrollTriggersRef.current.set(scene.sectionId, trigger);
+    }
+  }, [enabled, activeSectionId]);
+
+  // Unmount-only: kill every trigger this component ever created, however
+  // many creation attempts above it took to find each section's element.
+  // Intentionally reads scrollTriggersRef.current inside the cleanup itself
+  // (not a variable captured at effect-setup time) — this ref is a Map
+  // that the trigger-creation effect above keeps mutating for as long as
+  // the component is mounted, so a snapshot taken when this effect first
+  // runs (empty, since it mounts before that effect has created anything)
+  // would miss every trigger created afterward.
+  useEffect(() => {
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment above
+      for (const trigger of scrollTriggersRef.current.values()) trigger.kill();
+      scrollTriggersRef.current.clear();
+    };
+  }, []);
 
   if (!enabled) return null;
 
@@ -384,7 +494,7 @@ export function ModelSceneController() {
           src={currentModel.src}
           alt={currentModel.alt}
           className="w-full h-full bg-transparent"
-          autoRotate
+          autoRotate={!(activeSectionId !== null && SCROLL_DRIVEN_SECTION_IDS.has(activeSectionId))}
           cameraControls={false}
         />
       )}

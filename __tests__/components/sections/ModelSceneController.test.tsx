@@ -1,7 +1,7 @@
 import { act, render, fireEvent } from '@testing-library/react';
 import { ModelSceneController } from '@/components/sections/ModelSceneController';
 import { MODEL_ASSETS } from '@/lib/data/fabricaModels';
-import { gsap } from '@/lib/gsap';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 
 jest.mock('@google/model-viewer', () => ({}));
 
@@ -314,5 +314,261 @@ describe('ModelSceneController', () => {
 
     errorSpy.mockRestore();
     jest.useRealTimers();
+  });
+
+  it('drives the current model camera from local scroll progress within a multi-model section, only while that section is active, and disables auto-rotate while doing so', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+
+    const capturedTriggers: Record<string, { onUpdate?: (self: { progress: number }) => void }> =
+      {};
+    const createSpy = jest
+      .spyOn(ScrollTrigger, 'create')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation((config: any) => {
+        const id = (config.trigger as HTMLElement).id;
+        capturedTriggers[id] = config;
+        return { kill: jest.fn(), progress: 0 } as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+      });
+
+    const { container } = render(<ModelSceneController />);
+
+    const gateSection = document.createElement('section');
+    gateSection.id = 'gate-systems';
+    document.body.appendChild(gateSection);
+    const landscapingSection = document.createElement('section');
+    landscapingSection.id = 'interior-landscaping';
+    document.body.appendChild(landscapingSection);
+
+    act(() => {
+      fireIntersection(gateSection, true, 400);
+    });
+
+    // gate.glb mounts as the *incoming* model first (there's no current
+    // model yet — this is the page's very first request). Stub its camera
+    // getters before firing load, same pattern the existing baseline-
+    // capture tests use, then let its crossfade fully complete (advance
+    // past the 600ms fade) before treating it as "current" — completing a
+    // crossfade mounts a genuinely new <model-viewer> in the "current"
+    // JSX slot, distinct from the "incoming" one that unmounts, so any
+    // reference captured before this point would point at a detached node.
+    const incomingGateEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as {
+      getCameraOrbit: () => { theta: number; phi: number; radius: number };
+      getCameraTarget: () => { x: number; y: number; z: number };
+    };
+    incomingGateEl.getCameraOrbit = () => ({
+      theta: (10 * Math.PI) / 180,
+      phi: (75 * Math.PI) / 180,
+      radius: 2.5,
+    });
+    incomingGateEl.getCameraTarget = () => ({ x: 0, y: 1.2, z: 0 });
+    act(() => {
+      fireEvent(incomingGateEl as unknown as Element, new Event('load'));
+    });
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+
+    const currentEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as { cameraOrbit: string; cameraTarget: string };
+    expect(currentEl).not.toBeNull();
+
+    // Camera-ownership invariant: a scroll-driven section's model must not
+    // carry auto-rotate — only ScrollTrigger writes its camera.
+    expect(currentEl).not.toHaveAttribute('auto-rotate');
+
+    expect(capturedTriggers['gate-systems']).toBeDefined();
+    expect(capturedTriggers['interior-landscaping']).toBeDefined();
+
+    // Real progress -> real camera assertion, not a weak "isn't undefined"
+    // check. thetaDeg baseline is 10 (from the stubbed getCameraOrbit
+    // above), full sweep is STAIRS_ROTATION_DEG (1440) — at overall
+    // progress 0.25 (local progress 0.5 within the first half) theta
+    // should be baseline + half the sweep.
+    act(() => {
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.25 });
+    });
+    expect(currentEl.cameraOrbit).toBe(`${10 + 1440 * 0.5}deg 75deg 2.5m`);
+
+    // interior-landscaping's own trigger fires while gate-systems is still
+    // active — the authority rule requires this to be a complete no-op,
+    // not just "didn't crash". Capture the exact orbit string first.
+    const orbitBeforeInactiveUpdate = currentEl.cameraOrbit;
+    act(() => {
+      capturedTriggers['interior-landscaping'].onUpdate!({ progress: 0.9 });
+    });
+    expect(currentEl.cameraOrbit).toBe(orbitBeforeInactiveUpdate);
+
+    // Crossing the midpoint requests the section's second model.
+    act(() => {
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.6 });
+    });
+    expect(
+      container.querySelector(`model-viewer[src="${MODEL_ASSETS.gateV2.src}"]`),
+    ).not.toBeNull();
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+    document.body.removeChild(gateSection);
+    document.body.removeChild(landscapingSection);
+  });
+
+  it('idle single-model sections carry auto-rotate once their crossfade completes', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+    const createSpy = jest.spyOn(ScrollTrigger, 'create').mockImplementation(
+      () => ({ kill: jest.fn(), progress: 0 }) as any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    );
+
+    const { container } = render(<ModelSceneController />);
+    const gazeboSection = document.createElement('section');
+    gazeboSection.id = 'cabana-gazebo';
+
+    act(() => {
+      fireIntersection(gazeboSection, true, 400);
+    });
+    const incomingEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gazebo.src}"]`,
+    ) as unknown as Element;
+    act(() => {
+      fireEvent(incomingEl, new Event('load'));
+    });
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+
+    expect(
+      container.querySelector(`model-viewer[src="${MODEL_ASSETS.gazebo.src}"]`),
+    ).toHaveAttribute('auto-rotate');
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+  });
+
+  it('cancels a pending same-section transition when scroll reverses back to the already-current model before it loads', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+
+    const capturedTriggers: Record<string, { onUpdate?: (self: { progress: number }) => void }> =
+      {};
+    const createSpy = jest
+      .spyOn(ScrollTrigger, 'create')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .mockImplementation((config: any) => {
+        const id = (config.trigger as HTMLElement).id;
+        capturedTriggers[id] = config;
+        return { kill: jest.fn(), progress: 0 } as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+      });
+
+    const { container } = render(<ModelSceneController />);
+    const gateSection = document.createElement('section');
+    gateSection.id = 'gate-systems';
+    document.body.appendChild(gateSection);
+
+    act(() => {
+      fireIntersection(gateSection, true, 400);
+    });
+    const incomingGateEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as Element;
+    act(() => {
+      fireEvent(incomingGateEl, new Event('load'));
+    });
+    act(() => {
+      jest.advanceTimersByTime(700);
+    });
+    expect(container.querySelector(`model-viewer[src="${MODEL_ASSETS.gate.src}"]`)).not.toBeNull();
+
+    // Progress crosses the midpoint — requests gateV2, which mounts and
+    // starts loading but hasn't fired its `load` event yet.
+    act(() => {
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.6 });
+    });
+    const gateV2El = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gateV2.src}"]`,
+    ) as unknown as Element;
+    expect(gateV2El).not.toBeNull();
+
+    // Scroll reverses back below the midpoint before gateV2 ever loaded —
+    // this must cancel gateV2's pending transition, not just no-op.
+    act(() => {
+      capturedTriggers['gate-systems'].onUpdate!({ progress: 0.4 });
+    });
+    expect(container.querySelector(`model-viewer[src="${MODEL_ASSETS.gateV2.src}"]`)).toBeNull();
+
+    // gateV2 is already unmounted by this point (its React effect cleanup
+    // already removed its `load` listener when incomingModel became null
+    // above), so this fireEvent is inert — it's here to document that even
+    // a straggling event can't resurrect it, not because it's expected to
+    // do anything. The actual regression this test guards against is the
+    // *previous* assertion: a naive "target === current -> early return,
+    // don't touch the pending transition" implementation would have left
+    // gateV2 mounted and its listener live, and this fireEvent WOULD have
+    // made it become current — that's what the assertion above already
+    // caught before we ever got here.
+    act(() => {
+      fireEvent(gateV2El, new Event('load'));
+      jest.advanceTimersByTime(700);
+    });
+    expect(container.querySelectorAll('model-viewer').length).toBe(1);
+    expect(container.querySelector('model-viewer')).toHaveAttribute('src', MODEL_ASSETS.gate.src);
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+    document.body.removeChild(gateSection);
+  });
+
+  it('gives auto-rotate ownership back to the current model when the active section changes from scroll-driven to single-model', () => {
+    jest.useFakeTimers();
+    mockNormalMotion();
+    const createSpy = jest.spyOn(ScrollTrigger, 'create').mockImplementation(
+      () => ({ kill: jest.fn(), progress: 0 }) as any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    );
+
+    const { container } = render(<ModelSceneController />);
+    const gateSection = document.createElement('section');
+    gateSection.id = 'gate-systems';
+    document.body.appendChild(gateSection);
+    const gazeboSection = document.createElement('section');
+    gazeboSection.id = 'cabana-gazebo';
+    document.body.appendChild(gazeboSection);
+
+    act(() => {
+      fireIntersection(gateSection, true, 400);
+    });
+    const incomingGateEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gate.src}"]`,
+    ) as unknown as Element;
+    act(() => {
+      fireEvent(incomingGateEl, new Event('load'));
+      jest.advanceTimersByTime(700);
+    });
+    expect(
+      container.querySelector(`model-viewer[src="${MODEL_ASSETS.gate.src}"]`),
+    ).not.toHaveAttribute('auto-rotate');
+
+    // Scrolling into cabana-gazebo makes it the active section.
+    act(() => {
+      fireIntersection(gazeboSection, true, 400);
+    });
+    const incomingGazeboEl = container.querySelector(
+      `model-viewer[src="${MODEL_ASSETS.gazebo.src}"]`,
+    ) as unknown as Element;
+    act(() => {
+      fireEvent(incomingGazeboEl, new Event('load'));
+      jest.advanceTimersByTime(700);
+    });
+
+    expect(
+      container.querySelector(`model-viewer[src="${MODEL_ASSETS.gazebo.src}"]`),
+    ).toHaveAttribute('auto-rotate');
+
+    createSpy.mockRestore();
+    jest.useRealTimers();
+    document.body.removeChild(gateSection);
+    document.body.removeChild(gazeboSection);
   });
 });
