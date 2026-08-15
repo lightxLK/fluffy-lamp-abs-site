@@ -4,14 +4,13 @@ import { CardNuts } from '@/components/ui/CardNuts';
 import { ModelViewer } from '@/components/ui/ModelViewer';
 import { MODEL_ASSETS } from '@/lib/data/fabricaModels';
 
-const GATE_MODELS = [
+const MODELS = [
   { name: 'Ornamental Gate', asset: MODEL_ASSETS.gate },
   { name: 'Modern Gate', asset: MODEL_ASSETS.gateV2 },
-];
-
-const LANDSCAPE_MODELS = [
+  { name: 'Gazebo', asset: MODEL_ASSETS.gazebo },
   { name: 'Structural Stairs', asset: MODEL_ASSETS.stairs },
   { name: 'Street Lamp', asset: MODEL_ASSETS.streetLamp },
+  { name: 'Round Staircase', asset: MODEL_ASSETS.roundStairs },
 ];
 
 function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: string } }) {
@@ -34,27 +33,14 @@ function ModelCard({ name, asset }: { name: string; asset: { src: string; alt: s
 
 export function FabricaModelShowcase() {
   return (
-    <>
-      <section className="bg-bg-dark py-14">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {GATE_MODELS.map((gate) => (
-              <ModelCard key={gate.asset.src} name={gate.name} asset={gate.asset} />
-            ))}
-          </div>
-        </Container>
-      </section>
-      <section className="bg-bg-card py-14">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ModelCard name="Gazebo" asset={MODEL_ASSETS.gazebo} />
-            {LANDSCAPE_MODELS.map((item) => (
-              <ModelCard key={item.asset.src} name={item.name} asset={item.asset} />
-            ))}
-            <ModelCard name="Round Staircase" asset={MODEL_ASSETS.roundStairs} />
-          </div>
-        </Container>
-      </section>
-    </>
+    <section className="bg-bg-dark pt-32 pb-24 min-h-screen">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {MODELS.map((model) => (
+            <ModelCard key={model.asset.src} name={model.name} asset={model.asset} />
+          ))}
+        </div>
+      </Container>
+    </section>
   );
 }
