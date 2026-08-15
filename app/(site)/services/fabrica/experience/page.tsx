@@ -14,12 +14,20 @@ import { CardNuts } from '@/components/ui/CardNuts';
 import { DIRECTORS } from '@/data/directors';
 import { SERVICES } from '@/data/services';
 
-export const metadata: Metadata = genMeta({
-  title: 'ABS Fabrica Experience | Interactive Steel Fabrication Showcase',
-  description:
-    'An interactive, scroll-driven walkthrough of ABS Fabrica gates, facades, window grills, and interior landscaping in 3D.',
-  path: '/services/fabrica/experience',
-});
+// This route is an interactive variant of `/services/fabrica`, not a
+// separate topic — its copy is near-identical, so indexing both would be
+// self-competing duplicate content. It is deliberately kept out of
+// `app/sitemap.ts`, marked `noindex`, and canonicalised at the real
+// `/services/fabrica` page, which stays the single indexable URL.
+export const metadata: Metadata = {
+  ...genMeta({
+    title: 'ABS Fabrica Experience | Interactive Steel Fabrication Showcase',
+    description:
+      'An interactive, scroll-driven walkthrough of ABS Fabrica gates, facades, window grills, and interior landscaping in 3D.',
+    path: '/services/fabrica',
+  }),
+  robots: { index: false, follow: true },
+};
 
 const WHY_CHOOSE = [
   {
@@ -167,7 +175,6 @@ export default function FabricaExperiencePage() {
       />
 
       <ModelSceneController />
-      <ReducedMotionModelFallback />
 
       <div className="relative z-10 pointer-events-none">
         <section className="relative bg-bg-dark pt-40 pb-24 overflow-hidden">
@@ -424,6 +431,12 @@ export default function FabricaExperiencePage() {
           </Container>
         </section>
       </div>
+
+      {/* Reduced-motion visitors get the model cards here, after the real
+          page content, rather than above the hero — mounted as a sibling of
+          the `pointer-events-none` wrapper (same relationship it had
+          before), just moved to the end of the content flow. */}
+      <ReducedMotionModelFallback />
 
       <ContactStrip />
     </main>
