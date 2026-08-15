@@ -10,9 +10,11 @@ export interface CameraTargetBaseline {
   zM: number;
 }
 
-// Camera now choreographs across the entire page's scroll length (not one
-// section), so both values scale up from the original single-section
-// tuning to stay visually meaningful over that much longer scroll range.
+// Camera choreography for scroll-driven sections of the fabrica page.
+// Originally built for the round-stairs model; the math is generic
+// (baseline + progress -> camera string) and is reused by
+// ModelSceneController for any mapped section that drives its camera
+// from scroll progress, not just stairs.
 export const STAIRS_ROTATION_DEG = 1440;
 export const STAIRS_DESCENT_M = 4;
 
