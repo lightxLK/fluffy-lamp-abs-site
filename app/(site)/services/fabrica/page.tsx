@@ -6,6 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
 import { ContactStrip } from '@/components/sections/ContactStrip';
+import { StairsScrollScene } from '@/components/sections/StairsScrollScene';
 import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
@@ -412,6 +413,8 @@ export default function FabricaPage() {
           </div>
         </Container>
       </section>
+
+      <StairsScrollScene />
 
       <section className="bg-bg-mid py-24">
         <Container>
