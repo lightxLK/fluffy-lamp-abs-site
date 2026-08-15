@@ -63,7 +63,7 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
   }, [fadeOnLoad]);
 
   return (
-    <div className={cn('relative overflow-hidden bg-border-subtle/40', className)}>
+    <div className={cn('relative overflow-hidden bg-bg-card', className)}>
       <model-viewer
         ref={(node: ModelViewerElement | null) => {
           elementRef.current = node;
