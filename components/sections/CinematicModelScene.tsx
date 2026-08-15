@@ -8,6 +8,7 @@ import { MODEL_PLACEMENTS, SCENE_ANCHORS } from '@/lib/data/fabricaSceneAnchors'
 import {
   buildCameraCurves,
   normalizeModelToPlacement,
+  sampleCameraPath,
   type CameraCurves,
   type MeasuredRadii,
 } from '@/lib/three/cinematicCamera';
@@ -121,11 +122,155 @@ export function CinematicModelScene() {
     const rim = new THREE.DirectionalLight(0xe65a2d, 0.2);
     scene.add(rim);
 
+    scene.fog = new THREE.FogExp2(SCENE_ANCHORS[0].fog.color, SCENE_ANCHORS[0].fog.density);
+
     let cancelled = false;
     const measurementCache: MeasuredRadii = {};
     let curves: CameraCurves | null = null;
     const scrollProgressRef = { current: 0 };
     let scrollTrigger: ReturnType<typeof ScrollTrigger.create> | null = null;
+
+    type ResidencyState = 'idle' | 'loading' | 'resident' | 'disposed' | 'failed';
+    const residency = new Map<string, ResidencyState>();
+    const residentObjects = new Map<string, THREE.Object3D>();
+
+    function windowFor(t: number) {
+      const index = Math.round(t * (MODEL_PLACEMENTS.length - 1));
+      return {
+        start: Math.max(0, index - 1),
+        end: Math.min(MODEL_PLACEMENTS.length - 1, index + 1),
+      };
+    }
+
+    function updateResidency(t: number) {
+      const { start: windowStart, end: windowEnd } = windowFor(t);
+
+      MODEL_PLACEMENTS.forEach((placement, i) => {
+        const inWindow = i >= windowStart && i <= windowEnd;
+        const state = residency.get(placement.src) ?? 'idle';
+
+        if (inWindow && (state === 'idle' || state === 'disposed')) {
+          residency.set(placement.src, 'loading');
+          loadModel(placement.src)
+            .then((object) => {
+              if (cancelled || residency.get(placement.src) !== 'loading') return;
+              // Re-check against the *live* scroll position at resolution
+              // time, not the `t` this request started under — the model
+              // may have left the residency window while this load was in
+              // flight. A late result must never become resident just
+              // because the request started while it was still wanted.
+              const liveWindow = windowFor(scrollProgressRef.current);
+              const stillWanted = i >= liveWindow.start && i <= liveWindow.end;
+              if (!stillWanted) {
+                disposeObject(object);
+                residency.set(placement.src, 'disposed');
+                return;
+              }
+              normalizeModelToPlacement(object, placement);
+              object.traverse((node) => {
+                if (node instanceof THREE.Mesh) node.castShadow = true;
+              });
+              scene.add(object);
+              residentObjects.set(placement.src, object);
+              residency.set(placement.src, 'resident');
+              renderer.shadowMap.needsUpdate = true;
+            })
+            .catch((err) => {
+              console.error(
+                `[CinematicModelScene] residency load failed for ${placement.src}`,
+                err,
+              );
+              residency.set(placement.src, 'failed');
+            });
+        }
+
+        if (!inWindow && state === 'resident') {
+          const object = residentObjects.get(placement.src);
+          if (object) {
+            scene.remove(object);
+            disposeObject(object);
+            residentObjects.delete(placement.src);
+            renderer.shadowMap.needsUpdate = true;
+          }
+          residency.set(placement.src, 'disposed');
+        }
+      });
+    }
+
+    // Shadow-map invalidation is keyed off the key light specifically —
+    // it's the only shadow-casting light (`key.castShadow = true`, set
+    // above) — compared against a snapshot from the last frame that
+    // actually invalidated the shadow map. Position/intensity move
+    // continuously as sampleCameraPath interpolates between anchors;
+    // invalidating on every frame would defeat autoUpdate=false entirely,
+    // so only a materially different light state re-triggers it.
+    const lastShadowKeyPosition = new THREE.Vector3();
+    let lastShadowKeyIntensity = 0;
+    const SHADOW_POSITION_EPSILON_SQ = 0.25; // 0.5 units, squared
+    const SHADOW_INTENSITY_EPSILON = 0.05;
+
+    function renderFrame() {
+      if (!curves) return;
+      const state = sampleCameraPath(scrollProgressRef.current, SCENE_ANCHORS, curves);
+
+      camera.position.copy(state.position);
+      camera.lookAt(state.lookAt);
+      scene.background = state.background;
+      if (scene.fog instanceof THREE.FogExp2) {
+        scene.fog.color.copy(state.fog.color);
+        scene.fog.density = state.fog.density;
+      }
+      renderer.toneMappingExposure = state.exposure;
+
+      key.position.copy(state.light.key.position);
+      key.color.copy(state.light.key.color);
+      key.intensity = state.light.key.intensity;
+      rim.position.copy(state.light.rim.position);
+      rim.color.copy(state.light.rim.color);
+      rim.intensity = state.light.rim.intensity;
+      hemi.color.copy(state.light.hemi.skyColor);
+      hemi.groundColor.copy(state.light.hemi.groundColor);
+      hemi.intensity = state.light.hemi.intensity;
+
+      const keyMoved =
+        key.position.distanceToSquared(lastShadowKeyPosition) > SHADOW_POSITION_EPSILON_SQ;
+      const keyDimmed = Math.abs(key.intensity - lastShadowKeyIntensity) > SHADOW_INTENSITY_EPSILON;
+      if (keyMoved || keyDimmed) {
+        renderer.shadowMap.needsUpdate = true;
+        lastShadowKeyPosition.copy(key.position);
+        lastShadowKeyIntensity = key.intensity;
+      }
+
+      updateResidency(scrollProgressRef.current);
+      renderer.render(scene, camera);
+    }
+
+    function startAnimationLoop() {
+      renderer.setAnimationLoop(renderFrame);
+    }
+
+    function handleResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      // Curve immutability: rebuild only here, from the same measured
+      // data — never inside renderFrame. scrollProgressRef is untouched,
+      // so the ride continues from the same position after the rebuild.
+      if (Object.keys(measurementCache).length > 0 || curves) {
+        curves = buildCameraCurves(SCENE_ANCHORS, measurementCache, camera.fov, camera.aspect);
+      }
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'hidden') {
+        renderer.setAnimationLoop(null);
+      } else if (curves) {
+        startAnimationLoop();
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     async function measureAndBuild() {
       for (let i = 0; i < MODEL_PLACEMENTS.length; i++) {
@@ -139,10 +284,15 @@ export function CinematicModelScene() {
           if (i === 0) {
             // Promote the first anchor's model directly into the visible
             // scene — it's needed immediately, before any scroll happens.
+            // Register it in residentObjects/residency too, so unmount
+            // actually disposes it and updateResidency doesn't
+            // immediately try to re-load it.
             object.traverse((node) => {
               if (node instanceof THREE.Mesh) node.castShadow = true;
             });
             scene.add(object);
+            residentObjects.set(placement.src, object);
+            residency.set(placement.src, 'resident');
             renderer.shadowMap.needsUpdate = true;
           } else {
             // Metadata-only retention: dispose everything except the
@@ -154,7 +304,13 @@ export function CinematicModelScene() {
         } catch (err) {
           console.error(`[CinematicModelScene] measurement failed for ${placement.src}`, err);
           // No entry in measurementCache — buildCameraCurves falls back to
-          // this anchor's authored fallbackRadius.
+          // this anchor's authored fallbackRadius. Also mark residency
+          // 'failed' permanently: without this, updateResidency (above)
+          // would see the default 'idle' state and retry loadModel every
+          // time this anchor enters the residency window, contradicting
+          // the frozen loading-miss policy ("permanently empty for the
+          // session").
+          residency.set(placement.src, 'failed');
         }
       }
 
@@ -189,15 +345,19 @@ export function CinematicModelScene() {
         });
       }
 
-      renderer.render(scene, camera);
+      startAnimationLoop();
     }
 
     measureAndBuild();
 
     return () => {
       cancelled = true;
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       scrollTrigger?.kill();
       renderer.setAnimationLoop(null);
+      residentObjects.forEach((object) => disposeObject(object));
+      residentObjects.clear();
       renderer.dispose();
       ground.geometry.dispose();
       (ground.material as THREE.Material).dispose();
