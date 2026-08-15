@@ -2,6 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { ScrollTrigger } from '@/lib/gsap';
+import { MODEL_PLACEMENTS, SCENE_ANCHORS } from '@/lib/data/fabricaSceneAnchors';
+import {
+  buildCameraCurves,
+  normalizeModelToPlacement,
+  type CameraCurves,
+  type MeasuredRadii,
+} from '@/lib/three/cinematicCamera';
 
 function hasWebGL(): boolean {
   try {
@@ -12,8 +21,48 @@ function hasWebGL(): boolean {
   }
 }
 
+function loadModel(src: string): Promise<THREE.Object3D> {
+  return new Promise((resolve, reject) => {
+    const loader = new GLTFLoader();
+    loader.load(
+      src,
+      (gltf) => resolve(gltf.scene),
+      undefined,
+      (err) => reject(err instanceof Error ? err : new Error(String(err))),
+    );
+  });
+}
+
+function disposeObject(object: THREE.Object3D) {
+  // Guard against double-disposal: a GLTF export commonly reuses one
+  // material instance (and its textures) across several mesh nodes in the
+  // same object graph — without these sets, traverse() would call
+  // `.dispose()` on the same material/texture once per mesh that
+  // references it, not once total.
+  const disposedMaterials = new Set<THREE.Material>();
+  const disposedTextures = new Set<THREE.Texture>();
+
+  object.traverse((node) => {
+    if (!(node instanceof THREE.Mesh)) return;
+    node.geometry.dispose();
+    const materials = Array.isArray(node.material) ? node.material : [node.material];
+    for (const material of materials) {
+      if (disposedMaterials.has(material)) continue;
+      disposedMaterials.add(material);
+      for (const value of Object.values(material)) {
+        if (value instanceof THREE.Texture && !disposedTextures.has(value)) {
+          disposedTextures.add(value);
+          value.dispose();
+        }
+      }
+      material.dispose();
+    }
+  });
+}
+
 export function CinematicModelScene() {
   const [enabled, setEnabled] = useState(false);
+  const [measuring, setMeasuring] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Gating order: reduced-motion, then WebGL availability — checked once
@@ -72,7 +121,82 @@ export function CinematicModelScene() {
     const rim = new THREE.DirectionalLight(0xe65a2d, 0.2);
     scene.add(rim);
 
+    let cancelled = false;
+    const measurementCache: MeasuredRadii = {};
+    let curves: CameraCurves | null = null;
+    const scrollProgressRef = { current: 0 };
+    let scrollTrigger: ReturnType<typeof ScrollTrigger.create> | null = null;
+
+    async function measureAndBuild() {
+      for (let i = 0; i < MODEL_PLACEMENTS.length; i++) {
+        if (cancelled) return;
+        const placement = MODEL_PLACEMENTS[i];
+        try {
+          const object = await loadModel(placement.src);
+          if (cancelled) return;
+          const radius = normalizeModelToPlacement(object, placement);
+          measurementCache[placement.src] = radius;
+          if (i === 0) {
+            // Promote the first anchor's model directly into the visible
+            // scene — it's needed immediately, before any scroll happens.
+            object.traverse((node) => {
+              if (node instanceof THREE.Mesh) node.castShadow = true;
+            });
+            scene.add(object);
+            renderer.shadowMap.needsUpdate = true;
+          } else {
+            // Metadata-only retention: dispose everything except the
+            // measured radius for every model not being promoted now.
+            // Task 6's residency window re-loads models as the camera
+            // approaches them.
+            disposeObject(object);
+          }
+        } catch (err) {
+          console.error(`[CinematicModelScene] measurement failed for ${placement.src}`, err);
+          // No entry in measurementCache — buildCameraCurves falls back to
+          // this anchor's authored fallbackRadius.
+        }
+      }
+
+      if (cancelled) return;
+      curves = buildCameraCurves(SCENE_ANCHORS, measurementCache, camera.fov, camera.aspect);
+      setMeasuring(false);
+
+      // Global Constraints: ScrollTrigger's trigger is the page's own
+      // <main> element — never document.body (content outside <main>
+      // would stretch the 0→1 mapping) and never this component's own
+      // `container` div (position: fixed, no natural scroll height).
+      // <main> is a hard invariant (page.tsx always renders exactly one),
+      // never document.body — fail closed rather than silently accepting
+      // a trigger element the spec explicitly ruled out. If this ever
+      // fires, the ride stays static at the first anchor (curves are
+      // still built, the first model is still visible) rather than
+      // scrolling against the wrong contract.
+      const scrollRoot = document.querySelector('main');
+      if (!scrollRoot) {
+        console.error(
+          '[CinematicModelScene] expected page <main> was not found — scroll-driven camera path disabled for this session',
+        );
+      } else {
+        scrollTrigger = ScrollTrigger.create({
+          trigger: scrollRoot,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          onUpdate: (self) => {
+            scrollProgressRef.current = self.progress;
+          },
+        });
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    measureAndBuild();
+
     return () => {
+      cancelled = true;
+      scrollTrigger?.kill();
       renderer.setAnimationLoop(null);
       renderer.dispose();
       ground.geometry.dispose();
@@ -83,5 +207,14 @@ export function CinematicModelScene() {
 
   if (!enabled) return null;
 
-  return <div ref={containerRef} className="fixed inset-0 z-0" />;
+  return (
+    <>
+      <div ref={containerRef} className="fixed inset-0 z-0" />
+      {measuring && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <p className="text-text-muted text-sm uppercase tracking-widest">Loading scene…</p>
+        </div>
+      )}
+    </>
+  );
 }
