@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  deploy-staging:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +32,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          key: ${{ runner.os }}-nextjs-staging-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-nextjs-staging-${{ hashFiles('package-lock.json') }}-
 
       - name: Build static site
         run: npm run build
@@ -47,6 +47,57 @@ jobs:
           server: ftp.tsa.anilbalajisteel.com
           username: u591788557.tsaxabs
           password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          timeout: 180000
+          local-dir: ./out/
+          server-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+
+  deploy-production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-production-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-production-${{ hashFiles('package-lock.json') }}-
+
+      # NEXT_PUBLIC_SITE_ENV=production flips SITE_URL to anilbalajisteel.com
+      # and turns search-engine indexing on (see lib/env.ts, app/robots.ts) —
+      # the staging build above deliberately stays noindex.
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ secrets.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+          NEXT_PUBLIC_SITE_ENV: production
+
+      - name: Deploy out/ to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.anilbalajisteel.com
+          username: u591788557.ABSx26
+          password: ${{ secrets.FTP_PASSWORD_PROD }}
           port: 21
           timeout: 180000
           local-dir: ./out/
