@@ -18,6 +18,12 @@ export function markPreloaderShown(): void {
   window.sessionStorage.setItem(PRELOADER_SHOWN_KEY, String(Date.now()));
 }
 
+/** Forces the next home-page mount to replay the preloader, bypassing the 30-minute skip. */
+export function clearPreloaderShown(): void {
+  if (typeof window === 'undefined') return;
+  window.sessionStorage.removeItem(PRELOADER_SHOWN_KEY);
+}
+
 /**
  * Called from a CTA on the home page right before navigating away, so that
  * coming back (via back button or a link back to "/") can restore the

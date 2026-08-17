@@ -254,6 +254,14 @@ body::after {
 }
 
 @layer utilities {
+  /* Soft top- and bottom-center glow on the maintenance page — no rays, no
+     animation, just static radial highlights behind the content. */
+  .maintenance-glow {
+    background:
+      radial-gradient(ellipse 55% 40% at 50% 0%, rgba(54, 103, 244, 0.35), transparent 70%),
+      radial-gradient(ellipse 55% 40% at 50% 100%, rgba(54, 103, 244, 0.35), transparent 70%);
+  }
+
   .animate-canopy-x {
     animation: canopy-x var(--duration, 30s) linear infinite;
   }

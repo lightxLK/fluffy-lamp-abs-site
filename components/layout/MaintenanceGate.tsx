@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { isLaunched } from '@/lib/maintenance';
+import { clearPreloaderShown } from '@/lib/homeReturn';
 import { MaintenancePage } from '@/components/layout/MaintenancePage';
 
 // Tab/session-only bypass: closing the browser (not just navigating) re-locks
@@ -30,6 +31,14 @@ function writeBypass() {
   }
 }
 
+function clearBypass() {
+  try {
+    sessionStorage.removeItem(BYPASS_KEY);
+  } catch {
+    // sessionStorage unavailable (private mode, etc.) — nothing to clear.
+  }
+}
+
 export function MaintenanceGate({ children }: { children: React.ReactNode }) {
   // Starts null on both server and client so the first client render matches
   // the static HTML (no hydration mismatch); the effect below resolves the
@@ -45,7 +54,26 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
 
     const unlock = () => {
       writeBypass();
+      // Re-arms the home preloader so revealing the site through the gate
+      // always plays the intro, instead of the 30-minute skip meant for
+      // ordinary back/forward navigation.
+      clearPreloaderShown();
       setUnlocked(true);
+    };
+
+    // Toggles between the maintenance overlay and the live site, so the
+    // same combo can flip back and forth without a reload.
+    const toggle = () => {
+      setUnlocked((prev) => {
+        const next = !(prev ?? false);
+        if (next) {
+          writeBypass();
+          clearPreloaderShown();
+        } else {
+          clearBypass();
+        }
+        return next;
+      });
     };
 
     // Ctrl/Cmd+W is intercepted where the browser allows it (embedded
@@ -58,7 +86,7 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
 
       if (closeCombo || altCombo) {
         event.preventDefault();
-        unlock();
+        toggle();
       }
     };
 

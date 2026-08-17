@@ -2,22 +2,57 @@
 
 import { useEffect, useState } from 'react';
 import Counter from '@/components/ui/Counter';
-import LightRays from '@/components/ui/LightRays';
+import SplitText from '@/components/ui/SplitText';
 import { getCountdown, type Countdown } from '@/lib/maintenance';
+import { HERO_QUOTES, shuffleHeroQuoteOrder } from '@/lib/heroQuotes';
 
 // Deliberately deeper than the --color-abs-blue token — a one-off backdrop
 // for this page rather than a reusable brand color.
 const MAINTENANCE_BG = '#011152';
 
-const UNITS: { key: keyof Countdown; label: string }[] = [
-  { key: 'days', label: 'Days' },
-  { key: 'hours', label: 'Hours' },
-  { key: 'minutes', label: 'Minutes' },
-  { key: 'seconds', label: 'Seconds' },
+const QUOTE_INTERVAL_MS = 4500;
+
+interface QuoteSession {
+  order: number[];
+  pos: number;
+}
+
+// Cycles through a freshly shuffled order each lap, so every quote appears
+// once before any repeat, instead of independent random picks that can
+// repeat back-to-back.
+function useRotatingHeroQuote(): string {
+  const [session, setSession] = useState<QuoteSession>(() => ({
+    order: shuffleHeroQuoteOrder(),
+    pos: 0,
+  }));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSession((prev) => {
+        const nextPos = prev.pos + 1;
+        if (nextPos >= prev.order.length) {
+          return { order: shuffleHeroQuoteOrder(), pos: 0 };
+        }
+        return { order: prev.order, pos: nextPos };
+      });
+    }, QUOTE_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return HERO_QUOTES[session.order[session.pos]];
+}
+
+const UNITS: { key: keyof Countdown; singular: string; plural: string }[] = [
+  { key: 'days', singular: 'Day', plural: 'Days' },
+  { key: 'hours', singular: 'Hour', plural: 'Hours' },
+  { key: 'minutes', singular: 'Minute', plural: 'Minutes' },
+  { key: 'seconds', singular: 'Second', plural: 'Seconds' },
 ];
 
 export function MaintenancePage() {
   const [countdown, setCountdown] = useState<Countdown>(() => getCountdown());
+  const quote = useRotatingHeroQuote();
 
   useEffect(() => {
     const interval = setInterval(() => setCountdown(getCountdown()), 1000);
@@ -29,21 +64,7 @@ export function MaintenancePage() {
       className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 py-16 text-white"
       style={{ background: MAINTENANCE_BG }}
     >
-      <div aria-hidden className="absolute inset-0 z-0">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#3667f4"
-          raysSpeed={0.8}
-          lightSpread={0.65}
-          rayLength={1.4}
-          fadeDistance={0.9}
-          saturation={0.7}
-          followMouse
-          mouseInfluence={0.12}
-          noiseAmount={0.06}
-          distortion={0.03}
-        />
-      </div>
+      <div aria-hidden className="maintenance-glow pointer-events-none absolute inset-0 z-0" />
 
       <div className="relative z-10 flex flex-col items-center">
         <img
@@ -58,9 +79,19 @@ export function MaintenancePage() {
           Under Maintenance
         </p>
 
-        <h1 className="mt-4 max-w-2xl text-center text-[clamp(1.75rem,5vw,3.25rem)] font-bold leading-[1.15]">
-          Something big is coming.
-        </h1>
+        <SplitText
+          key={quote}
+          text={quote}
+          tag="h1"
+          className="mt-4 min-h-[1.3em] max-w-[92vw] !whitespace-nowrap text-[clamp(1.15rem,3.6vw,2.5rem)] font-medium leading-[1.15]"
+          splitType="words"
+          from={{ opacity: 0, y: 24 }}
+          to={{ opacity: 1, y: 0 }}
+          duration={1.1}
+          delay={70}
+          ease="power3.out"
+          textAlign="center"
+        />
 
         <div className="mt-12 flex items-start gap-3 md:gap-6">
           {UNITS.map((unit, i) => (
@@ -80,7 +111,7 @@ export function MaintenancePage() {
                   containerStyle={{ fontVariantNumeric: 'tabular-nums' }}
                 />
                 <span className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2rem] text-white/60 md:text-xs">
-                  {unit.label}
+                  {countdown[unit.key] === 1 ? unit.singular : unit.plural}
                 </span>
               </div>
               {i < UNITS.length - 1 && (

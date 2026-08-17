@@ -27,7 +27,7 @@ export function ReadyToBuildScene({ className }: ReadyToBuildSceneProps) {
 
       gsap.to(path, {
         strokeDashoffset: 0,
-        duration: 25,
+        duration: 15,
         ease: 'power2.inOut',
         scrollTrigger: {
           trigger: svgRef.current,
