@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Albert_Sans } from 'next/font/google';
 import { EasterEgg } from '@/components/layout/EasterEgg';
+import { MaintenanceGate } from '@/components/layout/MaintenanceGate';
 import { IS_PRODUCTION_SITE, SITE_URL } from '@/lib/env';
 import './globals.css';
 
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-bg-dark text-text-primary font-sans antialiased">
-        {children}
+        <MaintenanceGate>{children}</MaintenanceGate>
         <EasterEgg />
       </body>
     </html>
