@@ -56,3 +56,11 @@ vite.config.ts
 
 # subagent-driven-development scratch workspace (local-only)
 /.superpowers/
+
+# Claude Code agent/tooling state (local-only, not part of shipped repo)
+/.agents/
+/.claude/
+skills-lock.json
+
+# unrelated side project nested in this checkout (local-only)
+/making-of-video/
