@@ -28,6 +28,11 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
   forwardedRef,
 ) {
   const [loaded, setLoaded] = useState(false);
+  // Tracks a hard failure (most commonly WebGL unavailable — hardware
+  // acceleration disabled, GPU sandboxed/blocklisted) so the card can show a
+  // fallback message instead of staying invisible forever: without this,
+  // the opacity-gate below never flips because `load` never fires.
+  const [failed, setFailed] = useState(false);
   const elementRef = useRef<ModelViewerElement | null>(null);
 
   // @google/model-viewer throws `HTMLElement is not defined` if its module
@@ -58,8 +63,13 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
       return;
     }
     const handleLoad = () => setLoaded(true);
+    const handleError = () => setFailed(true);
     el.addEventListener('load', handleLoad);
-    return () => el.removeEventListener('load', handleLoad);
+    el.addEventListener('error', handleError);
+    return () => {
+      el.removeEventListener('load', handleLoad);
+      el.removeEventListener('error', handleError);
+    };
   }, [fadeOnLoad]);
 
   return (
@@ -87,6 +97,14 @@ export const ModelViewer = forwardRef<ModelViewerElement, ModelViewerProps>(func
           transition: 'opacity 0.6s ease',
         }}
       />
+      {failed && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 px-4 text-center">
+          <span className="text-text-muted text-sm font-medium">3D preview unavailable</span>
+          <span className="text-text-muted/70 text-xs">
+            Enable hardware acceleration in your browser to view this model.
+          </span>
+        </div>
+      )}
     </div>
   );
 });
