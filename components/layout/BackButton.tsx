@@ -1,8 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { ArrowLeft, ArrowUp } from 'lucide-react';
 import { getLenis } from '@/lib/lenis';
+
+// Below this, the home page is still showing its hero — a "back to top"
+// button pointing at where the visitor already is has nothing useful to do.
+const TOP_VISIBILITY_THRESHOLD_PX = 200;
 
 /**
  * Fixed corner button. On every page except home it goes back to wherever
@@ -10,12 +15,23 @@ import { getLenis } from '@/lib/lenis';
  * HomeReturnScroll's back-navigation handling restores the previous page's
  * exact scroll offset, or the exact home page section, the same way a
  * physical back gesture would. On the home page there is nowhere useful to
- * go "back" to, so it instead scrolls back to the top of the page.
+ * go "back" to, so it instead scrolls back to the top of the page — and
+ * stays hidden until the visitor has actually scrolled away from the top.
  */
 export function BackButton() {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const [scrolledPastTop, setScrolledPastTop] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const onScroll = () => setScrolledPastTop(window.scrollY > TOP_VISIBILITY_THRESHOLD_PX);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHome]);
 
   const scrollToTop = () => {
     const lenis = getLenis();
@@ -25,6 +41,8 @@ export function BackButton() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  if (isHome && !scrolledPastTop) return null;
 
   return (
     <button
