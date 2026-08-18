@@ -121,7 +121,7 @@ export function MaintenancePage() {
           ))}
         </div>
 
-        <p className="mt-12 text-sm text-white/60">21 August 2026, 7:30 PM IST</p>
+        <p className="mt-12 text-sm text-white/60">21 August 2026</p>
       </div>
     </main>
   );
