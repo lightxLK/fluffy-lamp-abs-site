@@ -7,6 +7,7 @@ interface EastIndiaMapSceneProps {
 const HQ = { cx: 1691, cy: 1411 }; // Howrah / West Bengal
 
 const NODES = [
+  { cx: 1079, cy: 995, label: 'Lucknow' }, // Uttar Pradesh
   { cx: 1425, cy: 1117, label: 'Patna' }, // Bihar
   { cx: 1441, cy: 1344, label: 'Ranchi' }, // Jharkhand
   { cx: 1483, cy: 1638, label: 'Bhubaneswar' }, // Odisha
@@ -17,7 +18,7 @@ const NODES = [
 export function EastIndiaMapScene({ className }: EastIndiaMapSceneProps) {
   return (
     <svg viewBox="0 0 2500 2843" fill="none" aria-hidden="true" className={className}>
-      {/* Actual India map — WB bright blue, 5 states mid-blue, rest faded.
+      {/* Actual India map — WB bright blue, 6 states mid-blue, rest faded.
           Baked-in line colors can't inherit CSS vars, so swap per theme. */}
       <image href="/india-map.svg" width="2500" height="2843" className="light:hidden" />
       <image
