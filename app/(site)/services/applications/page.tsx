@@ -26,7 +26,7 @@ const USE_CASES = [
   },
   {
     title: 'Gates',
-    body: 'Shutter profiles and Fabrica-built gates secure homes, shops, and commercial premises across six states.',
+    body: 'Shutter profiles and Fabrica-built gates secure homes, shops, and commercial premises across seven states.',
   },
   {
     title: 'Fabrication',

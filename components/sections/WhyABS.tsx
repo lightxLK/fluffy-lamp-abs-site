@@ -16,7 +16,7 @@ const REASONS = [
   {
     number: '03',
     title: '250+ Dealer Network',
-    body: 'Our partners span six states. Wherever you build, ABS material is within reach.',
+    body: 'Our partners span seven states. Wherever you build, ABS material is within reach.',
   },
   {
     number: '04',

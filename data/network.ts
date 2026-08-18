@@ -14,6 +14,7 @@ export const NETWORK_STATES: NetworkState[] = [
   { slug: 'bihar', name: 'Bihar', dealers: 50, svgSrc: '/states/bihar.svg' },
   { slug: 'assam', name: 'Assam', dealers: 120, svgSrc: '/states/assam.svg' },
   { slug: 'tripura', name: 'Tripura', dealers: 140, svgSrc: '/states/tripura.svg' },
+  { slug: 'uttar-pradesh', name: 'Uttar Pradesh', dealers: 50, svgSrc: '/states/uttarpradesh.svg' },
 ];
 
 export const DEFAULT_NETWORK_STATE_SLUG = 'west-bengal';

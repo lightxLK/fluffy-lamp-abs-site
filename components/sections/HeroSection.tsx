@@ -23,7 +23,7 @@ const SLIDES = [
   {
     eyebrow: 'The ABS Difference',
     headline: 'Precision. Strength. Legacy.',
-    tagline: '250+ dealers. 6 states. One unwavering standard.',
+    tagline: '250+ dealers. 7 states. One unwavering standard.',
     cta: { label: 'About Us', href: '/about' },
   },
 ] as const;

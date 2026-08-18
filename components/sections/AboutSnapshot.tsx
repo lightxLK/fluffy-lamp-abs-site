@@ -12,7 +12,7 @@ export function AboutSnapshot() {
             [
               { value: '1972', label: 'Founded' },
               { value: '250+', label: 'Dealers' },
-              { value: '6', label: 'States' },
+              { value: '7', label: 'States' },
             ] as const
           ).map((stat) => (
             <div key={stat.label} className="text-center">
@@ -34,7 +34,7 @@ export function AboutSnapshot() {
           <p className="text-text-body text-lg leading-relaxed mb-6">
             Founded in 1972 in Howrah by Late Shri Ved Prakash Agarwal, Anil Balaji Steel began as a
             modest rolling operation and grew into Eastern India&apos;s most recognised steel brand,
-            a name on every shutter, roof, and frame across six states.
+            a name on every shutter, roof, and frame across seven states.
           </p>
           <p className="text-text-muted text-base leading-relaxed mb-10">
             Today, with 70+ professionals, 250+ dealer partners, and sourcing relationships with
