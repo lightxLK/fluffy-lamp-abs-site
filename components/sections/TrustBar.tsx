@@ -3,7 +3,7 @@ const STATS = [
   '427 Dealers',
   '1,00,000 MT Capacity',
   '85% West Bengal',
-  '70+ Professionals',
+  '112 Professionals',
   '95% Employee Retention',
 ];
 
