@@ -78,9 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/60 to-transparent p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
           <p className="text-text-muted text-xs uppercase tracking-widest mb-2">
-            {product.category === product.brandLine
-              ? product.category
-              : `${product.category} · ${product.brandLine}`}
+            {product.brandLine}
           </p>
           <h3 className="text-text-primary font-semibold text-lg leading-tight mb-2">
             {product.name}
