@@ -42,7 +42,7 @@ function loadState(state: (typeof NETWORK_STATES)[number]): Promise<void> {
       const dots = await sampleDotsViaRaster(
         text,
         result.viewBox,
-        dotCountFor(state.dealers),
+        dotCountFor(state.dealers, state.slug),
         state.slug,
       );
 
@@ -136,7 +136,7 @@ export function NetworkStateDetail({ selected, className }: NetworkStateDetailPr
     <div className={className}>
       <div className="flex aspect-square w-full items-center justify-center">
         {parsed === undefined && <StateSkeleton />}
-        {parsed === null && <StatePlaceholder dealers={state.dealers} />}
+        {parsed === null && <StatePlaceholder dealers={state.dealers} slug={state.slug} />}
         {parsed && (
           <svg
             ref={svgRef}
@@ -197,8 +197,8 @@ function StateSkeleton() {
   );
 }
 
-function StatePlaceholder({ dealers }: { dealers: number }) {
-  const dotCount = dotCountFor(dealers);
+function StatePlaceholder({ dealers, slug }: { dealers: number; slug: string }) {
+  const dotCount = dotCountFor(dealers, slug);
   return (
     <div
       className="border-border-subtle relative z-[2] flex h-2/3 w-2/3 flex-wrap content-center items-center justify-center gap-2 rounded-lg border border-dashed p-6"

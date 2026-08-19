@@ -19,7 +19,8 @@ export const NETWORK_STATES: NetworkState[] = [
 
 export const DEFAULT_NETWORK_STATE_SLUG = 'west-bengal';
 
-/** Dot count equals actual dealer count for the state. */
-export function dotCountFor(dealers: number): number {
+/** Dot count equals actual dealer count, except West Bengal which divides by 10. */
+export function dotCountFor(dealers: number, slug?: string): number {
+  if (slug === 'west-bengal') return Math.max(1, Math.round(dealers / 10));
   return dealers;
 }
