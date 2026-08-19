@@ -20,7 +20,7 @@ export function ProductsSection() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {PRODUCTS.map((product) => {
-            const isShutter = product.slug === 'shutter';
+            const isShutter = ['shutter', 'shutter-accessories', 'coils'].includes(product.slug);
             return (
               <HomeExitLink
                 key={product.slug}
