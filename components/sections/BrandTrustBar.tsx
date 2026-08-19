@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-const BRANDS = [
+const BRANDS: { name: string; src: string; scale?: string }[] = [
   { name: 'SAIL', src: '/Client Logo/sail.webp' },
   { name: 'APL Apollo', src: '/Client Logo/apollo.webp' },
   { name: 'Nezone', src: '/Client Logo/nezone-bl.webp' },
   { name: 'JSW Steel', src: '/Client Logo/jsw.webp' },
   { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
-  { name: 'Shyam Steel', src: '/Client Logo/shyam-steel.png' },
+  { name: 'Shyam Steel', src: '/Client Logo/shyam-steel.png', scale: 'scale-150' },
 ];
 
 const REPEAT = 4;
@@ -37,7 +37,7 @@ export function BrandTrustBar() {
                   alt={brand.name}
                   width={192}
                   height={80}
-                  className="h-full w-full object-contain brightness-0 invert light:filter-none"
+                  className={`h-full w-full object-contain brightness-0 invert light:filter-none ${brand.scale ?? ''}`}
                 />
               </span>
             ))}

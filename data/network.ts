@@ -19,10 +19,7 @@ export const NETWORK_STATES: NetworkState[] = [
 
 export const DEFAULT_NETWORK_STATE_SLUG = 'west-bengal';
 
-const MAX_DOTS = 30;
-const maxDealers = Math.max(...NETWORK_STATES.map((s) => s.dealers));
-
-/** Dot count scales proportionally to the largest state's dealer count, capped at 30. */
+/** Dot count equals actual dealer count for the state. */
 export function dotCountFor(dealers: number): number {
-  return Math.max(1, Math.round((dealers / maxDealers) * MAX_DOTS));
+  return dealers;
 }
