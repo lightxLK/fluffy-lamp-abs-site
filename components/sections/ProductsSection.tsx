@@ -49,7 +49,7 @@ export function ProductsSection() {
 
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg-dark/95 via-bg-dark/60 to-transparent p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                     <p className="text-text-muted text-xs uppercase tracking-widest mb-1">
-                      {product.category}
+                      {product.brandLine}
                     </p>
                     <h3 className="text-text-primary font-semibold text-sm leading-tight">
                       {product.name}

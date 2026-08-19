@@ -11,7 +11,7 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     name: 'Rolling Shutter Gates',
-    brandLine: 'ABS Shakti Shutter™',
+    brandLine: 'ABS ShaktiShutter™',
     slug: 'shutter',
     tagline: 'One of the most diverse profile offerings in the sector',
     category: 'Profiles',
@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Pipes',
-    brandLine: 'ABS Flow Pipe™',
+    brandLine: 'ABS FlowPipe™',
     slug: 'pipes',
     tagline: 'Round, square and RHS, in MS, GP and stainless steel',
     category: 'Pipes',
@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Roofing Sheets',
-    brandLine: 'ABS Blue Shield™',
+    brandLine: 'ABS BlueShield™',
     slug: 'sheet',
     tagline: 'PPGL roofing, built for Indian weather',
     category: 'Sheets',
@@ -41,7 +41,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Shutter Accessories',
-    brandLine: 'ABS Total Shutter™',
+    brandLine: 'ABS TotalShutter™',
     slug: 'shutter-accessories',
     tagline: 'Every component for a complete installation',
     category: 'Accessories',
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Plain Sheets',
-    brandLine: 'ABS Edge Cut™',
+    brandLine: 'ABS EdgeCut™',
     slug: 'plain-sheets',
     tagline: 'GI, CR, HR and PPGL, cut to length',
     category: 'Processed Steel',
@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Slit & Pencil Coils',
-    brandLine: 'ABS Coreline™',
+    brandLine: 'ABS CoreLine™',
     slug: 'coils',
     tagline: 'Precision slitting, held to tight tolerance',
     category: 'Coils',
