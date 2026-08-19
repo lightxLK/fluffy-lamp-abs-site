@@ -11,9 +11,9 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     name: 'Rolling Shutter Gates',
-    brandLine: 'ABS ShaktiShutter™',
+    brandLine: 'ABS Shakti Shutter™',
     slug: 'shutter',
-    tagline: 'One of the widest profile ranges in the market',
+    tagline: 'One of the most diverse profile offerings in the sector',
     category: 'Profiles',
     description:
       'High-quality, precision-engineered profiles in GI, CR, and PPGL with special protective guard film. Flat, super flat, diamond, gear, and perforated profiles, alongside bottom plates, springs, lock plates, hood covers, and bracket plates.',
@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Pipes',
-    brandLine: 'ABS FlowPipe™ Series',
+    brandLine: 'ABS Flow Pipe™',
     slug: 'pipes',
     tagline: 'Round, square and RHS, in MS, GP and stainless steel',
     category: 'Pipes',
@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Roofing Sheets',
-    brandLine: 'ABS BlueShield™ System',
+    brandLine: 'ABS Blue Shield™',
     slug: 'sheet',
     tagline: 'PPGL roofing, built for Indian weather',
     category: 'Sheets',
@@ -41,7 +41,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Shutter Accessories',
-    brandLine: 'ABS TotalShutter™ System',
+    brandLine: 'ABS Total Shutter™',
     slug: 'shutter-accessories',
     tagline: 'Every component for a complete installation',
     category: 'Accessories',
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Plain Sheets',
-    brandLine: 'ABS EdgeCut™ Series',
+    brandLine: 'ABS Edge Cut™',
     slug: 'plain-sheets',
     tagline: 'GI, CR, HR and PPGL, cut to length',
     category: 'Processed Steel',
@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     name: 'Slit & Pencil Coils',
-    brandLine: 'ABS CoreLine™ Series',
+    brandLine: 'ABS Coreline™',
     slug: 'coils',
     tagline: 'Precision slitting, held to tight tolerance',
     category: 'Coils',

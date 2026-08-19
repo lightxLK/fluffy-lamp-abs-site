@@ -35,7 +35,7 @@ export function FabricaTeaser() {
             vision.
           </p>
           <p className="text-white text-base leading-relaxed mb-10 drop-shadow">
-            Led by Ms. Komal Agarwal, our fabrication division has completed 500+ bespoke
+            Led by Ms. Komal Agarwal, our fabrication division has completed 532 bespoke
             installations across West Bengal and Odisha.
           </p>
           <HomeExitLink

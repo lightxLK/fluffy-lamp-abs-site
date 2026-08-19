@@ -26,7 +26,7 @@ export function CSRTeaser() {
       <Container className="relative">
         <div className="text-center max-w-3xl mx-auto">
           <p className="text-white text-xs font-medium uppercase tracking-widest mb-4">
-            Social Responsibility
+            Corporate Social Responsibility
           </p>
           <h2 className="text-white font-bold text-4xl lg:text-5xl leading-tight mb-6">
             Community &amp; Sustainability

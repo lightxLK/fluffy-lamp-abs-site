@@ -6,31 +6,31 @@ const REASONS = [
   {
     number: '01',
     title: '50-Year Track Record',
-    body: 'Half a century of delivering steel on spec, on time, and on trust, ask any builder in Bengal.',
+    body: 'Half a century of delivering steel and building trust over 3 generations.',
   },
   {
     number: '02',
     title: 'Direct Mill Sourcing',
-    body: 'We source prime material from SAIL, Tata, JSW, and Jindal, no middleman, no grade uncertainty.',
+    body: 'We source prime material from SAIL, Nezone, JSW, and Jindal, no duplicity, no grade uncertainty.',
   },
   {
     number: '03',
-    title: '250+ Dealer Network',
-    body: 'Our partners span seven states. Wherever you build, ABS material is within reach.',
+    title: '427 Dealers Network',
+    body: 'Our dealers span seven states. Wherever you build, ABS material is within reach.',
   },
   {
     number: '04',
-    title: 'In-House Fabrication',
-    body: 'Fabrica brings custom design and fabrication under one roof, fewer handoffs, tighter tolerances.',
+    title: 'Single Point Loading',
+    body: 'Saving you millions in time, transport, quality and price stability.',
   },
   {
     number: '05',
-    title: 'Full Product Range',
-    body: 'Profiles, pipes, sheets, coils, sheds, one supplier for your entire project bill of materials.',
+    title: 'Widest Product Range',
+    body: 'From shutter parts to sheets, pipes to roofing sheets, we add constant addition to our product portfolio.',
   },
   {
     number: '06',
-    title: '70+ Steel Professionals',
+    title: 'InHouse Training Centers',
     body: 'From rolling to dispatch, our team has the domain knowledge to solve problems before they reach you.',
   },
 ];

@@ -11,7 +11,7 @@ export function ProductsSection() {
       <Container className="w-full">
         <div className="mb-8">
           <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-            Our Range
+            Product Portfolio
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight max-w-xl">
             What we make

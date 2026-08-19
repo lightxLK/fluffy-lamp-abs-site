@@ -9,7 +9,7 @@ describe('Footer', () => {
 
   it('renders contact phone number', () => {
     render(<Footer />);
-    expect(screen.getByText(/90072 11599/)).toBeInTheDocument();
+    expect(screen.getByText(/9007 21 1599/)).toBeInTheDocument();
   });
 
   it('renders contact email', () => {

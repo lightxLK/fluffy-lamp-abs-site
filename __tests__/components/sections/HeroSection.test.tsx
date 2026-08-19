@@ -28,6 +28,6 @@ describe('HeroSection', () => {
 
   it('renders primary CTA link', () => {
     render(<HeroSection />);
-    expect(screen.getByRole('link', { name: /explore products/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^about us$/i })).toBeInTheDocument();
   });
 });

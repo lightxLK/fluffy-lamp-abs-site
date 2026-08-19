@@ -12,19 +12,22 @@ const SLIDES = [
     eyebrow: '50 Years of Excellence',
     headline: "Eastern India's Most Trusted Steel Manufacturer",
     tagline: 'Trusted by builders across Eastern India since 1972.',
-    cta: { label: 'Explore Products', href: '/products' },
+    cta: { label: 'About Us', href: '/about' },
+    secondaryCta: { label: 'Testimonials', href: '/contact' },
   },
   {
     eyebrow: 'From Our Mill to Your Build',
     headline: 'Steel That Shapes India',
     tagline: 'Rolling shutter profiles, pipes, coils and more, direct from Howrah.',
-    cta: { label: 'Our Products', href: '/products' },
+    cta: { label: 'Products', href: '/products' },
+    secondaryCta: { label: 'Services', href: '/services' },
   },
   {
     eyebrow: 'The ABS Difference',
     headline: 'Precision. Strength. Legacy.',
-    tagline: '250+ dealers. 7 states. One unwavering standard.',
-    cta: { label: 'About Us', href: '/about' },
+    tagline: '427 dealers. 7 states. One unwavering standard.',
+    cta: { label: 'Fabrica', href: '/services/fabrica' },
+    secondaryCta: { label: 'Contact Us', href: '/contact' },
   },
 ] as const;
 
@@ -103,10 +106,10 @@ export function HeroSection() {
                     {slide.cta.label}
                   </Link>
                   <Link
-                    href="/contact"
+                    href={slide.secondaryCta.href}
                     className="relative z-[2] inline-flex items-center gap-2 border border-white/30 bg-white/10 text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest backdrop-blur-md hover:border-white hover:bg-white/20 transition-colors duration-300"
                   >
-                    Contact Us
+                    {slide.secondaryCta.label}
                   </Link>
                 </div>
               </Container>

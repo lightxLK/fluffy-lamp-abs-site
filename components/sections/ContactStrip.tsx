@@ -22,7 +22,7 @@ export function ContactStrip() {
           <h2 className="text-white font-bold text-3xl lg:text-4xl leading-tight mb-4">
             Ready to build with ABS steel?
           </h2>
-          <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto">
+          <p className="text-white text-lg font-semibold mb-10 max-w-xl mx-auto">
             Talk to our team today. We&apos;ll help you find the right product, grade, and quantity.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">

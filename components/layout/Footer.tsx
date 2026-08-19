@@ -69,13 +69,22 @@ export function Footer() {
           </p>
           <address className="not-italic space-y-3 text-text-muted text-sm">
             <p>
+              <span className="text-text-primary font-medium">Corporate Office:</span>
+              <br />
+              Eco Space Business Towers, Tower 5A, Unit 0804, Plot IIF/13, New Town, West Bengal,
+              700160
+            </p>
+            <p>
+              <span className="text-text-primary font-medium">Factory Address:</span>
+              <br />
               <a
                 href="https://maps.app.goo.gl/ndS6gDkZd79UAnQt6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-text-primary transition-colors duration-200"
               >
-                Jalan Industrial Complex, Gate No. 1, Domjur, NH6, Howrah, 711411
+                Jalan Industrial Complex, Gate No. 1, Domjur, NH6, Howrah, 711411, West Bengal,
+                India
               </a>
             </p>
             <p>
@@ -83,7 +92,14 @@ export function Footer() {
                 href="tel:+919007211599"
                 className="hover:text-text-primary transition-colors duration-200"
               >
-                +91 90072 11599
+                +91 9007 21 1599
+              </a>
+              ,{' '}
+              <a
+                href="tel:+919831118255"
+                className="hover:text-text-primary transition-colors duration-200"
+              >
+                9831 11 8255
               </a>
             </p>
             <p>
@@ -92,6 +108,14 @@ export function Footer() {
                 className="hover:text-text-primary transition-colors duration-200"
               >
                 viren@anilbalajisteel.com
+              </a>
+            </p>
+            <p>
+              <a
+                href="mailto:vivek@anilbalajisteel.com"
+                className="hover:text-text-primary transition-colors duration-200"
+              >
+                vivek@anilbalajisteel.com
               </a>
             </p>
           </address>

@@ -83,7 +83,7 @@ export function MaintenancePage() {
           key={quote}
           text={quote}
           tag="h1"
-          className="mt-4 min-h-[1.3em] max-w-[92vw] !whitespace-nowrap text-[clamp(1.15rem,3.6vw,2.5rem)] font-medium leading-[1.15]"
+          className="mt-4 min-h-[1.3em] max-w-[92vw] whitespace-nowrap! text-[clamp(1.15rem,3.6vw,2.5rem)] font-medium leading-[1.15]"
           splitType="words"
           from={{ opacity: 0, y: 24 }}
           to={{ opacity: 1, y: 0 }}

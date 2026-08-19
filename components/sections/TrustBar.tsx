@@ -1,6 +1,6 @@
 const STATS = [
   '50 Years',
-  '250+ Dealers',
+  '427 Dealers',
   '1,00,000 MT Capacity',
   '85% West Bengal',
   '70+ Professionals',

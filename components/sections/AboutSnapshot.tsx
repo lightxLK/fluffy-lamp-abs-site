@@ -11,7 +11,7 @@ export function AboutSnapshot() {
           {(
             [
               { value: '1972', label: 'Founded' },
-              { value: '250+', label: 'Dealers' },
+              { value: '427', label: 'Dealers' },
               { value: '7', label: 'States' },
             ] as const
           ).map((stat) => (
@@ -37,9 +37,9 @@ export function AboutSnapshot() {
             a name on every shutter, roof, and frame across seven states.
           </p>
           <p className="text-text-muted text-base leading-relaxed mb-10">
-            Today, with 70+ professionals, 250+ dealer partners, and sourcing relationships with
-            SAIL, Tata, JSW, and Jindal, we carry that legacy forward with the same precision it was
-            built on.
+            Today, with 112 professionals, 427 dealer partners, and sourcing relationships with
+            SAIL, Nezone, JSW, and Jindal, we carry that legacy forward with the same precision it
+            was built on.
           </p>
           <HomeExitLink
             href="/about"

@@ -6,7 +6,7 @@ describe('TrustBar', () => {
   it('renders stat text', () => {
     render(<TrustBar />);
     expect(screen.getAllByText(/50 Years/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/250\+ Dealers/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/427 Dealers/i).length).toBeGreaterThan(0);
   });
 });
 

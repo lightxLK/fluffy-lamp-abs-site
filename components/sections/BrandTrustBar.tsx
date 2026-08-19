@@ -6,6 +6,7 @@ const BRANDS = [
   { name: 'Nezone', src: '/Client Logo/nezone-bl.webp' },
   { name: 'JSW Steel', src: '/Client Logo/jsw.webp' },
   { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
+  { name: 'Shyam Steel', src: '/Client Logo/shyam-steel.png' },
 ];
 
 const REPEAT = 4;
