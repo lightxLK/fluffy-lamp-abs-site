@@ -9,7 +9,9 @@ export interface Service {
   tagline: string;
   description: string;
   process?: ServiceStep[];
+  applications?: string[];
   specs?: { label: string; value: string }[];
+  benefits?: string[];
 }
 
 export const SERVICES: Service[] = [
@@ -18,20 +20,22 @@ export const SERVICES: Service[] = [
     name: 'Cutting',
     tagline: 'Sheets that fit the first time',
     description:
-      'Our cut-to-length service delivers steel sheets and pipes in the exact dimensions your project demands, stack-ready, without extra work on site.',
-    process: [
-      {
-        label: 'Sheet & Pipe Cutting',
-        body: 'Roofing sheets, shutter panels, and pipe sections cut to length.',
-      },
-      { label: 'Angle & Section Cutting', body: 'Structural angles and sections cut to drawing.' },
-      { label: 'Custom Cutting', body: 'Non-standard lengths and profiles cut to order.' },
+      "Our cut-to-length service delivers steel sheets in the exact dimensions your project or customer demands. Whether you're dealing in roofing sheets or shutter panels, get stack-ready sheets without the extra work.",
+    applications: [
+      'Roofing panels',
+      'Shutter and cladding sheets',
+      'Cut stock for sheet metal work',
     ],
     specs: [
       { label: 'Lengths', value: '2 ft – 20 ft' },
       { label: 'Width', value: 'Up to 1250 mm' },
       { label: 'Thickness', value: '0.3 mm – 2.5 mm' },
-      { label: 'Materials', value: 'GP, HR, CR, PPGL' },
+      { label: 'Materials', value: 'GP, HR, PPGL' },
+    ],
+    benefits: [
+      'Ready-to-use sheets with clean edges',
+      'Saves cutting time and labour',
+      'Ideal for fast-moving dealer operations',
     ],
   },
   {
@@ -40,22 +44,20 @@ export const SERVICES: Service[] = [
     tagline: 'Coils, cut to perform',
     description:
       'ABS provides precision slitting services in custom widths. Our high-speed slitting line ensures tight tolerances, clean edges, and uniform quality across the coil.',
-    process: [
-      {
-        label: 'Master Coil Load',
-        body: 'Full-width coil loaded onto the slitting line uncoiler.',
-      },
-      { label: 'Blade Setup', body: 'Slitter blades set to the ordered width tolerance.' },
-      {
-        label: 'Slitting Pass',
-        body: 'Coil passes through the slitter in a single continuous run, burr-free.',
-      },
-      { label: 'Recoiling', body: 'Slit strips recoiled individually for handling and dispatch.' },
+    applications: [
+      'Roll-forming input coils',
+      'Slats for shutters and cladding',
+      'Roofing sheet stock prep',
     ],
     specs: [
       { label: 'Widths', value: '50 mm – 1250 mm' },
       { label: 'Thickness', value: '0.3 mm – 2.5 mm' },
       { label: 'Materials', value: 'HR, CR, GP, Colour-Coated' },
+    ],
+    benefits: [
+      'Consistent slit quality, burr-free',
+      'Minimizes scrap and offcut loss',
+      'Fast processing for both bulk and small orders',
     ],
   },
   {

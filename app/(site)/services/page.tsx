@@ -105,6 +105,28 @@ export default function ServicesPage() {
                 </div>
               )}
 
+              {service.applications && (
+                <div className="mb-10">
+                  <p className="text-text-muted text-xs uppercase tracking-widest mb-4">
+                    Applications
+                  </p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2">
+                    {service.applications.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-text-body text-sm leading-relaxed"
+                      >
+                        <span
+                          className="mt-2 w-1 h-1 rounded-full bg-abs-blue shrink-0"
+                          aria-hidden="true"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {service.specs && (
                 <div className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border-subtle pt-6 mb-10">
                   {service.specs.map((spec) => (
@@ -115,6 +137,26 @@ export default function ServicesPage() {
                       <p className="text-text-primary text-sm font-semibold">{spec.value}</p>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {service.benefits && (
+                <div>
+                  <p className="text-text-muted text-xs uppercase tracking-widest mb-4">Benefits</p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2">
+                    {service.benefits.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-text-body text-sm leading-relaxed"
+                      >
+                        <span
+                          className="mt-2 w-1 h-1 rounded-full bg-abs-blue shrink-0"
+                          aria-hidden="true"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </Container>
