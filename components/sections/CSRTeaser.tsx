@@ -21,15 +21,13 @@ export function CSRTeaser() {
 
       <Container className="relative">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center justify-center bg-white rounded-xl px-5 py-3 mb-6 shadow-lg">
-            <Image
-              src="/rekha-foundation-logo.png"
-              alt="The Rekha Foundation"
-              width={525}
-              height={215}
-              className="h-10 w-auto lg:h-12"
-            />
-          </div>
+          <Image
+            src="/rekha-foundation-logo.png"
+            alt="The Rekha Foundation"
+            width={1050}
+            height={430}
+            className="h-16 w-auto lg:h-20 mx-auto mb-6 rounded-xl shadow-lg"
+          />
           <p className="text-white text-xs font-medium uppercase tracking-widest mb-4">
             Corporate Social Responsibility
           </p>
