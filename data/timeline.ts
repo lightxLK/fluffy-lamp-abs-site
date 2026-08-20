@@ -16,9 +16,9 @@ export const TIMELINE: TimelineEntry[] = [
     body: 'The family takes ownership of the very re-rolling mill where Ved Prakash once worked as hired labour, turning eight years of trust into their first stake in steel.',
   },
   {
-    year: '2000',
-    title: 'Structured Manufacturing',
-    body: 'The next generation steps in, expanding into trading and fabrication and building the family-led operating model that still shapes how ABS runs today.',
+    year: '1996',
+    title: 'Started manufacturing of Rolling Shutter Parts',
+    body: 'The family moves beyond trading into manufacturing, rolling out its first Rolling Shutter Parts and laying the foundation for the product line ABS is known for today.',
   },
   {
     year: '2010',
@@ -37,22 +37,22 @@ export const TIMELINE: TimelineEntry[] = [
   },
   {
     year: '2023',
-    title: 'Steel That Cares Initiative',
-    body: 'ABS’s CSR identity takes shape under the name Steel That Cares, starting with a modular, weather-protected shelter project for stray dogs.',
+    title: 'The Rekha Foundation',
+    body: 'ABS’s CSR identity takes shape as The Rekha Foundation, a trust started to serve the exact same goals for ABS, starting with a modular, weather-protected shelter project for stray dogs.',
   },
   {
     year: '2024',
-    title: 'ABS Fabrica Launched',
+    title: 'Launched ABS Fabrica',
     body: 'ABS steps from B2B into B2C with the launch of ABS Fabrica, led by Ms. Komal Agarwal and built for turnkey automated gates and architectural steelwork.',
   },
   {
     year: '2025',
     title: 'Automation Integration',
-    body: 'PET strapping automation is integrated with the roll-forming lines, cutting manual dependency and tightening consistency across the production floor.',
+    body: 'PET Strapping Integration, use of Special Protection Films, and integration of Artificial Intelligence in our day to day activities, cutting manual dependency and tightening consistency across the production floor.',
   },
   {
     year: '2030',
     title: 'Vision 2030',
-    body: 'The roadmap ahead: production capacity up 50%+, Industry 4.0 on the floor, a 500+ dealer network, and a listing on the SME IPO platform.',
+    body: 'The roadmap ahead: production capacity up to 2,50,000 Sq. Ft., Industry 4.0 on the floor, a 2000+ dealer network, and a listing on the SME IPO platform.',
   },
 ];

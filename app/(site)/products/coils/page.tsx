@@ -14,9 +14,9 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'coils')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Slit & Pencil Coils | Precision Slitting | ABS CoreLine',
+  title: 'Slit & Pencil Coils | Precision Slitting | ABS CoreLine™',
   description:
-    'Precision slit coil and pencil coil, held to tight tolerance in GP, HR, CR and PPGL. ABS CoreLine Series, 30,000 MT annual capacity, Howrah.',
+    'Precision slit coil and pencil coil, held to tight tolerance in GP, HR, CR and PPGL. ABS CoreLine™ Series, 30,000 MT annual capacity, Howrah.',
   path: '/products/coils',
 });
 
@@ -45,7 +45,7 @@ const COILS = [
 
 const COIL_FAQS = [
   {
-    question: 'What tolerance does ABS CoreLine hold on slit width?',
+    question: 'What tolerance does ABS CoreLine™ hold on slit width?',
     answer:
       'Our high-speed slitting line runs rigorous dimensional checks on every pass, holding tight width tolerance across GP, HR, CR, and PPGL material.',
   },
@@ -86,7 +86,7 @@ export default function CoilsPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS CoreLine, Coil Range
+              ABS CoreLine™, Coil Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               Precision slitting, held to tight tolerance

@@ -14,7 +14,7 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'shutter')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Rolling Shutter Gates | ABS ShaktiShutter | GI, CR & PPGL',
+  title: 'Rolling Shutter Gates | ABS ShaktiShutter™ | GI, CR & PPGL',
   description:
     'Precision rolling shutter profiles in flat, diamond, gear and perforated patterns, plus bottom plates, springs, lock plates, hood covers and bracket plates. GI, CR, PPGL materials with protective guardfilm. 15,000 MT annual capacity, Howrah.',
   path: '/products/shutter',
@@ -162,7 +162,7 @@ export default function ShutterPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS ShaktiShutter, Profile Range
+              ABS ShaktiShutter™, Profile Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               One of the widest ranges in the market
@@ -181,7 +181,7 @@ export default function ShutterPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS TotalShutter, Component Range
+              ABS TotalShutter™, Component Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               Every part for a complete gate

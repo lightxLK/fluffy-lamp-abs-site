@@ -16,7 +16,7 @@ const product = PRODUCTS.find((p) => p.slug === 'shutter-accessories')!;
 export const metadata: Metadata = genMeta({
   title: 'Shutter Accessories & Components | Pulleys, Motors, Locks | ABS Steel',
   description:
-    'Complete rolling shutter accessory range: clips, pulleys, U clamps, kakda, collapsible gate wheels, chain pulley sets, gear boxes, motors, locks and more. Everything for one installation, ABS TotalShutter System.',
+    'Complete rolling shutter accessory range: clips, pulleys, U clamps, kakda, collapsible gate wheels, chain pulley sets, gear boxes, motors, locks and more. Everything for one installation, ABS TotalShutter™ System.',
   path: '/products/shutter-accessories',
 });
 
@@ -161,7 +161,7 @@ export default function ShutterAccessoriesPage() {
           </div>
 
           <p className="text-text-body text-base leading-relaxed max-w-2xl mb-14">
-            From the smallest fastener to the motor that drives it, ABS TotalShutter covers every
+            From the smallest fastener to the motor that drives it, ABS TotalShutter™ covers every
             component in a complete rolling shutter installation, sourced, stocked, and dispatched
             from one facility.
           </p>

@@ -16,9 +16,9 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'sheet')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'PPGL Roofing Sheets | GP, CR & HR | ABS BlueShield',
+  title: 'PPGL Roofing Sheets | GP, CR & HR | ABS BlueShield™',
   description:
-    'PPGL roofing sheets built for Indian weather. GP, CR and HR grades from SAIL, Tata and JSW. Custom widths and lengths, ABS BlueShield System.',
+    'PPGL roofing sheets built for Indian weather. GP, CR and HR grades from SAIL, Tata and JSW. Custom widths and lengths, ABS BlueShield™ System.',
   path: '/products/sheet',
 });
 
@@ -186,7 +186,7 @@ export default function SheetPage() {
 
           <div className="border-t border-border-subtle pt-8">
             <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
-              ABS BlueShield, Brands Available
+              ABS BlueShield™, Brands Available
             </p>
             <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
               {ROOFING_BRANDS.map((brand) =>

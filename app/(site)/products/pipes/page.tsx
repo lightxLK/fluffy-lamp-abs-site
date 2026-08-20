@@ -14,9 +14,9 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'pipes')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Steel Pipes & Tubes | Round, Square & RHS Sections | ABS FlowPipe',
+  title: 'Steel Pipes & Tubes | Round, Square & RHS Sections | ABS FlowPipe™',
   description:
-    'MS, GP and stainless steel pipes in round, square, and RHS sections. Full dimension range from ABS FlowPipe, 6,000 MT annual capacity, Howrah.',
+    'MS, GP and stainless steel pipes in round, square, and RHS sections. Full dimension range from ABS FlowPipe™, 6,000 MT annual capacity, Howrah.',
   path: '/products/pipes',
 });
 

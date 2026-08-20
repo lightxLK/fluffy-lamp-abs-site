@@ -34,7 +34,7 @@ const ConnectorCurves = dynamic(() =>
 export const metadata: Metadata = genMeta({
   title: "Anil Balaji Steel | Eastern India's Trusted Steel Manufacturer Since 1972",
   description:
-    'Rolling shutter profiles, pipes, roofing sheets, coils and steel fabrication from Howrah, West Bengal. 50 years, 250+ dealers, 1,00,000 MT annual capacity.',
+    'Rolling shutter profiles, pipes, roofing sheets, coils and steel fabrication from Howrah, West Bengal. 50 years, 427 dealers, 1,00,000 MT annual capacity.',
   path: '/',
 });
 

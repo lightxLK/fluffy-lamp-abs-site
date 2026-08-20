@@ -3,8 +3,8 @@ import Link from 'next/link';
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
   { label: 'Products', href: '/products' },
+  { label: 'Services', href: '/services' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 

@@ -218,10 +218,8 @@ export default function FabricaPage() {
           </p>
           <div className="flex gap-10 flex-wrap">
             <div>
-              <p className="text-text-primary font-bold text-4xl leading-none mb-1">50</p>
-              <p className="text-text-muted text-xs uppercase tracking-widest">
-                Years in Business · Five Decades of Steel Manufacturing
-              </p>
+              <p className="text-text-primary font-bold text-4xl leading-none mb-1">1st</p>
+              <p className="text-text-muted text-xs uppercase tracking-widest">Year in Business</p>
             </div>
             <div>
               <p className="text-text-primary font-bold text-4xl leading-none mb-1">500+</p>

@@ -94,7 +94,7 @@ export const SERVICES: Service[] = [
     name: 'Fabrication',
     tagline: 'Steel, designed your way',
     description:
-      'Shutter gates, kabon structures, motorized gates, and custom components, designed and fabricated in-house, from concept to installation.',
+      'Gates, PED Structures, Railings, Grills and custom components, designed and fabricated in-house, from concept to installation.',
     process: [
       {
         label: 'Strategic Consultation',

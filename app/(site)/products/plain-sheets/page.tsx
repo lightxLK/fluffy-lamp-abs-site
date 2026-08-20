@@ -13,9 +13,9 @@ import { PRODUCTS } from '@/data/products';
 const product = PRODUCTS.find((p) => p.slug === 'plain-sheets')!;
 
 export const metadata: Metadata = genMeta({
-  title: 'Plain Sheets | GI, CR & HR, Cut to Length | ABS EdgeCut',
+  title: 'Plain Sheets | GI, CR & HR, Cut to Length | ABS EdgeCut™',
   description:
-    'Precision cut plain sheets in GI, CR, and HR, cut to length, stack-ready. ABS EdgeCut Series, 24,000 MT annual capacity, Howrah.',
+    'Precision cut plain sheets in GI, CR, and HR, cut to length, stack-ready. ABS EdgeCut™ Series, 24,000 MT annual capacity, Howrah.',
   path: '/products/plain-sheets',
 });
 
@@ -90,7 +90,7 @@ export default function PlainSheetsPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              ABS EdgeCut, Grade Range
+              ABS EdgeCut™, Grade Range
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               GI, CR &amp; HR, cut to length

@@ -11,7 +11,7 @@ import { CardNuts } from '@/components/ui/CardNuts';
 export const metadata: Metadata = genMeta({
   title: 'Careers | Anil Balaji Steel',
   description:
-    'Build your career with Eastern India’s most trusted steel manufacturer, 70+ professionals, 95% employee retention.',
+    'Build your career with Eastern India’s most trusted steel manufacturer, 112+ professionals, 95% employee retention.',
   path: '/careers',
 });
 
@@ -35,9 +35,24 @@ const VALUES = [
 ];
 
 const STATS = [
-  { value: '70+', label: 'Skilled Professionals' },
+  { value: '112+', label: 'Skilled Professionals' },
   { value: '95%', label: 'Employee Retention' },
-  { value: '60k', label: 'Sq. Ft. Facility' },
+  { value: '1,00,000', label: 'Sq. Ft. Facility' },
+];
+
+const OPENINGS = [
+  {
+    title: 'Accounts HoD',
+    body: 'Lead the accounts function, own compliance, reporting, and financial controls across the group.',
+  },
+  {
+    title: 'Sr. Electrical Engineer',
+    body: 'Own electrical systems and automation across the Jangalpur facility, from maintenance to upgrades.',
+  },
+  {
+    title: 'Project Supervisor',
+    body: 'Drive fabrication and installation projects end to end, coordinating site teams and timelines.',
+  },
 ];
 
 export default function CareersPage() {
@@ -107,23 +122,41 @@ export default function CareersPage() {
       </section>
 
       <section className="bg-bg-mid py-24">
-        <Container className="text-center max-w-2xl mx-auto">
-          <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-            No Open Roles Listed Right Now
-          </p>
-          <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6">
-            Send us your resume
-          </h2>
-          <p className="text-text-muted text-base leading-relaxed mb-10">
-            We&apos;re always looking for skilled hands and sharp minds across production, sales,
-            and fabrication. Reach out and we&apos;ll keep you in mind for the next opening.
-          </p>
-          <Link
-            href="mailto:viren@anilbalajisteel.com?subject=Career%20Enquiry"
-            className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
-          >
-            Email Your Resume
-          </Link>
+        <Container>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+              Current Openings
+            </p>
+            <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight">
+              Roles we&apos;re hiring for
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-14">
+            {OPENINGS.map((role) => (
+              <article key={role.title} className="relative h-full">
+                <CardGlow className="h-full p-8">
+                  <h3 className="text-text-primary font-semibold text-lg mb-3">{role.title}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{role.body}</p>
+                </CardGlow>
+                <CardNuts />
+              </article>
+            ))}
+          </div>
+
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-text-muted text-base leading-relaxed mb-10">
+              Don&apos;t see the right fit? We&apos;re always looking for skilled hands and sharp
+              minds across production, sales, and fabrication. Reach out and we&apos;ll keep you in
+              mind for the next opening.
+            </p>
+            <Link
+              href="mailto:viren@anilbalajisteel.com?subject=Career%20Enquiry"
+              className="inline-flex items-center gap-3 relative z-[2] bg-abs-blue text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-abs-blue-dark transition-colors duration-300"
+            >
+              Email Your Resume
+            </Link>
+          </div>
         </Container>
       </section>
 
