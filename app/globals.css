@@ -253,6 +253,20 @@ body::after {
   }
 }
 
+/* ─── Slow Ken Burns pan/zoom (CSR image carousel) ──────────────────── */
+/* Runs continuously and identically on every slide rather than restarting
+   per-slide, so there's no dependency on animation-restart timing lining up
+   with the crossfade — only the opacity crossfade needs to be synced. */
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
 @layer utilities {
   /* Soft top- and bottom-center glow on the maintenance page — no rays, no
      animation, just static radial highlights behind the content. */
@@ -276,6 +290,10 @@ body::after {
 
   .marquee-mask {
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .animate-slow-zoom {
+    animation: slow-zoom 16s ease-in-out infinite alternate;
   }
 }
 
