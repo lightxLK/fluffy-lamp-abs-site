@@ -3,9 +3,11 @@ import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
 import { Container } from '@/components/layout/Container';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
+import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { ContactStrip } from '@/components/sections/ContactStrip';
 import { CardGlow } from '@/components/ui/CardGlow';
 import { CardNuts } from '@/components/ui/CardNuts';
+import { SPLScene } from '@/components/svg/scenes/SPLScene';
 
 export const metadata: Metadata = genMeta({
   title: 'Why ABS? | Single Point Loading & Packaging Assurance | Anil Balaji Steel',
@@ -48,6 +50,10 @@ export default function WhyABSPage() {
 
       <section className="bg-bg-dark py-24 overflow-hidden" id="spl">
         <Container>
+          <DrawSVGSection selector=".abs-path" duration={2.5} stagger={0.004} className="mb-14">
+            <SPLScene className="w-full max-w-4xl mx-auto h-auto" />
+          </DrawSVGSection>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

@@ -9,6 +9,10 @@ interface DrawSVGSectionProps {
   selector: string;
   className?: string;
   duration?: number;
+  /** Per-path stagger offset in seconds. Lower for scenes with hundreds of
+   * paths (e.g. potrace output) so the reveal doesn't stretch on for tens
+   * of seconds. */
+  stagger?: number;
 }
 
 export function DrawSVGSection({
@@ -16,6 +20,7 @@ export function DrawSVGSection({
   selector,
   className,
   duration = 1.5,
+  stagger = 0.08,
 }: DrawSVGSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -45,7 +50,7 @@ export function DrawSVGSection({
         .fromTo(
           paths,
           { drawSVG: '0%', fillOpacity: 0 },
-          { drawSVG: '100%', duration, stagger: 0.08, ease: 'power2.inOut' },
+          { drawSVG: '100%', duration, stagger, ease: 'power2.inOut' },
         )
         .to(
           paths,
