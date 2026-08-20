@@ -60,10 +60,10 @@ export default function WhyABSPage() {
                 Saving you millions in time, transport, quality and price stability.
               </p>
               <p className="text-text-muted text-base leading-relaxed">
-                SPL is basically a single point where you get everything. Say you have a list of 500
-                items and there are 3 shops: shop 1 sells 10 items from your list, shop 2 sells 50
-                items from your list, but shop 3 has the entire 500 items from your list, that is
-                what ABS is. One dock, one dispatch, your full order, every time.
+                Most suppliers can fulfil only part of a large order, leaving you to coordinate
+                across multiple vendors for the rest. ABS carries the full range in-house, so your
+                entire order, however wide the specification, is sourced, scheduled, and dispatched
+                from a single point. One dock, one dispatch, your full order, every time.
               </p>
             </div>
             <div className="relative">
