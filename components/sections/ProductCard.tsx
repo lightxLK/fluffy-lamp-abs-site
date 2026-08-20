@@ -76,7 +76,7 @@ export function ProductCard({ product }: ProductCardProps) {
             slug={product.slug}
             variant="stroke"
             className={
-              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[50%] h-[50%]' : 'w-full h-full'
+              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[38%] h-[38%]' : 'w-full h-full'
             }
           />
         </div>
