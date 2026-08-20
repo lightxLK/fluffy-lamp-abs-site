@@ -2,6 +2,8 @@ import {
   PRODUCT_ICON_PATHS,
   PRODUCT_ICON_VIEWBOX,
   PRODUCT_ICON_TRANSFORM,
+  PRODUCT_ICON_STROKE_SCALE,
+  PRODUCT_ICON_FILL_RULE,
 } from './productIconPaths';
 
 interface ProductIconProps {
@@ -23,6 +25,12 @@ export function ProductIcon({
   if (!path) return null;
   const viewBox = PRODUCT_ICON_VIEWBOX[slug] ?? VIEWBOX;
   const transform = PRODUCT_ICON_TRANSFORM[slug];
+  // A transform's scale shrinks stroke width along with the path, so icons
+  // whose transform scales down (e.g. potrace output baked at 10x) need
+  // their stroke width scaled back up to read at the same weight as icons
+  // with no scale in their transform.
+  const strokeScale = PRODUCT_ICON_STROKE_SCALE[slug] ?? 1;
+  const fillRule = PRODUCT_ICON_FILL_RULE[slug] ?? 'evenodd';
 
   if (variant === 'stroke') {
     return (
@@ -34,8 +42,8 @@ export function ProductIcon({
           fill="currentColor"
           fillOpacity="0"
           stroke="currentColor"
-          strokeWidth={strokeWidth}
-          fillRule="evenodd"
+          strokeWidth={strokeWidth * strokeScale}
+          fillRule={fillRule}
         />
       </svg>
     );
@@ -43,7 +51,7 @@ export function ProductIcon({
 
   return (
     <svg viewBox={viewBox} fill="currentColor" aria-hidden="true" className={className}>
-      <path d={path} transform={transform} fillRule="evenodd" />
+      <path d={path} transform={transform} fillRule={fillRule} />
     </svg>
   );
 }

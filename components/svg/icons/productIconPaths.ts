@@ -36,3 +36,16 @@ export const PRODUCT_ICON_TRANSFORM: Record<string, string> = {
   shutter: 'translate(82.49901926517487,26.75160300731659)',
   'gi-laser-cutting': 'translate(0,512) scale(0.1,-0.1)',
 };
+
+// Compensates stroke width for icons whose transform scales the path down
+// (see ProductIcon.tsx) so their line weight matches un-scaled icons.
+export const PRODUCT_ICON_STROKE_SCALE: Record<string, number> = {
+  'gi-laser-cutting': 10,
+};
+
+// potrace traces multi-contour shapes for nonzero winding; forcing evenodd
+// (the default for hand-drawn icons that rely on it for punch-through holes)
+// misrenders those contours as thin slivers instead of solid fills.
+export const PRODUCT_ICON_FILL_RULE: Record<string, 'nonzero' | 'evenodd'> = {
+  'gi-laser-cutting': 'nonzero',
+};
