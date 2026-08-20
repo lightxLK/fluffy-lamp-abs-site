@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const VIDEO_SRC = '/shutter-reveal.mp4';
 
@@ -9,10 +9,16 @@ const VIDEO_SRC = '/shutter-reveal.mp4';
 const KEY_LOW = 40;
 const KEY_HIGH = 90;
 
+// Once the shutter finishes opening, the overlay dissolves rather than
+// cutting away instantly — this is how long that fade takes before the
+// gate is told the reveal is done and unmounts this component.
+const FADE_OUT_MS = 600;
+
 export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keyCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [fadingOut, setFadingOut] = useState(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -84,11 +90,16 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
       rafId = requestAnimationFrame(draw);
     };
 
+    let fadeTimeout = 0;
+
     const handleEnded = () => {
       if (cancelled) return;
       cancelled = true;
       cancelAnimationFrame(rafId);
-      onComplete();
+      // Leave the last drawn frame on the canvas and fade the whole overlay
+      // out, rather than cutting straight to the site behind it.
+      setFadingOut(true);
+      fadeTimeout = window.setTimeout(onComplete, FADE_OUT_MS);
     };
 
     video.addEventListener('ended', handleEnded);
@@ -98,13 +109,20 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
     return () => {
       cancelled = true;
       cancelAnimationFrame(rafId);
+      window.clearTimeout(fadeTimeout);
       window.removeEventListener('resize', resize);
       video.removeEventListener('ended', handleEnded);
     };
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[70]" aria-hidden>
+    <div
+      className={`fixed inset-0 z-[70] transition-opacity ease-out ${
+        fadingOut ? 'opacity-0' : 'opacity-100'
+      }`}
+      style={{ transitionDuration: `${FADE_OUT_MS}ms` }}
+      aria-hidden
+    >
       <video ref={videoRef} src={VIDEO_SRC} muted playsInline preload="auto" className="hidden" />
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
