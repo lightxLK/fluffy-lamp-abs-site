@@ -22,7 +22,7 @@ const FURTHER_LINKS = [
 // on top. No layout change — `relative` with no offsets moves nothing.
 export function Footer() {
   return (
-    <footer className="relative z-10 bg-bg-dark border-t border-border-subtle">
+    <footer className="relative z-10 bg-bg-dark border-t border-border-subtle md:min-h-[50dvh] md:flex md:flex-col md:justify-center">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
           <img
