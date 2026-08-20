@@ -25,6 +25,13 @@ export function SPLScene({ className }: SPLSceneProps) {
             fillOpacity={0}
             strokeWidth={STROKE_WIDTH}
             fillRule="evenodd"
+            // Hides the stroke via plain SVG attributes (not just the GSAP
+            // tween's "from" state), so there's no flash-of-fully-drawn-line
+            // before the draw-in script has run — same technique every
+            // other line-art scene in this codebase uses.
+            pathLength={1}
+            strokeDasharray={1}
+            strokeDashoffset={1}
           />
         ))}
       </g>

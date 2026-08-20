@@ -21,7 +21,11 @@ const PACKAGING_MARKERS = [
   'Special protective film on every profile',
 ];
 
-const PACKAGING_TYPES = ['Weatherproof CDP packaging', 'Stretch film packaging for springs'];
+const PACKAGING_TYPES = [
+  'Weatherproof CDP packaging',
+  'Stretch film packaging for springs',
+  'PET strapping',
+];
 
 export default function WhyABSPage() {
   const breadcrumbSchema = generateBreadcrumbSchema('/why-abs');
