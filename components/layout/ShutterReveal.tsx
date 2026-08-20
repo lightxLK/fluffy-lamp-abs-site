@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
-const VIDEO_SRC = '/shutter-reveal.mp4';
-const AUDIO_SRC = '/shutter-audio.mp3';
+import { SHUTTER_VIDEO_SRC, SHUTTER_AUDIO_SRC } from '@/lib/shutterVideo';
 
 // Chroma-key thresholds tuned for a bright green screen. KEY_LOW..KEY_HIGH
 // is a feather band so the shutter's silhouette edge doesn't look jagged.
@@ -133,8 +131,15 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
       style={{ transitionDuration: `${FADE_OUT_MS}ms` }}
       aria-hidden
     >
-      <video ref={videoRef} src={VIDEO_SRC} muted playsInline preload="auto" className="hidden" />
-      <audio ref={audioRef} src={AUDIO_SRC} preload="auto" className="hidden" />
+      <video
+        ref={videoRef}
+        src={SHUTTER_VIDEO_SRC}
+        muted
+        playsInline
+        preload="auto"
+        className="hidden"
+      />
+      <audio ref={audioRef} src={SHUTTER_AUDIO_SRC} preload="auto" className="hidden" />
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   );

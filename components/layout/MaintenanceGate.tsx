@@ -6,6 +6,7 @@ import { clearPreloaderShown } from '@/lib/homeReturn';
 import { IS_PRODUCTION_SITE } from '@/lib/env';
 import { MaintenancePage } from '@/components/layout/MaintenancePage';
 import { ShutterReveal } from '@/components/layout/ShutterReveal';
+import { SHUTTER_VIDEO_SRC } from '@/lib/shutterVideo';
 
 // Tab/session-only bypass: closing the browser (not just navigating) re-locks
 // the site. Reason: static export has no server, so this flag is the only
@@ -154,7 +155,18 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
   // Avoid a flash of the real site before the bypass/launch check resolves.
   if (phase === 'loading') return null;
 
-  if (phase === 'locked') return <MaintenancePage onLaunch={handleLaunch} />;
+  if (phase === 'locked') {
+    return (
+      <>
+        <MaintenancePage onLaunch={handleLaunch} />
+        {/* Warms the browser's cache for the shutter video while the visitor
+            is still reading the countdown/quotes, so by the time the 10s
+            launch countdown hits zero the file is already buffered instead
+            of starting a multi-second fetch at reveal time. */}
+        <video src={SHUTTER_VIDEO_SRC} muted preload="auto" className="hidden" aria-hidden />
+      </>
+    );
+  }
 
   if (phase === 'revealing') {
     return (
