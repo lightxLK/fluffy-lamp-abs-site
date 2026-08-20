@@ -44,11 +44,7 @@ export default function ServicesPage() {
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-2xl mb-10">
             Cutting, slitting, and fabrication, carrying every order from mill to site under one
-            roof. For loading, packaging, and hallmarking, see{' '}
-            <Link href="/why-abs" className="text-abs-blue hover:underline">
-              Why ABS
-            </Link>
-            .
+            roof.
           </p>
 
           <nav aria-label="Service sections" className="flex flex-wrap gap-3">
