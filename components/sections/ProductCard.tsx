@@ -52,7 +52,6 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const isShutter = product.slug === 'shutter';
-  const isLaserCutting = product.slug === 'gi-laser-cutting';
 
   return (
     <Link
@@ -67,17 +66,13 @@ export function ProductCard({ product }: ProductCardProps) {
           className={
             isShutter
               ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-16'
-              : isLaserCutting
-                ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-20'
-                : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
+              : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
           }
         >
           <ProductIcon
             slug={product.slug}
             variant="stroke"
-            className={
-              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[28%] h-[28%]' : 'w-full h-full'
-            }
+            className={isShutter ? 'w-[75%] h-[75%]' : 'w-full h-full'}
           />
         </div>
 

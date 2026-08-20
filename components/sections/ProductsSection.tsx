@@ -21,6 +21,7 @@ export function ProductsSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {PRODUCTS.map((product) => {
             const isShutter = ['shutter', 'shutter-accessories', 'coils'].includes(product.slug);
+            const isLaserCutting = product.slug === 'gi-laser-cutting';
             return (
               <HomeExitLink
                 key={product.slug}
@@ -36,14 +37,22 @@ export function ProductsSection() {
                     className={
                       isShutter
                         ? 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6 pb-12'
-                        : 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6'
+                        : isLaserCutting
+                          ? 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6 pb-14'
+                          : 'absolute inset-0 flex items-center justify-center text-text-primary opacity-90 group-hover:opacity-100 transition-opacity duration-500 p-6'
                     }
                   >
                     <ProductIcon
                       slug={product.slug}
                       variant="stroke"
                       strokeWidth={7}
-                      className={isShutter ? 'w-[80%] h-[80%]' : 'w-full h-full'}
+                      className={
+                        isShutter
+                          ? 'w-[80%] h-[80%]'
+                          : isLaserCutting
+                            ? 'w-[45%] h-[45%]'
+                            : 'w-full h-full'
+                      }
                     />
                   </DrawSVGSection>
 
