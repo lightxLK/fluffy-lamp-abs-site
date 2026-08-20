@@ -5,8 +5,8 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 const ANNOTATIONS = [
   { label: 'Pergola', x: 49, y: 21.6 },
   { label: 'Railings', x: 20, y: 48.7 },
-  { label: 'Staircase', x: 60, y: 49 },
-  { label: 'Cabana', x: 70, y: 58 },
+  { label: 'Staircase', x: 60, y: 58 },
+  { label: 'Cabana', x: 76, y: 58 },
   { label: 'Border Walled Fencing', x: 11, y: 83.6 },
   { label: 'Swing Gate', x: 45, y: 83.6 },
 ] as const;

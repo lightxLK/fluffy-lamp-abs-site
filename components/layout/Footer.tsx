@@ -1,4 +1,17 @@
 import Link from 'next/link';
+import { InstagramIcon } from '@/components/svg/icons/InstagramIcon';
+import { FacebookIcon } from '@/components/svg/icons/FacebookIcon';
+import { LinkedinIcon } from '@/components/svg/icons/LinkedinIcon';
+
+const SOCIAL_LINKS = [
+  { label: 'Instagram', href: 'https://www.instagram.com/anilbalajisteel/', Icon: InstagramIcon },
+  { label: 'Facebook', href: 'https://www.facebook.com/anilbalajisteel1', Icon: FacebookIcon },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/anil-balaji-steel/',
+    Icon: LinkedinIcon,
+  },
+] as const;
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
@@ -44,6 +57,20 @@ export function Footer() {
           <p className="text-text-muted text-sm mt-4 leading-relaxed max-w-xs">
             Eastern India&apos;s most trusted steel manufacturer. Howrah, West Bengal. Est. 1972.
           </p>
+          <div className="flex items-center gap-4 mt-5">
+            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-text-muted hover:text-text-primary transition-colors duration-200"
+              >
+                <Icon className="h-5 w-5 fill-current" />
+              </a>
+            ))}
+          </div>
         </div>
 
         <div>

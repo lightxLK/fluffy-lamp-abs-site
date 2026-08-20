@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { InstagramIcon } from '@/components/svg/icons/InstagramIcon';
+import { FacebookIcon } from '@/components/svg/icons/FacebookIcon';
+import { LinkedinIcon } from '@/components/svg/icons/LinkedinIcon';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
 import { Container } from '@/components/layout/Container';
@@ -112,6 +115,39 @@ export default function ContactPage() {
                   >
                     <Mail className="w-5 h-5 text-abs-blue shrink-0" aria-hidden="true" />
                     viren@anilbalajisteel.com
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-text-muted text-xs uppercase tracking-widest mb-4">Follow Us</p>
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://www.instagram.com/anilbalajisteel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="text-text-body hover:text-text-primary transition-colors duration-200"
+                  >
+                    <InstagramIcon className="w-5 h-5 fill-current" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/anilbalajisteel1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="text-text-body hover:text-text-primary transition-colors duration-200"
+                  >
+                    <FacebookIcon className="w-5 h-5 fill-current" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/anil-balaji-steel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-text-body hover:text-text-primary transition-colors duration-200"
+                  >
+                    <LinkedinIcon className="w-5 h-5 fill-current" />
                   </a>
                 </div>
               </div>
