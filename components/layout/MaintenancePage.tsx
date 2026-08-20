@@ -56,10 +56,17 @@ const UNITS: { key: keyof Countdown; singular: string; plural: string }[] = [
 // plays, regardless of how much real time is actually left.
 const LAUNCH_COUNTDOWN_SECONDS = 10;
 
+// Letters that must all be held down together with Alt (Windows) / Option
+// (macOS — reported as the same `altKey` flag by the DOM) to toggle the
+// Launch button's visibility. A held-keys set means order doesn't matter,
+// only that all three are down at once.
+const HIDE_BUTTON_COMBO = ['a', 'b', 's'];
+
 export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
   const [countdown, setCountdown] = useState<Countdown>(() => getCountdown());
   const [launching, setLaunching] = useState(false);
   const [launchSecondsLeft, setLaunchSecondsLeft] = useState(LAUNCH_COUNTDOWN_SECONDS);
+  const [buttonHidden, setButtonHidden] = useState(false);
   const quote = useRotatingHeroQuote();
 
   useEffect(() => {
@@ -67,6 +74,42 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
     const interval = setInterval(() => setCountdown(getCountdown()), 1000);
     return () => clearInterval(interval);
   }, [launching]);
+
+  useEffect(() => {
+    const heldKeys = new Set<string>();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!event.altKey) {
+        heldKeys.clear();
+        return;
+      }
+      const key = event.key.toLowerCase();
+      if (HIDE_BUTTON_COMBO.includes(key)) heldKeys.add(key);
+
+      if (HIDE_BUTTON_COMBO.every((k) => heldKeys.has(k))) {
+        event.preventDefault();
+        setButtonHidden((prev) => !prev);
+        heldKeys.clear();
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      heldKeys.delete(event.key.toLowerCase());
+      if (!event.altKey) heldKeys.clear();
+    };
+
+    const clearHeld = () => heldKeys.clear();
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('blur', clearHeld);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('blur', clearHeld);
+    };
+  }, []);
 
   useEffect(() => {
     if (!launching) return;
@@ -148,8 +191,10 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
 
         {/* Shutter-reveal launch flow is a tsa.anilbalajisteel.com preview
             feature only — the button stays hidden on the real production
-            build so nobody can trigger it on anilbalajisteel.com early. */}
-        {!IS_PRODUCTION_SITE && (
+            build so nobody can trigger it on anilbalajisteel.com early.
+            On preview, Alt+A+B+S (Option+A+B+S on macOS) toggles it too,
+            for showing this page to someone without exposing the button. */}
+        {!IS_PRODUCTION_SITE && !buttonHidden && (
           <button
             type="button"
             onClick={() => setLaunching(true)}
