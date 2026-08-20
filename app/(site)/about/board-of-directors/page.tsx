@@ -57,7 +57,7 @@ export default function BoardOfDirectorsPage() {
               </p>
               <p className="text-text-body text-base leading-relaxed">{TRIBUTE_DIRECTOR.bio}</p>
             </div>
-            <div className="relative z-[2] aspect-[1000/1314] max-w-md mx-auto w-full bg-white p-4 shadow-lg">
+            <div className="relative z-[2] aspect-[1000/1314] max-w-md mx-auto w-full bg-black p-2 shadow-lg">
               <div className="relative h-full w-full overflow-hidden">
                 <Image
                   src={TRIBUTE_DIRECTOR.image}
