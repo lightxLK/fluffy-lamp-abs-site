@@ -57,8 +57,8 @@ export default function BoardOfDirectorsPage() {
               </p>
               <p className="text-text-body text-base leading-relaxed">{TRIBUTE_DIRECTOR.bio}</p>
             </div>
-            <div className="relative z-[2] aspect-[1000/1314] max-w-md mx-auto w-full">
-              <div className="absolute inset-x-[11.1%] inset-y-[8.45%] overflow-hidden">
+            <div className="relative z-[2] aspect-[1000/1314] max-w-md mx-auto w-full bg-white p-4 shadow-lg">
+              <div className="relative h-full w-full overflow-hidden">
                 <Image
                   src={TRIBUTE_DIRECTOR.image}
                   alt={TRIBUTE_DIRECTOR.name}
@@ -67,14 +67,6 @@ export default function BoardOfDirectorsPage() {
                   className="object-cover"
                 />
               </div>
-              <Image
-                src="/board-members/frame-trimmed.png"
-                alt=""
-                fill
-                aria-hidden="true"
-                sizes="(min-width: 1024px) 33vw, 80vw"
-                className="object-cover pointer-events-none"
-              />
             </div>
           </div>
         </Container>
@@ -96,23 +88,13 @@ export default function BoardOfDirectorsPage() {
               <article key={director.name} className="relative h-full">
                 <CardGlow className="h-full p-8">
                   <div className="flex flex-col sm:flex-row gap-6">
-                    <div className="relative z-[2] aspect-[1000/1314] w-full sm:w-40 shrink-0">
-                      <div className="absolute inset-x-[11.1%] inset-y-[8.45%] overflow-hidden">
-                        <Image
-                          src={director.image}
-                          alt={director.name}
-                          fill
-                          sizes="160px"
-                          className="object-cover"
-                        />
-                      </div>
+                    <div className="relative z-[2] aspect-[1000/1314] w-full sm:w-40 shrink-0 overflow-hidden rounded">
                       <Image
-                        src="/board-members/frame-trimmed.png"
-                        alt=""
+                        src={director.image}
+                        alt={director.name}
                         fill
-                        aria-hidden="true"
                         sizes="160px"
-                        className="object-cover pointer-events-none"
+                        className="object-cover"
                       />
                     </div>
                     <div className="min-w-0">
