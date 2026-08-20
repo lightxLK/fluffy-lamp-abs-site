@@ -5,7 +5,6 @@ import Counter from '@/components/ui/Counter';
 import SplitText from '@/components/ui/SplitText';
 import { getCountdown, type Countdown } from '@/lib/maintenance';
 import { HERO_QUOTES, shuffleHeroQuoteOrder } from '@/lib/heroQuotes';
-import { IS_PRODUCTION_SITE } from '@/lib/env';
 
 // Deliberately deeper than the --color-abs-blue token — a one-off backdrop
 // for this page rather than a reusable brand color.
@@ -66,7 +65,8 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
   const [countdown, setCountdown] = useState<Countdown>(() => getCountdown());
   const [launching, setLaunching] = useState(false);
   const [launchSecondsLeft, setLaunchSecondsLeft] = useState(LAUNCH_COUNTDOWN_SECONDS);
-  const [buttonHidden, setButtonHidden] = useState(false);
+  // Hidden by default on both dev and prod — Alt/Option+A+B+S reveals it.
+  const [buttonHidden, setButtonHidden] = useState(true);
   const quote = useRotatingHeroQuote();
 
   useEffect(() => {
@@ -189,12 +189,10 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
 
         <p className="mt-12 text-sm text-white/60">21 August 2026</p>
 
-        {/* Shutter-reveal launch flow is a tsa.anilbalajisteel.com preview
-            feature only — the button stays hidden on the real production
-            build so nobody can trigger it on anilbalajisteel.com early.
-            On preview, Alt+A+B+S (Option+A+B+S on macOS) toggles it too,
-            for showing this page to someone without exposing the button. */}
-        {!IS_PRODUCTION_SITE && !buttonHidden && (
+        {/* Hidden by default on both dev and prod — Alt+A+B+S
+            (Option+A+B+S on macOS) reveals it, so it's never visible to an
+            ordinary visitor and only shows up for whoever holds the combo. */}
+        {!buttonHidden && (
           <button
             type="button"
             onClick={() => setLaunching(true)}
