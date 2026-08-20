@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 const ANNOTATIONS = [
-  { label: 'Pergola', x: 42.25, y: 21.6 },
-  { label: 'Railings', x: 13.15, y: 48.7 },
-  { label: 'Staircase', x: 54.25, y: 53.6 },
-  { label: 'Cabana', x: 60.65, y: 56.1 },
-  { label: 'Border Walled Fencing', x: 4.65, y: 83.6 },
-  { label: 'Swing Gate', x: 38.15, y: 83.6 },
+  { label: 'Pergola', x: 49, y: 21.6 },
+  { label: 'Railings', x: 20, y: 48.7 },
+  { label: 'Staircase', x: 60, y: 49 },
+  { label: 'Cabana', x: 70, y: 58 },
+  { label: 'Border Walled Fencing', x: 11, y: 83.6 },
+  { label: 'Swing Gate', x: 45, y: 83.6 },
 ] as const;
 
 export function FabricaTeaser() {
