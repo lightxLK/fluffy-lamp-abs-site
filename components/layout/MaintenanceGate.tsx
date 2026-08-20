@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { isLaunched } from '@/lib/maintenance';
 import { clearPreloaderShown } from '@/lib/homeReturn';
+import { IS_PRODUCTION_SITE } from '@/lib/env';
 import { MaintenancePage } from '@/components/layout/MaintenancePage';
 import { ShutterReveal } from '@/components/layout/ShutterReveal';
 
@@ -135,7 +136,12 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Called once the Launch button's on-page 10s countdown reaches zero.
-  const handleLaunch = () => setPhase('revealing');
+  // Guarded here too (button itself is hidden on production) so the shutter
+  // reveal can never trigger on the real anilbalajisteel.com build.
+  const handleLaunch = () => {
+    if (IS_PRODUCTION_SITE) return;
+    setPhase('revealing');
+  };
 
   // Called when the shutter video finishes (or is skipped for
   // prefers-reduced-motion) — mirrors the secret-combo unlock side effects.

@@ -52,6 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const isShutter = product.slug === 'shutter';
+  const isLaserCutting = product.slug === 'gi-laser-cutting';
 
   return (
     <Link
@@ -72,7 +73,9 @@ export function ProductCard({ product }: ProductCardProps) {
           <ProductIcon
             slug={product.slug}
             variant="stroke"
-            className={isShutter ? 'w-[75%] h-[75%]' : 'w-full h-full'}
+            className={
+              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[65%] h-[65%]' : 'w-full h-full'
+            }
           />
         </div>
 

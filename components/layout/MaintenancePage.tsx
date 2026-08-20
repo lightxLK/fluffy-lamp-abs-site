@@ -5,6 +5,7 @@ import Counter from '@/components/ui/Counter';
 import SplitText from '@/components/ui/SplitText';
 import { getCountdown, type Countdown } from '@/lib/maintenance';
 import { HERO_QUOTES, shuffleHeroQuoteOrder } from '@/lib/heroQuotes';
+import { IS_PRODUCTION_SITE } from '@/lib/env';
 
 // Deliberately deeper than the --color-abs-blue token — a one-off backdrop
 // for this page rather than a reusable brand color.
@@ -145,14 +146,19 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
 
         <p className="mt-12 text-sm text-white/60">21 August 2026</p>
 
-        <button
-          type="button"
-          onClick={() => setLaunching(true)}
-          disabled={launching}
-          className="mt-10 rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold uppercase tracking-[0.2rem] text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {launching ? 'Launching…' : 'Launch'}
-        </button>
+        {/* Shutter-reveal launch flow is a tsa.anilbalajisteel.com preview
+            feature only — the button stays hidden on the real production
+            build so nobody can trigger it on anilbalajisteel.com early. */}
+        {!IS_PRODUCTION_SITE && (
+          <button
+            type="button"
+            onClick={() => setLaunching(true)}
+            disabled={launching}
+            className="mt-10 rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold uppercase tracking-[0.2rem] text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {launching ? 'Launching…' : 'Launch'}
+          </button>
+        )}
       </div>
     </main>
   );
