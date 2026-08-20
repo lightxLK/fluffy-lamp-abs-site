@@ -165,7 +165,7 @@ export function Navbar() {
       className={[
         'fixed top-0 left-0 right-0 z-[60] transition-all duration-300',
         scrolled || open
-          ? 'bg-bg-dark border-b border-border-subtle backdrop-blur-sm'
+          ? 'bg-bg-dark/70 border-b border-border-subtle backdrop-blur-md'
           : 'bg-transparent',
         nearFooter && !open
           ? '-translate-y-full opacity-0 pointer-events-none'

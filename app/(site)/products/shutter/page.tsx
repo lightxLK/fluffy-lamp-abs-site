@@ -109,6 +109,7 @@ const HARDWARE = [
     name: 'Lock Plate',
     image: '/products/shutter/lock-plate.png',
     specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
+    imagePadding: 'p-0',
   },
   {
     name: 'Hood Cover',
@@ -119,6 +120,7 @@ const HARDWARE = [
       'Weight: 50 to 60 kg/roll',
       'Material: GI',
     ],
+    imagePadding: 'p-0',
   },
   {
     name: 'Bracket Plate',
