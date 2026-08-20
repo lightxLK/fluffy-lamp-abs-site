@@ -5,6 +5,7 @@ const COMPANY_LINKS = [
   { label: 'About Us', href: '/about' },
   { label: 'Products', href: '/products' },
   { label: 'Services', href: '/services' },
+  { label: 'Why ABS?', href: '/why-abs' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 

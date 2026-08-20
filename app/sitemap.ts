@@ -19,6 +19,8 @@ const STATIC_ROUTES = [
   '/products/plain-sheets',
   '/products/coils',
   '/products/abrasives',
+  '/products/gi-laser-cutting',
+  '/why-abs',
   '/contact',
   '/terms',
   '/careers',

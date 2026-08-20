@@ -3,11 +3,6 @@ export interface ServiceStep {
   body: string;
 }
 
-export interface ServiceList {
-  title: string;
-  items: string[];
-}
-
 export interface Service {
   slug: string;
   name: string;
@@ -15,35 +10,9 @@ export interface Service {
   description: string;
   process?: ServiceStep[];
   specs?: { label: string; value: string }[];
-  lists?: ServiceList[];
-  /** Each group is one contact-sheet image covering a contiguous range of pattern codes. */
-  patternGallery?: { prefix: string; groupCount: number; codesPerGroup: number };
 }
 
 export const SERVICES: Service[] = [
-  {
-    slug: 'spl',
-    name: 'Single Point Loading (SPL)',
-    tagline: 'One dock, full order, no delay',
-    description:
-      'Our Single Point Loading service consolidates order scheduling, material prep, and dispatch through one coordinated line, fewer handoffs, faster turnaround.',
-    process: [
-      {
-        label: 'Order Received',
-        body: 'Order specification logged against live stock and mill schedule.',
-      },
-      { label: 'Scheduling', body: 'Production and dispatch slotted into the loading calendar.' },
-      {
-        label: 'Material Prep',
-        body: 'Coil, profile, or sheet staged and inspected ahead of loading.',
-      },
-      {
-        label: 'Loading',
-        body: 'Single-point loading onto the outbound vehicle, sequenced by drop.',
-      },
-      { label: 'Dispatch', body: 'Vehicle cleared with documentation and tracked to site.' },
-    ],
-  },
   {
     slug: 'cutting',
     name: 'Cutting',
@@ -117,38 +86,5 @@ export const SERVICES: Service[] = [
         body: 'We stay involved after delivery, offering guidance and technical assistance to ensure long-term performance and continued value.',
       },
     ],
-  },
-  {
-    slug: 'packaging-hallmarking',
-    name: 'Packaging & Hallmarking',
-    tagline: 'Assurance, built in',
-    description:
-      'Every genuine ABS product carries its own markers of authenticity, verifiable the moment it reaches site.',
-    lists: [
-      {
-        title: 'Markers of Genuine ABS Products',
-        items: [
-          'Profile and guide, name and logo embossed',
-          'Special protective film on every profile',
-        ],
-      },
-      {
-        title: 'Packaging',
-        items: ['Weatherproof CDP packaging', 'Stretch film packaging for springs'],
-      },
-    ],
-  },
-  {
-    slug: 'gi-laser-cutting-sheet',
-    name: 'GI Laser Cutting Sheet',
-    tagline: 'Precision, cut to pattern',
-    description:
-      'Precision-cut GI sheets in a wide range of decorative laser-cut patterns, suited to gates, grills, screens, and facade work. Available in a wide range of standard patterns from our GLC design series.',
-    specs: [
-      { label: 'Thickness', value: '0.6 mm – 3 mm' },
-      { label: 'Width', value: 'Up to 1500 mm' },
-      { label: 'Length', value: 'Can be customised' },
-    ],
-    patternGallery: { prefix: 'GLC', groupCount: 8, codesPerGroup: 9 },
   },
 ];

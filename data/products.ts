@@ -70,6 +70,16 @@ export const PRODUCTS: Product[] = [
     capacity: '30,000 MT / year',
   },
   {
+    name: 'GI Laser Cutting Sheet',
+    brandLine: 'ABS Steel',
+    slug: 'gi-laser-cutting',
+    tagline: 'Precision-cut patterns for gates, grills and facades',
+    category: 'Laser Cutting',
+    description:
+      'Precision-cut GI sheets in a wide range of decorative laser-cut patterns, suited to gates, grills, screens, and facade work. Available in a wide range of standard patterns from our GLC design series.',
+    capacity: 'Made to order',
+  },
+  {
     name: 'Cutting & Grinding Wheels',
     brandLine: 'Abrasives',
     slug: 'abrasives',

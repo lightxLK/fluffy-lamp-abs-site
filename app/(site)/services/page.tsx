@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
-import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
@@ -11,9 +10,9 @@ import { GatePergolaScene } from '@/components/svg/scenes/GatePergolaScene';
 import { SERVICES } from '@/data/services';
 
 export const metadata: Metadata = genMeta({
-  title: 'Steel Services | Loading, Cutting, Slitting & Fabrication | ABS Steel',
+  title: 'Steel Services | Cutting, Slitting & Fabrication | ABS Steel',
   description:
-    'Single Point Loading, precision cutting, coil slitting, and custom fabrication. Four service verticals, one facility, from mill to site.',
+    'Precision cutting, coil slitting, and custom fabrication. Three service verticals, one facility, from mill to site.',
   path: '/services',
 });
 
@@ -44,8 +43,12 @@ export default function ServicesPage() {
             <SplitTextReveal>Services</SplitTextReveal>
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-2xl mb-10">
-            Seven service verticals carry every order from mill to site, loading, cutting, slitting,
-            fabrication, packaging, hallmarking, and laser cutting, all under one roof.
+            Cutting, slitting, and fabrication, carrying every order from mill to site under one
+            roof. For loading, packaging, and hallmarking, see{' '}
+            <Link href="/why-abs" className="text-abs-blue hover:underline">
+              Why ABS
+            </Link>
+            .
           </p>
 
           <nav aria-label="Service sections" className="flex flex-wrap gap-3">
@@ -106,23 +109,6 @@ export default function ServicesPage() {
                 </div>
               )}
 
-              {service.lists && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-10">
-                  {service.lists.map((list) => (
-                    <div key={list.title} className="border-t border-border-subtle pt-4">
-                      <h3 className="text-text-primary font-semibold text-sm mb-4">{list.title}</h3>
-                      <ul className="space-y-2">
-                        {list.items.map((item) => (
-                          <li key={item} className="text-text-muted text-xs leading-relaxed">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
-
               {service.specs && (
                 <div className="flex flex-wrap gap-x-10 gap-y-4 border-t border-border-subtle pt-6 mb-10">
                   {service.specs.map((spec) => (
@@ -133,41 +119,6 @@ export default function ServicesPage() {
                       <p className="text-text-primary text-sm font-semibold">{spec.value}</p>
                     </div>
                   ))}
-                </div>
-              )}
-
-              {service.patternGallery && (
-                <div className="border-t border-border-subtle pt-8">
-                  <p className="text-text-muted text-xs uppercase tracking-widest mb-6">
-                    GLC Design Series,{' '}
-                    {service.patternGallery.groupCount * service.patternGallery.codesPerGroup}{' '}
-                    Patterns
-                  </p>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    {Array.from({ length: service.patternGallery.groupCount }, (_, idx) => {
-                      const { prefix, codesPerGroup } = service.patternGallery!;
-                      const groupNum = idx + 1;
-                      const firstCode = idx * codesPerGroup + 1;
-                      const lastCode = firstCode + codesPerGroup - 1;
-                      const range = `${prefix}-${String(firstCode).padStart(3, '0')} – ${prefix}-${String(lastCode).padStart(3, '0')}`;
-                      return (
-                        <div key={groupNum}>
-                          <div className="relative aspect-[2/1] bg-bg-dark border border-border-subtle overflow-hidden">
-                            <Image
-                              src={`/products/gi-laser-cutting/glc-group-${groupNum}.webp`}
-                              alt={`GLC design series, ${range}`}
-                              fill
-                              sizes="(min-width: 1024px) 50vw, 100vw"
-                              className="object-contain p-3"
-                            />
-                          </div>
-                          <p className="text-text-muted text-[11px] text-center uppercase tracking-widest mt-2">
-                            Group {groupNum}, {range}
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
                 </div>
               )}
             </Container>

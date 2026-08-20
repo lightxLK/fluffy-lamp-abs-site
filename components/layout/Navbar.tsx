@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { label: 'Products', href: '/products' },
   { label: 'Services', href: '/services' },
   { label: 'Fabrica', href: '/services/fabrica' },
+  { label: 'Why ABS?', href: '/why-abs' },
   { label: 'Community', href: '/news' },
   { label: 'Contact Us', href: '/contact' },
 ] as const;
