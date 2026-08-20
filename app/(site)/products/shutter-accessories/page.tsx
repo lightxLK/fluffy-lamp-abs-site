@@ -51,26 +51,6 @@ const COMPONENTS = [
     specs: ['Weight: 40 kg / 400 pcs', 'Machining polished wheel finish'],
   },
   {
-    name: 'Chain Pulley Set',
-    image: '/products/shutter-accessories/chain-pulley-set.webp',
-    specs: ['Light: 25mm rod', 'Heavy: 32mm rod'],
-  },
-  {
-    name: 'Gear Box',
-    image: '/products/shutter-accessories/gear-box.webp',
-    specs: ['Available in light and heavy duty'],
-  },
-  {
-    name: 'Shutter Motors',
-    image: '/products/shutter-accessories/shutter-motors.webp',
-    specs: ['Weight capacity: 500 kg to 2,000 kg'],
-  },
-  {
-    name: 'Aluminium Socket',
-    image: '/products/shutter-accessories/aluminium-socket.webp',
-    specs: ['Quantity per bag: 5,000 pcs / 17 kg'],
-  },
-  {
     name: 'Shutter Lock',
     image: '/products/shutter-accessories/shutter-lock.png',
     specs: [
@@ -89,19 +69,9 @@ const COMPONENTS = [
     specs: ['Thickness: 8mm', 'Quantity: 500 pcs per bag'],
   },
   {
-    name: 'Pipe Socket',
-    image: '/products/shutter-accessories/pipe-socket.webp',
-    specs: ['Quantity: 5,000 pcs'],
-  },
-  {
     name: 'Tala Patti',
     image: '/products/shutter-accessories/tala-patti.png',
     specs: ['Thickness: 6mm', 'Quantity per bag: 50 kg', 'Type: GI, Black'],
-  },
-  {
-    name: 'G Block',
-    image: '/products/shutter-accessories/g-block.webp',
-    specs: ['Thickness: 8mm', 'Quantity per bag: 500 pcs'],
   },
   {
     name: 'Rivit',
