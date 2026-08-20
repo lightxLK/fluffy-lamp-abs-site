@@ -4,7 +4,10 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
 export function CSRTeaser() {
   return (
-    <section className="relative z-[2] bg-bg-mid py-24 overflow-hidden" id="csr">
+    <section
+      className="relative z-[2] bg-bg-mid min-h-dvh flex items-center overflow-hidden"
+      id="csr"
+    >
       <Image
         src="/csr.webp"
         alt=""
