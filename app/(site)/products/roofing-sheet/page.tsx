@@ -34,7 +34,7 @@ const ROOFING_FAQS = [
 
 const ROOFING_BRANDS: { name: string; src: string; scale?: string }[] = [
   { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
-  { name: 'Jindal India', src: '/Client Logo/jindal india.png', scale: 'scale-[1.4]' },
+  { name: 'Jindal India', src: '/Client Logo/jindal india.webp', scale: 'scale-[1.4]' },
   { name: 'JSW', src: '/Client Logo/jsw.webp' },
 ];
 
@@ -150,7 +150,7 @@ export default function SheetPage() {
           </div>
           <div className="relative aspect-[16/9] max-w-4xl mx-auto">
             <Image
-              src="/products/sheet/roofing accessories ABS.png"
+              src="/products/sheet/roofing accessories ABS.webp"
               alt="ABS roofing accessories"
               fill
               sizes="(min-width: 1024px) 60vw, 100vw"

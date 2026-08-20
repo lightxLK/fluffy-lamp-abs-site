@@ -21,18 +21,18 @@ export const metadata: Metadata = genMeta({
 const WHEELS = [
   {
     name: 'Cutting Wheel — 14"',
-    image: '/products/abrasives/cutting-wheel-14.png',
+    image: '/products/abrasives/cutting-wheel-14.webp',
     specs: ['Size: 14"'],
     imagePadding: 'p-0',
   },
   {
     name: 'Cutting Wheel — 4"',
-    image: '/products/abrasives/cutting-wheel-4.png',
+    image: '/products/abrasives/cutting-wheel-4.webp',
     specs: ['Size: 4"'],
   },
   {
     name: 'Grinding Wheel',
-    image: '/products/abrasives/grinding-wheel-4.png',
+    image: '/products/abrasives/grinding-wheel-4.webp',
     specs: ['Size: 4"'],
   },
 ];

@@ -23,12 +23,12 @@ export const metadata: Metadata = genMeta({
 const COMPONENTS = [
   {
     name: 'Clip',
-    image: '/products/shutter-accessories/clip.png',
+    image: '/products/shutter-accessories/clip.webp',
     specs: ['Weight: 64/80 gm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Pulley',
-    image: '/products/shutter-accessories/pulley.png',
+    image: '/products/shutter-accessories/pulley.webp',
     specs: [
       'Light: 850 gm, 50 pcs per bag',
       'Heavy: 1.15 kg, 40 pcs per bag',
@@ -37,22 +37,22 @@ const COMPONENTS = [
   },
   {
     name: 'U Clamp',
-    image: '/products/shutter-accessories/u-clamp.png',
+    image: '/products/shutter-accessories/u-clamp.webp',
     specs: ['Weight: 350 gm or 500 gm', 'Quantity: 100 pcs or 75 pcs per bag'],
   },
   {
     name: 'Kakda',
-    image: '/products/shutter-accessories/kakda.png',
+    image: '/products/shutter-accessories/kakda.webp',
     specs: ['Thickness: 4mm to 5mm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Collapsible Gate Wheel',
-    image: '/products/shutter-accessories/collapsible-gate-wheel.png',
+    image: '/products/shutter-accessories/collapsible-gate-wheel.webp',
     specs: ['Weight: 40 kg / 400 pcs', 'Machining polished wheel finish'],
   },
   {
     name: 'Shutter Lock',
-    image: '/products/shutter-accessories/shutter-lock.png',
+    image: '/products/shutter-accessories/shutter-lock.webp',
     specs: [
       'Iron, master key, 12 pcs per bag',
       'Also available in brass: light, medium, and heavy duty',
@@ -60,22 +60,22 @@ const COMPONENTS = [
   },
   {
     name: 'Hash Bolt',
-    image: '/products/shutter-accessories/hash-bolt.png',
+    image: '/products/shutter-accessories/hash-bolt.webp',
     specs: ['Thickness: 5mm to 6mm', 'Weight: 50 kg per bag'],
   },
   {
     name: 'Laichis',
-    image: '/products/shutter-accessories/laichis.png',
+    image: '/products/shutter-accessories/laichis.webp',
     specs: ['Thickness: 8mm', 'Quantity: 500 pcs per bag'],
   },
   {
     name: 'Tala Patti',
-    image: '/products/shutter-accessories/tala-patti.png',
+    image: '/products/shutter-accessories/tala-patti.webp',
     specs: ['Thickness: 6mm', 'Quantity per bag: 50 kg', 'Type: GI, Black'],
   },
   {
     name: 'Rivit',
-    image: '/products/shutter-accessories/rivit.png',
+    image: '/products/shutter-accessories/rivit.webp',
     specs: ['Quantity per bag: 50 kg', 'Type: VSP / Normal'],
   },
 ];

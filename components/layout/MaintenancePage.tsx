@@ -91,7 +91,7 @@ export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
 
       <div className="relative z-10 flex flex-col items-center">
         <img
-          src="/abs-nav-footer-full-color.png"
+          src="/abs-nav-footer-full-color.webp"
           alt="Anil Balaji Steel"
           width={642}
           height={464}

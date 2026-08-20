@@ -41,7 +41,7 @@ const FAQS = [
 const PROFILE_TYPES = [
   {
     name: 'Flat Profile',
-    image: '/products/shutter/flat-profile.png',
+    image: '/products/shutter/flat-profile.webp',
     specs: ['Standard lath, approximately 84mm width', 'Also available in Super Flat variant'],
   },
   {
@@ -56,12 +56,12 @@ const PROFILE_TYPES = [
   },
   {
     name: 'Round Profile',
-    image: '/products/shutter/round-profile.png',
+    image: '/products/shutter/round-profile.webp',
     specs: ['Rounded edge profile'],
   },
   {
     name: 'Diamond Profile',
-    image: '/products/shutter/diamond-profile.png',
+    image: '/products/shutter/diamond-profile.webp',
     specs: ['Diamond pattern rolled into the lath'],
   },
   {
@@ -71,12 +71,12 @@ const PROFILE_TYPES = [
   },
   {
     name: 'Gear Profile',
-    image: '/products/shutter/gear-profile.png',
+    image: '/products/shutter/gear-profile.webp',
     specs: ['Toothed edge for enhanced structural rigidity'],
   },
   {
     name: 'Perforated Profile',
-    image: '/products/shutter/perforated-profile.png',
+    image: '/products/shutter/perforated-profile.webp',
     specs: ['Ventilated lath, allows airflow without compromising security'],
   },
 ];
@@ -84,7 +84,7 @@ const PROFILE_TYPES = [
 const GUIDES = [
   {
     name: 'Guide',
-    image: '/products/shutter/c2-guide.png',
+    image: '/products/shutter/c2-guide.webp',
     specs: ['Thickness: 2.0mm, 750 gms/ft', 'Thickness: 2.5mm, 900 gms/ft', 'Material: GP, HR'],
   },
 ];
@@ -92,12 +92,12 @@ const GUIDES = [
 const HARDWARE = [
   {
     name: 'Bottom Plate',
-    image: '/products/shutter/bottom-plate.png',
+    image: '/products/shutter/bottom-plate.webp',
     specs: ['Thickness: 2.5mm, 3mm', 'Guide width options: 2.5", 3"'],
   },
   {
     name: 'Spring',
-    image: '/products/shutter/spring.png',
+    image: '/products/shutter/spring.webp',
     specs: [
       'Thickness: 6mm, 7mm, 8mm',
       '6mm: 12"–22" at 6–11.5 kg/pair',
@@ -107,13 +107,13 @@ const HARDWARE = [
   },
   {
     name: 'Lock Plate',
-    image: '/products/shutter/lock-plate.png',
+    image: '/products/shutter/lock-plate.webp',
     specs: ['Thickness: 2mm, 2.5mm', 'Material: GP, HR'],
     imagePadding: 'p-0',
   },
   {
     name: 'Hood Cover',
-    image: '/products/shutter/hood-cover.png',
+    image: '/products/shutter/hood-cover.webp',
     specs: [
       'Thickness: 0.3mm to 0.35mm',
       'Width: 336mm',
@@ -124,7 +124,7 @@ const HARDWARE = [
   },
   {
     name: 'Bracket Plate',
-    image: '/products/shutter/bracket-plate.png',
+    image: '/products/shutter/bracket-plate.webp',
     specs: ['Thickness: 2mm to 5mm', 'Size: 14"x14", 16"x16"', 'Material: GP, HR, CR'],
   },
 ];

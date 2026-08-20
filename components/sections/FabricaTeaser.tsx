@@ -19,7 +19,7 @@ export function FabricaTeaser() {
     >
       {/* Background Image */}
       <Image
-        src="/fabrica_cover.jpg.jpeg"
+        src="/fabrica_cover.webp"
         alt="Fabrica"
         fill
         sizes="100vw"

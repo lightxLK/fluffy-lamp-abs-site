@@ -22,7 +22,7 @@ export function CSRTeaser() {
       <Container className="relative">
         <div className="text-center max-w-3xl mx-auto">
           <Image
-            src="/rekha-foundation-logo.png"
+            src="/rekha-foundation-logo.webp"
             alt="The Rekha Foundation"
             width={1050}
             height={430}
