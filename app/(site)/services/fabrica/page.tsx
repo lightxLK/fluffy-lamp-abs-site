@@ -58,21 +58,21 @@ const GATE_OVERVIEW = [
 
 const GATE_SYSTEMS = [
   {
-    name: 'Automatic Sliding Gate',
+    name: 'Sliding Gate',
     benefits: [
       'Space-saving operation, slides neatly along the wall, ideal for compact sites.',
       'Effortless heavy-duty use for large, wide openings.',
     ],
   },
   {
-    name: 'Automatic Swing Gate',
+    name: 'Swing Gate',
     benefits: [
       'Classic elegance, opens with a grand swing for a premium entrance.',
       'Dual-leaf options, flexible for single or double panel setups.',
     ],
   },
   {
-    name: 'Automatic Shutter Gate',
+    name: 'Shutter Gate',
     benefits: [
       'Full coverage security, locks down completely as a wall-like barrier.',
       'Multipurpose utility for homes and commercial spaces alike.',
