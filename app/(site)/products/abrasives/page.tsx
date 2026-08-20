@@ -35,7 +35,7 @@ const WHEELS = [
     name: 'Grinding Wheel',
     image: '/products/abrasives/grinding-wheel-4.webp',
     specs: ['Size: 4"'],
-    imagePadding: 'p-28',
+    imagePadding: 'p-24',
   },
 ];
 
