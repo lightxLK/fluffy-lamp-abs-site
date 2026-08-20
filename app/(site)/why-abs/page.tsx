@@ -55,8 +55,8 @@ export default function WhyABSPage() {
       <section className="bg-bg-dark pt-8 pb-24 overflow-hidden" id="spl">
         <DrawSVGSection
           selector=".abs-path"
-          duration={1.1}
-          stagger={0.0015}
+          duration={4}
+          stagger={0.004}
           fill={false}
           className="mb-10 px-2"
         >
