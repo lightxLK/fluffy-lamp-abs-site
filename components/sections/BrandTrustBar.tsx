@@ -6,7 +6,8 @@ const BRANDS: { name: string; src: string; scale?: string }[] = [
   { name: 'Nezone', src: '/Client Logo/nezone-bl.webp' },
   { name: 'JSW Steel', src: '/Client Logo/jsw.webp' },
   { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
-  { name: 'Shyam Steel', src: '/Client Logo/shyam-steel.png', scale: 'scale-150' },
+  { name: 'Shyam Sel', src: '/Client Logo/shyam-sel.png' },
+  { name: 'Jindal India', src: '/Client Logo/jindal india.png' },
 ];
 
 const REPEAT = 4;
