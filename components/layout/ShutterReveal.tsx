@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const VIDEO_SRC = '/shutter-reveal.mp4';
+const AUDIO_SRC = '/shutter-audio.mp3';
 
 // Chroma-key thresholds tuned for a bright green screen. KEY_LOW..KEY_HIGH
 // is a feather band so the shutter's silhouette edge doesn't look jagged.
@@ -16,6 +17,7 @@ const FADE_OUT_MS = 600;
 
 export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keyCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [fadingOut, setFadingOut] = useState(false);
@@ -27,6 +29,7 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
     }
 
     const video = videoRef.current;
+    const audio = audioRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
 
@@ -96,6 +99,7 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
       if (cancelled) return;
       cancelled = true;
       cancelAnimationFrame(rafId);
+      audio?.pause();
       // Leave the last drawn frame on the canvas and fade the whole overlay
       // out, rather than cutting straight to the site behind it.
       setFadingOut(true);
@@ -104,6 +108,11 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
 
     video.addEventListener('ended', handleEnded);
     video.play().catch(() => handleEnded());
+    // The chroma-key video itself is silent (kept `muted` so the browser
+    // never blocks its autoplay); this separate track supplies the shutter
+    // sound effect. Play errors (e.g. no user-activation left) are
+    // swallowed — the reveal still works, just silently.
+    audio?.play().catch(() => {});
     rafId = requestAnimationFrame(draw);
 
     return () => {
@@ -112,6 +121,7 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
       window.clearTimeout(fadeTimeout);
       window.removeEventListener('resize', resize);
       video.removeEventListener('ended', handleEnded);
+      audio?.pause();
     };
   }, [onComplete]);
 
@@ -124,6 +134,7 @@ export function ShutterReveal({ onComplete }: { onComplete: () => void }) {
       aria-hidden
     >
       <video ref={videoRef} src={VIDEO_SRC} muted playsInline preload="auto" className="hidden" />
+      <audio ref={audioRef} src={AUDIO_SRC} preload="auto" className="hidden" />
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   );
