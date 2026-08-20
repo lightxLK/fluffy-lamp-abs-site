@@ -50,7 +50,7 @@ export function ProductsSection() {
                         isShutter
                           ? 'w-[80%] h-[80%]'
                           : isLaserCutting
-                            ? 'w-[45%] h-[45%]'
+                            ? 'w-[62%] h-[62%]'
                             : 'w-full h-full'
                       }
                     />
