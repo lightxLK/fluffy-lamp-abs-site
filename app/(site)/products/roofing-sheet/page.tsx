@@ -33,7 +33,6 @@ const ROOFING_FAQS = [
 ];
 
 const ROOFING_BRANDS: { name: string; src: string; scale?: string }[] = [
-  { name: 'ABS Branded', src: '/abs-nav-footer-full-color.png' },
   { name: 'Jindal Steel', src: '/Client Logo/jindal.webp' },
   { name: 'Jindal India', src: '/Client Logo/jindal india.png', scale: 'scale-[1.4]' },
   { name: 'JSW', src: '/Client Logo/jsw.webp' },
@@ -107,6 +106,22 @@ export default function SheetPage() {
               ABS BlueShield™, Brands Available
             </p>
             <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
+              <span className="flex items-center justify-center h-14 w-32">
+                <Image
+                  src="/abs-nav-footer1.webp"
+                  alt="ABS Branded"
+                  width={128}
+                  height={56}
+                  className="h-full w-full object-contain light:hidden"
+                />
+                <Image
+                  src="/abs-nav-footer-light.webp"
+                  alt="ABS Branded"
+                  width={128}
+                  height={56}
+                  className="hidden light:block h-full w-full object-contain"
+                />
+              </span>
               {ROOFING_BRANDS.map((brand) => (
                 <span key={brand.name} className="flex items-center justify-center h-14 w-32">
                   <Image
