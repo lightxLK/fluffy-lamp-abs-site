@@ -48,12 +48,18 @@ export default function WhyABSPage() {
         </Container>
       </section>
 
-      <section className="bg-bg-dark py-24 overflow-hidden" id="spl">
-        <Container>
-          <DrawSVGSection selector=".abs-path" duration={2.5} stagger={0.004} className="mb-14">
-            <SPLScene className="w-full h-auto" />
-          </DrawSVGSection>
+      <section className="bg-bg-dark pt-8 pb-24 overflow-hidden" id="spl">
+        <DrawSVGSection
+          selector=".abs-path"
+          duration={1.1}
+          stagger={0.0015}
+          fill={false}
+          className="mb-10 px-2"
+        >
+          <SPLScene className="w-full max-w-none h-auto scale-110" />
+        </DrawSVGSection>
 
+        <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
               <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">

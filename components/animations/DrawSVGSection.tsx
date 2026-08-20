@@ -13,6 +13,10 @@ interface DrawSVGSectionProps {
    * paths (e.g. potrace output) so the reveal doesn't stretch on for tens
    * of seconds. */
   stagger?: number;
+  /** Whether the fill fades in once a path is drawn. Off for scenes meant
+   * to stay pure line art (e.g. the SPL diagram) instead of resolving into
+   * filled shapes. */
+  fill?: boolean;
 }
 
 export function DrawSVGSection({
@@ -21,6 +25,7 @@ export function DrawSVGSection({
   className,
   duration = 1.5,
   stagger = 0.08,
+  fill = true,
 }: DrawSVGSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,31 +37,34 @@ export function DrawSVGSection({
       if (!paths.length) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(paths, { fillOpacity: 1 });
+        gsap.set(paths, fill ? { fillOpacity: 1 } : { drawSVG: '100%' });
         return;
       }
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 75%',
+          once: true,
+        },
+      });
 
       // Same crossfade handoff as the ABS logo scene: the fill starts
       // fading in well before the line finishes drawing, so the two read
       // as one continuous motion instead of a draw-then-fill sequence.
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 75%',
-            once: true,
-          },
-        })
-        .fromTo(
-          paths,
-          { drawSVG: '0%', fillOpacity: 0 },
-          { drawSVG: '100%', duration, stagger, ease: 'power2.inOut' },
-        )
-        .to(
+      tl.fromTo(
+        paths,
+        { drawSVG: '0%', fillOpacity: 0 },
+        { drawSVG: '100%', duration, stagger, ease: 'power2.inOut' },
+      );
+
+      if (fill) {
+        tl.to(
           paths,
           { fillOpacity: 1, duration: duration * 0.25, ease: 'power1.out' },
           `-=${duration * 0.54}`,
         );
+      }
     },
     { scope: ref },
   );
