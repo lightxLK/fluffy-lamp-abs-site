@@ -8,7 +8,7 @@ export function generateOrganizationSchema() {
     url: SITE_URL,
     telephone: '+919007211599',
     email: 'viren@anilbalajisteel.com',
-    foundingDate: '1972',
+    foundingDate: '1975',
     description: "Eastern India's most trusted steel manufacturer and distributor.",
     address: {
       '@type': 'PostalAddress',

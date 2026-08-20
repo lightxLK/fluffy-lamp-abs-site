@@ -11,7 +11,7 @@ const SLIDES = [
   {
     eyebrow: '50 Years of Excellence',
     headline: "Eastern India's Most Trusted Steel Manufacturer",
-    tagline: 'Trusted by builders across Eastern India since 1972.',
+    tagline: 'Trusted by builders across Eastern India since 1975.',
     cta: { label: 'About Us', href: '/about' },
     secondaryCta: { label: 'Testimonials', href: '/#testimonials' },
   },

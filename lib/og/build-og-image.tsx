@@ -77,7 +77,7 @@ export async function renderOgImage() {
             textTransform: 'uppercase',
           }}
         >
-          Since 1972 · Howrah, West Bengal
+          Since 1975 · Howrah, West Bengal
         </div>
         <div
           style={{

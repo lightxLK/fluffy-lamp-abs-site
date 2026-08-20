@@ -14,7 +14,7 @@ export function AboutHero() {
             <SplitTextReveal>50 years of trust, forged in steel</SplitTextReveal>
           </h1>
           <p className="text-text-body text-lg leading-relaxed max-w-2xl">
-            In 1972, Ved Prakash Agarwal left Hansi, Haryana with nothing but determination and a
+            In 1975, Ved Prakash Agarwal left Hansi, Haryana with nothing but determination and a
             few annas in his pocket. His journey, from steel broker to mill owner, became the
             foundation of Anil Balaji Steel and every product we make today.
           </p>

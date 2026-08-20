@@ -46,7 +46,7 @@ export function AboutTimeline() {
             The Journey
           </p>
           <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
-            1972 to present
+            1975 to present
           </h2>
         </div>
       </Container>

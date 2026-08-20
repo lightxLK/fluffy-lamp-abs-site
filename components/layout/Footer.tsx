@@ -55,7 +55,7 @@ export function Footer() {
           />
           <p className="text-text-muted text-sm mt-3">Anil Balaji Steel Pvt. Ltd.</p>
           <p className="text-text-muted text-sm mt-4 leading-relaxed max-w-xs">
-            Eastern India&apos;s most trusted steel manufacturer. Howrah, West Bengal. Est. 1972.
+            Eastern India&apos;s most trusted steel manufacturer. Howrah, West Bengal. Est. 1975.
           </p>
           <div className="flex items-center gap-4 mt-5">
             {SOCIAL_LINKS.map(({ label, href, Icon }) => (

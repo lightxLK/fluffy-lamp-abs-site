@@ -6,7 +6,7 @@ export interface TimelineEntry {
 
 export const TIMELINE: TimelineEntry[] = [
   {
-    year: '1972',
+    year: '1975',
     title: 'Foundation of the Legacy',
     body: 'Ved Prakash Agarwal arrives in Kolkata from Hansi with nothing but resolve, taking his first job as a steel broker and planting the seed of everything ABS would become.',
   },

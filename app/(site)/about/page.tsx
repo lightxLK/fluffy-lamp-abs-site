@@ -12,7 +12,7 @@ import { ContactStrip } from '@/components/sections/ContactStrip';
 export const metadata: Metadata = genMeta({
   title: 'About Anil Balaji Steel | 50 Years of Steel Manufacturing in Howrah',
   description:
-    'From steel broker to Eastern India’s leading rolling mill. The story, values, and leadership of Anil Balaji Steel Pvt. Ltd., est. 1972.',
+    'From steel broker to Eastern India’s leading rolling mill. The story, values, and leadership of Anil Balaji Steel Pvt. Ltd., est. 1975.',
   path: '/about',
 });
 
