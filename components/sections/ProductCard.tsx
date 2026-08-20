@@ -67,14 +67,16 @@ export function ProductCard({ product }: ProductCardProps) {
           className={
             isShutter
               ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-16'
-              : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
+              : isLaserCutting
+                ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-16'
+                : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
           }
         >
           <ProductIcon
             slug={product.slug}
             variant="stroke"
             className={
-              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[65%] h-[65%]' : 'w-full h-full'
+              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[50%] h-[50%]' : 'w-full h-full'
             }
           />
         </div>
