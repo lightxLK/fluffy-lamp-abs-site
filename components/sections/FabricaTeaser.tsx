@@ -2,6 +2,15 @@
 import Image from 'next/image';
 import { HomeExitLink } from '@/components/layout/HomeExitLink';
 
+const ANNOTATIONS = [
+  { label: 'Pergola', x: 42.25, y: 21.6 },
+  { label: 'Railings', x: 13.15, y: 48.7 },
+  { label: 'Staircase', x: 54.25, y: 53.6 },
+  { label: 'Cabana', x: 60.65, y: 56.1 },
+  { label: 'Border Walled Fencing', x: 4.65, y: 83.6 },
+  { label: 'Swing Gate', x: 38.15, y: 83.6 },
+] as const;
+
 export function FabricaTeaser() {
   return (
     <section
@@ -10,7 +19,7 @@ export function FabricaTeaser() {
     >
       {/* Background Image */}
       <Image
-        src="/dssdfc.webp"
+        src="/fabrica_cover.jpg.jpeg"
         alt="Fabrica"
         fill
         sizes="100vw"
@@ -19,6 +28,25 @@ export function FabricaTeaser() {
 
       {/* Color Overlay */}
       <div className="absolute inset-0 bg-[#0D0D0D]/65 z-[5] pointer-events-none" />
+
+      {/* Annotation Highlights */}
+      <div className="absolute inset-0 z-[6] pointer-events-none hidden lg:block">
+        {ANNOTATIONS.map((point) => (
+          <div
+            key={point.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2"
+            style={{ left: `${point.x}%`, top: `${point.y}%` }}
+          >
+            <span className="relative flex h-3 w-3 shrink-0">
+              <span className="absolute inset-0 rounded-full bg-abs-blue animate-ping opacity-60" />
+              <span className="relative rounded-full h-3 w-3 bg-abs-blue border border-white/40" />
+            </span>
+            <span className="text-white text-xs font-semibold uppercase tracking-widest px-3 py-1.5 bg-bg-dark/80 backdrop-blur-sm border border-border-subtle whitespace-nowrap">
+              {point.label}
+            </span>
+          </div>
+        ))}
+      </div>
 
       {/* Content */}
       <Container className="relative z-20 w-full">
