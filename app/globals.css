@@ -253,11 +253,11 @@ body::after {
   }
 }
 
-/* ─── Slow Ken Burns pan/zoom (CSR image carousel) ──────────────────── */
-/* Runs continuously and identically on every slide rather than restarting
-   per-slide, so there's no dependency on animation-restart timing lining up
-   with the crossfade — only the opacity crossfade needs to be synced. */
-@keyframes slow-zoom {
+/* ─── Ken Burns pan/zoom (CSR image carousel) ───────────────────────── */
+/* Applied only to the active slide (class toggled on/off in JS), so the
+   zoom restarts from scale(1) each time a slide fades in, in step with
+   its own visible window rather than an independent, unsynced cycle. */
+@keyframes ken-burns {
   from {
     transform: scale(1);
   }
@@ -292,8 +292,8 @@ body::after {
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
 
-  .animate-slow-zoom {
-    animation: slow-zoom 16s ease-in-out infinite alternate;
+  .animate-ken-burns {
+    animation: ken-burns 7.5s ease-out forwards;
   }
 }
 

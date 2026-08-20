@@ -68,7 +68,6 @@ export default function HomePage() {
 
       <WhyABS />
       <BrandTrustBar />
-      <TestimonialsSection />
 
       <div className="relative">
         <ConnectorCurves />
@@ -77,6 +76,7 @@ export default function HomePage() {
 
       <NetworkSection />
       <CSRTeaser />
+      <TestimonialsSection />
       <ContactStrip />
     </>
   );

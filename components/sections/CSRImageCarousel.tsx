@@ -41,7 +41,9 @@ export function CSRImageCarousel() {
             sizes="100vw"
             priority={i === 0}
             draggable={false}
-            className="animate-slow-zoom select-none object-cover pointer-events-none"
+            className={`select-none object-cover pointer-events-none ${
+              i === index ? 'animate-ken-burns' : ''
+            }`}
           />
         </div>
       ))}
