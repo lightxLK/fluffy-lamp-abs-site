@@ -5,7 +5,11 @@ const REPEAT = 2;
 
 export function TestimonialsSection() {
   return (
-    <section className="py-20 bg-bg-mid overflow-hidden" aria-label="Customer testimonials">
+    <section
+      id="testimonials"
+      className="py-20 bg-bg-mid overflow-hidden"
+      aria-label="Customer testimonials"
+    >
       <Container>
         <p className="text-center text-text-muted text-xs uppercase tracking-widest mb-3">
           Testimonials

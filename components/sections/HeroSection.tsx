@@ -13,7 +13,7 @@ const SLIDES = [
     headline: "Eastern India's Most Trusted Steel Manufacturer",
     tagline: 'Trusted by builders across Eastern India since 1972.',
     cta: { label: 'About Us', href: '/about' },
-    secondaryCta: { label: 'Testimonials', href: '/contact' },
+    secondaryCta: { label: 'Testimonials', href: '/#testimonials' },
   },
   {
     eyebrow: 'From Our Mill to Your Build',
