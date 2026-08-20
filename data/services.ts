@@ -8,6 +8,7 @@ export interface Service {
   name: string;
   tagline: string;
   description: string;
+  image?: string;
   process?: ServiceStep[];
   applications?: string[];
   specs?: { label: string; value: string }[];
@@ -19,6 +20,7 @@ export const SERVICES: Service[] = [
     slug: 'cutting',
     name: 'Cutting',
     tagline: 'Sheets that fit the first time',
+    image: '/services/cutting.webp',
     description:
       "Our cut-to-length service delivers steel sheets in the exact dimensions your project or customer demands. Whether you're dealing in roofing sheets or shutter panels, get stack-ready sheets without the extra work.",
     applications: [
@@ -42,6 +44,7 @@ export const SERVICES: Service[] = [
     slug: 'slitting',
     name: 'Slitting',
     tagline: 'Coils, cut to perform',
+    image: '/services/slitting.webp',
     description:
       'ABS provides precision slitting services in custom widths. Our high-speed slitting line ensures tight tolerances, clean edges, and uniform quality across the coil.',
     applications: [

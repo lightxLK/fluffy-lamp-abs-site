@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { generateMetadata as genMeta } from '@/lib/seo/generateMetadata';
 import { generateBreadcrumbSchema } from '@/lib/seo/generateBreadcrumbSchema';
+import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { DrawSVGSection } from '@/components/animations/DrawSVGSection';
 import { SplitTextReveal } from '@/components/animations/SplitTextReveal';
@@ -81,15 +82,42 @@ export default function ServicesPage() {
             )}
 
             <Container className="relative">
-              <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-                {service.tagline}
-              </p>
-              <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6 max-w-2xl">
-                {service.name}
-              </h2>
-              <p className="text-text-body text-base leading-relaxed max-w-2xl mb-12">
-                {service.description}
-              </p>
+              {service.image ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
+                  <div>
+                    <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                      {service.tagline}
+                    </p>
+                    <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6 max-w-2xl">
+                      {service.name}
+                    </h2>
+                    <p className="text-text-body text-base leading-relaxed max-w-2xl">
+                      {service.description}
+                    </p>
+                  </div>
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border-subtle">
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
+                    {service.tagline}
+                  </p>
+                  <h2 className="text-text-primary font-bold text-3xl lg:text-4xl leading-tight mb-6 max-w-2xl">
+                    {service.name}
+                  </h2>
+                  <p className="text-text-body text-base leading-relaxed max-w-2xl mb-12">
+                    {service.description}
+                  </p>
+                </>
+              )}
 
               {service.process && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
