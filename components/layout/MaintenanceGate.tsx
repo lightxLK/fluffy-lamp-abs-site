@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { isLaunched } from '@/lib/maintenance';
 import { clearPreloaderShown } from '@/lib/homeReturn';
 import { MaintenancePage } from '@/components/layout/MaintenancePage';
+import { ShutterReveal } from '@/components/layout/ShutterReveal';
 
 // Tab/session-only bypass: closing the browser (not just navigating) re-locks
 // the site. Reason: static export has no server, so this flag is the only
@@ -39,40 +40,44 @@ function clearBypass() {
   }
 }
 
+type Phase = 'loading' | 'locked' | 'revealing' | 'unlocked';
+
 export function MaintenanceGate({ children }: { children: React.ReactNode }) {
-  // Starts null on both server and client so the first client render matches
-  // the static HTML (no hydration mismatch); the effect below resolves the
-  // real bypass/launch state right after mount.
-  const [unlocked, setUnlocked] = useState<boolean | null>(null);
+  // Starts 'loading' on both server and client so the first client render
+  // matches the static HTML (no hydration mismatch); the effect below
+  // resolves the real bypass/launch state right after mount.
+  const [phase, setPhase] = useState<Phase>('loading');
 
   useEffect(() => {
     // Reads external state (clock, sessionStorage) to sync into React state
     // on mount — the canonical case the set-state-in-effect lint heuristic
     // doesn't distinguish from an accidental render loop.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setUnlocked(isLaunched() || readBypass());
+    setPhase(isLaunched() || readBypass() ? 'unlocked' : 'locked');
 
+    // Secret combo unlock: instant, no shutter video — a dev shortcut, not
+    // the visitor-facing Launch button flow.
     const unlock = () => {
       writeBypass();
       // Re-arms the home preloader so revealing the site through the gate
       // always plays the intro, instead of the 30-minute skip meant for
       // ordinary back/forward navigation.
       clearPreloaderShown();
-      setUnlocked(true);
+      setPhase('unlocked');
     };
 
     // Toggles between the maintenance overlay and the live site, so the
     // same combo can flip back and forth without a reload.
     const toggle = () => {
-      setUnlocked((prev) => {
-        const next = !(prev ?? false);
+      setPhase((prev) => {
+        const next = prev !== 'unlocked';
         if (next) {
           writeBypass();
           clearPreloaderShown();
-        } else {
-          clearBypass();
+          return 'unlocked';
         }
-        return next;
+        clearBypass();
+        return 'locked';
       });
     };
 
@@ -114,7 +119,7 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
     // Re-checks the clock every second so the site unlocks itself the moment
     // the launch timestamp passes, with no user action required.
     const interval = setInterval(() => {
-      if (isLaunched()) setUnlocked(true);
+      if (isLaunched()) setPhase((prev) => (prev === 'locked' ? 'unlocked' : prev));
     }, 1000);
 
     window.addEventListener('keydown', handleKeyDown);
@@ -129,8 +134,30 @@ export function MaintenanceGate({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Avoid a flash of the real site before the bypass/launch check resolves.
-  if (unlocked === null) return null;
+  // Called once the Launch button's on-page 10s countdown reaches zero.
+  const handleLaunch = () => setPhase('revealing');
 
-  return unlocked ? children : <MaintenancePage />;
+  // Called when the shutter video finishes (or is skipped for
+  // prefers-reduced-motion) — mirrors the secret-combo unlock side effects.
+  const handleRevealComplete = () => {
+    writeBypass();
+    clearPreloaderShown();
+    setPhase('unlocked');
+  };
+
+  // Avoid a flash of the real site before the bypass/launch check resolves.
+  if (phase === 'loading') return null;
+
+  if (phase === 'locked') return <MaintenancePage onLaunch={handleLaunch} />;
+
+  if (phase === 'revealing') {
+    return (
+      <>
+        {children}
+        <ShutterReveal onComplete={handleRevealComplete} />
+      </>
+    );
+  }
+
+  return children;
 }

@@ -50,14 +50,36 @@ const UNITS: { key: keyof Countdown; singular: string; plural: string }[] = [
   { key: 'seconds', singular: 'Second', plural: 'Seconds' },
 ];
 
-export function MaintenancePage() {
+// Once Launch is clicked, the real countdown is abandoned in favor of a
+// fixed final countdown — a predictable, short beat before the shutter
+// plays, regardless of how much real time is actually left.
+const LAUNCH_COUNTDOWN_SECONDS = 10;
+
+export function MaintenancePage({ onLaunch }: { onLaunch: () => void }) {
   const [countdown, setCountdown] = useState<Countdown>(() => getCountdown());
+  const [launching, setLaunching] = useState(false);
+  const [launchSecondsLeft, setLaunchSecondsLeft] = useState(LAUNCH_COUNTDOWN_SECONDS);
   const quote = useRotatingHeroQuote();
 
   useEffect(() => {
+    if (launching) return;
     const interval = setInterval(() => setCountdown(getCountdown()), 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [launching]);
+
+  useEffect(() => {
+    if (!launching) return;
+    if (launchSecondsLeft <= 0) {
+      onLaunch();
+      return;
+    }
+    const timeout = setTimeout(() => setLaunchSecondsLeft((s) => s - 1), 1000);
+    return () => clearTimeout(timeout);
+  }, [launching, launchSecondsLeft, onLaunch]);
+
+  const displayedCountdown: Countdown = launching
+    ? { days: 0, hours: 0, minutes: 0, seconds: launchSecondsLeft }
+    : countdown;
 
   return (
     <main
@@ -98,7 +120,7 @@ export function MaintenancePage() {
             <div key={unit.key} className="flex items-start gap-3 md:gap-6">
               <div className="flex flex-col items-center">
                 <Counter
-                  value={countdown[unit.key]}
+                  value={displayedCountdown[unit.key]}
                   places={[10, 1]}
                   fontSize={40}
                   gap={2}
@@ -111,7 +133,7 @@ export function MaintenancePage() {
                   containerStyle={{ fontVariantNumeric: 'tabular-nums' }}
                 />
                 <span className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2rem] text-white/60 md:text-xs">
-                  {countdown[unit.key] === 1 ? unit.singular : unit.plural}
+                  {displayedCountdown[unit.key] === 1 ? unit.singular : unit.plural}
                 </span>
               </div>
               {i < UNITS.length - 1 && (
@@ -122,6 +144,15 @@ export function MaintenancePage() {
         </div>
 
         <p className="mt-12 text-sm text-white/60">21 August 2026</p>
+
+        <button
+          type="button"
+          onClick={() => setLaunching(true)}
+          disabled={launching}
+          className="mt-10 rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold uppercase tracking-[0.2rem] text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {launching ? 'Launching…' : 'Launch'}
+        </button>
       </div>
     </main>
   );
