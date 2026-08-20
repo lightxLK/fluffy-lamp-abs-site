@@ -5,8 +5,8 @@ import { HomeExitLink } from '@/components/layout/HomeExitLink';
 const ANNOTATIONS = [
   { label: 'Pergola', x: 49, y: 21.6 },
   { label: 'Railings', x: 20, y: 48.7 },
-  { label: 'Staircase', x: 60, y: 58 },
-  { label: 'Cabana', x: 76, y: 58 },
+  { label: 'Staircase', x: 60, y: 64 },
+  { label: 'Cabana', x: 82, y: 58 },
   { label: 'Border Walled Fencing', x: 11, y: 83.6 },
   { label: 'Swing Gate', x: 45, y: 83.6 },
 ] as const;
@@ -57,12 +57,12 @@ export function FabricaTeaser() {
           <h2 className="font-bold text-4xl lg:text-5xl leading-tight mb-6 text-white drop-shadow-md">
             Fabrica
           </h2>
-          <p className="text-lg leading-relaxed mb-6 text-white drop-shadow">
+          <p className="text-lg leading-relaxed mb-6 text-white font-semibold drop-shadow">
             Gates, pergolas, grilles, and custom steel structures, designed and fabricated in-house
             by our specialist team. Fabrica is where industrial precision meets architectural
             vision.
           </p>
-          <p className="text-white text-base leading-relaxed mb-10 drop-shadow">
+          <p className="text-white text-base leading-relaxed mb-10 font-semibold drop-shadow">
             Led by Ms. Komal Agarwal, our fabrication division has completed 532 bespoke
             installations across West Bengal and Odisha.
           </p>

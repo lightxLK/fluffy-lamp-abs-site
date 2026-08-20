@@ -68,7 +68,7 @@ export function ProductCard({ product }: ProductCardProps) {
             isShutter
               ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-16'
               : isLaserCutting
-                ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-16'
+                ? 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10 pb-20'
                 : 'absolute inset-0 flex items-center justify-center text-text-muted opacity-40 group-hover:text-text-primary group-hover:opacity-100 transition-[color,opacity] duration-500 p-10'
           }
         >
@@ -76,7 +76,7 @@ export function ProductCard({ product }: ProductCardProps) {
             slug={product.slug}
             variant="stroke"
             className={
-              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[38%] h-[38%]' : 'w-full h-full'
+              isShutter ? 'w-[75%] h-[75%]' : isLaserCutting ? 'w-[28%] h-[28%]' : 'w-full h-full'
             }
           />
         </div>
