@@ -64,3 +64,4 @@ skills-lock.json
 
 # unrelated side project nested in this checkout (local-only)
 /making-of-video/
+public/products/products-real.zip

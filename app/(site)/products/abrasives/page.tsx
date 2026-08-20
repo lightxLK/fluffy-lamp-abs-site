@@ -23,6 +23,7 @@ const WHEELS = [
     name: 'Cutting Wheel — 14"',
     image: '/products/abrasives/cutting-wheel-14.png',
     specs: ['Size: 14"'],
+    imagePadding: 'p-0',
   },
   {
     name: 'Cutting Wheel — 4"',
