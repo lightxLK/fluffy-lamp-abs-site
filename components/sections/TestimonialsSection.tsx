@@ -41,6 +41,7 @@ export function TestimonialsSection() {
                   {testimonial.title}
                 </h3>
                 <p className="text-text-muted text-sm leading-relaxed">{testimonial.quote}</p>
+                <p className="text-text-primary text-xs font-semibold mt-4">— {testimonial.name}</p>
               </div>
             ))}
           </div>

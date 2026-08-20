@@ -1,6 +1,7 @@
 export interface Testimonial {
   title: string;
   quote: string;
+  name: string;
 }
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -8,150 +9,180 @@ export const TESTIMONIALS: Testimonial[] = [
     title: 'Quality That Delivers',
     quote:
       'Anil Balaji Steel consistently delivers quality products with the reliability we expect from a long-term steel partner.',
+    name: 'Bibaswan Ghosh',
   },
   {
     title: 'Reliable Every Time',
     quote:
       'Their consistent product quality and dependable service have made Anil Balaji Steel a trusted name for our steel requirements.',
+    name: 'Rakesh Sarkar',
   },
   {
     title: 'Strong & Dependable',
     quote:
       'Quality steel and reliable service — that’s what we have consistently experienced with Anil Balaji Steel.',
+    name: 'Aakash Sarkar',
   },
   {
     title: 'Professional Service',
     quote:
       'What impressed us most is their professional approach, timely response, and commitment to maintaining quality.',
+    name: 'Pritha Das',
   },
   {
     title: 'Built on Trust',
     quote:
       'Anil Balaji Steel has built a strong reputation through quality products, transparent dealings, and dependable service.',
+    name: 'Sujoy Shit',
   },
   {
     title: 'Consistent Quality',
     quote:
       'Every order reflects their commitment to quality. Their consistency is what makes them a reliable steel supplier.',
+    name: 'Nairita Sarkar',
   },
   {
     title: 'Timely Supply',
     quote:
       'Timely delivery is extremely important in our business, and Anil Balaji Steel has consistently supported us with dependable supply.',
+    name: 'Sukanto Baruli',
   },
   {
     title: 'A Trusted Partner',
     quote:
       'They are more than just a steel supplier. Their responsive service and commitment to quality make them a valuable business partner.',
+    name: 'Shinjan Chatterjee',
   },
   {
     title: 'Quality You Can Count On',
     quote:
       'When it comes to steel, consistency matters. Anil Balaji Steel has consistently delivered products we can rely on.',
+    name: 'Ritwinkar',
   },
   {
     title: 'Excellent Experience',
     quote:
       'Our experience with Anil Balaji Steel has been excellent — quality products, smooth coordination, and reliable service.',
+    name: 'Toushali Banerjee',
   },
   {
     title: 'Strength in Every Product',
     quote:
       'The quality and strength of their steel products give us confidence in every project we undertake.',
+    name: 'Rupkotha Bandhopadhaya',
   },
   {
     title: 'Dependable Supply',
     quote:
       'Anil Balaji Steel has always maintained a professional approach and dependable supply, making our procurement process much easier.',
+    name: 'Swarajit Dey',
   },
   {
     title: 'Customer-Focused Approach',
     quote:
       'What sets them apart is their willingness to understand customer requirements and provide the right solution.',
+    name: 'Ankana Dey',
   },
   {
     title: 'Consistency Matters',
     quote:
       'Consistent quality and professional service are hard to find. Anil Balaji Steel delivers both exceptionally well.',
+    name: 'Kathakoili Sen',
   },
   {
     title: 'A Name We Trust',
     quote:
       'We value our association with Anil Balaji Steel because they consistently maintain the standards we expect from a quality steel manufacturer.',
+    name: 'Saumili Shosh',
   },
   {
     title: 'Strong Business Relationship',
     quote:
       'Over time, Anil Balaji Steel has proven to be a dependable business partner that we can confidently rely on.',
+    name: 'Shyamol Joy',
   },
   {
     title: 'Quality First',
     quote:
       'Their focus on quality is evident in every interaction and every product. It’s reassuring to work with a company that takes standards seriously.',
+    name: 'Kathbiral Sengupta',
   },
   {
     title: 'Smooth & Reliable',
     quote:
       'From enquiry to delivery, the entire process has been smooth and professional. Anil Balaji Steel is a name we trust.',
+    name: 'Anirban Ghosh',
   },
   {
     title: 'Dependable Performance',
     quote:
       'Good steel requires consistency, and that is exactly what we appreciate about Anil Balaji Steel — dependable quality and service.',
+    name: 'Oishee Pal',
   },
   {
     title: 'Professional & Responsive',
     quote:
       'Their team is responsive, professional, and committed to meeting customer requirements. Our experience has been very positive.',
+    name: 'Shiny Basu',
   },
   {
     title: 'Quality That Builds Confidence',
     quote:
       'Working with Anil Balaji Steel gives us confidence that our steel requirements are being handled by a reliable and quality-focused company.',
+    name: 'Swapnendu',
   },
   {
     title: 'Reliable Steel Solutions',
     quote:
       'They understand the importance of quality and timely supply. Their dependable approach has made them one of our preferred steel partners.',
+    name: 'Dibdendu Dasgupta',
   },
   {
     title: 'Trust Through Quality',
     quote:
       'Quality products and consistent service have helped Anil Balaji Steel build a relationship based on trust and reliability.',
+    name: 'Snigdha Dutto',
   },
   {
     title: 'Recommended for Reliability',
     quote:
       'Anil Balaji Steel combines product quality with professional service. Their reliability is something we genuinely appreciate.',
+    name: 'Sriya Ganguly',
   },
   {
     title: 'Consistent From Start to Finish',
     quote:
       'From placing the order to receiving the material, their attention to quality and service remains consistent throughout.',
+    name: 'Joyjit Pal',
   },
   {
     title: 'A Dependable Choice',
     quote:
       'For businesses where quality and timely supply matter, Anil Balaji Steel is a dependable choice.',
+    name: 'Debrup Mazumdar',
   },
   {
     title: 'Built to Perform',
     quote:
       'The quality of their steel products gives us the confidence we need for demanding applications. Their service complements the product quality.',
+    name: 'Anindya Basak',
   },
   {
     title: 'Strong Partnership',
     quote:
       'Our association with Anil Balaji Steel has been built on mutual trust, consistent quality, and dependable service.',
+    name: 'Ritam Lahiri',
   },
   {
     title: 'Quality Meets Service',
     quote:
       'Anil Balaji Steel has created a strong balance between quality products, responsive service, and reliable supply.',
+    name: 'Tamal Bhattacharjee',
   },
   {
     title: 'A Steel Partner We Can Rely On',
     quote:
       'Reliable products, consistent quality, and professional support — Anil Balaji Steel has proven to be a partner we can count on.',
+    name: 'Rupayan Guha',
   },
 ];
