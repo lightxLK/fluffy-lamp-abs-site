@@ -41,7 +41,10 @@ export function FabricaTeaser() {
               <span className="absolute inset-0 rounded-full bg-abs-blue animate-ping opacity-60" />
               <span className="relative rounded-full h-3 w-3 bg-abs-blue border border-white/40" />
             </span>
-            <span className="text-white text-xs font-semibold uppercase tracking-widest px-3 py-1.5 bg-bg-dark/80 backdrop-blur-sm border border-border-subtle whitespace-nowrap">
+            <span
+              className="text-xs font-semibold uppercase tracking-widest px-3 py-1.5 bg-bg-dark/80 backdrop-blur-sm border border-border-subtle whitespace-nowrap"
+              style={{ color: '#011152' }}
+            >
               {point.label}
             </span>
           </div>
