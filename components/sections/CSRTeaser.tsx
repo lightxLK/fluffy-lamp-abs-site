@@ -26,7 +26,7 @@ export function CSRTeaser() {
             alt="The Rekha Foundation"
             width={1050}
             height={430}
-            className="h-16 w-auto lg:h-20 mx-auto mb-6 rounded-xl shadow-lg"
+            className="h-24 w-auto lg:h-28 mx-auto mb-6 rounded-xl shadow-lg"
           />
           <p className="text-white text-xs font-medium uppercase tracking-widest mb-4">
             Corporate Social Responsibility
