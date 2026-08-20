@@ -17,6 +17,9 @@ const WhyABS = dynamic(() => import('@/components/sections/WhyABS').then((m) => 
 const BrandTrustBar = dynamic(() =>
   import('@/components/sections/BrandTrustBar').then((m) => m.BrandTrustBar),
 );
+const TestimonialsSection = dynamic(() =>
+  import('@/components/sections/TestimonialsSection').then((m) => m.TestimonialsSection),
+);
 const FabricaTeaser = dynamic(() =>
   import('@/components/sections/FabricaTeaser').then((m) => m.FabricaTeaser),
 );
@@ -65,6 +68,7 @@ export default function HomePage() {
 
       <WhyABS />
       <BrandTrustBar />
+      <TestimonialsSection />
 
       <div className="relative">
         <ConnectorCurves />
