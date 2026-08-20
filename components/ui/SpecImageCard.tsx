@@ -4,9 +4,10 @@ interface SpecImageCardProps {
   name: string;
   image: string;
   specs: string[];
+  imagePadding?: string;
 }
 
-export function SpecImageCard({ name, image, specs }: SpecImageCardProps) {
+export function SpecImageCard({ name, image, specs, imagePadding = 'p-4' }: SpecImageCardProps) {
   return (
     <div className="h-full">
       <div className="relative aspect-[4/3]">
@@ -15,7 +16,7 @@ export function SpecImageCard({ name, image, specs }: SpecImageCardProps) {
           alt={name}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-contain p-4"
+          className={`object-contain ${imagePadding}`}
         />
       </div>
       <div className="p-8 pt-4">

@@ -23,16 +23,19 @@ const WHEELS = [
     name: 'Cutting Wheel — 14"',
     image: '/products/abrasives/cutting-wheel-14.webp',
     specs: ['Size: 14"'],
+    imagePadding: 'p-0',
   },
   {
     name: 'Cutting Wheel — 4"',
     image: '/products/abrasives/cutting-wheel-4.webp',
     specs: ['Size: 4"'],
+    imagePadding: 'p-12',
   },
   {
     name: 'Grinding Wheel',
     image: '/products/abrasives/grinding-wheel-4.webp',
     specs: ['Size: 4"'],
+    imagePadding: 'p-12',
   },
 ];
 
@@ -71,7 +74,7 @@ export default function AbrasivesPage() {
         <Container>
           <div className="mb-14 max-w-2xl">
             <p className="text-text-muted text-xs font-medium uppercase tracking-widest mb-4">
-              Range
+              Available Sizes
             </p>
             <h2 className="text-text-primary font-bold text-4xl lg:text-5xl leading-tight">
               The right wheel for every job

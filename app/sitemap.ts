@@ -15,7 +15,7 @@ const STATIC_ROUTES = [
   '/products/shutter',
   '/products/shutter-accessories',
   '/products/pipes',
-  '/products/sheet',
+  '/products/roofing-sheet',
   '/products/plain-sheets',
   '/products/coils',
   '/products/abrasives',

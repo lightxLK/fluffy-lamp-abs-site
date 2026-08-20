@@ -32,7 +32,7 @@ export const PRODUCTS: Product[] = [
   {
     name: 'Roofing Sheets',
     brandLine: 'ABS BlueShield™',
-    slug: 'sheet',
+    slug: 'roofing-sheet',
     tagline: 'PPGL roofing, built for Indian weather',
     category: 'Sheets',
     description:

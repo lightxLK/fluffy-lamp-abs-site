@@ -118,13 +118,13 @@ export default function PipesPage() {
 
           <div className="space-y-14">
             {PIPE_TABLES.map((table) => (
-              <div key={table.name} className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+              <div key={table.name} className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6">
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={table.image}
                     alt={table.name}
                     fill
-                    sizes="280px"
+                    sizes="400px"
                     className="object-contain p-4"
                   />
                 </div>

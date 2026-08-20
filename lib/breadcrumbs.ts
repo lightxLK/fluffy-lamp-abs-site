@@ -4,7 +4,7 @@ export const BREADCRUMB_LABELS: Record<string, string> = {
   '/products': 'Products',
   '/products/coils': 'Coils',
   '/products/pipes': 'Pipes',
-  '/products/sheet': 'Roofing Sheets',
+  '/products/roofing-sheet': 'Roofing Sheets',
   '/products/plain-sheets': 'Plain Sheets',
   '/products/shutter': 'Rolling Shutters',
   '/products/shutter-accessories': 'Shutter Accessories',
