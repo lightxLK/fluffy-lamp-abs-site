@@ -6,6 +6,7 @@ interface SpecImageCardProps {
   specs: string[];
   imagePadding?: string;
   imageObjectPosition?: string;
+  textAlign?: string;
 }
 
 export function SpecImageCard({
@@ -14,6 +15,7 @@ export function SpecImageCard({
   specs,
   imagePadding = 'p-4',
   imageObjectPosition = 'object-center',
+  textAlign = 'text-left',
 }: SpecImageCardProps) {
   return (
     <div className="h-full">
@@ -26,7 +28,7 @@ export function SpecImageCard({
           className={`object-contain ${imageObjectPosition} ${imagePadding}`}
         />
       </div>
-      <div className="p-8 pt-4">
+      <div className={`p-8 pt-4 ${textAlign}`}>
         <h3 className="text-text-primary font-semibold text-lg mb-4">{name}</h3>
         <ul className="space-y-2">
           {specs.map((s) => (

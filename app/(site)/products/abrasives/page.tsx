@@ -29,11 +29,15 @@ const WHEELS = [
     name: 'Cutting Wheel — 4"',
     image: '/products/abrasives/cutting-wheel-4.webp',
     specs: ['Size: 4"'],
+    imagePadding: 'p-14',
   },
   {
     name: 'Grinding Wheel',
     image: '/products/abrasives/grinding-wheel-4.webp',
     specs: ['Size: 4"'],
+    imagePadding: 'p-14',
+    imageObjectPosition: 'object-left',
+    textAlign: 'text-center',
   },
 ];
 
